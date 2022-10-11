@@ -48,9 +48,6 @@ img {
 body {
   color: var(--tg-theme-text-color);
   background: var(--tg-theme-bg-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-size: 18px;
 }
 

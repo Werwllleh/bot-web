@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './Form.css';
+
 
 const Form = () => {
 
@@ -28,10 +29,13 @@ const Form = () => {
 	return (
 		<div className={'form'}>
 			<h1 className={'title'}>Регистрация</h1>
-			<input className={'input'} onChange={onChangeName} type="text" placeholder={'Имя и фамилия*'}/>
-			<input className={'input'} onChange={onChangeCar} type="text" placeholder={'Марка и модель авто*'} />
-			<input className={'input'} onChange={onChangeCarNum} type="text" placeholder={'Номер вашего авто*'}/>
-			<input className={'input'} onChange={onChangeCarNote} type="text" placeholder={'Примечание к авто'}/>
+			<input className={'input'} value={name} onChange={onChangeName} type="text" placeholder={'Имя и фамилия*'}/>
+			<input className={'input'} value={car} onChange={onChangeCar} type="text" placeholder={'Марка и модель авто*'} />
+			<input className={'input'} value={carNum} onChange={onChangeCarNum} type="text" placeholder={'Номер вашего авто*'}/>
+			<input className={'input'} value={carNote} onChange={onChangeCarNote} type="text" placeholder={'Примечание к авто'} />
+			<div className={'form-footer'}>
+				<p>Поля со * обязательны к заполнению</p>
+			</div>
 		</div>
 	);
 };
