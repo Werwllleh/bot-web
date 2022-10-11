@@ -26,6 +26,12 @@
 	margin-top: 15px;
 }
 
+.ant-upload.ant-upload-select-picture-card {
+	color: var(--tg-theme-text-color) !important;
+	background: var(--tg-theme-bg-color) !important;
+	margin: 0;
+}
+
 .input-label {
 	font-size: 12px;
 	font-weight: 300;
