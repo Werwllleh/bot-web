@@ -18,7 +18,7 @@ const Form = () => {
 	}, [])
 
 	useEffect(() => {
-		if (!name == '' || !car == '' || !/^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum)) {
+		if (!name || !car || !carNum) {
 			tg.MainButton.hide()
 		} else {
 			tg.MainButton.show()
