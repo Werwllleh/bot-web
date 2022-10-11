@@ -47,7 +47,9 @@ const Form = () => {
 			<h1 className={'title'}>Регистрация</h1>
 			<input className={'input'} value={name} onChange={onChangeName} type="text" placeholder={'Имя и фамилия*'}/>
 			<input className={'input'} value={car} onChange={onChangeCar} type="text" placeholder={'Марка и модель авто*'} />
-			<input className={'input'} value={carNum} onChange={onChangeCarNum} type="text" placeholder={'Номер вашего авто*'}/>
+			<p className={'input-label'}>Желательно использовать латинские буквы</p>
+			<input className={'input'} value={carNum} onChange={onChangeCarNum} type="text" placeholder={'Номер вашего авто*'} />
+			<p className={'input-label'}>Заглавные и латинские буквы, формат A999AA99 или A999AA999</p>
 			<input className={'input'} value={carNote} onChange={onChangeCarNote} type="text" placeholder={'Примечание к авто'} />
 			<div className={'form-footer'}>
 				<p>Поля со * обязательны к заполнению</p>
