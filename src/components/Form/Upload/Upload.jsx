@@ -1,7 +1,7 @@
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import React, { useState } from 'react';
-import 'antd/dist/antd.compact.css';
+import 'antd/dist/antd.min.css';
 
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
