@@ -1,0 +1,20 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 0 10px;
+}
+
+.input {
+	width: 100%;
+	padding: 10px 7px;
+	border-radius: 5px;
+	border: 1px solid var(--tg-theme-bg-color);
+	outline: none;
+	box-shadow: 0 0 2px rgba(205, 205, 205, 0.676);
+	font-weight: 500;
+}
+
+.input + .input {
+	margin-top: 15px;
+}

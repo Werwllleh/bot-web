@@ -7,6 +7,7 @@ export function useTelegram() {
 	}
 
 	const onToggleButton = () => {
+		tg.MainButton.text = "Отправить";
 		if (tg.MainButton.isVisible) {
 			tg.MainButton.hide();
 		} else {

@@ -3,6 +3,10 @@ import { useEffect } from "react";
 import { useTelegram } from "./hooks/useTelegram";
 import Button from './components/Button/Button';
 import Header from './components/Header/Header';
+import Form from './components/Form/Form';
+
+import { Route, Routes } from 'react-router-dom';
+
 
 
 function App() {
@@ -16,7 +20,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Button onClick={onToggleButton}>toggle</Button>
+      <Routes>
+        <Route path={'form'} element={<Form />} />
+      </Routes>
     </div>
   );
 }
