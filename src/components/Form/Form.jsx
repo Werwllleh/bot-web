@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import { useTelegram } from '../../hooks/useTelegram';
 import './Form.css';
 
 
@@ -8,6 +9,21 @@ const Form = () => {
 	const [car, setCar] = useState('');
 	const [carNum, setCarNum] = useState('');
 	const [carNote, setCarNote] = useState('');
+	const { tg } = useTelegram();
+
+	useEffect(() => {
+		tg.MainButton.setParams({
+			text: 'Отправить данные'
+		})
+	}, [])
+
+	useEffect(() => {
+		if (!name || !car || /^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum)) {
+			tg.MainButton.hide()
+		} else {
+			tg.MainButton.show()
+		}
+	}, [name, car, carNum])
 
 	const onChangeName = (e) => {
         setCountry(e.target.value)
