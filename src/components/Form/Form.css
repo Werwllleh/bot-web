@@ -6,6 +6,7 @@
 }
 
 .title {
+	color: var(--tg-theme-text-color) !important;
 	font-size: 24px;
 	text-align: center;
 	margin: 15px 0;
@@ -15,7 +16,7 @@
 	width: 100%;
 	padding: 10px 7px;
 	border-radius: 5px;
-	border: 1px solid var(--tg-theme-bg-color);
+	border: 1px solid var(--tg-theme-bg-color) !important;
 	outline: none;
 	box-shadow: 0 0 10px rgba(205, 205, 205, 0.676);
 	font-weight: 600;
