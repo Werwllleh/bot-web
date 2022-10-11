@@ -49,6 +49,7 @@ body {
   color: var(--tg-theme-text-color);
   background: var(--tg-theme-bg-color);
   font-size: 18px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .link {

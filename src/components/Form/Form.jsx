@@ -26,19 +26,19 @@ const Form = () => {
 	}, [name, car, carNum])
 
 	const onChangeName = (e) => {
-        setCountry(e.target.value)
+		setName(e.target.value)
 	}
 
 	const onChangeCar = (e) => {
-			setStreet(e.target.value)
+		setCar(e.target.value)
 	}
 
 	const onChangeCarNum = (e) => {
-			setSubject(e.target.value)
+		setCarNum(e.target.value)
 	}
 	
 	const onChangeCarNote = (e) => {
-        setSubject(e.target.value)
+		setCarNote(e.target.value)
 	}
 
 
