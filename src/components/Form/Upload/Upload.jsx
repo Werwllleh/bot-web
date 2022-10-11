@@ -47,12 +47,8 @@ const UploadForm = () => {
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
+      <div style={{marginTop: 8, fontSize: 12}}>
+        Загрузить фото
       </div>
     </div>
   );
