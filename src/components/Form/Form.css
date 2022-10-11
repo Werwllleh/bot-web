@@ -31,8 +31,11 @@
 	margin: 5px 0 10px 0;
 }
 
+.form-upload {
+	margin: 20px 0;
+}
+
 .form-footer {
-	margin: 20px 0 10px 0;
 	font-size: 12px;
 	font-weight: 300;
 }
