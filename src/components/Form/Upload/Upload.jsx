@@ -5,7 +5,7 @@ import 'antd/dist/antd.min.css';
 
 const props = {
   name: 'file',
-  action: 'https://localhost/upload',
+  action: 'https://193.164.149.140/upload',
   headers: {
     authorization: 'authorization-text',
   },
