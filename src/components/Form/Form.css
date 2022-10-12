@@ -18,8 +18,9 @@
 	border-radius: 5px;
 	border: 1px solid var(--tg-theme-bg-color) !important;
 	outline: none;
-	box-shadow: 0 0 10px rgba(205, 205, 205, 0.676);
+	box-shadow: 0 0 5px rgba(205, 205, 205, 0.676);
 	font-weight: 600;
+	color: rgb(79, 79, 79);
 }
 
 .input + .input {
@@ -32,10 +33,15 @@
 	margin: 0;
 }
 
+.anticon {
+	color: var(--tg-theme-bg-color);
+}
+
 .upload-text {
 	margin: 8px 0 0 0;
 	font-size: 12px;
 	color: var(--tg-theme-text-color);
+	font-weight: 500;
 }
 
 .input-label {
