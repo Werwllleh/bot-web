@@ -52,7 +52,7 @@ const UploadForm = () => {
       listType="picture-card"
       className="avatar-uploader"
       showUploadList={false}
-      action="https://193.164.149.140/upload"
+      action="https://193.164.149.140/api/upload"
       beforeUpload={beforeUpload}
       onChange={handleChange}
     >
