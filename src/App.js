@@ -4,9 +4,11 @@ import { useEffect } from "react";
 import { useTelegram } from "./hooks/useTelegram";
 import Header from './components/Header/Header';
 import Form from './components/Form/Form';
-
-import { Route, Routes } from 'react-router-dom';
 import Cars from './components/Cars/Cars';
+import Partners from './components/Partners/Partners';
+import SearchCar from './components/SearchCar/SearchCar';
+import { Route, Routes } from 'react-router-dom';
+
 
 
 
@@ -25,7 +27,6 @@ function App() {
         <Route index element={<Cars />} />
         <Route path={'form'} element={<Form />} />
         <Route path={'partners'} element={<Partners />} />
-        <Route path={'ourcars'} element={<OurCars />} />
         <Route path={'searchcar'} element={<SearchCar />} />
       </Routes>
     </div>

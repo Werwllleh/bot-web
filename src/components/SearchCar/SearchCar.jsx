@@ -2,7 +2,7 @@ import React from 'react'
 
 function SearchCar() {
 	return (
-		<div>SearchCar</div>
+		<div>Поиск авто</div>
 	)
 }
 
