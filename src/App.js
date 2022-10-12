@@ -24,6 +24,9 @@ function App() {
       <Routes>
         <Route index element={<Cars />} />
         <Route path={'form'} element={<Form />} />
+        <Route path={'partners'} element={<Partners />} />
+        <Route path={'ourcars'} element={<OurCars />} />
+        <Route path={'searchcar'} element={<SearchCar />} />
       </Routes>
     </div>
   );
