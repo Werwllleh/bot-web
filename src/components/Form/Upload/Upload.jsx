@@ -1,4 +1,4 @@
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+/* import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import React, { useState } from 'react';
 import 'antd/dist/antd.min.css';
@@ -77,21 +77,26 @@ const UploadForm = () => {
   );
 };
 
-export default UploadForm;
+export default UploadForm; */
 
-/* import { UploadOutlined } from '@ant-design/icons';
-import { Button, Upload } from 'antd';
-import 'antd/dist/antd.min.css';
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, Space, Upload } from 'antd';
 import React from 'react';
-
 const UploadForm = () => (
-  <>
+  <Space
+    direction="vertical"
+    style={{
+      width: '100%',
+    }}
+    size="large"
+  >
     <Upload
       action="https://193.164.149.140/api/upload"
       listType="picture"
+      maxCount={1}
     >
-      <Button icon={<UploadOutlined />}>Upload</Button>
+      <Button icon={<UploadOutlined />}>Загрузить фото</Button>
     </Upload>
-  </>
+  </Space>
 );
-export default UploadForm; */
+export default UploadForm;
