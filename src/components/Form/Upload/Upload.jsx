@@ -81,11 +81,22 @@ const UploadForm = () => {
 
 export default UploadForm; */
 
-import { UploadOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Space, message, Upload } from 'antd';
+import React, { useState } from 'react';
 import 'antd/dist/antd.min.css';
-import React from 'react';
+
+
+
 const UploadForm = () => {
+
+  const [loading, setLoading] = useState(false);
+
+  const getBase64 = (img, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+  };
 
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/heif';
@@ -100,15 +111,26 @@ const UploadForm = () => {
   };
 
   const handleChange = (info) => {
+
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
+    }
+
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, (url) => {
+        setLoading(false);
+      });
+    }
+
     console.log(info);
   };
 
   return (
   <Space
     direction="vertical"
-    style={{
-      width: '100%',
-    }}
+    style={{width: '100%'}}
     size="large"
   >
     <Upload
