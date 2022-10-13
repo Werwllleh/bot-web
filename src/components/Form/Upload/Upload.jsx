@@ -10,10 +10,12 @@ const getBase64 = (img, callback) => {
 };
 
 const beforeUpload = (file) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/heif';
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/heif';
 
   if (!isJpgOrPng) {
-    message.error('Только формат изображения!');
+    message.error('Только изображение!');
+  } else {
+    message.error('Изображение загружено');
   }
 
   return isJpgOrPng;
@@ -80,10 +82,28 @@ const UploadForm = () => {
 export default UploadForm; */
 
 import { UploadOutlined } from '@ant-design/icons';
-import { Button, Space, Upload } from 'antd';
+import { Button, Space, message, Upload } from 'antd';
 import 'antd/dist/antd.min.css';
 import React from 'react';
-const UploadForm = () => (
+const UploadForm = () => {
+
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/heif';
+
+    if (!isJpgOrPng) {
+      message.error('Только изображение!');
+    } else {
+      message.success('Изображение загружено');
+    }
+
+    return isJpgOrPng;
+  };
+
+  const handleChange = (info) => {
+    console.log(info);
+  };
+
+  return (
   <Space
     direction="vertical"
     style={{
@@ -96,9 +116,13 @@ const UploadForm = () => (
       action="https://193.164.149.140/api/upload"
       listType="picture"
       maxCount={1}
+      beforeUpload={beforeUpload}
+      onChange={handleChange}
     >
       <Button icon={<UploadOutlined />}>Загрузить фото</Button>
     </Upload>
   </Space>
-);
+)
+}
+
 export default UploadForm;
