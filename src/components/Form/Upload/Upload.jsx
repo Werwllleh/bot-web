@@ -89,8 +89,8 @@ const UploadForm = () => (
     <Upload
       action="https://193.164.149.140/api/upload"
       listType="picture"
-      multiple={false}
-      maxCount={1}
+      /* multiple={false}
+      maxCount={1} */
       /* defaultFileList={[...fileList]} */
     >
       <Button icon={<UploadOutlined />}>Загрузить фото</Button>
