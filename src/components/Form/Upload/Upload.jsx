@@ -81,7 +81,7 @@ const UploadForm = () => {
 
 export default UploadForm; */
 
-import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 import { Button, Space, message, Upload } from 'antd';
 import React, { useState } from 'react';
 import 'antd/dist/antd.min.css';
