@@ -81,6 +81,7 @@ export default UploadForm; */
 
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Space, Upload } from 'antd';
+import 'antd/dist/antd.min.css';
 import React from 'react';
 const UploadForm = () => (
   <Space
