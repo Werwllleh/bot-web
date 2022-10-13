@@ -80,16 +80,16 @@ const UploadForm = () => {
 export default UploadForm; */
 
 import { UploadOutlined } from '@ant-design/icons';
-import { Button, message, Upload } from 'antd';
+import { Button, Upload } from 'antd';
 import 'antd/dist/antd.min.css';
 import React from 'react';
-
 
 const UploadForm = () => (
   <>
     <Upload
       action="https://193.164.149.140/api/upload"
       listType="picture"
+      defaultFileList={[...fileList]}
     >
       <Button icon={<UploadOutlined />}>Upload</Button>
     </Upload>
