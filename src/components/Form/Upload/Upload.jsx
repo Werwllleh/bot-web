@@ -92,6 +92,7 @@ const UploadForm = () => (
     size="large"
   >
     <Upload
+      name="avatar"
       action="https://193.164.149.140/api/upload"
       listType="picture"
       maxCount={1}
