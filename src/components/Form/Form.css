@@ -27,9 +27,10 @@
 	margin-top: 15px;
 }
 
-.ant-upload.ant-upload-select-picture-card {
+.ant-upload-list-picture .ant-upload-list-item {
 	color: var(--tg-theme-text-color) !important;
 	background: var(--tg-theme-bg-color) !important;
+	font-weight: 600;
 	margin: 0;
 }
 
