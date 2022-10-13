@@ -91,7 +91,7 @@ const UploadForm = () => (
       listType="picture"
       /* multiple={false}
       maxCount={1} */
-      /* defaultFileList={[...fileList]} */
+      defaultFileList={[...fileList]}
     >
       <Button icon={<UploadOutlined />}>Загрузить фото</Button>
     </Upload>
