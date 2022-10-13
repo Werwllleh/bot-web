@@ -89,7 +89,6 @@ const UploadForm = () => (
     <Upload
       action="https://193.164.149.140/api/upload"
       listType="picture"
-      showUploadList={false}
       multiple={false}
       maxCount={1}
       /* defaultFileList={[...fileList]} */
