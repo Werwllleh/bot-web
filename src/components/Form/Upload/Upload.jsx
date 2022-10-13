@@ -1,4 +1,4 @@
-/* import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import React, { useState } from 'react';
 import 'antd/dist/antd.min.css';
@@ -77,9 +77,9 @@ const UploadForm = () => {
   );
 };
 
-export default UploadForm; */
+export default UploadForm;
 
-import { UploadOutlined } from '@ant-design/icons';
+/* import { UploadOutlined } from '@ant-design/icons';
 import { Button, Upload } from 'antd';
 import 'antd/dist/antd.min.css';
 import React from 'react';
@@ -94,4 +94,4 @@ const UploadForm = () => (
     </Upload>
   </>
 );
-export default UploadForm;
+export default UploadForm; */
