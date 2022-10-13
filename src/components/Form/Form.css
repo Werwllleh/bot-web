@@ -30,19 +30,22 @@
 .ant-upload-list-picture .ant-upload-list-item {
 	color: var(--tg-theme-text-color) !important;
 	background: var(--tg-theme-bg-color) !important;
+	border-radius: 5px !important;
 	font-weight: 600;
-	margin: 0;
+	margin: 10px 0 0 0;
 }
 
-.anticon {
-	color: var(--tg-theme-text-color);
+.anticon svg {
+	fill: var(--tg-theme-text-color) !important;
 }
 
-.upload-text {
-	margin: 8px 0 0 0;
-	font-size: 12px;
-	color: var(--tg-theme-text-color);
-	font-weight: 500;
+.ant-btn.ant-btn-default {
+	border-radius: 5px !important;
+}
+
+.ant-btn>.anticon+span,
+.ant-btn>span+.anticon {
+	font-weight: 500 !important;
 }
 
 .input-label {
