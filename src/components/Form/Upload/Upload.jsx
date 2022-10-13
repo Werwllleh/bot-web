@@ -93,7 +93,7 @@ const UploadForm = () => (
       maxCount={1}
       /* defaultFileList={[...fileList]} */
     >
-      <Button icon={<UploadOutlined />}>Upload</Button>
+      <Button icon={<UploadOutlined />}>Загрузить фото</Button>
     </Upload>
   </>
 );
