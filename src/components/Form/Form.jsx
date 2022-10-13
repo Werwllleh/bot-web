@@ -42,6 +42,8 @@ const Form = () => {
 		setCarNote(e.target.value)
 	}
 
+	console.log('wefwewef');
+
 
 	return (
 		<div className={'form'}>

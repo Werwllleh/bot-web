@@ -24,6 +24,10 @@ const UploadForm = () => {
   const [imageUrl, setImageUrl] = useState();
 
   const handleChange = (info) => {
+
+    let newFileList = [...info.fileList];
+    newFileList = newFileList.slice(-1);
+
     if (info.file.status === 'uploading') {
       setLoading(true);
       return;
