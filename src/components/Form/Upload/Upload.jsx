@@ -89,7 +89,6 @@ const UploadForm = () => (
     <Upload
       action="https://193.164.149.140/api/upload"
       listType="picture"
-      defaultFileList={[...fileList]}
     >
       <Button icon={<UploadOutlined />}>Upload</Button>
     </Upload>
