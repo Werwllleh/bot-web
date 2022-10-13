@@ -35,7 +35,7 @@
 	margin: 10px 0 0 0;
 }
 
-.anticon svg {
+.anticon-delete svg {
 	fill: var(--tg-theme-text-color) !important;
 }
 
