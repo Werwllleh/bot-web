@@ -128,6 +128,7 @@ const UploadForm = () => {
       getBase64(info.file.originFileObj, (url) => {
         setLoading(false);
       });
+      console.log('delete');
     }
 
     console.log(info);
