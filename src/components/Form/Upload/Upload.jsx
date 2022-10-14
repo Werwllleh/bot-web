@@ -98,7 +98,7 @@ const UploadForm = () => {
   };
 
   const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/heif';
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/HEIC' || file.type === 'image/heif' || file.type === 'image/HEIF';
 
     if (!isJpgOrPng) {
       message.error('Только изображение!');
@@ -151,7 +151,7 @@ const UploadForm = () => {
       <Button icon={<UploadOutlined />}>Загрузить фото</Button>
     </Upload>
   </Space>
-)
+  )
 }
 
 export default UploadForm;
