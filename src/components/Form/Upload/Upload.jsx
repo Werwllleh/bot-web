@@ -123,6 +123,13 @@ const UploadForm = () => {
       });
     }
 
+    if (info.file.status === 'removed') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, (url) => {
+        setLoading(false);
+      });
+    }
+
     console.log(info);
   };
 
