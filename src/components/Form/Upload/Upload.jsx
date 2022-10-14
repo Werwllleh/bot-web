@@ -98,6 +98,7 @@ const UploadForm = () => {
   };
 
   const beforeUpload = (file) => {
+
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/HEIC' || file.type === 'image/heif' || file.type === 'image/HEIF';
 
     if (!isJpgOrPng) {
@@ -106,7 +107,13 @@ const UploadForm = () => {
       message.success('Изображение загружено');
     }
 
-    return isJpgOrPng;
+    const isLt5M = file.size / 1024 / 1024 < 5;
+
+    if (!isLt5M) {
+      message.error('Изображение должно весить не больше 5 МБ');
+    }
+
+    return isJpgOrPng && isLt5M;
   };
 
   const handleChange = (info) => {
