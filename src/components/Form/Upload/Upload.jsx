@@ -52,12 +52,13 @@ const UploadForm = () => {
   };
 
   const handleRemove = (info) => {
-      // info.file.status = "removed";
-      axios.post('https://193.164.149.140/api/remove', {
-        file: info.file.response,
-      });
-      console.log(info.file);
-    }
+    let response = info.response;
+    console.log(info.response);
+    // info.file.status = "removed";
+    axios.post('https://193.164.149.140/api/remove', {
+      response,
+    });
+  }
 
   return (
   <Space
