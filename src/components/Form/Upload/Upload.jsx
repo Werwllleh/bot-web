@@ -99,7 +99,7 @@ const UploadForm = () => {
 
   const beforeUpload = (file) => {
 
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/HEIC' || file.type === 'image/heif' || file.type === 'image/HEIF';
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/heif';
 
     if (!isJpgOrPng) {
       message.error('Только изображение!');
