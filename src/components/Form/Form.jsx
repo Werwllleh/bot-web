@@ -14,12 +14,13 @@ const Form = () => {
 
 	const onSendData = useCallback(() => {
         const data = {
-            name,
-            car,
-            carNum
+					name,
+					car,
+					carNum,
+					carNote
         }
         tg.sendData(JSON.stringify(data));
-    }, [name, car, carNum])
+    }, [name, car, carNum, carNote])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
