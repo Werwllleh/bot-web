@@ -12,6 +12,22 @@ const Form = () => {
 	const [carNote, setCarNote] = useState('');
 	const { tg } = useTelegram();
 
+	const onSendData = useCallback(() => {
+        const data = {
+            name,
+            car,
+            carNum
+        }
+        tg.sendData(JSON.stringify(data));
+    }, [name, car, carNum])
+
+    useEffect(() => {
+        tg.onEvent('mainButtonClicked', onSendData)
+        return () => {
+            tg.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [onSendData])
+
 	useEffect(() => {
 		tg.MainButton.setParams({
 			text: 'Отправить данные'
