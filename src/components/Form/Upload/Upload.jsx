@@ -5,7 +5,7 @@ import axios from 'axios';
 import 'antd/dist/antd.min.css';
 
 
-const UploadForm = () => {
+const UploadForm = ({img}) => {
 
   const [loading, setLoading] = useState(false);
 
@@ -46,6 +46,7 @@ const UploadForm = () => {
       getBase64(info.file.originFileObj, (url) => {
         setLoading(false);
       });
+      img(info.file.response)
     }
 
     // console.log(info);

@@ -11,6 +11,7 @@ const Form = () => {
 	const [carNum, setCarNum] = useState('');
 	const [carYear, setCarYear] = useState('');
 	const [carNote, setCarNote] = useState('');
+	const [carImage, setCarImage] = useState('');
 	const { tg } = useTelegram();
 
 	const onSendData = useCallback(() => {
@@ -19,10 +20,11 @@ const Form = () => {
 					car,
 					carNum,
 					carYear,
-					carNote
+					carNote,
+					carImage
         }
         tg.sendData(JSON.stringify(data));
-    }, [name, car, carNum, carYear, carNote])
+    }, [name, car, carNum, carYear, carNote, carImage])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -42,12 +44,12 @@ const Form = () => {
 
 		let curYear = new Date().getFullYear();
 
-		if (name.length >= 3 && car.length >= 5 && (/^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum)) && carYear >=1800  && carYear <= curYear) {
+		if (name.length >= 3 && car.length >= 5 && (/^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum)) && carYear >=1800  && carYear <= curYear && carImage != '') {
 			tg.MainButton.show()
 		} else {
 			tg.MainButton.hide()
 		}
-	}, [name, car, carNum, carYear])
+	}, [name, car, carNum, carYear, carImage])
 
 	const onChangeName = (e) => {
 		setName(e.target.value)
@@ -81,7 +83,7 @@ const Form = () => {
 			<p className={'input-label'}>Латинские буквы, формат A999AA99 или A999AA999</p>
 			<input className={'input'} value={carNote} onChange={onChangeCarNote} type="text" placeholder={'Примечание к авто'} />
 			<div className={'form-upload'}>
-				<UploadForm/>
+				<UploadForm img={setCarImage} />
 			</div>
 			<div className={'form-footer'}>
 				<p>Поля со * обязательны к заполнению</p>
