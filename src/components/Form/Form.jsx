@@ -42,7 +42,7 @@ const Form = () => {
 
 		let curYear = new Date().getFullYear();
 
-		if (name.length >= 3 && car.length >= 5 && (/^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum)) && carYear <= curYear) {
+		if (name.length >= 3 && car.length >= 5 && (/^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum)) && carYear >=1800  && carYear <= curYear) {
 			tg.MainButton.show()
 		} else {
 			tg.MainButton.hide()
@@ -76,7 +76,7 @@ const Form = () => {
 			<input className={'input'} value={name} onChange={onChangeName} type="text" placeholder={'Имя и фамилия*'}/>
 			<input className={'input'} value={car} onChange={onChangeCar} type="text" placeholder={'Марка и модель авто*'} />
 			<p className={'input-label'}>Желательно использовать латинские буквы</p>
-			<input className={'input'} value={carYear} onChange={onChangeCarYear} type="number" min="1800" placeholder={'Год выпуска вашего авто*'} />
+			<input className={'input'} value={carYear} onChange={onChangeCarYear} type="number" placeholder={'Год выпуска вашего авто*'} />
 			<input className={'input'} value={carNum} onChange={onChangeCarNum} type="text" placeholder={'Номер вашего авто*'} />
 			<p className={'input-label'}>Латинские буквы, формат A999AA99 или A999AA999</p>
 			<input className={'input'} value={carNote} onChange={onChangeCarNote} type="text" placeholder={'Примечание к авто'} />
