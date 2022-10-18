@@ -48,13 +48,12 @@ const UploadForm = () => {
       });
     }
 
-    console.log(info);
+    // console.log(info);
   };
 
   const handleRemove = (file) => {
     let response = file.response;
-    console.log(response);
-    // info.file.status = "removed";
+    // console.log(response);
     axios.post('https://193.164.149.140/api/upload/remove', {
       response,
     });

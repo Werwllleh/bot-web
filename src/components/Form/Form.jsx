@@ -30,6 +30,7 @@ const Form = () => {
     }, [onSendData])
 
 	useEffect(() => {
+		tg.expand()
 		tg.MainButton.setParams({
 			text: 'Отправить данные'
 		})
