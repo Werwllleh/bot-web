@@ -53,7 +53,7 @@ const Form = () => {
 	}
 
 	const onChangeCarNum = (e) => {
-		setCarNum(e.target.value)
+		setCarNum(e.target.value.toUpperCase())
 	}
 	
 	const onChangeCarNote = (e) => {
@@ -67,7 +67,7 @@ const Form = () => {
 			<input className={'input'} value={car} onChange={onChangeCar} type="text" placeholder={'Марка и модель авто*'} />
 			<p className={'input-label'}>Желательно использовать латинские буквы</p>
 			<input className={'input'} value={carNum} onChange={onChangeCarNum} type="text" placeholder={'Номер вашего авто*'} />
-			<p className={'input-label'}>Заглавные и латинские буквы, формат A999AA99 или A999AA999</p>
+			<p className={'input-label'}>Латинские буквы, формат A999AA99 или A999AA999</p>
 			<input className={'input'} value={carNote} onChange={onChangeCarNote} type="text" placeholder={'Примечание к авто'} />
 			<div className={'form-upload'}>
 				<UploadForm/>
