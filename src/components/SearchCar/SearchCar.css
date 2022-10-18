@@ -1,6 +1,52 @@
-.title {
-	color: var(--tg-theme-text-color) !important;
-	font-size: 24px;
-	text-align: center;
-	margin: 15px 0;
+.searchCar {
+	padding: 0 10px;
+}
+
+.input-search {
+	margin: 0 0 20px 0;
+	width: 100%;
+	padding: 10px 7px;
+	border-radius: 5px;
+	border: 1px solid var(--tg-theme-bg-color) !important;
+	outline: none;
+	box-shadow: 0 0 5px rgb(205 205 205 / 68%);
+	font-weight: 600;
+	color: rgb(79, 79, 79);
+}
+
+.foundBody {
+	margin: 15px 0 0 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.foundCarImg {
+	margin: 0 0 20px 0;
+}
+
+.foundCarImg img{
+	border-radius: 5px;
+}
+
+.list {
+	display: flex;
+	align-items: center;
+}
+
+.list-right {
+	margin: 0 15px 0 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	font-size: 20px;
+	font-weight: 300;
+}
+
+.list-left {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	font-size: 22px;
+	font-weight: 500;
 }

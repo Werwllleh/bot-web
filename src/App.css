@@ -25,7 +25,7 @@ figcaption,
 blockquote,
 dl,
 dd {
-  margin: 0;
+  margin: 0 !important;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
