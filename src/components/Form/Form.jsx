@@ -44,7 +44,7 @@ const Form = () => {
 
 		let curYear = new Date().getFullYear();
 
-		if (name.length >= 3 && car.length >= 5 && (/^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum)) && carYear >=1800  && carYear <= curYear && carImage != '') {
+		if (name.length >= 3 && car.length >= 5 && (/^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum)) && carYear >=1800  && carYear <= curYear) {
 			tg.MainButton.show()
 		} else {
 			tg.MainButton.hide()
