@@ -10,6 +10,12 @@ const SearchCar = () => {
 	const { tg } = useTelegram();
 
 	useEffect(() => {
+		fetch('/searchcar')
+			.then(response => response.json())
+			.then(response => setSearcheble(response))
+	}, [])
+
+	useEffect(() => {
 		tg.expand()
 	}, [])
 
@@ -20,7 +26,12 @@ const SearchCar = () => {
 	return (
 		<div className={'searchCar'}>
 			<h1 className={'title'}>Поиск авто</h1>
-			<input className={'input-search'} value={searcheble} onChange={onSearcheble} type="text" placeholder={'Введите номер автомобиля'} />
+			<input
+				className={'input-search'}
+				value={searcheble}
+				onChange={onSearcheble}
+				type="text"
+				placeholder={'Введите номер автомобиля'} />
 			<div className={'foundBody'}>
 				<div className={'foundCarImg'}>
 					<img src="https://193.164.149.140/api/image/446012794.jpeg" alt="" />
