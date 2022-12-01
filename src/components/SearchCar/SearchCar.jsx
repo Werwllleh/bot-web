@@ -20,7 +20,7 @@ const SearchCar = () => {
 	}, [])
 
 	const onSearcheble = (e) => {
-		setSearcheble(e.target.value.toUpperCase())
+		setSearcheble(e.target.value.toUpperCase());
 	}
 
 	return (
@@ -34,7 +34,7 @@ const SearchCar = () => {
 				placeholder={'Введите номер автомобиля'} />
 			<div className={'foundBody'}>
 				<div className={'foundCarImg'}>
-					<img src="https://193.164.149.140/api/image/446012794.jpeg" alt="" />
+					<img src="https://193.164.149.140/api/image/${searcheble}" alt="" />
 				</div>
 				<div className={'list'}>
 					<div className={'list-right'}>
