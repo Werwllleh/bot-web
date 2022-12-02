@@ -18,9 +18,9 @@ const SearchCar = () => {
 		useEffect(() => {
 				axios({
 					method: 'get',
-					url: 'https://193.164.149.140/api/carnum',
+					url: 'https://193.164.149.140/api/searchcar',
 					headers: { 
-						'Content-Type': 'application/json'
+						'Content-Type': 'application/x-www-form-urlencoded,'
 					},
 					data: searcheble
 				}).then(res => {
@@ -54,7 +54,6 @@ const SearchCar = () => {
 				{/* {
 					{carNumber} ? <img src={"https://193.164.149.140/api/image/"+ {carNumber}} alt="" />:"NETU"
 				} */}
-				
 			</div>
 			<div className={s.textBody}>
 
