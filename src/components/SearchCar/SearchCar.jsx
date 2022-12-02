@@ -10,38 +10,28 @@ import s from './SearchCar.module.css';
 const SearchCar = () => {
 
 	const [searcheble, setSearcheble] = useState('');
-	const [carImage, setCarImage] = useState(null);
+	// const [carImage, setCarImage] = useState(null);
 
 	const { tg } = useTelegram();
 
-/* 	useEffect(() => {
-		fetch('/searchcar')
-			.then(response => response.json())
-			.then(response => setSearcheble(response))
-	}, []) */
-
-
+	setTimeout(
 		useEffect(() => {
-		/* axios.get(`https://193.164.149.140/api/carnum`, { data: {search: searcheble} })
-			.then(res => {
-				const carNumber = res.data;
-				console.log(carNumber);
-			}) */
-			axios({
-				method: 'get',
-				url: 'https://193.164.149.140/api/carnum',
-				headers: { 
-					'Content-Type': 'application/json'
-				},
-				body : {search: searcheble}
-			}).then(res => {
-				const carNumber = res.data;
-				console.log(carNumber);
-			})
-		}, [searcheble])
+				axios({
+					method: 'get',
+					url: 'https://193.164.149.140/api/carnum',
+					headers: { 
+						'Content-Type': 'application/json'
+					},
+					data: searcheble
+				}).then(res => {
+					const carNumber = res.data;
+					console.log(data);
+				})
+		}, [searcheble]),
+		2000
+	)
 
-
-	useEffect(() => {
+	useEffect(() => { 
 		tg.expand()
 	}, [])
 
@@ -61,9 +51,9 @@ const SearchCar = () => {
 				onChange={onSearcheble}
 			/>
 			<div className={s.image_body}>
-				{
-					{carImage} ? <img src={"https://193.164.149.140/api/image/"+ carImage} alt="" />:"NETU"
-				}
+				{/* {
+					{carNumber} ? <img src={"https://193.164.149.140/api/image/"+ {carNumber}} alt="" />:"NETU"
+				} */}
 				
 			</div>
 			<div className={s.textBody}>
