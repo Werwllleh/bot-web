@@ -10,26 +10,23 @@ import s from './SearchCar.module.css';
 const SearchCar = () => {
 
 	const [searcheble, setSearcheble] = useState('');
-	// const [carImage, setCarImage] = useState(null);
 
 	const { tg } = useTelegram();
 
-	setTimeout(
-		useEffect(() => {
-				axios({
-					method: 'post',
-					url: 'https://193.164.149.140/api/searchcar',
-					headers: { 
-						'Content-Type': 'application/json'
-					},
-					data: {searcheble}
-				}).then(res => {
-					const carNumber = res.data.searcheble;
-					console.log(carNumber);
-				})
-		}, [searcheble]),
-		2000
-	)
+	useEffect(() => {
+			axios({
+				method: 'post',
+				url: 'https://193.164.149.140/api/searchcar',
+				headers: { 
+					'Content-Type': 'application/json'
+				},
+				data: searcheble
+			}).then(res => {
+				const carNumber = res.data.searcheble;
+				console.log(carNumber);
+			})
+	}, [searcheble])
+
 
 	useEffect(() => { 
 		tg.expand()
