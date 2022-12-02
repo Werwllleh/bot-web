@@ -1,7 +1,10 @@
+import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
-import './SearchCar.css';
-import '../../App.css';
+import s from './SearchCar.module.css';
+
+
+// import '../../App.css';
 
 
 const SearchCar = () => {
@@ -9,50 +12,47 @@ const SearchCar = () => {
 	const [searcheble, setSearcheble] = useState('');
 	const { tg } = useTelegram();
 
-	useEffect(() => {
+/* 	useEffect(() => {
 		fetch('/searchcar')
 			.then(response => response.json())
 			.then(response => setSearcheble(response))
-	}, [])
+	}, []) */
+
+	useEffect(() => {
+		axios.get(`https://193.164.149.140/searchcar`, {data:'K868OP21'})
+			.then(res => {
+				const carNumber = res.data;
+				console.log(carNumber);
+      })
+	}, [searcheble])
 
 	useEffect(() => {
 		tg.expand()
 	}, [])
 
-	const onSearcheble = (e) => {
+	const onSearcheble = async (e) => {
 		setSearcheble(e.target.value.toUpperCase());
 	}
 
 	return (
-		<div className={'searchCar'}>
-			<h1 className={'title'}>Поиск авто</h1>
+		<div className={s.search_body}>
+			<h1 className={s.title}>Поиск авто</h1>
 			<input
-				className={'input-search'}
+				className={s.input}
+				type="text"
+				placeholder='Введи номер авто'
 				value={searcheble}
 				onChange={onSearcheble}
-				type="text"
-				placeholder={'Введите номер автомобиля'} />
-			<div className={'foundBody'}>
-				<div className={'foundCarImg'}>
-					<img src="https://193.164.149.140/api/image/${searcheble}" alt="" />
-				</div>
-				<div className={'list'}>
-					<div className={'list-right'}>
-						<div className={'list-item'}>Авто:</div>
-						<div className={'list-item'}>Владелец:</div>
-						<div className={'list-item'}>Год авто:</div>
-						<div className={'list-item'}>Примечания:</div>
-					</div>
-					<div className={'list-left'}>
-						<div className={'list-item list-item-r'}>Какое-то</div>
-						<div className={'list-item list-item-r'}>Кто-то</div>
-						<div className={'list-item list-item-r'}>Когда-то</div>
-						<div className={'list-item list-item-r'}>Какие-то</div>
-					</div>
-				</div>
+			/>
+			<div className={s.image_body}>
+				<img src="https://193.164.149.140/api/image/446012794.jpeg" alt="" />
+			</div>
+			<div className={s.textBody}>
+
 			</div>
 		</div>
 	)
 }
 
 export default SearchCar;
+

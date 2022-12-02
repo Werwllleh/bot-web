@@ -1,0 +1,36 @@
+.search_body {
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+.title {
+	font-weight: 600;
+	text-align: center;
+	padding: 15px 0;
+}
+
+.input {
+	width: 100%;
+	padding: 10px 7px;
+	border-radius: 5px;
+	border: 1px solid var(--tg-theme-bg-color) !important;
+	outline: none;
+	box-shadow: 0 0 5px rgba(79,79,79, 0.676);
+	font-weight: 600;
+	color: rgb(79, 79, 79);
+}
+
+.image_body {
+	margin: 15px 0;
+}
+
+.image_body img {
+	margin: 0 auto;
+	max-width: calc(100vw - 20%);
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
+}
+
+.textBody {
+
+}

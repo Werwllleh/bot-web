@@ -21,7 +21,7 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
+    <div className={"App"}>
       <Header />
       <Routes>
         <Route index element={<Cars />} />
