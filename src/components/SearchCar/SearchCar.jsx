@@ -22,8 +22,19 @@ const SearchCar = () => {
 
 
 		useEffect(() => {
-		axios.get(`https://193.164.149.140/api/carnum`, { data: {search: searcheble} })
+		/* axios.get(`https://193.164.149.140/api/carnum`, { data: {search: searcheble} })
 			.then(res => {
+				const carNumber = res.data;
+				console.log(carNumber);
+			}) */
+			axios({
+				method: 'get',
+				url: 'https://193.164.149.140/api/carnum',
+				headers: { 
+					'Content-Type': 'application/json'
+				},
+				data : {search: searcheble}
+			}).then(res => {
 				const carNumber = res.data;
 				console.log(carNumber);
 			})
