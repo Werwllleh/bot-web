@@ -20,12 +20,12 @@ const SearchCar = () => {
 					method: 'post',
 					url: 'https://193.164.149.140/api/searchcar',
 					headers: { 
-						'Content-Type': 'application/x-www-form-urlencoded,'
+						'Content-Type': 'application/json'
 					},
-					data: searcheble
+					data: {searcheble}
 				}).then(res => {
-					const carNumber = res.data;
-					console.log(data);
+					const carNumber = res.data.searcheble;
+					console.log(carNumber);
 				})
 		}, [searcheble]),
 		2000
@@ -51,9 +51,9 @@ const SearchCar = () => {
 				onChange={onSearcheble}
 			/>
 			<div className={s.image_body}>
-				{/* {
+				{
 					{carNumber} ? <img src={"https://193.164.149.140/api/image/"+ {carNumber}} alt="" />:"NETU"
-				} */}
+				}
 			</div>
 			<div className={s.textBody}>
 
