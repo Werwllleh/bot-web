@@ -17,7 +17,7 @@ const SearchCar = () => {
 	setTimeout(
 		useEffect(() => {
 				axios({
-					method: 'get',
+					method: 'post',
 					url: 'https://193.164.149.140/api/searchcar',
 					headers: { 
 						'Content-Type': 'application/x-www-form-urlencoded,'
