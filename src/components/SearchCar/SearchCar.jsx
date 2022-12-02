@@ -18,13 +18,18 @@ const SearchCar = () => {
 			.then(response => setSearcheble(response))
 	}, []) */
 
-	useEffect(() => {
+	setTimeout(
+		useEffect(() => {
 		axios.get(`https://193.164.149.140/api/carnum`, { data: {searcheble} })
 			.then(res => {
 				const carNumber = res.data;
 				console.log(carNumber);
 			})
-	}, [searcheble])
+		}, [searcheble]),
+		300
+	)
+
+	
 
 	useEffect(() => {
 		tg.expand()
