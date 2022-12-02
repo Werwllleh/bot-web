@@ -19,11 +19,12 @@ const SearchCar = () => {
 	}, []) */
 
 	useEffect(() => {
-		axios.get(`https://193.164.149.140/searchcar`, {data:'K868OP21'})
+		axios.get(`https://193.164.149.140/searchcar`, { data: 'K868OP21' })
 			.then(res => {
 				const carNumber = res.data;
 				console.log(carNumber);
-      })
+			})
+		console.log(res);
 	}, [searcheble])
 
 	useEffect(() => {
