@@ -33,7 +33,7 @@ const SearchCar = () => {
 				headers: { 
 					'Content-Type': 'application/json'
 				},
-				data : {search: searcheble}
+				body : {search: searcheble}
 			}).then(res => {
 				const carNumber = res.data;
 				console.log(carNumber);
