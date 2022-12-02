@@ -48,9 +48,9 @@ const SearchCar = () => {
 				onChange={onSearcheble}
 			/>
 			<div className={s.image_body}>
-				{
+				{/* {
 					carNumber ? <img src={"https://193.164.149.140/api/image/"+ {carNumber}} alt="" />:"NETU"
-				}
+				} */}
 			</div>
 			<div className={s.textBody}>
 
