@@ -10,6 +10,8 @@ import s from './SearchCar.module.css';
 const SearchCar = () => {
 
 	const [searcheble, setSearcheble] = useState('');
+	const [carImage, setCarImage] = useState(null);
+
 	const { tg } = useTelegram();
 
 /* 	useEffect(() => {
@@ -18,18 +20,15 @@ const SearchCar = () => {
 			.then(response => setSearcheble(response))
 	}, []) */
 
-	setTimeout(
+
 		useEffect(() => {
-		axios.get(`https://193.164.149.140/api/carnum`, { data: {searcheble} })
+		axios.get(`https://193.164.149.140/api/carnum`, { data: {search: searcheble} })
 			.then(res => {
 				const carNumber = res.data;
 				console.log(carNumber);
 			})
-		}, [searcheble]),
-		300
-	)
+		}, [searcheble])
 
-	
 
 	useEffect(() => {
 		tg.expand()
@@ -38,6 +37,7 @@ const SearchCar = () => {
 	const onSearcheble = async (e) => {
 		setSearcheble(e.target.value.toUpperCase());
 	}
+
 
 	return (
 		<div className={s.search_body}>
@@ -50,7 +50,10 @@ const SearchCar = () => {
 				onChange={onSearcheble}
 			/>
 			<div className={s.image_body}>
-				<img src="https://193.164.149.140/api/image/446012794.jpeg" alt="" />
+				{
+					{carImage} ? <img src={"https://193.164.149.140/api/image/"+ carImage} alt="" />:"NETU"
+				}
+				
 			</div>
 			<div className={s.textBody}>
 
