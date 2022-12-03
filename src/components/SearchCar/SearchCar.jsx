@@ -16,13 +16,17 @@ const SearchCar = () => {
 	}
 
 	useEffect(() => {
-		axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
+    const delayDebounceFn = setTimeout(() => {
+      axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
 			.then((res) => {
-				let photoName = res.data.carImage;
-				setCarPhotoName("https://193.164.149.140/api/image/" + photoName)
-				// console.log(carPhotoName);
+				if (res.data) {
+					let photoName = res.data.carImage;
+					setCarPhotoName("https://193.164.149.140/api/image/" + photoName)
+				}
     });
-	}, [searcheble]);
+    }, 1500)
+    return () => clearTimeout(delayDebounceFn)
+  }, [searcheble])
 
 
 	useEffect(() => { 
@@ -41,8 +45,7 @@ const SearchCar = () => {
 				onChange={onSearcheble}
 			/>
 			<div className={s.image_body}>
-				{console.log(carPhotoName)}
-				<img src={carPhotoName} alt="" />
+				{{carPhotoName} ? <img src={carPhotoName} alt="" /> : <p>Не найдено</p>}
 			</div>
 			<div className={s.textBody}>
 			</div>
