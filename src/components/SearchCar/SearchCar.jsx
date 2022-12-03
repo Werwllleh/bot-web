@@ -3,39 +3,27 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 import s from './SearchCar.module.css';
 
-
-// import '../../App.css';
-
-
 const SearchCar = () => {
 
 	const [searcheble, setSearcheble] = useState('');
 
 	const { tg } = useTelegram();
 
+	const onSearcheble = (e) => {
+		setSearcheble(e.target.value.toUpperCase());
+	}
+
 	useEffect(() => {
-			axios({
-				method: 'post',
-				url: 'https://193.164.149.140/api/searchcar',
-				headers: { 
-					'Content-Type': 'application/json'
-				},
-				data: searcheble
-			}).then(res => {
-				const carNumber = res.data.searcheble;
-				console.log(carNumber);
-			})
-	}, [searcheble])
+		axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
+			.then((response) => {
+      console.log(response);
+    });
+  }, [searcheble]);
 
 
 	useEffect(() => { 
 		tg.expand()
 	}, [])
-
-	const onSearcheble = async (e) => {
-		setSearcheble(e.target.value.toUpperCase());
-	}
-
 
 	return (
 		<div className={s.search_body}>
