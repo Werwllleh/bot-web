@@ -7,6 +7,8 @@ const SearchCar = () => {
 
 	const [searcheble, setSearcheble] = useState('');
 
+	const [carPhotoName, setCarPhotoName] = useState('')
+
 	const { tg } = useTelegram();
 
 	const onSearcheble = (e) => {
@@ -15,10 +17,12 @@ const SearchCar = () => {
 
 	useEffect(() => {
 		axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
-			.then((response) => {
-      console.log(response);
+			.then((res) => {
+				let photoName = res.data.carImage;
+				setCarPhotoName("https://193.164.149.140/api/image/" + photoName)
+				// console.log(carPhotoName);
     });
-  }, [searcheble]);
+	}, [searcheble]);
 
 
 	useEffect(() => { 
@@ -29,6 +33,7 @@ const SearchCar = () => {
 		<div className={s.search_body}>
 			<h1 className={s.title}>Поиск авто</h1>
 			<input
+				maxLength={9}
 				className={s.input}
 				type="text"
 				placeholder='Введи номер авто'
@@ -36,12 +41,10 @@ const SearchCar = () => {
 				onChange={onSearcheble}
 			/>
 			<div className={s.image_body}>
-				{/* {
-					carNumber ? <img src={"https://193.164.149.140/api/image/"+ {carNumber}} alt="" />:"NETU"
-				} */}
+				{console.log(carPhotoName)}
+				<img src={carPhotoName} alt="" />
 			</div>
 			<div className={s.textBody}>
-
 			</div>
 		</div>
 	)
