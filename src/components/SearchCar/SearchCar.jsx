@@ -7,7 +7,9 @@ const SearchCar = () => {
 
 	const [searcheble, setSearcheble] = useState('');
 
-	const [carPhotoName, setCarPhotoName] = useState('')
+	const [carPhotoName, setCarPhotoName] = useState('');
+
+	const [userFileds, setUserFields] = useState('');
 
 	const { tg } = useTelegram();
 
@@ -18,10 +20,12 @@ const SearchCar = () => {
 	useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
-			.then((res) => {
+				.then((res) => {
+				console.log(res.data);
 				if (res.data) {
 					let photoName = res.data.carImage;
 					setCarPhotoName("https://193.164.149.140/api/image/" + photoName)
+					setUserFields(res.data.userName)
 				}
     });
     }, 1500)
@@ -48,6 +52,7 @@ const SearchCar = () => {
 				{{carPhotoName} ? <img src={carPhotoName} alt="" /> : <p>Не найдено</p>}
 			</div>
 			<div className={s.textBody}>
+				{userFileds}
 			</div>
 		</div>
 	)
