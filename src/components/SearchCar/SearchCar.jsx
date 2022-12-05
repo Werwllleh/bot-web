@@ -1,10 +1,9 @@
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 import s from './SearchCar.module.css';
-
 import { LoadingOutlined } from '@ant-design/icons';
-// import 'antd/dist/antd.min.css';
+
 
 const SearchCar = () => {
 
