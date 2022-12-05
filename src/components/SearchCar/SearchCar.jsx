@@ -24,8 +24,10 @@ const SearchCar = () => {
 			setLoading(true)
       axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
 				.then((res) => {
-					setUserFields(res.data)
-					setLoading(false)
+					if (res.data != 'Не найдено') {
+						setUserFields(res.data)
+						setLoading(false)
+					}
 				})
     }, 1200)
     return () => clearTimeout(delayDebounceFn)
@@ -61,18 +63,21 @@ const SearchCar = () => {
 						</ul>
 					</div>
 				</div>
-			) : (
-					<div className={s.notFound}>
-						{loading ?
-							<LoadingOutlined style={{ textAlign: 'center', fontSize: '16px', color: `var(--tg-theme-text-color) !important` }} /> :
-							(
-								<div className={s.notFoundImg}>
-									<img src="https://193.164.149.140/api/icons/404.png" alt="Not found" />
-									<p>Авто не найдено</p>
-								</div>
-							)
-						}
-				</div>
+			) : (userFileds == null) ? (
+							<div className={s.notFoundImg}>
+								<img src="https://193.164.149.140/api/icons/404.png" alt="Not found" />
+								<p>Авто не найдено</p>
+							</div>
+						)
+				: (<div className={s.notFound}>
+				{loading ? <LoadingOutlined style={{ textAlign: 'center', fontSize: '16px', color: `var(--tg-theme-text-color) !important` }} /> :
+					(
+						<div className={s.notFoundImg}>
+							<img src="https://193.164.149.140/api/icons/404.png" alt="Not found" />
+							<p>Авто не найдено</p>
+						</div>
+					)}
+			</div>
 			)}
 		</div>
 	)
