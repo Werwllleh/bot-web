@@ -6,7 +6,7 @@ import s from './Cars.module.css';
 
 const Cars = () => {
 
-	const [carPhotos, setCarPhotos] = useState('')
+	const [carPhotos, setCarPhotos] = useState([]);
 
 	const { tg } = useTelegram();
 
@@ -17,12 +17,9 @@ const Cars = () => {
 	useEffect(() => {
 		axios.get(`https://193.164.149.140/api/ourcars`)
 			.then((res) => {
-				let arrPhoto = [];
-				setCarPhotos(arrPhoto.push(res.data))
-
-				console.log(arrPhoto);
+				setCarPhotos(res.data)
 		})
-	}, [carPhotos])
+	}, [])
 
 
 
@@ -30,7 +27,9 @@ const Cars = () => {
 		<div className={s.cars_body}>
 			<div className={s.cars_cards}>
 				<div className={s.cars_card}>
-					<img src={"https://193.164.149.140/api/image/" + carPhotos} alt="" />
+					{carPhotos.map((photo) => {
+						return (<img src={"https://193.164.149.140/api/image/" + photo} alt="" />)
+					})}
 				</div>
 			</div>
 		</div>
