@@ -22,10 +22,8 @@ const SearchCar = () => {
     const delayDebounceFn = setTimeout(() => {
       axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
 				.then((res) => {
-				if (res.data) {
 					setUserFields(res.data) 
-				}
-    });
+				});
     }, 1200)
     return () => clearTimeout(delayDebounceFn)
   }, [searcheble])
