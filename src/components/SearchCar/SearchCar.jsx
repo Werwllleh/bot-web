@@ -3,6 +3,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 import s from './SearchCar.module.css';
 
+import { LoadingOutlined } from '@ant-design/icons';
+// import 'antd/dist/antd.min.css';
+
 const SearchCar = () => {
 
 	const [searcheble, setSearcheble] = useState('');
@@ -58,8 +61,8 @@ const SearchCar = () => {
 					</div>
 				</div>
 			) : (
-				<div className={s.loader}>
-					Автомобиль с таким номером не найден
+				<div className={s.notFound}>
+					<LoadingOutlined style={{textAlign: 'center', fontSize: '16px', color: `var(--tg-theme-text-color) !important` }}/>
 				</div>
 			)}
 		</div>
