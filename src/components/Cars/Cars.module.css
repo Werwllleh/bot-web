@@ -1,0 +1,13 @@
+.title {
+	font-weight: 600;
+	text-align: center;
+	padding: 15px 0;
+	color: var(--tg-theme-text-color) !important;
+}
+
+.ant-image-img {
+	width: 100px !important;
+	object-fit: cover !important;
+}
+
+
