@@ -7,9 +7,7 @@ const SearchCar = () => {
 
 	const [searcheble, setSearcheble] = useState('');
 
-	const [carPhotoName, setCarPhotoName] = useState('');
-
-	const [userFileds, setUserFields] = useState('');
+	const [userFileds, setUserFields] = useState(null);
 
 	const { tg } = useTelegram();
 
@@ -21,14 +19,11 @@ const SearchCar = () => {
     const delayDebounceFn = setTimeout(() => {
       axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
 				.then((res) => {
-				console.log(res.data);
 				if (res.data) {
-					let photoName = res.data.carImage;
-					setCarPhotoName("https://193.164.149.140/api/image/" + photoName)
-					setUserFields(res.data.userName)
+					setUserFields(res.data) 
 				}
     });
-    }, 1500)
+    }, 1200)
     return () => clearTimeout(delayDebounceFn)
   }, [searcheble])
 
@@ -48,12 +43,25 @@ const SearchCar = () => {
 				value={searcheble}
 				onChange={onSearcheble}
 			/>
-			<div className={s.image_body}>
-				{{carPhotoName} ? <img src={carPhotoName} alt="" /> : <p>Не найдено</p>}
-			</div>
-			<div className={s.textBody}>
-				{userFileds}
-			</div>
+			{userFileds ? (
+				<div className={s.result_body}>
+					<div className={s.image_body}>
+						<img src={"https://193.164.149.140/api/image/" + userFileds.carImage} alt="" />
+					</div>
+					<div className={s.textBody}>
+						<ul className={s.list}>
+							<li>Владелец: <span>{userFileds.userName}</span></li>
+							<li>Авто: <span>{userFileds.carModel}</span></li>
+							<li>Год выпуска: <span>{userFileds.carYear}</span></li>
+							{userFileds.carNote ? <li>Примечание: <span>{userFileds.carNote}</span></li> : null}
+						</ul>
+					</div>
+				</div>
+			) : (
+				<div className={s.loader}>
+					Автомобиль с таким номером не найден
+				</div>
+			)}
 		</div>
 	)
 }

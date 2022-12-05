@@ -3,6 +3,10 @@
 	padding: 0 10px;
 }
 
+.result_body {
+
+}
+
 .title {
 	font-weight: 600;
 	text-align: center;
@@ -33,5 +37,16 @@
 }
 
 .textBody {
+	display: flex;
+	justify-content: center;
+}
 
+.list {
+	color: var(--tg-theme-text-color) !important;
+	font-weight: 300;
+	font-size: 18px;
+}
+
+.list li span {
+	font-weight: 400;
 }
