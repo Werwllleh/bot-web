@@ -12,6 +12,8 @@ const SearchCar = () => {
 
 	const [userFileds, setUserFields] = useState(null);
 
+	const [loading, setLoading] = useState(false);
+
 	const { tg } = useTelegram();
 
 	const onSearcheble = (e) => {
@@ -19,11 +21,13 @@ const SearchCar = () => {
 	}
 
 	useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
+		const delayDebounceFn = setTimeout(() => {
+			setLoading(true)
       axios.post(`https://193.164.149.140/api/searchcar`, {searcheble})
 				.then((res) => {
-					setUserFields(res.data) 
-				});
+					setUserFields(res.data)
+					setLoading(false)
+				})
     }, 1200)
     return () => clearTimeout(delayDebounceFn)
   }, [searcheble])
@@ -59,8 +63,16 @@ const SearchCar = () => {
 					</div>
 				</div>
 			) : (
-				<div className={s.notFound}>
-					<LoadingOutlined style={{textAlign: 'center', fontSize: '16px', color: `var(--tg-theme-text-color) !important` }}/>
+					<div className={s.notFound}>
+						{loading ?
+							<LoadingOutlined style={{ textAlign: 'center', fontSize: '16px', color: `var(--tg-theme-text-color) !important` }} /> :
+							(
+								<div className={s.notFoundImg}>
+									<img src="https://193.164.149.140/api/icons/404.png" alt="Not found" />
+									<p>Авто не найдено</p>
+								</div>
+							)
+						}
 				</div>
 			)}
 		</div>

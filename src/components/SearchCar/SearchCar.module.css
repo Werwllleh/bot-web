@@ -45,7 +45,6 @@
 	color: var(--tg-theme-text-color) !important;
 	font-weight: 300;
 	font-size: 20px;
-	
 }
 
 .list li span {
@@ -62,4 +61,16 @@
 	font-weight: 300;
 	width: 10em;
 	height: 10em;
+}
+
+.notFoundImg {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.notFoundImg p {
+	color: var(--tg-theme-text-color) !important;
+	font-weight: 300;
+	font-size: 26px;
 }
