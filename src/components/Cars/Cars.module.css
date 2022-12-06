@@ -1,5 +1,5 @@
 .cars_body {
-	padding: 0 10px;
+	padding: 0 12%;
 }
 
 .title {
@@ -12,14 +12,21 @@
 .image_grid {
 	margin: 30px 0 0 0;
 	display: flex;
+	align-items: center;
 	flex-wrap: wrap;
-	gap: 5px;
+	gap: 20px;
 }
 
 .image_card {
-	border: 7px solid #fff;
-	object-fit: cover;
-	max-width: 250px;
+	flex: 0 1 auto;
 }
 
+.image_card img{
+	max-width: 400px;
+	border: 7px solid #fff;
+	object-fit: cover;
+	box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
+}
+
+@media (max-width: 480px) {}
 

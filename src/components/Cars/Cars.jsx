@@ -36,12 +36,13 @@ const Cars = () => {
 			<div className={s.image_grid}>
 				{images.map((photo) => {
 					return (
-						<img
-							className={s.image_card}
-							key={String(photo).length + 7}
-							src={"https://193.164.149.140/api/image/" + photo}
-							alt=""
-						/>
+						<div className={s.image_card}>
+							<img
+								key={Math.random() * (0 - 50) + 50}
+								src={"https://193.164.149.140/api/image/" + photo}
+								alt=""
+								/>
+						</div>
 					)
 				})}
 			</div>
