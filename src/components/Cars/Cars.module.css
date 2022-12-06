@@ -11,7 +11,7 @@
 }
 
 .image_grid {
-	margin: 30px 0 0 0;
+	margin: 30px 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -31,7 +31,19 @@
 }
 
 @media (max-width: 860px) {
+	.title {
+		font-size: 24px;
+	}
+	.cars_body {
+		padding: 0 7px;
+	}
+	.image_grid {
+		gap: 10px;
+	}
 	.image_card {
 		flex: 0 1 45%;
+	}
+	.image_card img {
+		border: 4px solid #fff;
 	}
 }

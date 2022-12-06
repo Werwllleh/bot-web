@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 import s from './Cars.module.css';
-// import { Image } from 'antd';
 
 
 const Cars = () => {
@@ -29,16 +28,15 @@ const Cars = () => {
 	}, []);
 
 
-
 	return (
 		<div className={s.cars_body}>
-			<h1 className={s.title}>Авто нашего клуба</h1>
+			<h1 className={s.title}>Автомобили нашего клуба</h1>
 			<div className={s.image_grid}>
 				{images.map((photo) => {
 					return (
 						<div className={s.image_card}>
 							<img
-								key={Math.random() * (0 - 50) + 50}
+								key={Math.random()}
 								src={"https://193.164.149.140/api/image/" + photo}
 								alt=""
 								/>
@@ -51,11 +49,3 @@ const Cars = () => {
 };
 
 export default Cars;
-
-{/* <Image
-width={Math.random() * (400 - 200) + 200}
-height={Math.random() * (400 - 200) + 200}
-key={String(photo).length+7}
-src={"https://193.164.149.140/api/image/" + photo}
-alt={"car" + String(photo).length + 7}
-/> */}

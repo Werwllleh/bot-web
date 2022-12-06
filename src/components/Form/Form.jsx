@@ -1,7 +1,7 @@
 import UploadForm from './Upload/Upload';
 import React, {useCallback, useEffect, useState} from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
-import './Form.css';
+import s from './Form.module.css';
 
 
 const Form = () => {
@@ -73,20 +73,22 @@ const Form = () => {
 
 
 	return (
-		<div className={'form'}>
-			<h1 className={'title'}>Регистрация</h1>
-			<input className={'input'} value={name} onChange={onChangeName} type="text" placeholder={'Имя и фамилия*'}/>
-			<input className={'input'} value={car} onChange={onChangeCar} type="text" placeholder={'Марка и модель авто*'} />
-			<p className={'input-label'}>Желательно использовать латинские буквы</p>
-			<input className={'input'} value={carYear} onChange={onChangeCarYear} type="number" placeholder={'Год выпуска вашего авто*'} />
-			<input className={'input'} value={carNum} onChange={onChangeCarNum} type="text" placeholder={'Номер вашего авто*'} />
-			<p className={'input-label'}>Латинские буквы, формат A999AA99 или A999AA999</p>
-			<input className={'input'} value={carNote} onChange={onChangeCarNote} type="text" placeholder={'Примечание к авто'} />
-			<div className={'form-upload'}>
-				<UploadForm img={setCarImage} />
-			</div>
-			<div className={'form-footer'}>
-				<p>Поля со * обязательны к заполнению</p>
+		<div className={s.form}>
+			<h1 className={s.title}>Регистрация</h1>
+			<div className={s.form_body}>
+				<input className={s.input} value={name} onChange={onChangeName} type="text" placeholder={'Имя и фамилия*'}/>
+				<input className={s.input} value={car} onChange={onChangeCar} type="text" placeholder={'Марка и модель авто*'} />
+				<p className={s.input_label}>Желательно использовать латинские буквы</p>
+				<input className={s.input} value={carYear} onChange={onChangeCarYear} type="number" placeholder={'Год выпуска вашего авто*'} />
+				<input className={s.input} value={carNum} onChange={onChangeCarNum} type="text" placeholder={'Номер вашего авто*'} />
+				<p className={s.input_label}>Латинские буквы, формат A999AA99 или A999AA999</p>
+				<input className={s.input} value={carNote} onChange={onChangeCarNote} type="text" placeholder={'Примечание к авто'} />
+				<div className={s.form_upload}>
+					<UploadForm img={setCarImage} />
+				</div>
+				<div className={s.form_footer}>
+					<p>Поля со * обязательны к заполнению</p>
+				</div>
 			</div>
 		</div>
 	);

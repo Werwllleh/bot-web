@@ -5,11 +5,15 @@
 	padding: 0 10px;
 }
 
+.form_body {
+	
+}
+
 .title {
-	color: var(--tg-theme-text-color) !important;
-	font-size: 24px;
+	font-weight: 600;
 	text-align: center;
-	margin: 15px 0;
+	padding: 15px 0;
+	color: var(--tg-theme-text-color) !important;
 }
 
 .input {
@@ -69,17 +73,17 @@ input[type=number]::-webkit-outer-spin-button {
 	font-weight: 500 !important;
 }
 
-.input-label {
+.input_label {
 	font-size: 12px;
 	font-weight: 300;
-	margin: 5px 0 10px 0;
+	margin: 5px 0 10px 0 !important;
 }
 
-.form-upload {
+.form_upload {
 	margin: 20px 0;
 }
 
-.form-footer {
+.form_footer {
 	font-size: 12px;
 	font-weight: 300;
 }
