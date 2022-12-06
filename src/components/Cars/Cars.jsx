@@ -7,7 +7,6 @@ import s from './Cars.module.css';
 const Cars = () => {
 
 	const [images, setImages] = useState([]);
-	const [countImg, setCountImg] = useState(12);
 	const [fetching, setFetching] = useState(true);
 
 
@@ -22,8 +21,11 @@ const Cars = () => {
 			await axios.get(`https://193.164.149.140/api/ourcars`)
 			.then(res => {
 				let totalCount = res.data.length;
+				console.log(res);
+				
 				console.log(totalCount);
-        setImages([...images,...res.data]); 
+				setImages([...images, ...res.data]); 
+				console.log(images);
 			})
 			.finally(() => setFetching(false))
 		}
@@ -54,8 +56,7 @@ const Cars = () => {
 				{images.map((photo) => {
 					return (
 						<div className={s.image_card}>
-							<img
-								key={Math.random()}
+							<img key={Math.floor(Math.random())}
 								src={"https://193.164.149.140/api/image/" + photo}
 								alt=""
 								/>
