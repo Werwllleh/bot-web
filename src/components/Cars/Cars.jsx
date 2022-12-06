@@ -6,8 +6,10 @@ import s from './Cars.module.css';
 
 const Cars = () => {
 
-	const [images, setImages] = React.useState([]);
-	const [loaded, setIsLoaded] = React.useState(false);
+	const [images, setImages] = useState([]);
+	const [countImg, setCountImg] = useState(12);
+	const [fetching, setFetching] = useState(true);
+
 
 	const { tg } = useTelegram();
 
@@ -16,16 +18,33 @@ const Cars = () => {
 	}, [])
 
 	const fetchImages = async () => {
-    await axios.get(`https://193.164.149.140/api/ourcars`)
-      .then (res => {
-        setImages([...images, ...res.data]);
-        setIsLoaded(true);
-      });
+		if (fetching) {
+			await axios.get(`https://193.164.149.140/api/ourcars`)
+			.then(res => {
+				let totalCount = res.data.length;
+				console.log(totalCount);
+        setImages([...images,...res.data]); 
+			})
+			.finally(() => setFetching(false))
+		}
 	};
+
+	useEffect(() => {
+		document.addEventListener('scroll', scrollHandler)
+		return function () {
+			document.removeEventListener('scroll', scrollHandler)
+		}
+	}, [])
+
+	const scrollHandler = (e) => {
+		if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+			setFetching(true)
+		}
+	}
 	
 	useEffect(() => {
 			fetchImages();
-	}, []);
+	}, [fetching]);
 
 
 	return (
