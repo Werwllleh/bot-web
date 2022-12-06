@@ -2,7 +2,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import { Button, Space, message, Upload } from 'antd';
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'antd/dist/antd.min.css';
+// import 'antd/dist/antd.min.css';
 
 
 const UploadForm = ({img}) => {

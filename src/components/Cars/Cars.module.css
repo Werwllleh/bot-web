@@ -1,3 +1,7 @@
+.cars_body {
+	padding: 0 10px;
+}
+
 .title {
 	font-weight: 600;
 	text-align: center;
@@ -5,9 +9,17 @@
 	color: var(--tg-theme-text-color) !important;
 }
 
-.ant-image-img {
-	width: 100px !important;
-	object-fit: cover !important;
+.image_grid {
+	margin: 30px 0 0 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+.image_card {
+	border: 7px solid #fff;
+	object-fit: cover;
+	max-width: 250px;
 }
 
 
