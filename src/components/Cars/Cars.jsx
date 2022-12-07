@@ -26,7 +26,7 @@ const Cars = () => {
 		})
 		.finally(() => setFetching(false))
 		}
-	}, []);
+	}, [fetching]);
 
 	useEffect(() => {
 		document.addEventListener('scroll', scrollHandler)
