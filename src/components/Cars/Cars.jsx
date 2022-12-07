@@ -8,6 +8,7 @@ const Cars = () => {
 
 	const [images, setImages] = useState([]);
 	const [fetching, setFetching] = useState(true);
+	const [totalCount, setTotalCount] = useState(1)
 
 
 	const { tg } = useTelegram();
@@ -16,27 +17,24 @@ const Cars = () => {
 		tg.expand()
 	}, [])
 
-	const fetchImages = async () => {
-		if (fetching) {
-			await axios.get(`https://193.164.149.140/api/ourcars`)
-			.then(res => {
-				let totalCount = res.data.length;
-				console.log(res);
-				
-				console.log(totalCount);
-				setImages([...images, ...res.data]); 
-				console.log(images);
-			})
-			.finally(() => setFetching(false))
+	useEffect(() => {
+	if (fetching) {
+		axios.get(`https://193.164.149.140/api/ourcars`)
+		.then(res => {
+			console.log(res);
+			setTotalCount(res.data.pageCount)
+			setImages([...images, ...res.data.files]); 
+		})
+		.finally(() => setFetching(false))
 		}
-	};
+	}, [fetching]);
 
 	useEffect(() => {
 		document.addEventListener('scroll', scrollHandler)
 		return function () {
 			document.removeEventListener('scroll', scrollHandler)
 		}
-	}, [])
+	}, [totalCount])
 
 	const scrollHandler = (e) => {
 		if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
@@ -44,9 +42,7 @@ const Cars = () => {
 		}
 	}
 	
-	useEffect(() => {
-			fetchImages();
-	}, [fetching]);
+
 
 
 	return (
@@ -55,8 +51,8 @@ const Cars = () => {
 			<div className={s.image_grid}>
 				{images.map((photo) => {
 					return (
-						<div className={s.image_card}>
-							<img key={Math.floor(Math.random())}
+						<div className={s.image_card} key={photo}>
+							<img
 								src={"https://193.164.149.140/api/image/" + photo}
 								alt=""
 								/>
