@@ -19,15 +19,14 @@ const Cars = () => {
 
 	useEffect(() => {
 	if (fetching) {
-		axios.get(`https://193.164.149.140/api/ourcars`)
+		axios.get(`https://193.164.149.140/api/ourcars?p=${totalCount}`)
 		.then(res => {
 			console.log(res);
-			setTotalCount(res.data.pageCount)
 			setImages([...images, ...res.data.files]); 
 		})
 		.finally(() => setFetching(false))
 		}
-	}, [fetching]);
+	}, []);
 
 	useEffect(() => {
 		document.addEventListener('scroll', scrollHandler)
@@ -37,8 +36,14 @@ const Cars = () => {
 	}, [totalCount])
 
 	const scrollHandler = (e) => {
-		if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+		if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 50) {
+			console.log(e.target.documentElement.scrollHeight);
+			console.log(e.target.documentElement.scrollTop);
+			console.log(window.innerHeight);
+
 			setFetching(true)
+			console.log('ddd');
+			setTotalCount((i) => i+1)
 		}
 	}
 	
@@ -51,7 +56,7 @@ const Cars = () => {
 			<div className={s.image_grid}>
 				{images.map((photo) => {
 					return (
-						<div className={s.image_card} key={photo}>
+						<div className={s.image_card}>
 							<img
 								src={"https://193.164.149.140/api/image/" + photo}
 								alt=""
