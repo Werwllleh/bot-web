@@ -20,7 +20,6 @@ const Cars = () => {
 
 	useEffect(() => {
 		if (fetching) {
-		console.log("fetching");
 		axios.get(`https://193.164.149.140/api/ourcars?page=${currentPage}`)
 		.then(res => {
 			console.log(res);
@@ -33,9 +32,9 @@ const Cars = () => {
 	}, [fetching]);
 
 	useEffect(() => {
-		document.addEventListener('scroll', scrollHandler)
+		document.addEventListener('scroll', scrollHandler, true)
 		return function () {
-			document.removeEventListener('scroll', scrollHandler)
+			document.removeEventListener('scroll', scrollHandler, true)
 		}
 	}, [totalCount])
 
