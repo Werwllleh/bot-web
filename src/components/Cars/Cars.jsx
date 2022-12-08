@@ -44,9 +44,6 @@ const Cars = () => {
 		}
 	}
 	
-
-
-
 	return (
 		<div className={s.cars_body}>
 			<h1 className={s.title}>Автомобили нашего клуба</h1>
