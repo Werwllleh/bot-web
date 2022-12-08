@@ -51,12 +51,11 @@ const Cars = () => {
 		<div className={s.cars_body}>
 			<h1 className={s.title}>Автомобили нашего клуба</h1>
 			<div className={s.image_grid}>
-				<ImageList cols={3}>
+				<ImageList sx={{ width: 500 }} cols={3}>
 					{images.map((photo) => (
 						<ImageListItem key={photo}>
 							<img
 								src={"https://193.164.149.140/api/image/" + photo}
-								// srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
 								alt=""
 								loading="lazy"
 							/>

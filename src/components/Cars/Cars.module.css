@@ -30,7 +30,7 @@
 	box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
 }
  */
-@media (max-width: 860px) {
+/* @media (max-width: 860px) {
 	.title {
 		font-size: 24px;
 	}
@@ -46,4 +46,4 @@
 	.image_card img {
 		border: 4px solid #fff;
 	}
-}
+} */
