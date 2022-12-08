@@ -23,13 +23,13 @@
 	flex: 0 1 auto;
 }
 
-.image_card img{
+/* .image_card img{
 	max-width: 400px;
 	width: 100%;
 	border: 7px solid #fff;
 	box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
 }
-
+ */
 @media (max-width: 860px) {
 	.title {
 		font-size: 24px;

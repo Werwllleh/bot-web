@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 import s from './Cars.module.css';
 
+import { ImageList, ImageListItem } from '@mui/material';
+
 
 const Cars = () => {
 
@@ -43,24 +45,34 @@ const Cars = () => {
 			setFetching(true)
 		}
 	}
+
 	
 	return (
 		<div className={s.cars_body}>
 			<h1 className={s.title}>Автомобили нашего клуба</h1>
 			<div className={s.image_grid}>
-				{images.map((photo) => {
-					return (
-						<div className={s.image_card} key={photo}>
+				<ImageList cols={3}>
+					{images.map((photo) => (
+						<ImageListItem key={photo}>
 							<img
 								src={"https://193.164.149.140/api/image/" + photo}
+								// srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
 								alt=""
-								/>
-						</div>
-					)
-				})}
+								loading="lazy"
+							/>
+						</ImageListItem>
+					))}
+				</ImageList>
 			</div>
 		</div>
 	);
 };
 
 export default Cars;
+
+{/* <div className={s.image_card} key={photo}>
+							<img
+								src={"https://193.164.149.140/api/image/" + photo}
+								alt=""
+								/>
+						</div> */}
