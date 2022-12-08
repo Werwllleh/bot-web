@@ -30,29 +30,24 @@ const Partners = () => {
 	}, [])
 
 	useEffect(() => {
-		let partCats = [];
 
 		axios.get(`https://script.google.com/macros/s/AKfycbx1zqpE9SS0MUTL-GdVqFKAxSQQqz65050GZmoNzmhSGQEDrwjN22iQukmiKoXglktVwQ/exec`)
 		.then(res => {
-			console.log(res.data.partners);
-
-			for (let i = 0; i < res.data.partners.length - 1; i++) {
+			
+			for (let i = 0; i < res.data.partners.length; i++) {
 				setPartners(res.data.partners[i])
-				console.log(partners);
+			console.log(partners);
+
 			}
-			
-			
+
+
 		})
-		// .finally(() => setFetching(false))
 
 	}, []);
 
 	const onChange = (currentSlide) => {
     console.log(currentSlide);
 	};
-
-
-
 
 	
 	return (
