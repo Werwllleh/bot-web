@@ -51,7 +51,7 @@ const Cars = () => {
 		<div className={s.cars_body}>
 			<h1 className={s.title}>Автомобили нашего клуба</h1>
 			<div className={s.image_grid}>
-				<ImageList sx={{ width: 500 }} cols={3}>
+				<ImageList sx={{ width: 600 }} cols={3}>
 					{images.map((photo) => (
 						<ImageListItem key={photo}>
 							<img
