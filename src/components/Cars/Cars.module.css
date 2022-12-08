@@ -23,27 +23,11 @@
 	flex: 0 1 auto;
 }
 
-/* .image_card img{
-	max-width: 400px;
-	width: 100%;
-	border: 7px solid #fff;
-	box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
-}
- */
-/* @media (max-width: 860px) {
+@media (max-width: 860px) {
 	.title {
 		font-size: 24px;
 	}
 	.cars_body {
 		padding: 0 7px;
 	}
-	.image_grid {
-		gap: 10px;
-	}
-	.image_card {
-		flex: 0 1 45%;
-	}
-	.image_card img {
-		border: 4px solid #fff;
-	}
-} */
+}
