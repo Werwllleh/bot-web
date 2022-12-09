@@ -7,7 +7,6 @@
 
 .accordion_item {
   border-radius: 5px;
-  background: linear-gradient(45deg, #eecfba, #c5dde8);
 }
 
 .accordion_title {
@@ -17,6 +16,7 @@
   justify-content: space-between;
   cursor: pointer;
   font-weight: 300;
+  background: linear-gradient(45deg, #eecfba, #c5dde8);
   color: rgb(49, 49, 49);
 }
 
