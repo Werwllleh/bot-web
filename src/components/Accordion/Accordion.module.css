@@ -32,17 +32,8 @@
   transition: 0.3s;
 }
 
-.arrow_active {
-  position: absolute;
-  right: 0;
-  bottom: 15px;
-  transform: rotate(135deg);
-  width: 15px;
-  height: 15px;
-  border-top: 5px solid #6f18c0a8;
-  border-right: 5px solid #6e18c0;
-  margin-right: 20px;
-  transition: 0.3s;
+.arrow.active {
+	transform: rotate(135deg);
 }
 
 .accordion_title:hover {

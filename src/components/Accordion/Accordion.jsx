@@ -12,7 +12,7 @@ const Accordion = () => {
     <div className={s.accordion}>
       <div className={s.accordion_item}>
         <div onClick={onChange} className={s.accordion_title}>
-          <div className={isActive ? s.arrow_active : s.arrow}></div>
+          <div className={isActive ? s.arrow + " " + s.active : s.arrow}></div>
           Название партнера
         </div>
         {isActive && <div className={s.accordion_content}>Описание</div>}
