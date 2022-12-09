@@ -2,23 +2,22 @@
   width: 100%;
   margin: 2rem auto;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
+  overflow: hidden;
 }
 
 .accordion_item {
+  border-radius: 5px;
+  background: linear-gradient(45deg, #eecfba, #c5dde8);
 }
 
 .accordion_title {
-  border-radius: 5px 5px 0 0;
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-  background: linear-gradient(45deg, #eecfba, #c5dde8);
   font-weight: 300;
   color: rgb(49, 49, 49);
-  transition: 0.3s;
 }
 
 .arrow {
@@ -36,6 +35,8 @@
 
 .arrow.active {
   transform: rotate(135deg);
+  border-top: 5px solid #6e18c0;
+  border-right: 5px solid #6f18c0a8;
 }
 
 .accordion_title:hover {
