@@ -15,7 +15,15 @@ const Accordion = () => {
           <div className={isActive ? s.arrow + " " + s.active : s.arrow}></div>
           Название партнера
         </div>
-        {isActive && <div className={s.accordion_content}>Описание</div>}
+        <div
+          className={
+            isActive
+              ? s.accordion_content + " " + s.show
+              : s.accordion_content + " " + s.hide
+          }
+        >
+          Описание
+        </div>
       </div>
     </div>
   );

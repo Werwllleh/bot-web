@@ -14,9 +14,9 @@
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-  background-color: var(--tg-theme-bg-color);
-
-  color: var(--tg-theme-text-color) !important;
+  background: linear-gradient(45deg, #eecfba, #c5dde8);
+  font-weight: 300;
+  color: rgb(49, 49, 49);
   transition: 0.3s;
 }
 
@@ -45,10 +45,27 @@
   padding: 1rem;
 }
 
-.accordion_content {
+.accordion_content.show {
+  animation: show 1s 1; /* Указываем название анимации, её время и количество повторов*/
+  animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
   color: var(--tg-theme-text-color) !important;
-  background-color: #d7d7d7;
+  background: linear-gradient(45deg, #eecfba, #c5dde8);
   border-radius: 0 0 5px 5px;
+}
+
+.accordion_content.hide {
+  display: none;
+  opacity: 0;
+  transition: 1s;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* @media screen and (max-width: 700px) {
