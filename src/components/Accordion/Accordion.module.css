@@ -9,6 +9,7 @@
 }
 
 .accordion_title {
+  border-radius: 5px 5px 0 0;
   position: relative;
   display: flex;
   flex-direction: row;
