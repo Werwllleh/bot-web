@@ -14,7 +14,8 @@
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-  background-color: #e0e0e0;
+  background-color: var(--tg-theme-bg-color);
+
   color: var(--tg-theme-text-color) !important;
   transition: 0.3s;
 }
@@ -22,8 +23,8 @@
 .arrow {
   position: absolute;
   right: 0;
-  bottom: 15px;
-  transform: rotate(-45deg);
+  bottom: 20px;
+  transform: rotate(225deg);
   width: 15px;
   height: 15px;
   border-top: 5px solid #6f18c0a8;
@@ -33,7 +34,7 @@
 }
 
 .arrow.active {
-	transform: rotate(135deg);
+  transform: rotate(135deg);
 }
 
 .accordion_title:hover {
