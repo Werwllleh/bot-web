@@ -1,89 +1,143 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useTelegram } from '../../hooks/useTelegram';
-import s from './Partners.module.css';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useTelegram } from "../../hooks/useTelegram";
+import s from "./Partners.module.css";
 
-
-import { Collapse } from 'antd';
-const { Panel } = Collapse;
-
-import { Carousel } from 'antd';
-const contentStyle = {
-  margin: 0,
-  height: '100px',
-	color: `var(--tg-theme-text-color) !important`,
-  textAlign: 'center',
-  background: '#364d79',
-};
-
+import { styled } from "@mui/material/styles";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import MuiAccordion from "@mui/material/Accordion";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
 
 const Partners = () => {
+  const [partners, setPartners] = useState([]);
+  const [categories, setCategories] = useState(0);
+  const [expanded, setExpanded] = useState("panel1");
 
-	const [partners, setPartners] = useState([]);
-	const [categories, setCategories] = useState(0);
+  const { tg } = useTelegram();
 
+  useEffect(() => {
+    tg.expand();
+  }, []);
 
-	const { tg } = useTelegram();
+  useEffect(() => {
+    axios
+      .get(
+        `https://script.google.com/macros/s/AKfycbx1zqpE9SS0MUTL-GdVqFKAxSQQqz65050GZmoNzmhSGQEDrwjN22iQukmiKoXglktVwQ/exec`
+      )
+      .then((res) => {
+        for (let i = 0; i < res.data.partners.length; i++) {
+          setPartners(res.data.partners[i]);
+        }
+      });
+  }, []);
 
-	useEffect(() => { 
-		tg.expand()
-	}, [])
-
-	useEffect(() => {
-
-		axios.get(`https://script.google.com/macros/s/AKfycbx1zqpE9SS0MUTL-GdVqFKAxSQQqz65050GZmoNzmhSGQEDrwjN22iQukmiKoXglktVwQ/exec`)
-		.then(res => {
-			
-			for (let i = 0; i < res.data.partners.length; i++) {
-				setPartners(res.data.partners[i])
-			console.log(partners);
-
-			}
-
-
-		})
-
-	}, []);
-
-	const onChange = (currentSlide) => {
+  const onChange = (currentSlide) => {
     console.log(currentSlide);
-	};
+  };
 
-	
-	return (
-		<div className={s.partners_body}>
-			<h1 className={s.title}>Партнеры клуба</h1>
-			<div className={s.content_body}>
+  const Accordion = styled((props) => (
+    <MuiAccordion disableGutters elevation={0} square {...props} />
+  ))(({ theme }) => ({
+    border: `1px solid ${theme.palette.divider}`,
+    "&:not(:last-child)": {
+      borderBottom: 0,
+    },
+    "&:before": {
+      display: "none",
+    },
+  }));
 
-					<Collapse ghost accordion>
-					<Panel header="This is panel header 1" key="1">
-						<Carousel
-							arrows
-							afterChange={onChange}
-						>
-							<div className={s.slide_body}>
-								<h3 className={s.partner_title}>Название партнера</h3>
-								<div className={s.partner_text}>
-									<p>Адрес: <span>Address1</span></p>
-									<p>Контакты: <span>Tel 1</span></p>
-								</div>
-							</div>
-							<div>
-								<h3 style={contentStyle}>2</h3>
-							</div>
-							<div>
-								<h3 style={contentStyle}>3</h3>
-							</div>
-							<div>
-								<h3 style={contentStyle}>4</h3>
-							</div>
-						</Carousel>
-					</Panel>
-				</Collapse>
+  const AccordionSummary = styled((props) => (
+    <MuiAccordionSummary
+      expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+      {...props}
+    />
+  ))(({ theme }) => ({
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? "rgba(255, 255, 255, .05)"
+        : "rgba(0, 0, 0, .03)",
+    flexDirection: "row-reverse",
+    "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+      transform: "rotate(90deg)",
+    },
+    "& .MuiAccordionSummary-content": {
+      marginLeft: theme.spacing(1),
+    },
+  }));
 
-			</div>
-		</div>
-	)
-}
+  const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    borderTop: "1px solid rgba(0, 0, 0, .125)",
+  }));
 
-export default Partners
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
+  return (
+    <div className={s.partners_body}>
+      <h1 className={s.title}>Партнеры клуба</h1>
+      <div className={s.content_body}>
+        <Accordion
+          TransitionProps={{ unmountOnExit: true }}
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
+        >
+          <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+            <Typography>Collapsible Group Item #1</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion
+          TransitionProps={{ unmountOnExit: true }}
+          expanded={expanded === "panel2"}
+          onChange={handleChange("panel2")}
+        >
+          <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+            <Typography>Collapsible Group Item #2</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion
+          TransitionProps={{ unmountOnExit: true }}
+          expanded={expanded === "panel3"}
+          onChange={handleChange("panel3")}
+        >
+          <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+            <Typography>Collapsible Group Item #3</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+    </div>
+  );
+};
+
+export default Partners;
