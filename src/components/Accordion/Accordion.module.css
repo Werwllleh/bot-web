@@ -50,7 +50,7 @@
 .accordion_content.show {
   animation: show 1s 1; /* Указываем название анимации, её время и количество повторов*/
   animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
-  color: var(--tg-theme-text-color) !important;
+  color: rgb(49, 49, 49);
   background: linear-gradient(45deg, #eecfba, #c5dde8);
   border-radius: 0 0 5px 5px;
 }
