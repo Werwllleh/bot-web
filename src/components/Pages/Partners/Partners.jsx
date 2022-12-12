@@ -20,11 +20,28 @@ const Partners = () => {
         `https://script.google.com/macros/s/AKfycbx1zqpE9SS0MUTL-GdVqFKAxSQQqz65050GZmoNzmhSGQEDrwjN22iQukmiKoXglktVwQ/exec`
       )
       .then((res) => {
-        for (let i = 0; i < res.data.partners.length; i++) {
-          setPartners(res.data.partners[i]);
-        }
+        setPartners(res.data.partners);
       });
   }, []);
+
+  // console.log(partners);
+
+  /* for (let i = 0; i < partners.length; i++) {
+    for (let key in partners[i]) {
+      if (partners[i].hasOwnProperty.call(partners[i], key)) {
+        const category = partners[i][key];
+        console.log(category);
+      }
+    }
+  } */
+
+  for (let i = 0; i < partners.length; i++) {
+    // console.log(partners[i]);
+    let vals = Object.values(partners[i]);
+    for (let k = 0; k < vals; k++) {
+      console.log(k);
+    }
+  }
 
   return (
     <div className={s.partners_body}>
