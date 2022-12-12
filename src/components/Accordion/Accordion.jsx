@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Slider from "../Slider/Slider";
 import s from "./Accordion.module.css";
 
 const Accordion = () => {
@@ -13,7 +14,7 @@ const Accordion = () => {
       <div className={s.accordion_item}>
         <div onClick={onChange} className={s.accordion_title}>
           <div className={isActive ? s.arrow + " " + s.active : s.arrow}></div>
-          Название партнера
+          Категория партнера
         </div>
         <div
           className={
@@ -22,7 +23,7 @@ const Accordion = () => {
               : s.accordion_content + " " + s.hide
           }
         >
-          Описание
+          <Slider />
         </div>
       </div>
     </div>

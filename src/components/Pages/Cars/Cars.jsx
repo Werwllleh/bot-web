@@ -23,7 +23,6 @@ const Cars = () => {
       axios
         .get(`https://193.164.149.140/api/ourcars?page=${currentPage}`)
         .then((res) => {
-          console.log(res);
           setImages([...images, ...res.data.files]);
           setCurrentPage((prevState) => prevState + 1);
           setTotalCount(res.data.pageCount);
@@ -59,7 +58,6 @@ const Cars = () => {
             <ImageListItem key={photo}>
               <img
                 src={"https://193.164.149.140/api/image/" + photo}
-                alt=""
                 loading="lazy"
               />
             </ImageListItem>
@@ -71,12 +69,3 @@ const Cars = () => {
 };
 
 export default Cars;
-
-{
-  /* <div className={s.image_card} key={photo}>
-							<img
-								src={"https://193.164.149.140/api/image/" + photo}
-								alt=""
-								/>
-						</div> */
-}
