@@ -7,47 +7,56 @@ import s from "./Partners.module.css";
 
 const Partners = () => {
   const [partners, setPartners] = useState([]);
+  const [catNames, setCatNames] = useState([]);
 
   const { tg } = useTelegram();
+
+  const getData = async () => {
+    return await axios.get(
+      `https://script.google.com/macros/s/AKfycbx1zqpE9SS0MUTL-GdVqFKAxSQQqz65050GZmoNzmhSGQEDrwjN22iQukmiKoXglktVwQ/exec`
+    );
+  };
 
   useEffect(() => {
     tg.expand();
   }, []);
 
+  var factObject = mapObject({}, partners, function (key, item) {
+    return [
+      item.category,
+      {
+        name: item.name,
+        address: item.address,
+        info: item.information,
+      },
+    ];
+  });
+
+  function mapObject(empty, obj, mapFunc) {
+    return Object.keys(obj).reduce(function (newObj, key) {
+      var kvPair = mapFunc(key, obj[key]);
+      newObj[kvPair[0]] = kvPair[1];
+      return newObj;
+    }, empty);
+  }
+
   useEffect(() => {
-    axios
-      .get(
-        `https://script.google.com/macros/s/AKfycbx1zqpE9SS0MUTL-GdVqFKAxSQQqz65050GZmoNzmhSGQEDrwjN22iQukmiKoXglktVwQ/exec`
-      )
-      .then((res) => {
-        setPartners(res.data.partners);
-      });
+    getData().then((res) => {
+      setPartners(res.data.partners);
+    });
   }, []);
 
-  // console.log(partners);
+  // setCatNames(Object.keys(factObject));
 
-  /* for (let i = 0; i < partners.length; i++) {
-    for (let key in partners[i]) {
-      if (partners[i].hasOwnProperty.call(partners[i], key)) {
-        const category = partners[i][key];
-        console.log(category);
-      }
-    }
-  } */
-
-  for (let i = 0; i < partners.length; i++) {
-    // console.log(partners[i]);
-    let vals = Object.values(partners[i]);
-    for (let k = 0; k < vals; k++) {
-      console.log(k);
-    }
-  }
+  console.log(factObject);
 
   return (
     <div className={s.partners_body}>
       <Header title={"Партнеры клуба"} />
       <div className={s.content_body}>
-        <Accordion />
+        <Accordion category={"weewg"} />
+        <Accordion category={"rthr"} />
+        <Accordion category={"uyiy7u"} />
       </div>
     </div>
   );

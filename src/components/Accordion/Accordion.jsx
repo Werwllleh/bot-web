@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Slider from "../Slider/Slider";
 import s from "./Accordion.module.css";
 
-const Accordion = () => {
+const Accordion = ({ category }) => {
   const [isActive, setIsActive] = useState(false);
 
   const onChange = (e) => {
@@ -14,7 +14,7 @@ const Accordion = () => {
       <div className={s.accordion_item}>
         <div onClick={onChange} className={s.accordion_title}>
           <div className={isActive ? s.arrow + " " + s.active : s.arrow}></div>
-          Категория партнера
+          {category}
         </div>
         <div
           className={
