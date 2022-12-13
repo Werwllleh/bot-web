@@ -7,7 +7,6 @@ import s from "./Partners.module.css";
 
 const Partners = () => {
   const [partners, setPartners] = useState([]);
-  const [catNames, setCatNames] = useState([]);
 
   const { tg } = useTelegram();
 
@@ -21,42 +20,101 @@ const Partners = () => {
     tg.expand();
   }, []);
 
-  var factObject = mapObject({}, partners, function (key, item) {
-    return [
-      item.category,
-      {
-        name: item.name,
-        address: item.address,
-        info: item.information,
-      },
-    ];
-  });
-
-  function mapObject(empty, obj, mapFunc) {
-    return Object.keys(obj).reduce(function (newObj, key) {
-      var kvPair = mapFunc(key, obj[key]);
-      newObj[kvPair[0]] = kvPair[1];
-      return newObj;
-    }, empty);
-  }
-
   useEffect(() => {
     getData().then((res) => {
       setPartners(res.data.partners);
     });
   }, []);
 
-  // setCatNames(Object.keys(factObject));
+  let arrInsurancesServices = [];
+  let arrDetailingServices = [];
+  let arrAutocosmetics = [];
+  let arrTireServices = [];
+  let arrCarAudioServices = [];
+  let arrCarBoostServices = [];
+  let arrCarServices = [];
+  let arrCarHeadlightServices = [];
+  let arrCarOtherServices = [];
 
-  console.log(factObject);
+  let allServices = [
+    { Страхование: arrInsurancesServices },
+    { Детейлинг: arrDetailingServices },
+    { Автокосметика: arrAutocosmetics },
+    { Шиномонтаж: arrTireServices },
+    { Автозвук: arrCarAudioServices },
+    { "Чип-тюнинг": arrCarBoostServices },
+    { Автосервис: arrCarServices },
+    { Оптика: arrCarHeadlightServices },
+    { Прочие: arrCarOtherServices },
+  ];
+
+  for (let i = 0; i < partners.length; i++) {
+    if (partners[i].category === "Страхование") {
+      arrInsurancesServices.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    } else if (partners[i].category === "Детейлинг") {
+      arrDetailingServices.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    } else if (partners[i].category === "Автокосметика") {
+      arrAutocosmetics.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    } else if (partners[i].category === "Шиномонтаж") {
+      arrTireServices.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    } else if (partners[i].category === "Автозвук") {
+      arrCarAudioServices.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    } else if (partners[i].category === "Чип-тюнинг") {
+      arrCarBoostServices.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    } else if (partners[i].category === "Автосервис") {
+      arrCarServices.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    } else if (partners[i].category === "Оптика") {
+      arrCarHeadlightServices.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    } else if (partners[i].category === "Прочие") {
+      arrCarOtherServices.push([
+        partners[i].name,
+        partners[i].information,
+        partners[i].address,
+      ]);
+    }
+  }
 
   return (
     <div className={s.partners_body}>
       <Header title={"Партнеры клуба"} />
       <div className={s.content_body}>
-        <Accordion category={"weewg"} />
-        <Accordion category={"rthr"} />
-        <Accordion category={"uyiy7u"} />
+        {allServices.map((name) => {
+          return (
+            <Accordion key={Object.keys(name)} category={Object.keys(name)} />
+          );
+        })}
       </div>
     </div>
   );
