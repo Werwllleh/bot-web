@@ -44,64 +44,82 @@ const Partners = () => {
   ];
 
   for (let i = 0; i < partners.length; i++) {
-    if (partners[i].category === "Страхование") {
+    if (partners[i].partCategory === "Страхование") {
       arrInsurancesServices.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
-    } else if (partners[i].category === "Детейлинг") {
+    } else if (partners[i].partCategory === "Детейлинг") {
       arrDetailingServices.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
-    } else if (partners[i].category === "Автокосметика") {
+    } else if (partners[i].partCategory === "Автокосметика") {
       arrAutocosmetics.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
-    } else if (partners[i].category === "Шиномонтаж") {
+    } else if (partners[i].partCategory === "Шиномонтаж") {
       arrTireServices.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
-    } else if (partners[i].category === "Автозвук") {
+    } else if (partners[i].partCategory === "Автозвук") {
       arrCarAudioServices.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
-    } else if (partners[i].category === "Чип-тюнинг") {
+    } else if (partners[i].partCategory === "Чип-тюнинг") {
       arrCarBoostServices.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
-    } else if (partners[i].category === "Автосервис") {
+    } else if (partners[i].partCategory === "Автосервис") {
       arrCarServices.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
-    } else if (partners[i].category === "Оптика") {
+    } else if (partners[i].partCategory === "Оптика") {
       arrCarHeadlightServices.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
-    } else if (partners[i].category === "Прочие") {
+    } else if (partners[i].partCategory === "Прочие") {
       arrCarOtherServices.push({
-        name: partners[i].name,
-        info: partners[i].information,
-        address: partners[i].address,
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
       });
     }
   }
 
-  // console.log(allServices);
+  console.log(allServices);
 
   /* allServices.map((name) => {
     let catName = Object.keys(name);

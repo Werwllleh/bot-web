@@ -27,7 +27,13 @@ const Accordion = ({ category, children }) => {
               <>
                 <div key={i.name} className={s.partnerInfo}>
                   <div className={s.partName}>{i.name}</div>
-                  <div className={s.partInfo}>{i.info}</div>
+                  <div className={s.partDescp}>{i.descp}</div>
+                  <div className={s.partLink}>
+                    <a href={i.link}>{i.link}</a>
+                  </div>
+                  <div className={s.partPhone}>
+                    <a href={"tel:+7" + i.phone}>{i.phone}</a>
+                  </div>
                   <div className={s.partAddress}>{i.address}</div>
                   <div className={s.linePart}></div>
                 </div>
