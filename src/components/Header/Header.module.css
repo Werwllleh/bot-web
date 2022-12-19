@@ -4,3 +4,9 @@
   padding: 15px 0;
   color: var(--tg-theme-text-color) !important;
 }
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 20px;
+  }
+}

@@ -4,24 +4,19 @@ import { useTelegram } from "../../../hooks/useTelegram";
 import Accordion from "../../Accordion/Accordion";
 import Header from "../../Header/Header";
 import s from "./Partners.module.css";
+import { getPartnersData } from "./partnersApi";
 
 const Partners = () => {
   const [partners, setPartners] = useState([]);
 
   const { tg } = useTelegram();
 
-  const getData = async () => {
-    return await axios.get(
-      `https://script.google.com/macros/s/AKfycbx1zqpE9SS0MUTL-GdVqFKAxSQQqz65050GZmoNzmhSGQEDrwjN22iQukmiKoXglktVwQ/exec`
-    );
-  };
-
   useEffect(() => {
     tg.expand();
   }, []);
 
   useEffect(() => {
-    getData().then((res) => {
+    getPartnersData().then((res) => {
       setPartners(res.data.partners);
     });
   }, []);
@@ -50,61 +45,82 @@ const Partners = () => {
 
   for (let i = 0; i < partners.length; i++) {
     if (partners[i].category === "Страхование") {
-      arrInsurancesServices.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrInsurancesServices.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     } else if (partners[i].category === "Детейлинг") {
-      arrDetailingServices.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrDetailingServices.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     } else if (partners[i].category === "Автокосметика") {
-      arrAutocosmetics.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrAutocosmetics.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     } else if (partners[i].category === "Шиномонтаж") {
-      arrTireServices.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrTireServices.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     } else if (partners[i].category === "Автозвук") {
-      arrCarAudioServices.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrCarAudioServices.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     } else if (partners[i].category === "Чип-тюнинг") {
-      arrCarBoostServices.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrCarBoostServices.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     } else if (partners[i].category === "Автосервис") {
-      arrCarServices.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrCarServices.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     } else if (partners[i].category === "Оптика") {
-      arrCarHeadlightServices.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrCarHeadlightServices.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     } else if (partners[i].category === "Прочие") {
-      arrCarOtherServices.push([
-        partners[i].name,
-        partners[i].information,
-        partners[i].address,
-      ]);
+      arrCarOtherServices.push({
+        name: partners[i].name,
+        info: partners[i].information,
+        address: partners[i].address,
+      });
     }
   }
+
+  // console.log(allServices);
+
+  /* allServices.map((name) => {
+    let catName = Object.keys(name);
+    let catVals = Object.values(name);
+    catVals[0].map((el) => {
+      console.log(el.name);
+    });
+    console.log(catVals[0]);
+  }); */
+
+  /* for (let i = 0; i < allServices.length; i++) {
+    let valArr = Object.values(allServices[i]);
+    for (let k = 0; k < valArr.length; k++) {
+      for (let j = 0; j < valArr[k].length; j++) {
+        console.log(Object.keys(allServices[i]));
+        console.log(valArr[k][j]);
+      }
+    }
+  } */
 
   return (
     <div className={s.partners_body}>
@@ -112,7 +128,11 @@ const Partners = () => {
       <div className={s.content_body}>
         {allServices.map((name) => {
           return (
-            <Accordion key={Object.keys(name)} category={Object.keys(name)} />
+            <Accordion
+              children={name}
+              key={Object.keys(name)}
+              category={Object.keys(name)}
+            />
           );
         })}
       </div>

@@ -20,6 +20,30 @@
   color: rgb(49, 49, 49);
 }
 
+.partnerInfo {
+  border-bottom: 1px solid linear-gradient(to top left, #6f18c0a8, #6e18c0);
+}
+
+.partnerInfo + .partnerInfo {
+  margin: 10px 0 0 0;
+}
+
+.partName {
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0 0 10px 0;
+}
+
+.partInfo {
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0 0 10px 0;
+}
+
+.partAddress {
+  margin: 0 0 5px 0;
+}
+
 .arrow {
   position: absolute;
   right: 0;
@@ -48,7 +72,7 @@
 }
 
 .accordion_content.show {
-  animation: show 1s 1; /* Указываем название анимации, её время и количество повторов*/
+  animation: show 1.3s 1; /* Указываем название анимации, её время и количество повторов*/
   animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
   color: rgb(49, 49, 49);
   background: linear-gradient(45deg, #eecfba, #c5dde8);
@@ -69,9 +93,3 @@
     opacity: 1;
   }
 }
-
-/* @media screen and (max-width: 700px) {
-  .accordion {
-    width: 90%;
-  }
-} */

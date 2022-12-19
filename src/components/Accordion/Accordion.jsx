@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Slider from "../Slider/Slider";
 import s from "./Accordion.module.css";
 
-const Accordion = ({ category }) => {
+const Accordion = ({ category, children }) => {
   const [isActive, setIsActive] = useState(false);
 
   const onChange = (e) => {
@@ -23,7 +22,17 @@ const Accordion = ({ category }) => {
               : s.accordion_content + " " + s.hide
           }
         >
-          <Slider />
+          {children[category].map((i) => {
+            return (
+              <>
+                <div key={i.name} className={s.partnerInfo}>
+                  <div className={s.partName}>{i.name}</div>
+                  <div className={s.partInfo}>{i.info}</div>
+                  <div className={s.partAddress}>{i.address}</div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
     </div>
