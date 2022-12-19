@@ -23,7 +23,7 @@ const Cars = () => {
       axios
         .get(`https://193.164.149.140/api/ourcars?page=${currentPage}`)
         .then((res) => {
-          setImages([...images, ...res.data]);
+          setImages([...images, ...res.data.files]);
           setCurrentPage((prevState) => prevState + 1);
           setTotalCount(res.data.pageCount);
         })
