@@ -29,6 +29,7 @@ const Accordion = ({ category, children }) => {
                   <div className={s.partName}>{i.name}</div>
                   <div className={s.partInfo}>{i.info}</div>
                   <div className={s.partAddress}>{i.address}</div>
+                  <div className={s.linePart}></div>
                 </div>
               </>
             );

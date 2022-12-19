@@ -21,7 +21,11 @@
 }
 
 .partnerInfo {
-  border-bottom: 1px solid linear-gradient(to top left, #6f18c0a8, #6e18c0);
+}
+
+.linePart {
+  height: 2px;
+  background: linear-gradient(to top left, #6f18c0a8, #6e18c0);
 }
 
 .partnerInfo + .partnerInfo {
@@ -30,18 +34,20 @@
 
 .partName {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 18px;
   margin: 0 0 10px 0;
 }
 
 .partInfo {
   font-weight: 300;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0 0 10px 0;
 }
 
 .partAddress {
-  margin: 0 0 5px 0;
+  font-weight: 300;
+  font-size: 16px;
+  margin: 0 0 10px 0;
 }
 
 .arrow {
