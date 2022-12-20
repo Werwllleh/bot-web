@@ -7,5 +7,3 @@ export const getPartnersData = async () => {
 		)
 	)
 };
-
-// `https://script.google.com/macros/s/AKfycbx1zqpE9SS0MUTL-GdVqFKAxSQQqz65050GZmoNzmhSGQEDrwjN22iQukmiKoXglktVwQ/exec`

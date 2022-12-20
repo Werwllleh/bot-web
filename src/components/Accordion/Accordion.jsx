@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import s from "./Accordion.module.css";
 
 const Accordion = ({ category, children }) => {
@@ -26,15 +27,25 @@ const Accordion = ({ category, children }) => {
             return (
               <>
                 <div key={i.name} className={s.partnerInfo}>
-                  <div className={s.partName}>{i.name}</div>
-                  <div className={s.partDescp}>{i.descp}</div>
-                  <div className={s.partLink}>
-                    <a href={i.link}>{i.link}</a>
-                  </div>
-                  <div className={s.partPhone}>
-                    <a href={"tel:+7" + i.phone}>{i.phone}</a>
-                  </div>
-                  <div className={s.partAddress}>{i.address}</div>
+                  {i.name ? <div className={s.partName}>{i.name}</div> : null}
+                  {i.descp ? (
+                    <div className={s.partDescp}>{i.descp}</div>
+                  ) : null}
+                  {i.link ? (
+                    <div className={s.partLink}>
+                      <a target={"_blank"} href={"http://" + i.link}>
+                        {i.link}
+                      </a>
+                    </div>
+                  ) : null}
+                  {i.phone ? (
+                    <div className={s.partPhone}>
+                      <a href={"tel:+" + i.phone}>{i.phone}</a>
+                    </div>
+                  ) : null}
+                  {i.address ? (
+                    <div className={s.partAddress}>{i.address}</div>
+                  ) : null}
                   <div className={s.linePart}></div>
                 </div>
               </>

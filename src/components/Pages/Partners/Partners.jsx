@@ -119,27 +119,6 @@ const Partners = () => {
     }
   }
 
-  console.log(allServices);
-
-  /* allServices.map((name) => {
-    let catName = Object.keys(name);
-    let catVals = Object.values(name);
-    catVals[0].map((el) => {
-      console.log(el.name);
-    });
-    console.log(catVals[0]);
-  }); */
-
-  /* for (let i = 0; i < allServices.length; i++) {
-    let valArr = Object.values(allServices[i]);
-    for (let k = 0; k < valArr.length; k++) {
-      for (let j = 0; j < valArr[k].length; j++) {
-        console.log(Object.keys(allServices[i]));
-        console.log(valArr[k][j]);
-      }
-    }
-  } */
-
   return (
     <div className={s.partners_body}>
       <Header title={"Партнеры клуба"} />
@@ -148,7 +127,7 @@ const Partners = () => {
           return (
             <Accordion
               children={name}
-              key={Object.keys(name)}
+              key={Object.keys(name)[0]}
               category={Object.keys(name)}
             />
           );
