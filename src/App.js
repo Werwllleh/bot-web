@@ -6,7 +6,7 @@ import Form from './components/Pages/Form/Form';
 import Cars from './components/Pages/Cars/Cars';
 import Partners from './components/Pages/Partners/Partners';
 import SearchCar from './components/Pages/SearchCar/SearchCar';
-import { createRoutesFromElements, createBrowserRouter, Routes, Route } from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
 
 
 
