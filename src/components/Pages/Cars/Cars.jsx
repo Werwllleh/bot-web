@@ -21,7 +21,7 @@ const Cars = () => {
   useEffect(() => {
     if (fetching) {
       axios
-        .get(`https://193.164.149.140/api/ourcars?page=${currentPage}`)
+        .get(`https://92.255.78.177/api/ourcars?page=${currentPage}`)
         .then((res) => {
           setImages([...images, ...res.data.files]);
           setCurrentPage((prevState) => prevState + 1);
@@ -57,7 +57,7 @@ const Cars = () => {
           {images.map((photo) => (
             <ImageListItem key={photo}>
               <img
-                src={"https://193.164.149.140/api/image/" + photo}
+                src={"https://92.255.78.177/api/image/" + photo}
                 loading="lazy"
               />
             </ImageListItem>

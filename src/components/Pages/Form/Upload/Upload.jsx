@@ -55,30 +55,26 @@ const UploadForm = ({img}) => {
   const handleRemove = (file) => {
     let response = file.response;
     // console.log(response);
-    axios.post('https://193.164.149.140/api/upload/remove', {
+    axios.post("https://92.255.78.177/api/upload/remove", {
       response,
     });
   }
 
   return (
-  <Space
-    direction="vertical"
-    style={{width: '100%'}}
-    size="large"
-  >
-    <Upload
-      name="avatar"
-      action="https://193.164.149.140/api/upload"
-      listType="picture"
-      maxCount={1}
-      beforeUpload={beforeUpload}
-      onChange={handleChange}
-      onRemove={handleRemove}
-    >
-      <Button icon={<UploadOutlined />}>Загрузить фото автомобиля</Button>
-    </Upload>
-  </Space>
-  )
+    <Space direction="vertical" style={{ width: "100%" }} size="large">
+      <Upload
+        name="avatar"
+        action="https://92.255.78.177/api/upload"
+        listType="picture"
+        maxCount={1}
+        beforeUpload={beforeUpload}
+        onChange={handleChange}
+        onRemove={handleRemove}
+      >
+        <Button icon={<UploadOutlined />}>Загрузить фото автомобиля</Button>
+      </Upload>
+    </Space>
+  );
 }
 
 export default UploadForm;
