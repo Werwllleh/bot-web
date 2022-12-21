@@ -7,7 +7,7 @@ import Form from './components/Pages/Form/Form';
 import Cars from './components/Pages/Cars/Cars';
 import Partners from './components/Pages/Partners/Partners';
 import SearchCar from './components/Pages/SearchCar/SearchCar';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 
@@ -21,15 +21,17 @@ function App() {
   }, [])
 
   return (
-    <div className={"App"}>
-      <Header />
-      <Routes>
-        <Route index element={<Cars />} />
-        <Route path={'/form'} element={<Form />} />
-        <Route path={'/partners'} element={<Partners />} />
-        <Route path={'/searchcar'} element={<SearchCar />} />
-      </Routes>
-    </div>
+    <BrowserRouter>
+      <div className={"App"}>
+        <Header />
+        <Routes>
+          <Route index element={<Cars />} />
+          <Route path={'/form'} element={<Form />} />
+          <Route path={'/partners'} element={<Partners />} />
+          <Route path={'/searchcar'} element={<SearchCar />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
