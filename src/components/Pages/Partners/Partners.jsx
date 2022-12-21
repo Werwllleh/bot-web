@@ -30,6 +30,8 @@ const Partners = () => {
   let arrCarServices = [];
   let arrCarHeadlightServices = [];
   let arrCarOtherServices = [];
+  let arrCarTuning = [];
+  let arrCarTinting = [];
 
   let allServices = [
     { Страхование: arrInsurancesServices },
@@ -40,6 +42,8 @@ const Partners = () => {
     { "Чип-тюнинг": arrCarBoostServices },
     { Автосервис: arrCarServices },
     { Оптика: arrCarHeadlightServices },
+    { Автотюнинг: arrCarTuning },
+    { Тонировка: arrCarTinting },
     { Прочие: arrCarOtherServices },
   ];
 
@@ -110,6 +114,22 @@ const Partners = () => {
       });
     } else if (partners[i].partCategory === "Прочие") {
       arrCarOtherServices.push({
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
+      });
+    } else if (partners[i].partCategory === "Автотюнинг") {
+      arrCarTuning.push({
+        name: partners[i].partName,
+        descp: partners[i].partDescp,
+        link: partners[i].partLink,
+        phone: partners[i].partPhone,
+        address: partners[i].partAddress,
+      });
+    } else if (partners[i].partCategory === "Тонировка, пленка") {
+      arrCarTinting.push({
         name: partners[i].partName,
         descp: partners[i].partDescp,
         link: partners[i].partLink,
