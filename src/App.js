@@ -25,9 +25,9 @@ function App() {
       <Header />
       <Routes>
         <Route index element={<Cars />} />
-        <Route path={'form'} element={<Form />} />
-        <Route path={'partners'} element={<Partners />} />
-        <Route path={'searchcar'} element={<SearchCar />} />
+        <Route path={'/form'} element={<Form />} />
+        <Route path={'/partners'} element={<Partners />} />
+        <Route path={'/searchcar'} element={<SearchCar />} />
       </Routes>
     </div>
   );
