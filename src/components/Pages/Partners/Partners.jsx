@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useTelegram } from "../../../hooks/useTelegram";
 import Accordion from "../../Accordion/Accordion";
@@ -21,19 +20,19 @@ const Partners = () => {
     });
   }, []);
 
-  let arrInsurancesServices = [];
-  let arrDetailingServices = [];
-  let arrAutocosmetics = [];
-  let arrTireServices = [];
-  let arrCarAudioServices = [];
-  let arrCarBoostServices = [];
-  let arrCarServices = [];
-  let arrCarHeadlightServices = [];
-  let arrCarOtherServices = [];
-  let arrCarTuning = [];
-  let arrCarTinting = [];
+  var arrInsurancesServices = [];
+  var arrDetailingServices = [];
+  var arrAutocosmetics = [];
+  var arrTireServices = [];
+  var arrCarAudioServices = [];
+  var arrCarBoostServices = [];
+  var arrCarServices = [];
+  var arrCarHeadlightServices = [];
+  var arrCarOtherServices = [];
+  var arrCarTuning = [];
+  var arrCarTinting = [];
 
-  let allServices = [
+  var allServices = [
     { Страхование: arrInsurancesServices },
     { Детейлинг: arrDetailingServices },
     { Автокосметика: arrAutocosmetics },
@@ -47,7 +46,7 @@ const Partners = () => {
     { Прочие: arrCarOtherServices },
   ];
 
-  for (let i = 0; i < partners.length; i++) {
+  for (var i = 0; i < partners.length; i++) {
     if (partners[i].partCategory === "Страхование") {
       arrInsurancesServices.push({
         name: partners[i].partName,

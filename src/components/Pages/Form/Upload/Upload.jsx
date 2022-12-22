@@ -53,7 +53,7 @@ const UploadForm = ({img}) => {
   };
 
   const handleRemove = (file) => {
-    let response = file.response;
+    var response = file.response;
     // console.log(response);
     axios.post("https://92.255.78.177/api/upload/remove", {
       response,

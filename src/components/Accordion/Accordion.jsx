@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import s from "./Accordion.module.css";
 
 const Accordion = ({ category, children }) => {
