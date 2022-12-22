@@ -29,25 +29,24 @@ const Cars = () => {
         })
         .finally(() => setFetching(false));
     }
-  }, [fetching]);
+  }, [fetching, currentPage, images]);
 
   useEffect(() => {
+    const scrollHandler = (e) => {
+      if (
+        e.target.documentElement.scrollHeight -
+          (e.target.documentElement.scrollTop + window.innerHeight) <
+          100 &&
+        currentPage < totalCount
+      ) {
+        setFetching(true);
+      }
+    };
     document.addEventListener("scroll", scrollHandler, true);
     return function () {
       document.removeEventListener("scroll", scrollHandler, true);
     };
-  }, [totalCount]);
-
-  const scrollHandler = (e) => {
-    if (
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight) <
-        100 &&
-      currentPage < totalCount
-    ) {
-      setFetching(true);
-    }
-  };
+  }, [totalCount, currentPage]);
 
   return (
     <div className={s.cars_body}>
@@ -59,6 +58,7 @@ const Cars = () => {
               <img
                 src={"https://92.255.78.177/api/image/" + photo}
                 loading="lazy"
+                alt=""
               />
             </ImageListItem>
           ))}
