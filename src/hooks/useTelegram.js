@@ -1,4 +1,4 @@
-/* const tg = window.Telegram.WebApp;
+const tg = window.Telegram.WebApp;
 
 export function useTelegram() {
 
@@ -21,9 +21,9 @@ export function useTelegram() {
 		tg,
 		user: tg.initDataUnsafe?.user,
 	}
-} */
+}
 
-import React, { useEffect, useState, createContext, useContext, useMemo } from "react";
+/* import React, { useEffect, useState, createContext, useContext, useMemo } from "react";
 
 export const TelegramContext = createContext({});
 export const TelegramProvider = ({ children, React }) => {
@@ -50,13 +50,12 @@ export const TelegramProvider = ({ children, React }) => {
 
 	return (
 		<TelegramContext.Provider value={value}>
-			{/* Make sure to include script tag with "beforeInteractive" strategy to pre-load web-app script */}
-			<Script
-				src="https://telegram.org/js/telegram-web-app.js"
-			/>
-			{children}
-		</TelegramContext.Provider>
+<Script
+	src="https://telegram.org/js/telegram-web-app.js"
+/>
+{ children }
+		</TelegramContext.Provider >
 	);
 };
 
-export const useTelegram = () => useContext(TelegramContext);
+export const useTelegram = () => useContext(TelegramContext); */

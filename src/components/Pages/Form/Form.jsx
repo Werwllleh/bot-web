@@ -13,10 +13,6 @@ const Form = () => {
   const [carImage, setCarImage] = useState("");
   const { tg } = useTelegram();
 
-  const { user, webApp } = useTelegram();
-  alert(user);
-  // console.log(user);
-
   const onSendData = useCallback(() => {
     const data = {
       name,
