@@ -13,6 +13,8 @@ const ChangeForm = () => {
   const [carImage, setCarImage] = useState("");
   const { tg } = useTelegram();
 
+  console.log(tg);
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       axios
