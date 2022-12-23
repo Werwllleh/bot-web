@@ -16,8 +16,7 @@ const ChangeForm = () => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       axios
-        // .post(`https://92.255.78.177/api/change`, {
-        .post(`https://chic-lolly-1605d1.netlify.app/form/change`, {
+        .post(`https://92.255.78.177/api/change`, {
           car,
           carYear,
           carNum,
