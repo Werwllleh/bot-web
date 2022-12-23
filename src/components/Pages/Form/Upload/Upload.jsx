@@ -1,64 +1,56 @@
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, Space, message, Upload } from 'antd';
-import React, { useState } from 'react';
-import axios from 'axios';
-// import 'antd/dist/antd.min.css';
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, Space, message, Upload } from "antd";
+import React from "react";
+import axios from "axios";
 
-
-const UploadForm = ({img}) => {
-
-  const [loading, setLoading] = useState(false);
-
+const UploadForm = ({ img }) => {
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
+    reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
   };
 
   const beforeUpload = (file) => {
-
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/heic' || file.type === 'image/heif';
+    const isJpgOrPng =
+      file.type === "image/jpeg" ||
+      file.type === "image/jpg" ||
+      file.type === "image/png" ||
+      file.type === "image/heic" ||
+      file.type === "image/heif";
 
     if (!isJpgOrPng) {
-      message.error('Только изображение!');
+      message.error("Только изображение!");
     } else {
-      message.success('Изображение загружено');
+      message.success("Изображение загружено");
     }
 
     const isLt5M = file.size / 1024 / 1024 < 5;
 
     if (!isLt5M) {
-      message.error('Изображение должно весить не больше 5 МБ');
+      message.error("Изображение должно весить не больше 5 МБ");
     }
 
     return isJpgOrPng && isLt5M;
   };
 
   const handleChange = (info) => {
-
-    if (info.file.status === 'uploading') {
-      setLoading(true);
+    if (info.file.status === "uploading") {
       return;
     }
 
-    if (info.file.status === 'done') {
+    if (info.file.status === "done") {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-      });
-      img(info.file.response)
+      getBase64(info.file.originFileObj, (url) => {});
+      img(info.file.response);
     }
-
-    // console.log(info);
   };
 
   const handleRemove = (file) => {
-    var response = file.response;
-    // console.log(response);
+    let response = file.response;
     axios.post("https://92.255.78.177/api/upload/remove", {
       response,
     });
-  }
+  };
 
   return (
     <Space direction="vertical" style={{ width: "100%" }} size="large">
@@ -75,6 +67,6 @@ const UploadForm = ({img}) => {
       </Upload>
     </Space>
   );
-}
+};
 
 export default UploadForm;
