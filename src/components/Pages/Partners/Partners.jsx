@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useTelegram } from "../../../hooks/useTelegram";
+import useTelegram from "../../../hooks/useTelegram";
 import Accordion from "../../Accordion/Accordion";
 import Header from "../../Header/Header";
 import s from "./Partners.module.css";

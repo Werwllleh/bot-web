@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useTelegram } from "../../../hooks/useTelegram";
+import useTelegram from "../../../hooks/useTelegram";
 import s from "./Cars.module.css";
 
 import { ImageList, ImageListItem } from "@mui/material";
