@@ -53,7 +53,7 @@ const Form = () => {
     } else {
       tg.MainButton.hide();
     }
-  }, [name, car, carNum, carYear]);
+  }, [name, car, carNum, carYear, carImage]);
 
   const onChangeName = (e) => {
     setName(e.target.value);

@@ -53,14 +53,9 @@ const ChangeForm = () => {
       });
     setDisabled(true);
     setSended(true);
-    setCar("");
-    setCarNum("");
-    setCarYear("");
-    setCarNote("");
-    setCarImage("");
     setTimeout(() => {
       tg.close();
-    }, 3000);
+    }, 1500);
   };
 
   const onChangeCar = (e) => {
