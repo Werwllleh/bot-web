@@ -24,10 +24,10 @@ const UploadForm = ({ img }) => {
       message.success("Изображение загружено");
     }
 
-    const isLt5M = file.size / 1024 / 1024 < 5;
+    const isLt5M = file.size / 1024 / 1024 < 15;
 
     if (!isLt5M) {
-      message.error("Изображение должно весить не больше 5 МБ");
+      message.error("Изображение должно весить не больше 15 МБ");
     }
 
     return isJpgOrPng && isLt5M;
