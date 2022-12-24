@@ -8,6 +8,8 @@ import Button from "../../../Button/Button";
 
 const ChangeForm = () => {
   const [isDisabled, setDisabled] = useState(true);
+  const [isSended, setSended] = useState(false);
+
   const [car, setCar] = useState("");
   const [carNum, setCarNum] = useState("");
   const [carYear, setCarYear] = useState("");
@@ -50,12 +52,15 @@ const ChangeForm = () => {
         console.log(res);
       });
     setDisabled(true);
+    setSended(true);
     setCar("");
     setCarNum("");
     setCarYear("");
     setCarNote("");
     setCarImage("");
-    tg.close();
+    setTimeout(() => {
+      tg.close();
+    }, 3000);
   };
 
   const onChangeCar = (e) => {
@@ -76,8 +81,12 @@ const ChangeForm = () => {
 
   return (
     <div className={s.form}>
-      <Header title={"Форма изменения данных"} />
-      <div className={s.form_body}>
+      <Header
+        title={
+          isSended ? "Спасибо, Ваши данные изменены" : "Форма изменения данных"
+        }
+      />
+      <div className={isSended ? s.form_body : s.form_body + " " + s.active}>
         <input
           className={s.input}
           value={car}

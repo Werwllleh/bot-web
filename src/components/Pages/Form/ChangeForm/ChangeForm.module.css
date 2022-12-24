@@ -9,7 +9,12 @@
 }
 
 .form_body {
+  display: none;
   padding: 15px 0;
+}
+
+.form_body.active {
+  display: block;
 }
 
 .title {
