@@ -11,12 +11,13 @@ const UploadForm = ({ img }) => {
   };
 
   const beforeUpload = (file) => {
+    console.log(file);
     const isJpgOrPng =
       file.type === "image/jpeg" ||
       file.type === "image/jpg" ||
       file.type === "image/png" ||
-      file.type === "image/heic" ||
-      file.type === "image/heif";
+      file.type === "image/.heic" ||
+      file.type === "image/.heif";
 
     if (!isJpgOrPng) {
       message.error("Только изображение!");
