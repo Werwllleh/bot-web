@@ -1,6 +1,8 @@
-.button {
-	background: var(--tg-theme-button-color);
-	color: var(--tg-theme-button-text-color);
-	border: none;
-	font-size: 18px;
+button {
+  width: 100%;
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }

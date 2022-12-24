@@ -41,13 +41,13 @@ const Form = () => {
 
   useEffect(() => {
     let curYear = new Date().getFullYear();
-
     if (
       name.length >= 3 &&
       car.length >= 3 &&
       /^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum) &&
       carYear >= 1800 &&
-      carYear <= curYear
+      carYear <= curYear &&
+      carImage
     ) {
       tg.MainButton.show();
     } else {
@@ -102,6 +102,7 @@ const Form = () => {
           placeholder={"Год выпуска вашего авто*"}
         />
         <input
+          maxLength={9}
           className={s.input}
           value={carNum}
           onChange={onChangeCarNum}

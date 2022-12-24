@@ -4,8 +4,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import useTelegram from "../../../../hooks/useTelegram";
 import s from "./ChangeForm.module.css";
 import Header from "../../../Header/Header";
+import Button from "../../../Button/Button";
 
 const ChangeForm = () => {
+  const [isDisabled, setDisabled] = useState(true);
   const [car, setCar] = useState("");
   const [carNum, setCarNum] = useState("");
   const [carYear, setCarYear] = useState("");
@@ -14,53 +16,47 @@ const ChangeForm = () => {
   const { tg } = useTelegram();
 
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      axios
-        .post(`https://92.255.78.177/api/change`, {
-          car,
-          carYear,
-          carNum,
-          carNote,
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    }, 1200);
-    return () => clearTimeout(delayDebounceFn);
-  });
-
-  /* useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      setLoading(true);
-      axios
-        .post(`https://92.255.78.177/api/change`, { searcheble })
-        .then((res) => {
-          if (res.data != "Не найдено") {
-            setUserFields(res.data);
-            setLoading(false);
-          }
-        });
-    }, 1200);
-    return () => clearTimeout(delayDebounceFn);
-  }, [searcheble]); */
-
-  useEffect(() => {
     tg.expand();
   }, []);
 
-  /*   useEffect(() => {
+  const checkData = useEffect(() => {
     let curYear = new Date().getFullYear();
     if (
       car.length >= 3 &&
       /^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum) &&
       carYear >= 1800 &&
-      carYear <= curYear
+      carYear <= curYear &&
+      carImage
     ) {
-      tg.MainButton.show();
+      setDisabled(false);
     } else {
-      tg.MainButton.hide();
+      setDisabled(true);
     }
-  }, [car, carNum, carYear]); */
+  }, [car, carNum, carYear, carNote, carImage]);
+
+  const sendChangedData = () => {
+    checkData;
+    axios
+      .post(`https://92.255.78.177/api/change`, {
+        changedData: {
+          car,
+          carNum,
+          carYear,
+          carNote,
+          carImage,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+    setDisabled(true);
+    setCar("");
+    setCarNum("");
+    setCarYear("");
+    setCarNote("");
+    setCarImage("");
+    tg.close();
+  };
 
   const onChangeCar = (e) => {
     setCar(e.target.value);
@@ -98,6 +94,7 @@ const ChangeForm = () => {
           placeholder={"Год выпуска вашего авто*"}
         />
         <input
+          maxLength={9}
           className={s.input}
           value={carNum}
           onChange={onChangeCarNum}
@@ -114,12 +111,20 @@ const ChangeForm = () => {
           type="text"
           placeholder={"Примечание к авто"}
         />
-        <div className={s.form_upload}>
-          <UploadForm img={setCarImage} />
-        </div>
         <div className={s.form_footer}>
           <p>Поля со * обязательны к заполнению</p>
         </div>
+        <div className={s.form_upload}>
+          <UploadForm img={setCarImage} />
+        </div>
+        <Button
+          disabled={isDisabled}
+          onClick={sendChangedData}
+          className={
+            isDisabled ? s.btnChangeForm : s.btnChangeForm + " " + s.active
+          }
+          title={"Отправить данные"}
+        />
       </div>
     </div>
   );
