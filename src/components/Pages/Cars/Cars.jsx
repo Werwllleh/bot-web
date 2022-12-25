@@ -52,9 +52,11 @@ const Cars = () => {
     <div className={s.cars_body}>
       <Header title={"Автомобили нашего клуба"} />
       <div className={s.image_grid}>
-        <ImageList sx={{ width: 600 }} cols={3}>
+        <ImageList sx={{ width: 600 }} cols={2}>
           {images.map((photo) => (
-            <ImageListItem key={photo}>
+            <ImageListItem
+              key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
+            >
               <img
                 src={"https://92.255.78.177/api/image/" + photo}
                 loading="lazy"

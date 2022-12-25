@@ -43,7 +43,7 @@ const Form = () => {
     let curYear = new Date().getFullYear();
     if (
       name.length >= 3 &&
-      car.length >= 3 &&
+      /^[a-zA-Z\s]+\s[a-zA-Z0-9\s]+$/.test(car) &&
       /^[ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2}\d{2,3}$/.test(carNum) &&
       carYear >= 1800 &&
       carYear <= curYear &&
@@ -124,6 +124,9 @@ const Form = () => {
         </div>
         <div className={s.form_footer}>
           <p>Поля со * обязательны к заполнению</p>
+          <p>
+            Имя и фамилия вводятся без дальнейшей возможности редактирования
+          </p>
         </div>
       </div>
     </div>

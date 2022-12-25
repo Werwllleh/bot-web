@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import useTelegram from "../../../hooks/useTelegram";
 import Accordion from "../../Accordion/Accordion";
 import Header from "../../Header/Header";
+import Loader from "../../Loader/Loader";
 import s from "./Partners.module.css";
 import { getPartnersData } from "./partnersApi";
 
+import useTelegram from "../../../hooks/useTelegram";
+
 const Partners = () => {
+  const [loading, setLoading] = useState(true);
   const [partners, setPartners] = useState([]);
 
   const { tg } = useTelegram();
@@ -17,6 +20,7 @@ const Partners = () => {
   useEffect(() => {
     getPartnersData().then((res) => {
       setPartners(res.data.partners);
+      setLoading(false);
     });
   }, []);
 
@@ -141,17 +145,21 @@ const Partners = () => {
   return (
     <div className={s.partners_body}>
       <Header title={"Партнеры клуба"} />
-      <div className={s.content_body}>
-        {allServices.map((name) => {
-          return (
-            <Accordion
-              children={name}
-              key={Object.keys(name)[0]}
-              category={Object.keys(name)}
-            />
-          );
-        })}
-      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className={s.content_body}>
+          {allServices.map((name) => {
+            return (
+              <Accordion
+                children={name}
+                key={Object.keys(name)[0]}
+                category={Object.keys(name)}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

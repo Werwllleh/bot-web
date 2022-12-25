@@ -1,0 +1,27 @@
+.loader {
+  overflow: hidden;
+  background: url("https://92.255.78.177/api/icons/loader.png");
+  background-repeat: no-repeat;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+  margin: 15% auto 5% auto;
+}
+
+@keyframes rotate {
+  form {
+    transform: rotate(0deg) scale(1);
+    -webkit-transform: rotate(0deg) scale(1);
+    -moz-transform: rotate(0deg) scale(1);
+    -ms-transform: rotate(0deg) scale(1);
+    -o-transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1.4);
+    -webkit-transform: rotate(360deg) scale(1.4);
+    -moz-transform: rotate(360deg) scale(1.4);
+    -ms-transform: rotate(360deg) scale(1.4);
+    -o-transform: rotate(360deg) scale(1.4);
+  }
+}
