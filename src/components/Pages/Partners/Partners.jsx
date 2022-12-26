@@ -46,8 +46,8 @@ const Partners = () => {
     { Автосервис: arrCarServices },
     { Оптика: arrCarHeadlightServices },
     { Автотюнинг: arrCarTuning },
-    { Тонировка: arrCarTinting },
-    { Прочие: arrCarOtherServices },
+    { "Тонировка, бронирование": arrCarTinting },
+    { "Автоаксессуары и прочее": arrCarOtherServices },
   ];
 
   for (var i = 0; i < partners.length; i++) {
