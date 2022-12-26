@@ -41,7 +41,7 @@ const Partners = () => {
     { Детейлинг: arrDetailingServices },
     { Автокосметика: arrAutocosmetics },
     { Шиномонтаж: arrTireServices },
-    { Автозвук, шумоизоляция: arrCarAudioServices },
+    { "Автозвук, шумоизоляция": arrCarAudioServices },
     { "Чип-тюнинг": arrCarBoostServices },
     { Автосервис: arrCarServices },
     { Оптика: arrCarHeadlightServices },
