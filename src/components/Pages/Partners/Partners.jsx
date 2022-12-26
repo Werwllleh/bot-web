@@ -41,7 +41,7 @@ const Partners = () => {
     { Детейлинг: arrDetailingServices },
     { Автокосметика: arrAutocosmetics },
     { Шиномонтаж: arrTireServices },
-    { Автозвук: arrCarAudioServices },
+    { Автозвук, шумоизоляция: arrCarAudioServices },
     { "Чип-тюнинг": arrCarBoostServices },
     { Автосервис: arrCarServices },
     { Оптика: arrCarHeadlightServices },
@@ -83,7 +83,7 @@ const Partners = () => {
         phone: partners[i].partPhone,
         address: partners[i].partAddress,
       });
-    } else if (partners[i].partCategory === "Автозвук") {
+    } else if (partners[i].partCategory === "Автозвук, шумоизоляция") {
       arrCarAudioServices.push({
         name: partners[i].partName,
         descp: partners[i].partDescp,
