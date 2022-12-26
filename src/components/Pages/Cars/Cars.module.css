@@ -23,6 +23,7 @@
   flex: 0 1 auto;
 }
 
+
 @media (max-width: 860px) {
   .cars_body {
     padding: 0 7px;

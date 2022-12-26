@@ -9,6 +9,7 @@ import Button from "../../../Button/Button";
 const ChangeForm = () => {
   const [isDisabled, setDisabled] = useState(true);
   const [isSended, setSended] = useState(false);
+  const [curUser, setCurUser] = useState("");
 
   const [car, setCar] = useState("");
   const [carNum, setCarNum] = useState("");
@@ -18,6 +19,7 @@ const ChangeForm = () => {
   const { tg } = useTelegram();
 
   useEffect(() => {
+    setCurUser(tg.initDataUnsafe.user.id);
     tg.expand();
   }, []);
 
@@ -41,6 +43,7 @@ const ChangeForm = () => {
     axios
       .post(`https://92.255.78.177/api/change`, {
         changedData: {
+          curUser,
           car,
           carNum,
           carYear,

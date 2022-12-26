@@ -4,6 +4,7 @@ import useTelegram from "../../../hooks/useTelegram";
 import s from "./Cars.module.css";
 
 import { ImageList, ImageListItem } from "@mui/material";
+import { Image } from "antd";
 import Header from "../../Header/Header";
 
 const Cars = () => {
@@ -24,7 +25,6 @@ const Cars = () => {
         .get(`https://92.255.78.177/api/ourcars?page=${currentPage}`)
         .then((res) => {
           setImages([...images, ...res.data.files]);
-          setCurrentPage((prevState) => prevState + 1);
           setTotalCount(res.data.pageCount);
         })
         .finally(() => setFetching(false));
@@ -40,6 +40,7 @@ const Cars = () => {
         currentPage < totalCount
       ) {
         setFetching(true);
+        setCurrentPage((prevState) => prevState + 1);
       }
     };
     document.addEventListener("scroll", scrollHandler, true);
@@ -52,17 +53,14 @@ const Cars = () => {
     <div className={s.cars_body}>
       <Header title={"Автомобили нашего клуба"} />
       <div className={s.image_grid}>
-        <ImageList sx={{ width: 600 }} cols={2}>
+        <ImageList variant="masonry" sx={{ width: 600 }} cols={2}>
           {images.map((photo) => (
-            <ImageListItem
+            <Image
+              // width={200}
               key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
-            >
-              <img
-                src={"https://92.255.78.177/api/image/" + photo}
-                loading="lazy"
-                alt=""
-              />
-            </ImageListItem>
+              src={"https://92.255.78.177/api/image/" + photo}
+              alt=""
+            />
           ))}
         </ImageList>
       </div>
