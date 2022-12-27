@@ -53,10 +53,11 @@ const Cars = () => {
     <div className={s.cars_body}>
       <Header title={"Автомобили нашего клуба"} />
       <div className={s.image_grid}>
-        <ImageList variant="masonry" sx={{ width: 600 }} cols={2}>
+        <ImageList variant="masonry" sx={{ width: 600 }} cols={3}>
           {images.map((photo) => (
             <Image
-              // width={200}
+              loading="lazy"
+              decoding="async"
               key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
               src={"https://92.255.78.177/api/image/" + photo}
               alt=""
