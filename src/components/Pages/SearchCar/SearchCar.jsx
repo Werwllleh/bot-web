@@ -56,10 +56,6 @@ const SearchCar = () => {
               src={"https://92.255.78.177/api/image/" + userFileds.carImage}
               alt=""
             />
-            {/* <img
-              src={"https://92.255.78.177/api/image/" + userFileds.carImage}
-              alt=""
-            /> */}
           </div>
           <div className={s.textBody}>
             <ul className={s.list}>
