@@ -19,13 +19,15 @@ function App() {
   }, [])
 
   return (
-    <Routes>
-      <Route index element={<Cars />} />
-      <Route path='/form' element={<Form />} />
-      <Route path='/form/change' element={<ChangeForm />} />
-      <Route path='/partners' element={<Partners />} />
-      <Route path='/searchcar' element={<SearchCar />} />
-    </Routes>
+    <div className="container">
+      <Routes>
+        <Route index element={<Cars />} />
+        <Route path='/form' element={<Form />} />
+        <Route path='/form/change' element={<ChangeForm />} />
+        <Route path='/partners' element={<Partners />} />
+        <Route path='/searchcar' element={<SearchCar />} />
+      </Routes>
+    </div>
   );
 }
 

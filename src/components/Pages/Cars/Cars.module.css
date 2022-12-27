@@ -23,6 +23,9 @@
   flex: 0 1 auto;
 }
 
+.ant-image .ant-image-img {
+  vertical-align: none !important;
+}
 
 @media (max-width: 860px) {
   .cars_body {

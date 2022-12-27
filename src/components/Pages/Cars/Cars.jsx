@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./Cars.module.css";
 
-import { ImageList, ImageListItem } from "@mui/material";
+import { ImageList } from "@mui/material";
 import { Image } from "antd";
 import Header from "../../Header/Header";
 
@@ -53,11 +53,11 @@ const Cars = () => {
     <div className={s.cars_body}>
       <Header title={"Автомобили нашего клуба"} />
       <div className={s.image_grid}>
-        <ImageList variant="masonry" sx={{ width: 600 }} cols={3}>
+        <ImageList variant="masonry" sx={{ width: 600 }} cols={3} gap={5}>
           {images.map((photo) => (
             <Image
-              loading="lazy"
-              decoding="async"
+              // width={150}
+              style={{ width: "200px", verticalAlign: "baseline" }}
               key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
               src={"https://92.255.78.177/api/image/" + photo}
               alt=""
