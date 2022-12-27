@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./SearchCar.module.css";
 import { LoadingOutlined } from "@ant-design/icons";
+import { Image } from "antd";
 
 const SearchCar = () => {
   const [searcheble, setSearcheble] = useState("");
@@ -50,10 +51,15 @@ const SearchCar = () => {
       {userFileds ? (
         <div className={s.result_body}>
           <div className={s.image_body}>
-            <img
+            <Image
+              width={250}
               src={"https://92.255.78.177/api/image/" + userFileds.carImage}
               alt=""
             />
+            {/* <img
+              src={"https://92.255.78.177/api/image/" + userFileds.carImage}
+              alt=""
+            /> */}
           </div>
           <div className={s.textBody}>
             <ul className={s.list}>

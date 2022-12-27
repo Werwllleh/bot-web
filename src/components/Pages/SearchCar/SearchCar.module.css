@@ -1,78 +1,81 @@
 .search_body {
-	margin: 0 auto;
-	padding: 0 10px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 .result_body {
-	padding: 30px 0;
+  padding: 30px 0;
 }
 
 .title {
-	font-weight: 600;
-	text-align: center;
-	padding: 15px 0;
-	color: var(--tg-theme-text-color) !important;
+  font-weight: 600;
+  text-align: center;
+  padding: 15px 0;
+  color: var(--tg-theme-text-color) !important;
 }
 
 .input {
-	width: 100%;
-	padding: 10px 7px;
-	border-radius: 5px;
-	border: 1px solid var(--tg-theme-bg-color) !important;
-	outline: none;
-	box-shadow: 0 0 5px rgba(79,79,79, 0.676);
-	font-weight: 600;
-	color: rgb(79, 79, 79);
-	margin: 15px 0 0 0;
+  width: 100%;
+  padding: 10px 7px;
+  border-radius: 5px;
+  border: 1px solid var(--tg-theme-bg-color) !important;
+  outline: none;
+  box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
+  font-weight: 600;
+  color: rgb(79, 79, 79);
+  margin: 15px 0 0 0;
 }
 
 .image_body {
-	margin: 15px 0 25px 0;
+  display: flex;
+  justify-content: center;
+  margin: 15px 0 25px 0;
 }
 
 .image_body img {
-	margin: 0 auto;
-	max-width: calc(100vw - 10%);
-	border-radius: 5px;
-	box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
+  margin: 0 auto;
+  max-width: calc(100vw - 10%);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
 }
 
 .textBody {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .list {
-	color: var(--tg-theme-text-color) !important;
-	font-weight: 300;
-	font-size: 20px;
+  color: var(--tg-theme-text-color) !important;
+  font-weight: 300;
+  font-size: 20px;
 }
 
 .list li span {
-	font-weight: 400;
+  font-weight: 400;
 }
 
 .notFound {
-	display: flex;
-	justify-content: center;
-	margin: 50px 0 0 0; 
+  display: flex;
+  justify-content: center !important;
+  margin: 50px 0 0 0;
 }
 
-.notFound span svg{
-	font-weight: 300;
-	width: 10em;
-	height: 10em;
+.notFound span svg {
+  font-weight: 300;
+  width: 10em;
+  height: 10em;
 }
 
 .notFoundImg {
-	margin: 50px 0 0 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  margin: 50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
 }
 
 .notFoundImg p {
-	color: var(--tg-theme-text-color) !important;
-	font-weight: 300;
-	font-size: 26px;
+  color: var(--tg-theme-text-color) !important;
+  font-weight: 300;
+  font-size: 26px;
 }

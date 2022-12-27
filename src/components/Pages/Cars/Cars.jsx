@@ -57,6 +57,8 @@ const Cars = () => {
           {images.map((photo) => (
             <Image
               // width={150}
+              decoding="async"
+              loading="lazy"
               style={{ width: "200px", verticalAlign: "baseline" }}
               key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
               src={"https://92.255.78.177/api/image/" + photo}
