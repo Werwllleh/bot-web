@@ -52,7 +52,7 @@ const SearchCar = () => {
         <div className={s.result_body}>
           <div className={s.image_body}>
             <Image
-              width={250}
+              width={300}
               src={"https://92.255.78.177/api/image/" + userFileds.carImage}
               alt=""
             />
