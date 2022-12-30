@@ -11,13 +11,12 @@ const UploadForm = ({ img }) => {
   };
 
   const beforeUpload = (file) => {
-    console.log(file);
     const isJpgOrPng =
       file.type === "image/jpeg" ||
       file.type === "image/jpg" ||
       file.type === "image/png" ||
-      file.type === "image/.heic" ||
-      file.type === "image/.heif";
+      file.type === "image/heic" ||
+      file.type === "image/heif";
 
     if (!isJpgOrPng) {
       message.error("Только изображение!");
@@ -46,11 +45,12 @@ const UploadForm = ({ img }) => {
     }
   };
 
-  const handleRemove = (file) => {
+  const handleRemove = async (file) => {
     let response = file.response;
-    axios.post("https://92.255.78.177/api/upload/remove", {
+    await axios.post("https://92.255.78.177/api/upload/remove", {
       response,
     });
+    img("");
   };
 
   return (
