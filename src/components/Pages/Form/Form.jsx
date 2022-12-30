@@ -20,10 +20,10 @@ const Form = () => {
       carNum,
       carYear,
       carNote,
-      // carImage,
+      carImage,
     };
     tg.sendData(JSON.stringify(data));
-  }, [name, car, carNum, carYear, carNote]);
+  }, [name, car, carNum, carYear, carNote, carImage]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
