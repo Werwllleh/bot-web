@@ -25,11 +25,13 @@ const ChangeForm = () => {
 
   const checkData = useEffect(() => {
     let patternCarNum = new RegExp(
-      /^(([ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2})(\d{2,3})$)/
+      /^[ABEKMHOPCTYX]{1}[0-9]{3}[ABEKMHOPCTYX]{2}[0-9]{2,3}$/
     );
+    let patternCarModel = new RegExp(/^[A-Za-z]/);
     let curYear = new Date().getFullYear();
     if (
       car.length >= 3 &&
+      patternCarModel.test(car) &&
       patternCarNum.test(carNum) &&
       carYear >= 1800 &&
       carYear <= curYear &&
