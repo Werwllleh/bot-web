@@ -34,6 +34,8 @@ const Form = () => {
 
   useEffect(() => {
     tg.expand();
+    tg.MainButton.show();
+    tg.MainButton.isActive = false;
     tg.MainButton.setParams({
       text: "Отправить данные",
     });
@@ -53,9 +55,9 @@ const Form = () => {
       carYear <= curYear &&
       carImage
     ) {
-      tg.MainButton.show();
+      tg.MainButton.isActive = true;
     } else {
-      tg.MainButton.hide();
+      tg.MainButton.isActive = false;
     }
   }, [name, car, carNum, carYear, carImage]);
 

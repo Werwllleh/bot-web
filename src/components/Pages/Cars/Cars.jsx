@@ -10,7 +10,7 @@ import Header from "../../Header/Header";
 const Cars = () => {
   const [images, setImages] = useState([]);
   const [fetching, setFetching] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
 
   const { tg } = useTelegram();
@@ -26,23 +26,28 @@ const Cars = () => {
         .then((res) => {
           setImages([...images, ...res.data.files]);
           setTotalCount(res.data.pageCount);
+          setCurrentPage((prevState) => prevState + 1);
         })
         .finally(() => setFetching(false));
     }
   }, [fetching, currentPage, images]);
 
+  console.log(images);
+  console.log(currentPage);
+  console.log(totalCount);
+
+  const scrollHandler = (e) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+        100 &&
+      currentPage < totalCount
+    ) {
+      setFetching(true);
+    }
+  };
+
   useEffect(() => {
-    const scrollHandler = (e) => {
-      if (
-        e.target.documentElement.scrollHeight -
-          (e.target.documentElement.scrollTop + window.innerHeight) <
-          100 &&
-        currentPage < totalCount
-      ) {
-        setFetching(true);
-        setCurrentPage((prevState) => prevState + 1);
-      }
-    };
     document.addEventListener("scroll", scrollHandler, true);
     return function () {
       document.removeEventListener("scroll", scrollHandler, true);
