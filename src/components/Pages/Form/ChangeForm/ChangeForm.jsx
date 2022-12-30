@@ -97,7 +97,9 @@ const ChangeForm = () => {
           type="text"
           placeholder={"Марка и модель авто*"}
         />
-        <p className={s.input_label}>Только латинские буквы</p>
+        <p className={s.input_label}>
+          <b>Только латинские буквы</b>
+        </p>
         <input
           className={s.input}
           value={carYear}
@@ -114,7 +116,7 @@ const ChangeForm = () => {
           placeholder={"Номер вашего авто*"}
         />
         <p className={s.input_label}>
-          Латинские буквы, формат A999AA99 или A999AA999
+          <b>Латинские буквы</b>, формат A999AA99 или A999AA999
         </p>
         <input
           className={s.input}
