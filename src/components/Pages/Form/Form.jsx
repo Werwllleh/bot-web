@@ -36,6 +36,7 @@ const Form = () => {
     tg.expand();
     tg.MainButton.show();
     tg.MainButton.isActive = false;
+    tg.MainButton.color = "#686A6C";
     tg.MainButton.setParams({
       text: "Отправить данные",
     });
@@ -56,8 +57,10 @@ const Form = () => {
       carImage
     ) {
       tg.MainButton.isActive = true;
+      tg.MainButton.color = "#00a86b";
     } else {
       tg.MainButton.isActive = false;
+      tg.MainButton.color = "#686A6C";
     }
   }, [name, car, carNum, carYear, carImage]);
 
