@@ -53,7 +53,6 @@ const Form = () => {
       carYear <= curYear &&
       carImage
     ) {
-      console.log("ready");
       tg.MainButton.show();
     } else {
       tg.MainButton.hide();
