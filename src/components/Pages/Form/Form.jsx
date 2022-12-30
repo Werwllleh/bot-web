@@ -20,10 +20,10 @@ const Form = () => {
       carNum,
       carYear,
       carNote,
-      carImage,
+      // carImage,
     };
     tg.sendData(JSON.stringify(data));
-  }, [name, car, carNum, carYear, carNote, carImage]);
+  }, [name, car, carNum, carYear, carNote]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
@@ -41,17 +41,19 @@ const Form = () => {
 
   useEffect(() => {
     let patternCarNum = new RegExp(
-      /^(([ABEKMHOPCTYX]\d{3}(?<!000)[ABEKMHOPCTYX]{2})(\d{2,3})$)/
+      /^[ABEKMHOPCTYX]{1}[0-9]{3}[ABEKMHOPCTYX]{2}[0-9]{2,3}$/
     );
+    let patternCarModel = new RegExp(/^[A-Za-z]/);
     let curYear = new Date().getFullYear();
     if (
       name.length >= 3 &&
-      car.length >= 3 &&
+      patternCarModel.test(car) &&
       patternCarNum.test(carNum) &&
       carYear >= 1800 &&
       carYear <= curYear &&
       carImage
     ) {
+      console.log("ready");
       tg.MainButton.show();
     } else {
       tg.MainButton.hide();
@@ -96,7 +98,9 @@ const Form = () => {
           type="text"
           placeholder={"Марка и модель авто*"}
         />
-        <p className={s.input_label}>Только латинские буквы</p>
+        <p className={s.input_label}>
+          Только <b>латинские</b> буквы
+        </p>
         <input
           className={s.input}
           value={carYear}
@@ -113,7 +117,7 @@ const Form = () => {
           placeholder={"Номер вашего авто*"}
         />
         <p className={s.input_label}>
-          Латинские буквы, формат A999AA99 или A999AA999
+          <b>Латинские буквы</b>, формат A999AA99 или A999AA999
         </p>
         <input
           className={s.input}
