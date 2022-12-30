@@ -98,7 +98,7 @@ const Form = () => {
           placeholder={"Марка и модель авто*"}
         />
         <p className={s.input_label}>
-          Только <b>латинские</b> буквы
+          <b>Только латинские буквы</b>
         </p>
         <input
           className={s.input}
