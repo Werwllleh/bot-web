@@ -32,9 +32,9 @@ const Cars = () => {
     }
   }, [fetching, currentPage, images]);
 
-  console.log(images);
-  console.log(currentPage);
-  console.log(totalCount);
+  // console.log(images);
+  // console.log(currentPage);
+  // console.log(totalCount);
 
   const scrollHandler = (e) => {
     if (
