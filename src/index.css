@@ -49,7 +49,6 @@ body {
   background: var(--tg-theme-bg-color) !important;
   font-size: 18px;
   font-family: "Roboto", sans-serif;
-  overflow: hidden;
 }
 
 .link {
@@ -65,4 +64,8 @@ body {
 
 .button:not(:last-child) {
   margin-bottom: 20px;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
