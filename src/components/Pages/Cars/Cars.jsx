@@ -58,13 +58,20 @@ const Cars = () => {
     <div className={s.cars_body}>
       <Header title={"Автомобили нашего клуба"} />
       <div className={s.image_grid}>
-        <ImageList variant="masonry" sx={{ width: 600 }} cols={3} gap={5}>
+        <ImageList
+          variant="standart"
+          cols={3}
+          gap={8}
+          style={{ alignItems: "center" }}
+        >
           {images.map((photo) => (
             <Image
-              // width={150}
+              style={{
+                objectFit: "cover",
+                maxHeight: "250px",
+              }}
               decoding="async"
               loading="lazy"
-              style={{ width: "200px", verticalAlign: "baseline" }}
               key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
               src={"https://92.255.78.177/api/image/" + photo}
               alt=""
