@@ -10,8 +10,9 @@ import Header from "../../Header/Header";
 const Cars = () => {
   const [images, setImages] = useState([]);
   const [fetching, setFetching] = useState(true);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const [countPhotos, setCountPhotos] = useState("");
 
   const { tg } = useTelegram();
 
@@ -24,24 +25,26 @@ const Cars = () => {
       axios
         .get(`https://92.255.78.177/api/ourcars?page=${currentPage}`)
         .then((res) => {
+          setCountPhotos(res.data.countPhotos);
           setImages([...images, ...res.data.files]);
           setTotalCount(res.data.pageCount);
           setCurrentPage((prevState) => prevState + 1);
         })
         .finally(() => setFetching(false));
     }
-  }, [fetching, currentPage, images]);
+  }, [fetching, currentPage, images, countPhotos]);
 
   // console.log(images);
   // console.log(currentPage);
   // console.log(totalCount);
+  // console.log(countPhotos);
 
   const scrollHandler = (e) => {
     if (
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
         100 &&
-      currentPage < totalCount
+      images.length < countPhotos
     ) {
       setFetching(true);
     }

@@ -23,9 +23,11 @@
   flex: 0 1 auto;
 }
 
-.ant-image .ant-image-img {
-  max-height: 170px !important;
-  object-fit: cover !important;
+.image_grid2 {
+  max-width: 600px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  align-items: center;
 }
 
 @media (max-width: 860px) {
