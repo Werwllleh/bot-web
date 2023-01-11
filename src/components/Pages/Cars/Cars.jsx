@@ -69,17 +69,22 @@ const Cars = () => {
         >
           {images.map((photo) => (
             <Image
-              // preview={{
-              //   src: "https://92.255.78.177/api/image/" + photo,
-              // }}
+              preview={{
+                src: "https://92.255.78.177/api/image/" + photo,
+              }}
               style={{
                 objectFit: "cover",
                 height: "150px",
                 width: "150px",
               }}
-              // loading="lazy"
+              loading="lazy"
               key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
-              src={"https://92.255.78.177/api/image/" + photo}
+              src={
+                "https://92.255.78.177/api/image/small/" +
+                photo +
+                "_" +
+                "small.jpeg"
+              }
               alt=""
             />
           ))}
