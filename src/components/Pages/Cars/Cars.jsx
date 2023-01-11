@@ -74,7 +74,8 @@ const Cars = () => {
               // }}
               style={{
                 objectFit: "cover",
-                maxHeight: "250px",
+                height: "150px",
+                width: "150px",
               }}
               // loading="lazy"
               key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
