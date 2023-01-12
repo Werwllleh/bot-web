@@ -52,8 +52,16 @@ const SearchCar = () => {
         <div className={s.result_body}>
           <div className={s.image_body}>
             <Image
+              preview={{
+                src: "https://92.255.78.177/api/image/" + userFileds.carImage,
+              }}
               width={300}
-              src={"https://92.255.78.177/api/image/" + userFileds.carImage}
+              src={
+                "https://92.255.78.177/api/image/small/" +
+                userFileds.carImage +
+                "_" +
+                "small.jpeg"
+              }
               alt=""
             />
           </div>
