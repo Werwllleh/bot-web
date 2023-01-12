@@ -19,6 +19,7 @@ const ChangeForm = () => {
   const { tg } = useTelegram();
 
   useEffect(() => {
+    console.log(tg.initDataUnsafe.user.id);
     setCurUser(tg.initDataUnsafe.user.id);
     tg.expand();
   }, []);
@@ -44,8 +45,10 @@ const ChangeForm = () => {
   }, [car, carNum, carYear, carNote, carImage]);
 
   const sendChangedData = () => {
-    checkData;
-    axios
+    console.log(curUser);
+
+    // checkData;
+    /* axios
       .post(`https://92.255.78.177/api/change`, {
         changedData: {
           curUser,
@@ -63,7 +66,7 @@ const ChangeForm = () => {
     setSended(true);
     setTimeout(() => {
       tg.close();
-    }, 1500);
+    }, 1500); */
   };
 
   const onChangeCar = (e) => {
