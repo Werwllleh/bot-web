@@ -76,7 +76,7 @@ const ChangeForm = () => {
   };
 
   const onChangeCarYear = (e) => {
-    setCarYear(e.target.value);
+    setCarYear(e.target.value.toNumber());
   };
 
   const onChangeCarNote = (e) => {
