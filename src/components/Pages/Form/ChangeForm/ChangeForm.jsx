@@ -23,8 +23,6 @@ const ChangeForm = () => {
     tg.expand();
   }, []);
 
-  console.log(curUser);
-
   const checkData = useEffect(() => {
     let patternCarNum = new RegExp(
       /^[ABEKMHOPCTYX]{1}[0-9]{3}[ABEKMHOPCTYX]{2}[0-9]{2,3}$/
@@ -32,7 +30,7 @@ const ChangeForm = () => {
     let patternCarModel = new RegExp(/^[A-Za-z]/);
     let curYear = new Date().getFullYear();
     if (
-      curUser &&
+      curUser != null &&
       car.length >= 3 &&
       patternCarModel.test(car) &&
       patternCarNum.test(carNum) &&
