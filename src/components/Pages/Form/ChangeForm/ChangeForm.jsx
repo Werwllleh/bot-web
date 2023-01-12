@@ -19,10 +19,11 @@ const ChangeForm = () => {
   const { tg } = useTelegram();
 
   useEffect(() => {
-    console.log(tg.initDataUnsafe.user.id);
     setCurUser(tg.initDataUnsafe.user.id);
     tg.expand();
   }, []);
+
+  console.log(curUser);
 
   const checkData = useEffect(() => {
     let patternCarNum = new RegExp(
@@ -31,6 +32,7 @@ const ChangeForm = () => {
     let patternCarModel = new RegExp(/^[A-Za-z]/);
     let curYear = new Date().getFullYear();
     if (
+      curUser &&
       car.length >= 3 &&
       patternCarModel.test(car) &&
       patternCarNum.test(carNum) &&
@@ -45,10 +47,8 @@ const ChangeForm = () => {
   }, [car, carNum, carYear, carNote, carImage]);
 
   const sendChangedData = () => {
-    console.log(curUser);
-
-    // checkData;
-    /* axios
+    checkData;
+    axios
       .post(`https://92.255.78.177/api/change`, {
         changedData: {
           curUser,
@@ -66,7 +66,7 @@ const ChangeForm = () => {
     setSended(true);
     setTimeout(() => {
       tg.close();
-    }, 1500); */
+    }, 1500);
   };
 
   const onChangeCar = (e) => {
