@@ -1,4 +1,4 @@
-import React, { useState } from "react";    
+import React, { useState } from "react";
 import s from "./Accordion.module.css";
 
 const Accordion = ({ category, children }) => {

@@ -13,6 +13,12 @@ const Form = () => {
   const [carImage, setCarImage] = useState("");
   const { tg } = useTelegram();
 
+  let patternCarNum = new RegExp(
+    /^[ABEKMHOPCTYX]{1}[0-9]{3}[ABEKMHOPCTYX]{2}[0-9]{2,3}$/
+  );
+  let patternCarModel = new RegExp(/^[A-Za-z]/);
+  let styleGRZInput = s.input;
+
   const onSendData = useCallback(() => {
     const data = {
       name,
@@ -43,10 +49,6 @@ const Form = () => {
   }, []);
 
   useEffect(() => {
-    let patternCarNum = new RegExp(
-      /^[ABEKMHOPCTYX]{1}[0-9]{3}[ABEKMHOPCTYX]{2}[0-9]{2,3}$/
-    );
-    let patternCarModel = new RegExp(/^[A-Za-z]/);
     let curYear = new Date().getFullYear();
     if (
       name.length >= 3 &&
@@ -75,6 +77,14 @@ const Form = () => {
   const onChangeCarNum = (e) => {
     setCarNum(e.target.value.toUpperCase());
   };
+
+  if (patternCarNum.test(carNum)) {
+    styleGRZInput = s.input;
+  } else if (carNum == "") {
+    styleGRZInput = s.input;
+  } else {
+    styleGRZInput = s.input + " " + s.error;
+  }
 
   const onChangeCarYear = (e) => {
     setCarYear(e.target.value);
@@ -114,14 +124,15 @@ const Form = () => {
         />
         <input
           maxLength={9}
-          className={s.input}
+          className={styleGRZInput}
           value={carNum}
           onChange={onChangeCarNum}
           type="text"
           placeholder={"Номер вашего авто*"}
         />
         <p className={s.input_label}>
-          <b>Латинские буквы</b>, формат A999AA99 или A999AA999
+          <b>Английские буквы аналогичные русским</b>, формат A999AA99 или
+          A999AA999
         </p>
         <input
           className={s.input}

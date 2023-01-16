@@ -25,14 +25,22 @@
 }
 
 .input {
+  display: block;
   width: 100%;
   padding: 10px 7px;
   border-radius: 5px;
-  border: 1px solid var(--tg-theme-bg-color) !important;
+  border: 1px solid rgba(205, 205, 205, 0.676);
   outline: none;
   box-shadow: 0 0 5px rgba(205, 205, 205, 0.676);
+  -webkit-box-shadow: 0 0 5px rgba(205, 205, 205, 0.676);
   font-weight: 600;
   color: rgb(79, 79, 79);
+}
+
+.input.error {
+  border-color: #ce1010ac;
+  background-color: #ce101065;
+  color: #fff;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

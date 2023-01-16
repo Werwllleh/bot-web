@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useTelegram from "../../../hooks/useTelegram";
+import Loader from "../../Loader/Loader";
 import s from "./SearchCar.module.css";
-import { LoadingOutlined } from "@ant-design/icons";
 import { Image } from "antd";
 
 const SearchCar = () => {
@@ -14,9 +14,23 @@ const SearchCar = () => {
 
   const { tg } = useTelegram();
 
+  let patternCarNum = new RegExp(
+    /^[ABEKMHOPCTYX]{1}[0-9]{3}[ABEKMHOPCTYX]{2}[0-9]{2,3}$/
+  );
+
+  let styleGRZInput = s.input;
+
   const onSearcheble = (e) => {
     setSearcheble(e.target.value.toUpperCase());
   };
+
+  if (patternCarNum.test(searcheble)) {
+    styleGRZInput = s.input;
+  } else if (searcheble == "") {
+    styleGRZInput = s.input;
+  } else {
+    styleGRZInput = s.input + " " + s.error;
+  }
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -42,7 +56,7 @@ const SearchCar = () => {
       <h1 className={s.title}>Поиск авто</h1>
       <input
         maxLength={9}
-        className={s.input}
+        className={styleGRZInput}
         type="text"
         placeholder="Введи номер авто"
         value={searcheble}
@@ -84,21 +98,15 @@ const SearchCar = () => {
             </ul>
           </div>
         </div>
-      ) : userFileds == null ? (
-        <div className={s.notFoundImg}>
+      ) : userFileds == "" ? (
+        <div className={s.notFoundImg + " " + s.empty}>
           <img src="https://92.255.78.177/api/icons/404.png" alt="Not found" />
           <p>Авто не найдено</p>
         </div>
       ) : (
         <div className={s.notFound}>
           {loading ? (
-            <LoadingOutlined
-              style={{
-                textAlign: "center",
-                fontSize: "16px",
-                color: `var(--tg-theme-text-color) !important`,
-              }}
-            />
+            <Loader />
           ) : (
             <div className={s.notFoundImg}>
               <img
