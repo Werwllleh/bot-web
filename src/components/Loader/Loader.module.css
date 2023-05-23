@@ -5,31 +5,23 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  animation: rotate 1.5s infinite ease-in-out;
+  animation: rotate 1s infinite alternate-reverse;
   margin: 15% auto 5% auto;
-  -webkit-animation: rotate 1.5s infinite ease-in-out;
 }
 
 @keyframes rotate {
-  0% {
+  form {
     transform: rotate(0deg) scale(1);
     -webkit-transform: rotate(0deg) scale(1);
     -moz-transform: rotate(0deg) scale(1);
     -ms-transform: rotate(0deg) scale(1);
     -o-transform: rotate(0deg) scale(1);
   }
-  50% {
-    transform: rotate(360deg) scale(1.4);
-    -webkit-transform: rotate(360deg) scale(1.4);
-    -moz-transform: rotate(360deg) scale(1.4);
-    -ms-transform: rotate(360deg) scale(1.4);
-    -o-transform: rotate(360deg) scale(1.4);
-  }
-  100% {
-    transform: rotate(720deg) scale(1);
-    -webkit-transform: rotate(720deg) scale(1);
-    -moz-transform: rotate(720deg) scale(1);
-    -ms-transform: rotate(720deg) scale(1);
-    -o-transform: rotate(720deg) scale(1);
+  to {
+    transform: rotate(720deg) scale(1.4);
+    -webkit-transform: rotate(720deg) scale(1.4);
+    -moz-transform: rotate(720deg) scale(1.4);
+    -ms-transform: rotate(720deg) scale(1.4);
+    -o-transform: rotate(720deg) scale(1.4);
   }
 }

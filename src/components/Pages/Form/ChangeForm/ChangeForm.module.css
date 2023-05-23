@@ -1,20 +1,10 @@
-.form {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 0 10px;
-  max-width: 500px;
+.search_body {
   margin: 0 auto;
+  padding: 0 10px;
 }
 
-.form_body {
-  display: none;
-  padding: 15px 0;
-}
-
-.form_body.active {
-  display: block;
+.result_body {
+  padding: 30px 0;
 }
 
 .title {
@@ -35,6 +25,7 @@
   -webkit-box-shadow: 0 0 5px rgba(205, 205, 205, 0.676);
   font-weight: 600;
   color: rgb(79, 79, 79);
+  margin: 15px 0 0 0;
 }
 
 .input.error {
@@ -43,50 +34,84 @@
   color: #fff;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.image_body {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0 25px 0;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
+.image_body img {
+  margin: 0 auto;
+  max-width: calc(100vw - 10%);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
+  -webkit-box-shadow: 0 0 5px rgba(79, 79, 79, 0.676);
 }
 
-input[type="number"]:hover,
-input[type="number"]:focus {
-  -moz-appearance: number-input;
+.textBody {
+  display: flex;
+  justify-content: center;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.input + .input {
-  margin-top: 15px;
-}
-
-.ant-upload-list-picture .ant-upload-list-item {
+.list {
   color: var(--tg-theme-text-color) !important;
-  background: var(--tg-theme-bg-color) !important;
-  border-radius: 5px !important;
-  font-weight: 600;
-  margin: 10px 0 0 0;
+  font-weight: 300;
+  font-size: 20px;
 }
 
-.anticon-delete svg {
-  fill: var(--tg-theme-text-color) !important;
+.list li span {
+  font-weight: 400;
 }
 
-.ant-btn.ant-btn-default {
-  border-radius: 5px !important;
+.notFound {
+  display: flex;
+  justify-content: center !important;
+  margin: 50px 0 0 0;
 }
 
-.ant-btn > .anticon + span,
-.ant-btn > span + .anticon {
-  font-weight: 500 !important;
+.notFound span svg {
+  font-weight: 300;
+  width: 10em;
+  height: 10em;
+}
+
+.notFoundImg {
+  margin: 50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.notFoundImg.empty {
+  display: none;
+}
+
+.notFoundImg p {
+  color: var(--tg-theme-text-color) !important;
+  font-weight: 300;
+  font-size: 26px;
+}
+
+.select_body {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.select_field {
+  display: flex;
+  flex-direction: column;
+  transition: 0.4s;
+}
+
+.select_field:not(:last-child) {
+  margin: 0 0 15px 0;
+}
+
+.label {
+  text-align: left;
+  margin: 0 0 5px 0;
 }
 
 .input_label {
@@ -100,9 +125,29 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .form_footer {
-  margin: 10px 0 0 0;
   font-size: 12px;
   font-weight: 300;
+}
+
+.form_footer p {
+  margin: 5px 0 0 0;
+}
+
+.select {
+  display: block;
+  width: 100%;
+  padding: 10px 7px;
+  border-radius: 5px;
+  border: 1px solid rgba(205, 205, 205, 0.676) !important;
+  outline: none;
+  box-shadow: 0 0 5px rgba(205, 205, 205, 0.676);
+  -webkit-box-shadow: 0 0 5px rgba(205, 205, 205, 0.676);
+  font-weight: 600;
+  color: rgb(79, 79, 79);
+}
+
+.option {
+  font-weight: 600;
 }
 
 .btnChangeForm {
