@@ -1,6 +1,6 @@
 import axios from "axios";
 import UploadForm from "../Upload/Upload";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import useTelegram from "../../../../hooks/useTelegram";
 import s from "./ChangeForm.module.css";
 import Header from "../../../Header/Header";
@@ -25,25 +25,13 @@ const ChangeForm = () => {
         tg.expand();
     }, []);
 
-    console.log(curUser)
-
     let patternCarNum = new RegExp(
         /^[АВЕКМНОРСТУХ]{1}[0-9]{3}[АВЕКМНОРСТУХ]{2}[0-9]{2,3}$/
     );
     let curYear = new Date().getFullYear();
     let styleGRZInput = s.input;
 
-/*    useEffect(() => {
-        tg.expand();
-        tg.MainButton.show();
-        tg.MainButton.isActive = false;
-        tg.MainButton.color = "#686A6C";
-        tg.MainButton.setParams({
-            text: "Отправить данные",
-        });
-    }, [])*/
-
-    const checkData = useEffect(() => {
+    const checkData = useMemo(() => {
         if (
             curUser != null &&
             carBrand !== '' &&
