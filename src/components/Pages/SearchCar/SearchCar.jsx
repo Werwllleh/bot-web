@@ -40,8 +40,6 @@ const SearchCar = () => {
         return () => clearTimeout(delayDebounceFn);
     }, [searcheble]);
 
-    console.log(userFileds)
-
     useEffect(() => {
         tg.expand();
     }, []);
