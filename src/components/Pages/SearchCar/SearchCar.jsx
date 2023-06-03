@@ -30,7 +30,6 @@ const SearchCar = () => {
             axios
                 .post(SITE + `api/searchcar`, {searcheble})
                 .then((res) => {
-                    console.log(res.data)
                     if (res.data != "Не найдено") {
                         setUserFields(res.data);
                         setLoading(false);
