@@ -1,4 +1,4 @@
-
+export const SITE = 'https://vagcheb.ru/';
 export const VOLKSWAGEN = 'volkswagen';
 export const SKODA = 'skoda';
 export const AUDI = 'audi';

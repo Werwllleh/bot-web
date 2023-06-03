@@ -4,6 +4,7 @@ import useTelegram from "../../../hooks/useTelegram";
 import s from "./SearchCar.module.css";
 import {Image} from "antd";
 import Loader from "../../Loader/Loader";
+import {SITE} from "../../../utils/consts";
 
 const SearchCar = () => {
     const [searcheble, setSearcheble] = useState("");
@@ -27,7 +28,7 @@ const SearchCar = () => {
         const delayDebounceFn = setTimeout(() => {
             setLoading(true);
             axios
-                .post(`https://92.255.78.177/api/searchcar`, {searcheble})
+                .post(SITE + `api/searchcar`, {searcheble})
                 .then((res) => {
                     console.log(res.data)
                     if (res.data != "Не найдено") {
@@ -69,11 +70,11 @@ const SearchCar = () => {
                     <div className={s.image_body}>
                         <Image
                             preview={{
-                                src: "https://92.255.78.177/api/image/" + userFileds.carImage,
+                                src: SITE + `api/image/` + userFileds.carImage,
                             }}
                             width={300}
                             src={
-                                "https://92.255.78.177/api/image/small/" +
+                                SITE + `api/image/small/` +
                                 userFileds.carImage +
                                 "_" +
                                 "small.jpeg"
@@ -102,7 +103,7 @@ const SearchCar = () => {
                 </div>
             ) : userFileds == "" ? (
                 <div className={s.notFoundImg + " " + s.empty}>
-                    <img src="https://92.255.78.177/api/icons/404.png" alt="Not found"/>
+                    <img src={SITE + "api/icons/404.png"} alt="Not found"/>
                     <p>Авто не найдено</p>
                 </div>
             ) : (
@@ -112,7 +113,7 @@ const SearchCar = () => {
                     ) : (
                         <div className={s.notFoundImg}>
                             <img
-                                src="https://92.255.78.177/api/icons/404.png"
+                                src={SITE + "api/icons/404.png"}
                                 alt="Not found"
                             />
                             <p>Авто не найдено</p>

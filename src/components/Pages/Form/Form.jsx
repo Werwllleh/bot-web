@@ -35,9 +35,6 @@ const Form = () => {
         };
     }, [onSendData]);
 
-    console.log(carBrand)
-    console.log(carModel)
-
     useEffect(() => {
         tg.expand();
         tg.MainButton.show();

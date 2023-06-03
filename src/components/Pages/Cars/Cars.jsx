@@ -6,6 +6,7 @@ import s from "./Cars.module.css";
 import { ImageList } from "@mui/material";
 import { Image } from "antd";
 import Header from "../../Header/Header";
+import {SITE} from "../../../utils/consts";
 
 const Cars = () => {
   const [images, setImages] = useState([]);
@@ -23,7 +24,7 @@ const Cars = () => {
   useEffect(() => {
     if (fetching) {
       axios
-        .get(`https://92.255.78.177/api/ourcars?page=${currentPage}`)
+        .get(SITE + `api/ourcars?page=${currentPage}`)
         .then((res) => {
           setCountPhotos(res.data.countPhotos);
           setImages([...images, ...res.data.files]);
@@ -33,11 +34,6 @@ const Cars = () => {
         .finally(() => setFetching(false));
     }
   }, [fetching, currentPage, images, countPhotos]);
-
-  // console.log(images);
-  // console.log(currentPage);
-  // console.log(totalCount);
-  // console.log(countPhotos);
 
   const scrollHandler = (e) => {
     if (
@@ -70,7 +66,7 @@ const Cars = () => {
           {images.map((photo) => (
             <Image
               preview={{
-                src: "https://92.255.78.177/api/image/" + photo,
+                src: SITE + "api/image/" + photo,
               }}
               style={{
                 objectFit: "cover",
@@ -80,7 +76,7 @@ const Cars = () => {
               loading="lazy"
               key={photo + "_" + Math.random((Math.ceil + 2.4) * 0.25)}
               src={
-                "https://92.255.78.177/api/image/small/" +
+                  SITE + "api/image/small/" +
                 photo +
                 "_" +
                 "small.jpeg"

@@ -1,7 +1,6 @@
 .loader {
   overflow: hidden;
-  background: url("https://92.255.78.177/api/icons/loader.png");
-  background-repeat: no-repeat;
+  background: url("https://vagcheb.ru/api/icons/loader.png") no-repeat;
   width: 64px;
   height: 64px;
   border-radius: 50%;

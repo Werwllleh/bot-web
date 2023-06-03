@@ -4,7 +4,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import useTelegram from "../../../../hooks/useTelegram";
 import s from "./ChangeForm.module.css";
 import Header from "../../../Header/Header";
-import {AUDI, BENTLEY, cars, LAMBORGHINI, SEAT, SKODA, VOLKSWAGEN} from "../../../../utils/consts";
+import {AUDI, BENTLEY, cars, LAMBORGHINI, SEAT, SKODA, VOLKSWAGEN, URL, SITE} from "../../../../utils/consts";
 import Button from "../../../Button/Button";
 
 const ChangeForm = () => {
@@ -50,7 +50,7 @@ const ChangeForm = () => {
     const sendChangedData = () => {
         checkData;
         axios
-            .post(`https://92.255.78.177/api/change`, {
+            .post( SITE + `api/change`, {
                 changedData: {
                     curUser,
                     carBrand,
