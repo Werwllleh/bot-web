@@ -37,7 +37,7 @@ const Partners = () => {
   var arrCarTinting = [];
 
   var allServices = [
-    { Страхование: arrInsurancesServices },
+    { "Помощь на дороге, страхование": arrInsurancesServices },
     { Детейлинг: arrDetailingServices },
     { Автокосметика: arrAutocosmetics },
     { Шиномонтаж: arrTireServices },
@@ -51,7 +51,7 @@ const Partners = () => {
   ];
 
   for (var i = 0; i < partners.length; i++) {
-    if (partners[i].partCategory === "Страхование") {
+    if (partners[i].partCategory === "Помощь на дороге, страхование") {
       arrInsurancesServices.push({
         name: partners[i].partName,
         descp: partners[i].partDescp,

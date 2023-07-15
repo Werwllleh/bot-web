@@ -13,7 +13,7 @@ const Accordion = ({ category, children }) => {
       <div className={s.accordion_item}>
         <div onClick={onChange} className={s.accordion_title}>
           <div className={isActive ? s.arrow + " " + s.active : s.arrow}></div>
-          {category}
+          <div>{category}</div>
         </div>
         <div
           className={
