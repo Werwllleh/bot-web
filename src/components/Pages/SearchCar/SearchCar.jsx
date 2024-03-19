@@ -1,125 +1,140 @@
-import axios from "axios";
 import React, {useEffect, useState} from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./SearchCar.module.css";
 import {Image} from "antd";
-import Loader from "../../Loader/Loader";
 import {SITE} from "../../../utils/consts";
 
-const SearchCar = () => {
-    const [searcheble, setSearcheble] = useState("");
+import {Navigation, Pagination, Scrollbar, A11y, Parallax} from 'swiper/modules';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
-    const [userFileds, setUserFields] = useState(null);
+import 'swiper/css';
+import 'swiper/css/parallax';
 
-    const [loading, setLoading] = useState(false);
+const SearchCar = ({data}) => {
 
-    const {tg} = useTelegram();
+  const [searcheble, setSearcheble] = useState('');
+  const [foundCars, setFoundCars] = useState([]);
 
-    let patternCarNum = new RegExp(
-        /^[АВЕКМНОРСТУХ]{1}[0-9]{3}[АВЕКМНОРСТУХ]{2}[0-9]{2,3}$/
-    );
-    let styleGRZInput = s.input;
+  const onSearcheble = (e) => {
+    setSearcheble(e.target.value.toUpperCase());
+  };
 
-    const onSearcheble = (e) => {
-        setSearcheble(e.target.value.toUpperCase());
-    };
+  useEffect(() => {
+    setFoundCars(data.filter(user => searcheble.length && user?.carGRZ?.startsWith(searcheble)))
+  }, [searcheble]);
 
-    useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-            setLoading(true);
-            axios
-                .post(SITE + `api/searchcar`, {searcheble})
-                .then((res) => {
-                    if (res.data != "Не найдено") {
-                        setUserFields(res.data);
-                        setLoading(false);
-                    }
-                });
-        }, 1200);
-        return () => clearTimeout(delayDebounceFn);
-    }, [searcheble]);
+  const {tg} = useTelegram();
 
-    useEffect(() => {
-        tg.expand();
-    }, []);
+  let patternCarNum = new RegExp(
+    /^[АВЕКМНОРСТУХ]{1}[0-9]{3}[АВЕКМНОРСТУХ]{2}[0-9]{2,3}$/
+  );
 
-    if (patternCarNum.test(searcheble)) {
-        styleGRZInput = s.input;
-    } else if (searcheble === "") {
-        styleGRZInput = s.input;
-    } else {
-        styleGRZInput = s.input + " " + s.error;
-    }
+  useEffect(() => {
+    tg.expand();
+  }, []);
 
-    return (
-        <div className={s.search_body}>
-            <h1 className={s.title}>Поиск авто</h1>
-            <input
-                maxLength={9}
-                className={styleGRZInput}
-                type="text"
-                placeholder="Введи номер авто"
-                value={searcheble}
-                onChange={onSearcheble}
-            />
-            {userFileds ? (
-                <div className={s.result_body}>
-                    <div className={s.image_body}>
-                        <Image
+  const isRussian = (str) => {
+    return /[а-яё]/i.test(str);
+  }
+
+  return (
+    <div className={s.search_body}>
+      <h1 className={s.title}>Поиск авто</h1>
+      <input
+        maxLength={9}
+        className={`${s.input} ${!isRussian(searcheble) && searcheble.length ? s.error : ''}`}
+        type="text"
+        placeholder="Введи номер авто"
+        value={searcheble}
+        onChange={onSearcheble}
+      />
+      {
+        foundCars.length && searcheble.length ? (
+          <div className={s.cards}>
+            <Swiper
+              centeredSlides={true}
+              breakpoints={{
+                320: {
+                  slidesPerView: 1.1,
+                  spaceBetween: 20
+                },
+                450: {
+                  slidesPerView: 1.5,
+                  spaceBetween: 30
+                },
+                768: {
+                  slidesPerView: 2.5,
+                  spaceBetween: 30
+                },
+                1024: {
+                  slidesPerView: 3.5,
+                  spaceBetween: 30
+                },
+                1280: {
+                  slidesPerView: 3.9,
+                  spaceBetween: 30
+                },
+                1440: {
+                  slidesPerView: 4.3,
+                  spaceBetween: 30
+                },
+                1600: {
+                  slidesPerView: 5.6,
+                  spaceBetween: 30
+                },
+              }}
+            >
+              {
+                foundCars.map((card) => {
+                  return (
+                    <SwiperSlide key={card.chatId}>
+                      <div className={s.card}>
+                        <div className={s.image_body}>
+                          <Image
                             preview={{
-                                src: SITE + `api/image/` + userFileds.carImage,
+                              src: SITE + `api/image/` + card.carImage,
                             }}
                             width={300}
                             src={
-                                SITE + `api/image/small/` +
-                                userFileds.carImage +
-                                "_" +
-                                "small.jpeg"
+                              SITE + `api/image/small/` +
+                              card.carImage +
+                              "_" +
+                              "small.jpeg"
                             }
                             alt=""
-                        />
-                    </div>
-                    <div className={s.textBody}>
-                        <ul className={s.list}>
-                            <li>
-                                Владелец: <span>{userFileds.userName}</span>
-                            </li>
-                            <li>
-                                Авто: <span>{userFileds.carbrand} {userFileds.carModel}</span>
-                            </li>
-                            <li>
-                                Год выпуска: <span>{userFileds.carYear}</span>
-                            </li>
-                            {userFileds.carNote ? (
-                                <li>
-                                    Примечание: <span>{userFileds.carNote}</span>
-                                </li>
-                            ) : null}
-                        </ul>
-                    </div>
-                </div>
-            ) : userFileds == "" ? (
-                <div className={s.notFoundImg + " " + s.empty}>
-                    <img src={SITE + "api/icons/404.png"} alt="Not found"/>
-                    <p>Авто не найдено</p>
-                </div>
-            ) : (
-                <div className={s.notFound}>
-                    {loading ? (
-                        <Loader/>
-                    ) : (
-                        <div className={s.notFoundImg}>
-                            <img
-                                src={SITE + "api/icons/404.png"}
-                                alt="Not found"
-                            />
-                            <p>Авто не найдено</p>
+                          />
                         </div>
-                    )}
-                </div>
-            )}
-        </div>
-    );
+                        <div className={s.textBody}>
+                          <ul className={s.list}>
+                            <li>Владелец: <span>{card.userName}</span></li>
+                            <li>Авто: <span>{card.carbrand} {card.carModel}</span></li>
+                            <li>Гос.номер: <span>{card.carGRZ}</span></li>
+                            <li>Год выпуска: <span>{card.carYear}</span></li>
+                            {card.carNote ? (
+                              <li>
+                                Примечание: <span>{card.carNote}</span>
+                              </li>
+                            ) : null}
+                          </ul>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  )
+                })
+              }
+            </Swiper>
+          </div>
+        ) : !foundCars.length && searcheble.length ? (
+          <div className={s.notFoundImg}>
+            <img src={SITE + "api/icons/404.png"} alt="Not found"/>
+            <p>Авто не найдено</p>
+          </div>
+        ) : (
+          <></>
+        )
+      }
+    </div>
+  );
 };
 
 export default SearchCar;
