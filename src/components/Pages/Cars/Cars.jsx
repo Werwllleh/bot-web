@@ -63,6 +63,7 @@ const Cars = ({data}) => {
                     </div>
                   </div>
                 ),
+                toolbarRender: () => null,
               }}
               style={{
                 objectFit: "cover",
