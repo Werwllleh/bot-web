@@ -8,6 +8,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/parallax';
+import LoaderCar from "../../LoaderCar/LoaderCar";
 
 const SearchCar = ({data}) => {
 
@@ -48,6 +49,7 @@ const SearchCar = ({data}) => {
             placeholder="Введи номер авто"
             value={searcheble}
             onChange={onSearcheble}
+
           />
           {foundCars.length && searcheble.length ? (
             <div className={s.cards__count}>

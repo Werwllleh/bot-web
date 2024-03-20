@@ -27,7 +27,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-
     axios
       .post(SITE + `api/data`)
       .then((res) => {
@@ -49,7 +48,7 @@ function App() {
       ) : (
         <div className="container">
           <Routes>
-            <Route index element={<Cars />} />
+            <Route index element={<Cars data={users} />} />
             <Route path='/form' element={<Form />} />
             <Route path='/form/change' element={<ChangeForm />} />
             <Route path='/partners' element={<Partners />} />

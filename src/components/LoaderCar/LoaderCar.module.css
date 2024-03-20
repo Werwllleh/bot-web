@@ -1,0 +1,19 @@
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 10% auto 0;
+    max-width: 250px;
+    animation: opacityAnim 1s infinite alternate-reverse;
+    pointer-events: none;
+}
+
+@keyframes opacityAnim {
+  from {
+    opacity: .4;
+  }
+  to {
+      opacity: 1;
+  }
+}
