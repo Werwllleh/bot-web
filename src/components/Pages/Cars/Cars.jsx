@@ -29,8 +29,6 @@ const Cars = ({data}) => {
             <Image
               preview={{
                 // src: SITE + "api/image/" + user.carImage,
-                toolbarRender: () => null,
-                movable: false,
                 mask: 'Просмотр',
                 imageRender: () => (
                   <div className={s.preview__block}>
