@@ -19,7 +19,7 @@ const SearchCar = ({data}) => {
   };
 
   useEffect(() => {
-    setFoundCars(data.filter(user => searcheble.length && user?.carGRZ?.startsWith(searcheble)))
+    setFoundCars(data.filter(user => searcheble.length && user?.carGRZ?.startsWith(searcheble) || user?.carGRZ?.includes(searcheble)))
   }, [searcheble]);
 
   const {tg} = useTelegram();
@@ -33,7 +33,7 @@ const SearchCar = ({data}) => {
   }, []);
 
   const isRussian = (str) => {
-    return /[а-яё]/i.test(str);
+    return /[а-яё0-9]/i.test(str);
   }
 
   return (
@@ -49,7 +49,7 @@ const SearchCar = ({data}) => {
             value={searcheble}
             onChange={onSearcheble}
           />
-          {foundCars.length ? (
+          {foundCars.length && searcheble.length ? (
             <div className={s.cards__count}>
               {`Количество найденных авто: ${foundCars.length}`}
             </div>
