@@ -47,7 +47,8 @@
 
 .preview__image img {
   max-height: 700px;
-  height: 100%;
+  object-fit: contain;
+  /*height: 100%;*/
 }
 
 .preview__info {
