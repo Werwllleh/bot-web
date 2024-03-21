@@ -1,58 +1,55 @@
-import React, { useState } from "react";
+import React from 'react';
+import { Collapse } from 'antd';
+import { CaretRightFilled } from '@ant-design/icons';
 import s from "./Accordion.module.css";
+import Loader from "../Loader/Loader";
+import {linksArrayFunc, phoneArrayFunc} from "../../utils/partnersUtils";
 
-const Accordion = ({ category, children }) => {
-  const [isActive, setIsActive] = useState(false);
 
-  const onChange = (e) => {
-    setIsActive(!isActive);
-  };
+
+const Accordion = ({data}) => {
+
+  let accordionItems = [];
+
+  Object.entries(data).forEach((entry, index) => {
+
+    const [category, items] = entry;
+
+    accordionItems.push({
+      key: index,
+      label: category,
+      children: items.map((el) => (
+        <div key={el.name} className={s.partnerInfo}>
+          {el.name && <div className={s.partName}>{el.name}</div>}
+          {el.descp && <div className={s.partDescp}>{el.descp}</div>}
+          {el.link && (
+            <div className={s.partLink}>
+              {
+                linksArrayFunc(el.link).map((item) => {
+                  return <a target={"_blank"} href={"http://" + item}>{item}</a>
+                })
+              }
+            </div>
+          )}
+          {el.phone && (
+            <div className={s.partPhones}>
+              {phoneArrayFunc(el.phone).map((item) => {
+                return <a href={`tel:${item}`}>{item}</a>
+              })}
+            </div>
+          )}
+          {el.address && <div className={s.partAddress}>{el.address}</div>}
+        </div>
+      )),
+    });
+  });
+
 
   return (
-    <div className={s.accordion}>
-      <div className={s.accordion_item}>
-        <div onClick={onChange} className={s.accordion_title}>
-          <div className={isActive ? s.arrow + " " + s.active : s.arrow}></div>
-          <div>{category}</div>
-        </div>
-        <div
-          className={
-            isActive
-              ? s.accordion_content + " " + s.show
-              : s.accordion_content + " " + s.hide
-          }
-        >
-          {children[category].map((i) => {
-            return (
-              <>
-                <div key={i.name} className={s.partnerInfo}>
-                  {i.name ? <div className={s.partName}>{i.name}</div> : null}
-                  {i.descp ? (
-                    <div className={s.partDescp}>{i.descp}</div>
-                  ) : null}
-                  {i.link ? (
-                    <div className={s.partLink}>
-                      <a target={"_blank"} href={"http://" + i.link}>
-                        {i.link}
-                      </a>
-                    </div>
-                  ) : null}
-                  {i.phone ? (
-                    <div className={s.partPhone}>
-                      <a href={"tel:+" + i.phone}>{i.phone}</a>
-                    </div>
-                  ) : null}
-                  {i.address ? (
-                    <div className={s.partAddress}>{i.address}</div>
-                  ) : null}
-                  <div className={s.linePart}></div>
-                </div>
-              </>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
+      accordionItems.length !== 0 ? (
+        <Collapse accordion items={accordionItems} expandIcon={() => <span><CaretRightFilled /></span>} />
+      ) : <Loader />
+    )
 };
+
 export default Accordion;

@@ -4,3 +4,56 @@
   margin: 0 auto;
   max-width: 768px;
 }
+
+.content_accordion {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.content_accordion .ant-collapse {
+  border: none;
+}
+
+.content_accordion .ant-collapse-content {
+  border-top: none !important;
+  background-color: #f8f8f8;
+}
+
+.content_accordion .ant-collapse-header {
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  background: linear-gradient(90deg, rgba(43,42,41,0.9) 0%, rgba(198,32,58,0.90) 60%, rgba(242,145,20,0.90) 100%);
+  transition: background .3s ease-in-out;
+  padding: 18px 15px !important;
+}
+
+.content_accordion .ant-collapse-header:hover,
+.content_accordion .ant-collapse-item-active .ant-collapse-header{
+  background: linear-gradient(90deg, rgba(43,42,41,1) 0%, rgba(198,32,58,1) 50%, rgba(242,145,20,1) 100%);
+}
+
+.content_accordion .ant-collapse-item {
+
+}
+
+.content_accordion .ant-collapse-item:last-child {
+  border-bottom: none;
+}
+
+.content_accordion .ant-collapse-header-text {
+  font-weight: 500;
+  color: rgb(255, 255, 255) !important;
+  font-size: 16px;
+}
+
+.content_accordion .anticon svg {
+  fill: #ffffff;
+}
+
+.content_accordion .ant-collapse-item-active .anticon svg {
+  transform: rotate(90deg);
+}
+
+.content_accordion .ant-collapse-item-active .ant-collapse-header {
+  border-radius: 0 0 0 0 !important;
+}
