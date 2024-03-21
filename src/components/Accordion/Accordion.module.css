@@ -80,6 +80,10 @@
   font-size: 16px;
 }
 
+.partPhones a {
+
+}
+
 .partPhones a::after,
 .partLink a::after {
   content: '';

@@ -26,7 +26,7 @@ const Accordion = ({data}) => {
             <div className={s.partLink}>
               {
                 linksArrayFunc(el.link).map((item) => {
-                  return <a target={"_blank"} href={"http://" + item}>{item}</a>
+                  return <a key={item} target={"_blank"} href={"http://" + item}>{item}</a>
                 })
               }
             </div>
@@ -34,7 +34,7 @@ const Accordion = ({data}) => {
           {el.phone && (
             <div className={s.partPhones}>
               {phoneArrayFunc(el.phone).map((item) => {
-                return <a href={`tel:${item}`}>{item}</a>
+                return <a key={item}>{item}</a>
               })}
             </div>
           )}
