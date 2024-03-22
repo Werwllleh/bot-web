@@ -13,6 +13,8 @@ const Accordion = ({data}) => {
 
   Object.entries(data).forEach((entry, index) => {
 
+    console.log(accordionItems)
+
     const [category, items] = entry;
 
     accordionItems.push({
@@ -21,7 +23,7 @@ const Accordion = ({data}) => {
       children: items.map((el) => (
         <div key={el.name} className={s.partnerInfo}>
           {el.name && <div className={s.partName}>{el.name}</div>}
-          {el.descp && <div className={s.partDescp}>{el.descp}</div>}
+          {el.description && <div className={s.partDescp}>{el.description}</div>}
           {el.link && (
             <div className={s.partLink}>
               {
@@ -43,7 +45,6 @@ const Accordion = ({data}) => {
       )),
     });
   });
-
 
   return (
       accordionItems.length !== 0 ? (

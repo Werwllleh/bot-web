@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import Accordion from "../../Accordion/Accordion";
 import Header from "../../Header/Header";
-import Loader from "../../Loader/Loader";
 import s from "./Partners.module.css";
 
 import useTelegram from "../../../hooks/useTelegram";
