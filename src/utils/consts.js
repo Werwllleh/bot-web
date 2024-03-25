@@ -26,3 +26,12 @@ export const cars = {
         'aventador', 'gallardo', 'huracan', 'murcielago', 'urus',
     ]
 }
+
+export const stickersTitles = {
+    'sk_colored': 'Наклейка Skoda цветная',
+    'sk_gray': 'Наклейка Skoda серая',
+    'sk_perl': 'Наклейка Skoda перламутр',
+    'vw_colored': 'Наклейка Volkswagen цветная',
+    'vw_gray': 'Наклейка Volkswagen серая',
+    'vw_perl': 'Наклейка Volkswagen перламутр',
+}

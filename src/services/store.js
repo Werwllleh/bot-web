@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
 export const useUsersStore = create((set) => ({
   users: [],
@@ -8,4 +8,9 @@ export const useUsersStore = create((set) => ({
 export const usePartnersStore = create((set) => ({
   partners: [],
   updatePartners: (data) => set(() => ({ partners: data })),
+}))
+
+export const useStickersStore = create((set) => ({
+  stickers: [],
+  updateStickers: (data) => set(() => ({ stickers: data })),
 }))

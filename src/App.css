@@ -2,7 +2,8 @@
   position: relative;
   width: 100%;
   margin: 0 auto;
-  max-width: 768px;
+  max-width: 850px;
+  padding: 0 15px;
 }
 
 .content_accordion {
@@ -56,4 +57,27 @@
 
 .content_accordion .ant-collapse-item-active .ant-collapse-header {
   border-radius: 0 0 0 0 !important;
+}
+
+.sticker__photo {
+  position: relative;
+  cursor: pointer;
+}
+
+.sticker__photo .ant-image-img {
+  transition: transform .3s ease-in-out;
+}
+
+.sticker__photo:hover .ant-image-img {
+  transform: scale(1.1);
+}
+
+.sticker__photo .ant-image .ant-image-mask {
+  background: none !important;
+  transform: scale(1.2);
+  font-weight: 500;
+}
+
+.ant-image-preview-img {
+
 }
