@@ -1,3 +1,8 @@
+.page {
+  margin: 77px 0 0 0;
+  padding: 20px 0 50px;
+}
+
 .container {
   position: relative;
   width: 100%;

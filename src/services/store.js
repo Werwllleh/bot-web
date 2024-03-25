@@ -2,7 +2,9 @@ import { create } from 'zustand';
 
 export const useUsersStore = create((set) => ({
   users: [],
+  cart: [],
   updateUsers: (data) => set(() => ({ users: data })),
+  updateCart: (data) => set(() => ({ cart: data })),
 }))
 
 export const usePartnersStore = create((set) => ({

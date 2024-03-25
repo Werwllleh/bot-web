@@ -61,8 +61,8 @@ function App() {
   useEffect(() => {
     getStickersData()
       .then((res) => {
-      setLoaderStickers(true);
-      return updateStickers(res.data.files)
+        setLoaderStickers(true);
+        return updateStickers(res.data.files)
       })
       .finally(() => {
         setLoaderStickers(false);
@@ -79,17 +79,19 @@ function App() {
   return (
     <>
       {loaderCars && loaderPartners && loaderStickers ? (
-        <Loader />
+        <Loader/>
       ) : (
-        <div className="container">
-          <Routes>
-            <Route index element={<Cars data={users} />} />
-            <Route path='/form' element={<Form />} />
-            <Route path='/form/change' element={<ChangeForm />} />
-            <Route path='/partners' element={<Partners data={partnersSortedObject} />} />
-            <Route path='/searchcar' element={<SearchCar data={users} />} />
-            <Route path='/stickers' element={<Stickers stickers={stickers} />} />
-          </Routes>
+        <div className="page">
+          <div className="container">
+            <Routes>
+              <Route index element={<Cars data={users}/>}/>
+              <Route path='/form' element={<Form/>}/>
+              <Route path='/form/change' element={<ChangeForm/>}/>
+              <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
+              <Route path='/searchcar' element={<SearchCar data={users}/>}/>
+              <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
+            </Routes>
+          </div>
         </div>
       )}
     </>

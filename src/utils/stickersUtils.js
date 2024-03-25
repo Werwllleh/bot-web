@@ -20,7 +20,9 @@ export const stickersInfo = (stickersArr) => {
       if (title === item[0]) {
         stickersData.push({
           photo: itemFile,
-          title:item[1]})
+          title: item[1][0],
+          price: item[1][1]
+        })
       }
     });
   });

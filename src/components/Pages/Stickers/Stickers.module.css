@@ -4,15 +4,14 @@
 
 .stickers__grid {
     margin: 30px 0 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    column-gap: 10px;
+    row-gap: 20px;
     justify-content: center;
-    padding: 0 0 50px;
 }
 
 .sticker {
-    flex: 1 1 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,16 +26,67 @@
 .sticker__preview img {
     object-fit: contain;
     max-width: 400px;
+    width: 100%;
 }
 
 .sticker__info {
-
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 7px;
+    /*width: 100%;*/
 }
 
 .sticker__title {
-    margin: 10px 0 0 0;
     display: block;
     font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    height: 52px;
+}
+
+.sticker__price {
+    display: block;
+    white-space: nowrap;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+}
+
+.sticker__button_cart {
+    margin: 7px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 10px 5px;
+    border-radius: 7px;
+    font-family: "Roboto", sans-serif;
     font-weight: 300;
-    text-align: center;
+    transition: background-color .3s ease-in-out;
+}
+
+.sticker__button_cart:hover {
+    background-color: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    .stickers__grid {
+        grid-template-columns: repeat(2, 200px);
+    }
+}
+
+
+@media (max-width: 500px) {
+    .stickers__grid {
+        grid-template-columns: repeat(2, 140px);
+    }
+    .sticker__title {
+        font-size: 14px;
+    }
+    .sticker__price {
+        font-size: 12px;
+    }
 }

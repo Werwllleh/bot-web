@@ -64,6 +64,7 @@ body {
 }
 
 .button {
+    font-family: inherit;
     background: var(--tg-theme-button-color) !important;
     color: var(--tg-theme-button-text-color) !important;
     border: none;
