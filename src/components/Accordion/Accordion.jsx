@@ -13,8 +13,6 @@ const Accordion = ({data}) => {
 
   Object.entries(data).forEach((entry, index) => {
 
-    console.log(accordionItems)
-
     const [category, items] = entry;
 
     accordionItems.push({

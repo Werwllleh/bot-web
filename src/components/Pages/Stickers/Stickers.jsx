@@ -28,10 +28,10 @@ const StickerItem = ({photo, title, price}) => {
     }
   };
 
-  useEffect(() => {
-    console.log(userCart)
-
-  }, [userCart]);
+  // useEffect(() => {
+  //   console.log(userCart)
+  //
+  // }, [userCart]);
 
 
   return (

@@ -1,6 +1,6 @@
 .page {
   margin: 77px 0 0 0;
-  padding: 20px 0 50px;
+  padding: 20px 0 120px;
 }
 
 .container {
@@ -83,6 +83,77 @@
   font-weight: 500;
 }
 
-.ant-image-preview-img {
 
+
+
+.bottom-navbar {
+  position: fixed;
+  z-index: 5;
+  bottom: 35px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-navbar .MuiBottomNavigation-root {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgba(104, 106, 108, 0.9);
+}
+
+.bottom-navbar__link {
+  position: relative;
+  flex: 0 1 100px;
+  height: 100%;
+  display: block;
+}
+
+.bottom-navbar__link .MuiButtonBase-root{
+  max-width: 100px;
+  width: 100%;
+  height: 100%;
+}
+
+.cart-count {
+  position: absolute;
+  top: 6px;
+  right: 20px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: rgb(104, 106, 108);
+  line-height: 0.8;
+  pointer-events: none;
+  padding: 5px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.bottom-navbar__link .MuiBottomNavigationAction-label {
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: .07em;
+}
+
+@media (max-width: 450px) {
+  .bottom-navbar__link .MuiBottomNavigationAction-label {
+    font-size: 12px !important;
+    letter-spacing: 0;
+  }
+  .bottom-navbar__link .MuiButtonBase-root {
+    max-width: 70px;
+  }
+
+}
+
+.bottom-navbar__link .Mui-selected .MuiSvgIcon-root {
+  fill: #ffffff;
 }
