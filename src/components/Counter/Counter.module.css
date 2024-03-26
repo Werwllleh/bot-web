@@ -18,13 +18,13 @@
 }
 
 
-.counter__input {
-    border: none;
-    outline: none;
+.counter__count {
+    display: block;
     padding: 0;
-    max-width: 30px;
+    width: 50px;
     text-align: center;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
     color: #000000;
+    pointer-events: none;
 }

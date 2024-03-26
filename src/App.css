@@ -87,17 +87,16 @@
 
 
 .bottom-navbar {
+
+}
+
+.bottom-navbar .MuiBottomNavigation-root {
   position: fixed;
   z-index: 5;
   bottom: 35px;
   left: 0;
   right: 0;
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
-}
-
-.bottom-navbar .MuiBottomNavigation-root {
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
@@ -145,6 +144,7 @@
 }
 
 .sticker__preview img {
+  pointer-events: none;
   object-fit: contain;
   max-width: 400px;
   width: 100%;

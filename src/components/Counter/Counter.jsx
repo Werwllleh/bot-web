@@ -25,6 +25,9 @@ const Counter = ({ product }) => {
       const updatedCart = [...userCart];
       updatedCart[index].count -= 1;
       updateUserCart(updatedCart);
+    } else {
+      const filteredItems = userCart.filter(item => item.title !== product);
+      updateUserCart(filteredItems);
     }
   };
 
@@ -32,7 +35,7 @@ const Counter = ({ product }) => {
     <div className={s.counter}>
       <div className={s.counter__body}>
         <button onClick={removeItem} className={s.counter__button}><RemoveIcon /></button>
-        <span>{item ? item.count : 0}</span>
+        <span className={s.counter__count}>{item ? item.count : 0}&nbsp;шт</span>
         <button onClick={addItem} className={s.counter__button}><AddIcon /></button>
       </div>
     </div>

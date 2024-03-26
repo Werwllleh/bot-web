@@ -35,3 +35,7 @@ export const stickersTitles = {
     'vw_gray': ['Наклейка Volkswagen серая', 500],
     'vw_perl': ['Наклейка Volkswagen перламутр', 500],
 }
+
+export const places = {
+
+}

@@ -6,10 +6,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import {Image} from "antd";
+import {useUsersStore} from "../../services/store";
 
 
 
 const CartItem = ({title, photo, count, price}) => {
+
+  const userCart = useUsersStore((state) => state.cart);
+  const updateUserCart = useUsersStore((state) => state.updateCart);
+
+  const deleteItem = () => {
+    const filteredItems = userCart.filter(item => item.title !== title);
+    updateUserCart(filteredItems);
+  }
+
+
   return (
     <li className={s.cart__item}>
       <div className={s.cart__item_info}>
@@ -38,7 +49,7 @@ const CartItem = ({title, photo, count, price}) => {
         </div>
       </div>
       <div className={s.cart__item_delete}>
-        <Tooltip onClick={() => console.log('click')} title="Удалить">
+        <Tooltip onClick={() => deleteItem()} title="Удалить">
           <IconButton>
             <DeleteIcon />
           </IconButton>

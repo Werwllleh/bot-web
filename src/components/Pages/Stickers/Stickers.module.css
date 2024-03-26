@@ -41,23 +41,43 @@
     letter-spacing: 0.05em;
 }
 
-.sticker__button_cart {
+.sticker__footer {
     margin: 7px 0 0 0;
+    width: 100%;
+    height: 37px;
+}
+
+.sticker__counter {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #f3f3f3;
+    border-radius: 7px;
+}
+
+.sticker__button_cart {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #f3f3f3;
-    font-size: 14px;
-    letter-spacing: 0.05em;
     padding: 10px 5px;
     border-radius: 7px;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
     transition: background-color .3s ease-in-out;
 }
 
 .sticker__button_cart:hover {
     background-color: #e0e0e0;
+}
+
+.sticker__button_cart span {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.05em;
 }
 
 @media (max-width: 768px) {
