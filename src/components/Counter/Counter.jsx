@@ -5,23 +5,35 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {useUsersStore} from "../../services/store";
 
-const Counter = ({product}) => {
-
+const Counter = ({ product }) => {
   const userCart = useUsersStore((state) => state.cart);
   const updateUserCart = useUsersStore((state) => state.updateCart);
 
-  // const index = userCart.findIndex(el => el.title === product);
+  const item = userCart.find(el => el.title === product);
+  const index = userCart.findIndex(el => el.title === product);
 
-  console.log(userCart)
+  const addItem = () => {
+    if (item) {
+      const updatedCart = [...userCart];
+      updatedCart[index].count += 1;
+      updateUserCart(updatedCart);
+    }
+  };
 
-  console.log(1)
+  const removeItem = () => {
+    if (item && item.count > 1) {
+      const updatedCart = [...userCart];
+      updatedCart[index].count -= 1;
+      updateUserCart(updatedCart);
+    }
+  };
 
   return (
     <div className={s.counter}>
       <div className={s.counter__body}>
-        <button className={s.counter__button}><RemoveIcon /></button>
-        <input className={s.counter__input} type="number" value={''} disabled={true}/>
-        <button className={s.counter__button}><AddIcon /></button>
+        <button onClick={removeItem} className={s.counter__button}><RemoveIcon /></button>
+        <span>{item ? item.count : 0}</span>
+        <button onClick={addItem} className={s.counter__button}><AddIcon /></button>
       </div>
     </div>
   );

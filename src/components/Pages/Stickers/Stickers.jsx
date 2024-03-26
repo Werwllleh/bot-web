@@ -15,7 +15,7 @@ const StickerItem = ({photo, title, price}) => {
 
 
 
-  const addToCart = (item, price) => {
+  const addToCart = (item, price, photo) => {
     // Находим индекс товара в корзине (если он есть)
     const index = userCart.findIndex(el => el.title === item);
 

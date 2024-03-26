@@ -1,16 +1,12 @@
 
-export const getTotalSumCart = (cart) => {
 
-  let cartSum = {
+export const getTotalSumCart = (cart) => {
+  return cart.reduce((cartSum, item) => {
+    cartSum.totalSum += item.price * item.count;
+    cartSum.totalCount += item.count;
+    return cartSum;
+  }, {
     totalSum: 0,
     totalCount: 0
-  }
-
-  cart.map((item) => {
-    cartSum.totalSum += item['price'];
-    cartSum.totalCount += item['count'];
-  })
-
-  return cartSum;
-
+  });
 }
