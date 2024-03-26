@@ -14,6 +14,7 @@ import Stickers from "./components/Pages/Stickers/Stickers";
 import {getStickersData} from "./utils/stickersUtils";
 import {getUsersData} from "./utils/usersUtils";
 import BottomNavigationBar from "./components/BottomNavigationBar/BottomNavigationBar";
+import Cart from "./components/Pages/Cart/Cart";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
   const users = useUsersStore((state) => state.users);
   const partners = usePartnersStore((state) => state.partners);
   const stickers = useStickersStore((state) => state.stickers);
+  const userCart = useUsersStore((state) => state.cart);
 
   const partnersSortedObject = groupedPartnersFunc(partners);
 
@@ -92,13 +94,14 @@ function App() {
                 <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
                 <Route path='/searchcar' element={<SearchCar data={users}/>}/>
                 <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
+                <Route path='/cart' element={<Cart cart={userCart} />}/>
               </Routes>
             </div>
           </div>
           {
             location.pathname !== '/form' && location.pathname !== '/form/change' ? (
               <div className="bottom-navbar">
-                <BottomNavigationBar />
+                <BottomNavigationBar cart={userCart}/>
               </div>
             ) : null
           }

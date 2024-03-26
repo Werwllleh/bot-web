@@ -7,9 +7,9 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import StoreIcon from '@mui/icons-material/Store';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {Link, useLocation} from "react-router-dom";
-import {useUsersStore} from "../../services/store";
+import {getTotalSumCart} from "../../utils/cartUtils";
 
-const BottomNavigationBar = () => {
+const BottomNavigationBar = ({cart}) => {
 
   const location = useLocation();
   const [value, setValue] = useState(location.pathname);
@@ -18,7 +18,6 @@ const BottomNavigationBar = () => {
     setValue(newValue);
   };
 
-  const userCart = useUsersStore((state) => state.cart);
 
   return (
     <BottomNavigation sx={{width: 500}} value={value} onChange={handleChange}>
@@ -55,8 +54,8 @@ const BottomNavigationBar = () => {
         />
       </Link>
       <Link className="bottom-navbar__link" to={'/cart'}>
-        {userCart.length ? (
-          <span className="cart-count">{userCart.length ? userCart.length : null}</span>
+        {getTotalSumCart(cart).totalCount ? (
+          <span className="cart-count">{getTotalSumCart(cart).totalCount}</span>
         ) : null}
         <BottomNavigationAction
           label="Корзина"

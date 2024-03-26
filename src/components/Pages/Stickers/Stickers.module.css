@@ -17,18 +17,6 @@
     align-items: center;
 }
 
-.sticker__preview {
-    background: #fff;
-    padding: 40px;
-    box-shadow: 0 0 20px 9px #00000057;
-}
-
-.sticker__preview img {
-    object-fit: contain;
-    max-width: 400px;
-    width: 100%;
-}
-
 .sticker__info {
     margin: 10px 0 0 0;
     display: flex;

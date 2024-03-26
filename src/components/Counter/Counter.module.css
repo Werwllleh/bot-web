@@ -1,0 +1,30 @@
+.counter {}
+
+.counter__body {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.counter__button {
+    line-height: 0;
+    transition: background-color .3s ease-in-out;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.counter__button:hover {
+    background-color: #d5d5d5;
+}
+
+
+.counter__input {
+    border: none;
+    outline: none;
+    padding: 0;
+    max-width: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000000;
+}

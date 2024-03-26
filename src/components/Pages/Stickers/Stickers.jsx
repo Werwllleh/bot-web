@@ -10,8 +10,10 @@ import {useUsersStore} from "../../../services/store";
 const StickerItem = ({photo, title, price}) => {
 
   const userCart = useUsersStore((state) => state.cart);
-
   const updateUserCart = useUsersStore((state) => state.updateCart);
+
+
+
 
   const addToCart = (item, price) => {
     // Находим индекс товара в корзине (если он есть)
@@ -24,7 +26,7 @@ const StickerItem = ({photo, title, price}) => {
       updateUserCart(updatedCart);
     } else {
       // Если товара нет в корзине, добавляем его с начальным количеством 1
-      updateUserCart([...userCart, {title: item, price: price, count: 1}]);
+      updateUserCart([...userCart, {photo: photo, title: item, price: price, count: 1}]);
     }
   };
 
@@ -42,8 +44,8 @@ const StickerItem = ({photo, title, price}) => {
             mask: false,
             // src: `${SITE}api/image/stickers/${photo}`,
             imageRender: () => (
-              <div className={s.sticker__preview}>
-                <img src={`${SITE}api/image/stickers/${photo}`} alt=""/>
+              <div className="sticker__preview">
+                <img src={`${SITE}api/image/stickers/${photo}`} alt={title}/>
               </div>
             ),
             toolbarRender: () => null,
@@ -55,7 +57,7 @@ const StickerItem = ({photo, title, price}) => {
       <div className={s.sticker__info}>
         <h2 className={s.sticker__title}>{title}</h2>
         <span className={s.sticker__price}>{price}&nbsp;₽</span>
-        <button onClick={() => addToCart(title, price)} className={s.sticker__button_cart}>В корзину</button>
+        <button onClick={() => addToCart(title, price, photo)} className={s.sticker__button_cart}>В корзину</button>
       </div>
     </div>
   )

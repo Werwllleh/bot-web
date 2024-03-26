@@ -8,7 +8,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/parallax';
-import LoaderCar from "../../LoaderCar/LoaderCar";
+import Header from "../../Header/Header";
 
 const SearchCar = ({data}) => {
 
@@ -41,7 +41,7 @@ const SearchCar = ({data}) => {
     <>
       <div className={s.search__body}>
         <div className={s.search__header}>
-          <h1 className={s.title}>Поиск авто</h1>
+          <Header title={"Поиск авто"}/>
           <input
             maxLength={9}
             className={`${s.input} ${!isRussian(searcheble) && searcheble.length ? s.error : ''}`}
@@ -49,7 +49,6 @@ const SearchCar = ({data}) => {
             placeholder="Введи номер авто"
             value={searcheble}
             onChange={onSearcheble}
-
           />
           {foundCars.length && searcheble.length ? (
             <div className={s.cards__count}>
