@@ -28,3 +28,9 @@
     color: #000000;
     pointer-events: none;
 }
+
+@media (max-width: 600px) {
+    .counter__count {
+        font-size: 14px;
+    }
+}

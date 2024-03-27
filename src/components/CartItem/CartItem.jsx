@@ -9,7 +9,6 @@ import {Image} from "antd";
 import {useUsersStore} from "../../services/store";
 
 
-
 const CartItem = ({title, photo, count, price}) => {
 
   const userCart = useUsersStore((state) => state.cart);
@@ -44,14 +43,14 @@ const CartItem = ({title, photo, count, price}) => {
           <h5 className={s.cart__item_title}>{title}</h5>
         </div>
         <div className={s.cart__item_info_right}>
-          <div className={s.cart__item_counter}><Counter product={title} /></div>
+          <div className={s.cart__item_counter}><Counter product={title}/></div>
           <div className={s.cart__item_sum}>{count * price}&nbsp;₽</div>
         </div>
       </div>
       <div className={s.cart__item_delete}>
-        <Tooltip onClick={() => deleteItem()} title="Удалить">
+        <Tooltip onClick={deleteItem} title="Удалить">
           <IconButton>
-            <DeleteIcon />
+            <DeleteIcon/>
           </IconButton>
         </Tooltip>
       </div>

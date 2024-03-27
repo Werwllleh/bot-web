@@ -1,19 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Cart.module.css';
 import Header from "../../Header/Header";
 import {getTotalSumCart} from "../../../utils/cartUtils";
 import CartItem from "../../CartItem/CartItem";
 import InventoryIcon from '@mui/icons-material/Inventory';
 import {Select} from "antd";
+import {places} from "../../../utils/consts";
 
 const Cart = ({cart}) => {
 
   // getTotalSumCart(cart)
   // console.log(getTotalSumCart(cart))
 
+  const [selectPlace, setSelectPlace] = useState('');
+
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    setSelectPlace(value)
   };
+
+  useEffect(() => {
+    console.log(selectPlace)
+  }, [selectPlace]);
 
 
   return (
@@ -37,27 +44,11 @@ const Cart = ({cart}) => {
             <div className={s.cart__footer_select}>
               <Select
                 // defaultValue="lucy"
+                className="cart__footer_select_ant"
+                popupClassName="cart__footer_select_popup"
                 placeholder={'Район самовывоза'}
                 onChange={handleChange}
-                options={[
-                  {
-                    value: 'jack',
-                    label: 'Jack',
-                  },
-                  {
-                    value: 'lucy',
-                    label: 'Lucy',
-                  },
-                  {
-                    value: 'Yiminghe',
-                    label: 'yiminghe',
-                  },
-                  {
-                    value: 'disabled',
-                    label: 'Disabled',
-                    disabled: true,
-                  },
-                ]}
+                options={places}
               />
             </div>
           </div></>

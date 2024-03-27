@@ -30,6 +30,7 @@
     margin: 40px 0 0;
     display: flex;
     align-items: flex-start;
+    gap: 20px;
     justify-content: space-between;
     max-width: 500px;
 }
@@ -74,9 +75,27 @@
     border-radius: 10px;
     color: #ffffff;
     cursor: pointer;
+    font-size: 16px;
+    font-family: "Roboto", sans-serif;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
     transition: background-color .3s ease-in-out;
 }
 
 .cart__button_order:hover {
     background-color: #ec6902;
+}
+
+@media (max-width: 400px) {
+    .cart__footer {
+        flex-direction: column-reverse;
+    }
+    .cart__footer_select {
+        width: 100%;
+    }
+
+    .cart__footer_select_ant {
+        width: 100%;
+    }
+
 }

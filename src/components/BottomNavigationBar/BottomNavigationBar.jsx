@@ -20,7 +20,7 @@ const BottomNavigationBar = ({cart}) => {
 
 
   return (
-    <BottomNavigation sx={{width: 500}} value={value} onChange={handleChange}>
+    <BottomNavigation sx={{width: 1, maxWidth: 500}} value={value} onChange={handleChange}>
       <Link className="bottom-navbar__link" to={'/'}>
         <BottomNavigationAction
           label="Авто"
