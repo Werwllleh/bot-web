@@ -86,7 +86,7 @@
     background-color: #ec6902;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 550px) {
     .cart__footer {
         flex-direction: column-reverse;
     }

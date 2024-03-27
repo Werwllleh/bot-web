@@ -87,7 +87,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     .cart__item {
         min-width: 290px;
     }

@@ -26,6 +26,7 @@ function App() {
   const [loaderPartners, setLoaderPartners] = useState(true);
   const [loaderStickers, setLoaderStickers] = useState(true);
 
+  const updateCurrentUser = useUsersStore((state) => state.updateCurrentUser);
   const updateUsers = useUsersStore((state) => state.updateUsers);
   const updatePartners = usePartnersStore((state) => state.updatePartners);
   const updateStickers = useStickersStore((state) => state.updateStickers);
@@ -35,7 +36,8 @@ function App() {
 
   useEffect(() => {
     tg.ready();
-  }, [])
+    // updateCurrentUser(tg?.initDataUnsafe?.user)
+  }, [tg])
 
   useEffect(() => {
     getUsersData()
@@ -72,10 +74,13 @@ function App() {
 
   }, []);
 
+  const currentUser = useUsersStore((state) => state.currentUser);
   const users = useUsersStore((state) => state.users);
   const partners = usePartnersStore((state) => state.partners);
   const stickers = useStickersStore((state) => state.stickers);
   const userCart = useUsersStore((state) => state.cart);
+
+
 
   const partnersSortedObject = groupedPartnersFunc(partners);
 

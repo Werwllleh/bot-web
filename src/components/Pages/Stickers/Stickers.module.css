@@ -44,7 +44,7 @@
 .sticker__footer {
     margin: 7px 0 0 0;
     width: 100%;
-    height: 37px;
+    height: 34px;
 }
 
 .sticker__counter {
@@ -89,12 +89,18 @@
 
 @media (max-width: 500px) {
     .stickers__grid {
-        grid-template-columns: repeat(2, 140px);
+        grid-template-columns: repeat(2, 170px);
     }
     .sticker__title {
         font-size: 14px;
     }
     .sticker__price {
         font-size: 12px;
+    }
+}
+
+@media (max-width: 375px) {
+    .stickers__grid {
+        grid-template-columns: repeat(2, 150px);
     }
 }

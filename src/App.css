@@ -119,8 +119,10 @@
 .bottom-navbar__link {
   position: relative;
   flex: 0 1 100px;
+  display: flex;
+  justify-content: center;
   height: 100%;
-  display: block;
+  text-decoration: none;
 }
 
 .bottom-navbar__link .MuiButtonBase-root{
@@ -174,7 +176,7 @@
 .cart__footer_select_ant {
   width: 100%;
   max-width: 300px;
-  min-width: 190px;
+  min-width: 250px;
 }
 
 .ant-select-arrow {
@@ -206,7 +208,7 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .bottom-navbar__link .MuiBottomNavigationAction-label {
     font-size: 12px !important;
     letter-spacing: 0;

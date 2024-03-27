@@ -5,22 +5,52 @@ import {getTotalSumCart} from "../../../utils/cartUtils";
 import CartItem from "../../CartItem/CartItem";
 import InventoryIcon from '@mui/icons-material/Inventory';
 import {Select} from "antd";
-import {places} from "../../../utils/consts";
+import {places, SITE} from "../../../utils/consts";
+import useTelegram from "../../../hooks/useTelegram";
+import axios from "axios";
+import {useUsersStore} from "../../../services/store";
 
 const Cart = ({cart}) => {
 
-  // getTotalSumCart(cart)
-  // console.log(getTotalSumCart(cart))
+  const currentUser = useUsersStore((state) => state.currentUser);
 
-  const [selectPlace, setSelectPlace] = useState('');
+  const [selectedPlace, setSelectedPlace] = useState([]);
+  const [requested, setRequested] = useState(false)
 
-  const handleChange = (value) => {
-    setSelectPlace(value)
+
+  console.log(cart)
+  console.log(currentUser)
+
+  const handleChange = (value, label) => {
+    setSelectedPlace([value, label])
   };
 
-  useEffect(() => {
-    console.log(selectPlace)
-  }, [selectPlace]);
+  console.log(selectedPlace[1])
+
+
+  const sendOrderData = () => {
+    if (currentUser.id && selectedPlace) {
+      axios
+        .post( SITE + `api/order`, {
+          orderData: {
+            user: currentUser,
+            cart: cart,
+            selectedPlace: selectedPlace[1],
+            cartTotalCount: getTotalSumCart(cart).totalCount,
+            cartTotalSum: getTotalSumCart(cart).totalSum,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
+      setRequested(true);
+      /*    setTimeout(() => {
+            tg.close();
+          }, 1500);*/
+    } else {
+      alert('wtf')
+    }
+  };
 
 
   return (
@@ -39,7 +69,9 @@ const Cart = ({cart}) => {
                 <div className={s.cart__total_count}>{getTotalSumCart(cart).totalCount}&nbsp;шт</div>
                 <div className={s.cart__total_sum}><span>Итого:</span>&nbsp;{getTotalSumCart(cart).totalSum}&nbsp;₽</div>
               </div>
-              <button className={s.cart__button_order}>Оформить заказ</button>
+              {cart.length && currentUser?.id && selectedPlace ? (
+                <button onClick={sendOrderData} className={s.cart__button_order}>Оформить заказ</button>
+              ) : null}
             </div>
             <div className={s.cart__footer_select}>
               <Select
