@@ -100,7 +100,9 @@
 }
 
 .list li span {
+  display: inline-block;
   font-weight: 400;
+  max-width: 300px;
 }
 
 .notFound {
