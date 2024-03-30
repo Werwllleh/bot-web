@@ -4,7 +4,7 @@ export const getPartnersData = async () => {
 
 	return (
 		await axios.get(
-			'https://script.google.com/macros/s/AKfycbxBJcTulyPPlLTw1XQ9oobyhX3iL95AakHteTdfPRytaEjYDZP9XfKBaOCoeb1_8JQ3Ag/exec'
+			'https://script.google.com/macros/s/AKfycbw2LiDhoOW4PC5bYXiP0J4GY03O460rLkSvwtT2JsDLk93OEvFIhzRqe-3xTK7qa_vBUw/exec'
 		)
 	)
 };

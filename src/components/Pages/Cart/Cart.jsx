@@ -8,24 +8,38 @@ import {Select} from "antd";
 import {places, SITE} from "../../../utils/consts";
 import useTelegram from "../../../hooks/useTelegram";
 import axios from "axios";
-import {useUsersStore} from "../../../services/store";
+import {useProductsCountStore, useUsersStore} from "../../../services/store";
+import {getProductsData} from "../../../utils/productsUtils";
 
 const Cart = ({cart}) => {
 
   const currentUser = useUsersStore((state) => state.currentUser);
 
+
   const [selectedPlace, setSelectedPlace] = useState([]);
-  const [requested, setRequested] = useState(false)
+  const [available, setAvailable] = useState(false);
+  const [requested, setRequested] = useState(false);
+
+  const productStore = useProductsCountStore((state) => state.productStore);
 
 
-  console.log(cart)
-  console.log(currentUser)
 
-  const handleChange = (value, label) => {
-    setSelectedPlace([value, label])
+  useEffect(() => {
+    // console.log(cart)
+    // console.log(selectedPlace[1]?.value)
+
+  }, [cart]);
+
+  // console.log(currentUser)
+
+  const handleChange = (value) => {
+    let filtered = productStore.filter((info) => info.value === value);
+
+    filtered.filter((sticker) => console.log(sticker))
+    cart.filter((cartItem) => console.log(cartItem))
   };
 
-  console.log(selectedPlace[1])
+  // console.log(selectedPlace[1])
 
 
   const sendOrderData = () => {
@@ -69,18 +83,26 @@ const Cart = ({cart}) => {
                 <div className={s.cart__total_count}>{getTotalSumCart(cart).totalCount}&nbsp;шт</div>
                 <div className={s.cart__total_sum}><span>Итого:</span>&nbsp;{getTotalSumCart(cart).totalSum}&nbsp;₽</div>
               </div>
+              {available ? <span>В наличии</span> : <span>По данном району продукция закончилась, выберите другой</span>}
               {cart.length && currentUser?.id && selectedPlace ? (
                 <button onClick={sendOrderData} className={s.cart__button_order}>Оформить заказ</button>
               ) : null}
             </div>
             <div className={s.cart__footer_select}>
               <Select
-                // defaultValue="lucy"
                 className="cart__footer_select_ant"
                 popupClassName="cart__footer_select_popup"
                 placeholder={'Район самовывоза'}
                 onChange={handleChange}
-                options={places}
+                options={productStore}
+                optionLabelProp={"label"}
+                optionRender={(option) => {
+                  return (
+                    <div className="select__place-item">
+                      {option?.data.value}
+                    </div>
+                  )
+                }}
               />
             </div>
           </div></>

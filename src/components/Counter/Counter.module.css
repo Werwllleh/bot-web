@@ -14,7 +14,7 @@
 }
 
 .counter__button:hover {
-    background-color: #d5d5d5;
+    background-color: rgba(243, 243, 243, 0.55);
 }
 
 

@@ -19,6 +19,7 @@ export const stickersInfo = (stickersArr) => {
     Object.entries(stickersTitles).map((item) => {
       if (title === item[0]) {
         stickersData.push({
+          id: title,
           photo: itemFile,
           title: item[1][0],
           price: item[1][1]

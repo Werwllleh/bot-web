@@ -30,3 +30,10 @@ export const useStickersStore = create((set) => ({
   stickers: [],
   updateStickers: (data) => set(() => ({ stickers: data })),
 }))
+
+export const useProductsCountStore = create((set) => ({
+  productStore: [],
+  productStoreLoading: true,
+  updateProductStore: (data) => set(() => ({ productStore: data })),
+  updateProductStoreLoading: (data) => set(() => ({ productStoreLoading: data })),
+}))

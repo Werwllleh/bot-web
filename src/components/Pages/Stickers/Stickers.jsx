@@ -15,7 +15,7 @@ const Stickers = ({stickers}) => {
       <div className={s.stickers__grid}>
         {
           stickersInfo(stickers).map((sticker) => {
-            return <StickerItem key={sticker.title} photo={sticker.photo} title={sticker.title} price={sticker.price}/>
+            return <StickerItem key={sticker.title} id={sticker.id} photo={sticker.photo} title={sticker.title} price={sticker.price}/>
           })
         }
       </div>

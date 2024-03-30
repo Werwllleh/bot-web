@@ -42,18 +42,24 @@
 }
 
 .sticker__footer {
-    margin: 7px 0 0 0;
-    width: 100%;
-    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 7px;
+    background-color: #f3f3f3;
+    transition: background-color .3s ease-in-out;
 }
+
+.sticker__footer_add {
+    background-color: #b9ffd2;
+}
+
 
 .sticker__counter {
     display: flex;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: #f3f3f3;
-    border-radius: 7px;
+    align-items: center;
 }
 
 .sticker__button_cart {
@@ -63,20 +69,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f3f3f3;
-    padding: 10px 5px;
-    border-radius: 7px;
-    transition: background-color .3s ease-in-out;
-}
 
-.sticker__button_cart:hover {
-    background-color: #e0e0e0;
 }
 
 .sticker__button_cart span {
     font-family: "Roboto", sans-serif;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 0.05em;
 }
 
@@ -91,9 +90,11 @@
     .stickers__grid {
         grid-template-columns: repeat(2, 170px);
     }
+
     .sticker__title {
         font-size: 14px;
     }
+
     .sticker__price {
         font-size: 12px;
     }

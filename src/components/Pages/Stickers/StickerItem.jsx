@@ -1,11 +1,11 @@
 import {useUsersStore} from "../../../services/store";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import s from "./Stickers.module.css";
 import {Image} from "antd";
 import {SITE} from "../../../utils/consts";
 import Counter from "../../Counter/Counter";
 
-const StickerItem = ({photo, title, price}) => {
+const StickerItem = ({id, photo, title, price}) => {
 
   const userCart = useUsersStore((state) => state.cart);
   const updateUserCart = useUsersStore((state) => state.updateCart);
@@ -22,14 +22,9 @@ const StickerItem = ({photo, title, price}) => {
       updateUserCart(updatedCart);
     } else {
       // Если товара нет в корзине, добавляем его с начальным количеством 1
-      updateUserCart([...userCart, {photo: photo, title: title, price: price, count: 1}]);
+      updateUserCart([...userCart, {id: id, photo: photo, title: title, price: price, count: 1}]);
     }
   };
-
-  // useEffect(() => {
-  //   console.log(userCart)
-  //
-  // }, [userCart]);
 
 
   return (
@@ -53,7 +48,7 @@ const StickerItem = ({photo, title, price}) => {
       <div className={s.sticker__info}>
         <h2 className={s.sticker__title}>{title}</h2>
         <span className={s.sticker__price}>{price}&nbsp;₽</span>
-        <div className={s.sticker__footer}>
+        <div className={`${s.sticker__footer} ${item ? s.sticker__footer_add : ''}` }>
           {!item ? (
             <button onClick={() => addToCart(title, price, photo)} className={s.sticker__button_cart}>
               <span>В корзину</span>

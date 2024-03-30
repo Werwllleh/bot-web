@@ -7,7 +7,7 @@ import Cars from './components/Pages/Cars/Cars';
 import Partners from './components/Pages/Partners/Partners';
 import SearchCar from './components/Pages/SearchCar/SearchCar';
 import {Routes, Route} from 'react-router-dom';
-import {usePartnersStore, useStickersStore, useUsersStore} from "./services/store";
+import {usePartnersStore, useProductsCountStore, useStickersStore, useUsersStore} from "./services/store";
 import Loader from "./components/Loader/Loader";
 import {getPartnersData, groupedPartnersFunc} from "./utils/partnersUtils";
 import Stickers from "./components/Pages/Stickers/Stickers";
@@ -15,6 +15,7 @@ import {getStickersData} from "./utils/stickersUtils";
 import {getUsersData} from "./utils/usersUtils";
 import BottomNavigationBar from "./components/BottomNavigationBar/BottomNavigationBar";
 import Cart from "./components/Pages/Cart/Cart";
+import {getProductsData} from "./utils/productsUtils";
 
 
 function App() {
@@ -30,8 +31,8 @@ function App() {
   const updateUsers = useUsersStore((state) => state.updateUsers);
   const updatePartners = usePartnersStore((state) => state.updatePartners);
   const updateStickers = useStickersStore((state) => state.updateStickers);
-
-
+  const updateProductStore = useProductsCountStore((state) => state.updateProductStore);
+  const updateProductStoreLoading = useProductsCountStore((state) => state.updateProductStoreLoading);
 
 
   useEffect(() => {
@@ -40,6 +41,7 @@ function App() {
   }, [tg])
 
   useEffect(() => {
+
     getUsersData()
       .then((res) => {
         setLoaderCars(true);
@@ -49,20 +51,6 @@ function App() {
         setLoaderCars(false);
       });
 
-  }, []);
-
-  useEffect(() => {
-    getPartnersData()
-      .then((res) => {
-        setLoaderPartners(true);
-        return updatePartners(res.data.partners)
-      })
-      .finally(() => {
-        setLoaderPartners(false);
-      });
-  }, []);
-
-  useEffect(() => {
     getStickersData()
       .then((res) => {
         setLoaderStickers(true);
@@ -72,14 +60,31 @@ function App() {
         setLoaderStickers(false);
       });
 
+    getPartnersData()
+      .then((res) => {
+        setLoaderPartners(true);
+        return updatePartners(res.data.partners)
+      })
+      .finally(() => {
+        setLoaderPartners(false);
+      });
+
+    getProductsData()
+      .then((res) => {
+        return updateProductStore(res.data)
+      })
+      .finally(() => {
+        updateProductStoreLoading(false);
+      });
+
   }, []);
+
 
   const currentUser = useUsersStore((state) => state.currentUser);
   const users = useUsersStore((state) => state.users);
   const partners = usePartnersStore((state) => state.partners);
   const stickers = useStickersStore((state) => state.stickers);
   const userCart = useUsersStore((state) => state.cart);
-
 
 
   const partnersSortedObject = groupedPartnersFunc(partners);
@@ -99,7 +104,7 @@ function App() {
                 <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
                 <Route path='/searchcar' element={<SearchCar data={users}/>}/>
                 <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
-                <Route path='/cart' element={<Cart cart={userCart} />}/>
+                <Route path='/cart' element={<Cart cart={userCart}/>}/>
               </Routes>
             </div>
           </div>
