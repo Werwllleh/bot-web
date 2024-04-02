@@ -174,13 +174,16 @@
 }
 
 .cart__footer_select_ant {
-  width: 100%;
-  max-width: 300px;
-  min-width: 250px;
+  width: 260px;
 }
 
 .ant-select-arrow {
   transition: transform .3s ease-in-out !important;
+}
+
+
+.ant-select-selection-item {
+  padding-inline-end: 0 !important;
 }
 
 .cart__footer_select_ant.ant-select-open .ant-select-arrow {
@@ -189,7 +192,7 @@
 
 .cart__footer_select_ant .ant-select-selector {
   border: 1px solid #f27814 !important;
-  padding: 0 20px !important;
+  padding: 0 10px !important;
 }
 
 .cart__footer_select_ant.ant-select-open .ant-select-selector {

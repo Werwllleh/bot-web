@@ -16,9 +16,13 @@ export const useUsersStore = create((set) => ({
   },
   users: [],
   cart: [],
+  selectedPlace: null,
+  available: false,
   updateCurrentUser: (data) => set(() => ({ currentUser: data })),
   updateUsers: (data) => set(() => ({ users: data })),
   updateCart: (data) => set(() => ({ cart: data })),
+  updateSelectedPlace: (data) => set(() => ({ selectedPlace: data })),
+  updateAvailableProducts: (data) => set(() => ({ available: data })),
 }))
 
 export const usePartnersStore = create((set) => ({

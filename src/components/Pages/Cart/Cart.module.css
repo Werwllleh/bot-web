@@ -8,6 +8,7 @@
     gap: 10px;
     max-height: 410px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .cart__items::-webkit-scrollbar {
     display: block;
@@ -44,7 +45,16 @@
     align-items: flex-start;
     gap: 20px;
     justify-content: space-between;
-    max-width: 500px;
+}
+
+.cart__footer_select {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cart__footer_select_title {
+
 }
 
 .cart__footer_left {
@@ -59,6 +69,15 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.cart__available {
+    display: block;
+    margin: 5px 0 0 0;
+    max-width: 500px;
+    font-weight: 300;
+    font-size: 14px;
+    color: #f27814;
 }
 
 .cart__total_count {
