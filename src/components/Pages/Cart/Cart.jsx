@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import s from './Cart.module.css';
 import Header from "../../Header/Header";
-import {checkAvailableProducts, getTotalSumCart} from "../../../utils/cartUtils";
+import {checkAvailable, getTotalSumCart} from "../../../utils/cartUtils";
 import CartItem from "../../CartItem/CartItem";
-import InventoryIcon from '@mui/icons-material/Inventory';
-import {Select} from "antd";
+import {Empty, Select} from "antd";
 import {SITE} from "../../../utils/consts";
 import axios from "axios";
 import {useProductsCountStore, useUsersStore} from "../../../services/store";
@@ -24,14 +23,14 @@ const Cart = ({cart}) => {
 
   const productStore = useProductsCountStore((state) => state.productStore);
 
+  useEffect(() => {
+    updateAvailable(checkAvailable(productStore, cart, selectedPlace))
+  }, [cart, available]);
+
 
   const handleChange = (value) => {
     updateSelectedPlace(value)
-    if (cart.length && selectedPlace) {
-      let filtered = productStore.filter((info) => info.value === value);
-      // Проверяем, есть ли все товары из корзины в наличии у продавца
-      updateAvailable(cart.every(item => filtered[0].products[item.id] >= item.count))
-    }
+    updateAvailable(checkAvailable(productStore, cart, value))
   };
 
 
@@ -75,8 +74,11 @@ const Cart = ({cart}) => {
                 <div className={s.cart__total_sum}><span>Итого:</span>&nbsp;{getTotalSumCart(cart).totalSum}&nbsp;₽
                 </div>
               </div>
-              <span className={s.cart__available}>{available ? 'В наличии' : 'По данном району продукция закончилась, выберите другой'}</span>
-              {cart.length && currentUser?.id && selectedPlace ? (
+              {selectedPlace !== null ? (
+                <span
+                  className={s.cart__available}>{available ? 'В наличии' : 'По данном району продукция закончилась, выберите другой'}</span>
+              ) : ''}
+              {cart.length && currentUser?.id && available ? (
                 <button onClick={sendOrderData} className={s.cart__button_order}>Оформить заказ</button>
               ) : null}
             </div>
@@ -85,7 +87,7 @@ const Cart = ({cart}) => {
               <Select
                 className="cart__footer_select_ant"
                 popupClassName="cart__footer_select_popup"
-                placeholder={selectedPlace === null && 'Район самовывоза'}
+                placeholder={"Район самовывоза"}
                 value={selectedPlace}
                 onChange={handleChange}
                 options={productStore}
@@ -103,8 +105,7 @@ const Cart = ({cart}) => {
         </>
       ) : (
         <div className={s.cart__empty}>
-          <span className={s.cart__empty_icon}><InventoryIcon/></span>
-          <p>Корзина пуста</p>
+          <Empty description={"Корзина пуста"}/>
         </div>
       )}
     </div>

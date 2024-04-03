@@ -1,6 +1,5 @@
 .cars_body {
     margin: 0 auto;
-    padding: 0 15px;
 }
 
 .title {
@@ -92,7 +91,5 @@
 }
 
 @media (max-width: 860px) {
-    .cars_body {
-        padding: 0 7px;
-    }
+
 }

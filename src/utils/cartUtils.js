@@ -1,4 +1,3 @@
-import {useProductsCountStore, useUsersStore} from "../services/store";
 
 
 export const getTotalSumCart = (cart) => {
@@ -10,4 +9,11 @@ export const getTotalSumCart = (cart) => {
     totalSum: 0,
     totalCount: 0
   });
+}
+
+export const checkAvailable = (availableProducts, currentCart, selectedPlace) => {
+  if (currentCart.length && selectedPlace) {
+    let filtered = availableProducts.filter((info) => info.value === selectedPlace);
+    return currentCart.every(item => filtered[0].products[item.id] >= item.count)
+  }
 }

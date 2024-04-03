@@ -4,6 +4,7 @@ import s from './Counter.module.css';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {useProductsCountStore, useUsersStore} from "../../services/store";
+import {checkAvailable} from "../../utils/cartUtils";
 
 const Counter = ({ product }) => {
   const userCart = useUsersStore((state) => state.cart);
@@ -17,21 +18,13 @@ const Counter = ({ product }) => {
 
   const updateAvailable = useUsersStore((state) => state.updateAvailableProducts);
 
-  const checkProducts = () => {
-    if (userCart.length && selectedPlace) {
-      let filtered = productStore.filter((info) => info.value === selectedPlace);
-      // Проверяем, есть ли все товары из корзины в наличии у продавца
-      updateAvailable(userCart.every(item => filtered[0].products[item.id] >= item.count))
-    }
-  }
-
   const addItem = () => {
     if (item) {
       const updatedCart = [...userCart];
       updatedCart[index].count += 1;
       updateUserCart(updatedCart);
     }
-    checkProducts()
+    updateAvailable(checkAvailable(productStore, userCart, selectedPlace))
   };
 
   const removeItem = () => {
@@ -43,7 +36,7 @@ const Counter = ({ product }) => {
       const filteredItems = userCart.filter(item => item.title !== product);
       updateUserCart(filteredItems);
     }
-    checkProducts()
+    updateAvailable(checkAvailable(productStore, userCart, selectedPlace))
   };
 
   return (
