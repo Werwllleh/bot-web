@@ -56,7 +56,7 @@ body {
     color: var(--tg-theme-text-color) !important;
     background: var(--tg-theme-bg-color) !important;
     font-size: 18px;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif !important;
 }
 
 .link {
