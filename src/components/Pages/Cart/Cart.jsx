@@ -25,7 +25,7 @@ const Cart = ({cart}) => {
   const [orderComment, setOrderComment] = useState('');
 
   const [phone, setPhone] = useState('');
-  const handleInputPhone = ({ target: { value } }) => setPhone(value);
+  const handleInputPhone = ({ target: { value } }) => setPhone(value.replace(/[\s_()]/g, ""));
 
 
 
@@ -43,19 +43,8 @@ const Cart = ({cart}) => {
     setOrderComment(e.currentTarget.value);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   const sendOrderData = () => {
-    if (currentUser.id && selectedPlace) {
+    try {
       axios
         .post(SITE + `api/order`, {
           orderData: {
@@ -69,12 +58,27 @@ const Cart = ({cart}) => {
           },
         })
         .then((res) => {
-          console.log(res);
+          console.log(res.status);
         });
-      setRequested(true);
-    } else {
-      alert('wtf')
+    } catch (e) {
+      console.log(e)
     }
+  };
+
+  const [isModalOrderOpen, setIsModalOrderOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOrderOpen(true);
+    console.log(phone.replace(/[ ()]/g, "").length)
+  };
+  const handleSend = () => {
+    if (currentUser.id && selectedPlace && phone.length === 12) {
+      setIsModalOrderOpen(false);
+      sendOrderData()
+    }
+
+  };
+  const handleCancel = () => {
+    setIsModalOrderOpen(false);
   };
 
 
@@ -134,7 +138,7 @@ const Cart = ({cart}) => {
         </div>
       )}
     </div>
-      <Modal title="Ваш заказ" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} cancelText={'Отмена'} okText={'Оформить заказ'}>
+      <Modal title="Ваш заказ" open={isModalOrderOpen} onOk={handleSend} onCancel={handleCancel} cancelText={'Отмена'} okText={'Оформить заказ'}>
         <ul className={s.order__items}>
           {cart.map((item) => {
             return (
