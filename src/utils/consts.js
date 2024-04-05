@@ -36,25 +36,7 @@ export const stickersTitles = {
     'vw_perl': ['Наклейка Volkswagen перламутр', 500],
 }
 
-export const places = [
-    {
-        value: '@all_lllll',
-        label: 'НЮР Чебоксары',
-    },
-    {
-        value: '@kris001k',
-        label: 'СЗР Чебоксары',
-    },
-    {
-        value: '@godok2005',
-        label: 'Новочебоксарск-Чебоксары',
-    },
-    {
-        value: '@BivaetITak',
-        label: 'Новочебоксарск-Чебоксары',
-    },
-    {
-        value: '@momcallsmeksu',
-        label: 'Новочебоксарск-Чебоксары',
-    }
-]
+export const userStatusValue = {
+    ADMIN: 'admin',
+    USER: 'user',
+}

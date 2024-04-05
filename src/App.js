@@ -16,6 +16,14 @@ import {getUsersData} from "./utils/usersUtils";
 import BottomNavigationBar from "./components/BottomNavigationBar/BottomNavigationBar";
 import Cart from "./components/Pages/Cart/Cart";
 import {getProductsData} from "./utils/productsUtils";
+import UpdateStickersData from "./components/Pages/UpdateStickresData/UpdateStickersData";
+import {Alert} from "antd";
+import {userStatusValue} from "./utils/consts";
+
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
 
 
 function App() {
@@ -28,6 +36,7 @@ function App() {
   const [loaderStickers, setLoaderStickers] = useState(true);
 
   const updateCurrentUser = useUsersStore((state) => state.updateCurrentUser);
+  const updateUserStatus = useUsersStore((state) => state.updateUserStatus);
   const updateUsers = useUsersStore((state) => state.updateUsers);
   const updatePartners = usePartnersStore((state) => state.updatePartners);
   const updateStickers = useStickersStore((state) => state.updateStickers);
@@ -35,10 +44,34 @@ function App() {
   const updateProductStoreLoading = useProductsCountStore((state) => state.updateProductStoreLoading);
 
 
+  const productsData = useProductsCountStore((state) => state.productStore);
+  const currentUser = useUsersStore((state) => state.currentUser);
+  const users = useUsersStore((state) => state.users);
+  const partners = usePartnersStore((state) => state.partners);
+  const stickers = useStickersStore((state) => state.stickers);
+  const userCart = useUsersStore((state) => state.cart);
+  const userStatus = useUsersStore((state) => state.userStatus);
+
+
   useEffect(() => {
     tg.ready();
     // updateCurrentUser(tg?.initDataUnsafe?.user)
+    updateCurrentUser({
+      allows_write_to_pm: true,
+      first_name: "Lesha",
+      id: 446012794,
+      language_code: "en",
+      last_name: "",
+      username: "all_lllll"
+    })
+
   }, [tg])
+
+  useEffect(() => {
+    const isAdmin = productsData.some(user => currentUser.id === Number(user.chatId));
+    const newUserStatus = isAdmin ? userStatusValue.ADMIN : userStatusValue.USER;
+    updateUserStatus(newUserStatus);
+  }, [userStatus, currentUser, productsData]);
 
   useEffect(() => {
 
@@ -80,43 +113,65 @@ function App() {
   }, []);
 
 
-  const currentUser = useUsersStore((state) => state.currentUser);
-  const users = useUsersStore((state) => state.users);
-  const partners = usePartnersStore((state) => state.partners);
-  const stickers = useStickersStore((state) => state.stickers);
-  const userCart = useUsersStore((state) => state.cart);
-
-
   const partnersSortedObject = groupedPartnersFunc(partners);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
     <>
-      {loaderCars && loaderPartners && loaderStickers ? (
-        <Loader/>
-      ) : (
-        <>
-          <div className="page">
-            <div className="container">
-              <Routes>
-                <Route index element={<Cars data={users}/>}/>
-                <Route path='/form' element={<Form/>}/>
-                <Route path='/form/change' element={<ChangeForm/>}/>
-                <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
-                <Route path='/searchcar' element={<SearchCar data={users}/>}/>
-                <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
-                <Route path='/cart' element={<Cart cart={userCart}/>}/>
-              </Routes>
-            </div>
-          </div>
-          {
-            location.pathname !== '/form' && location.pathname !== '/form/change' ? (
-              <div className="bottom-navbar">
-                <BottomNavigationBar cart={userCart}/>
-              </div>
-            ) : null
-          }
-        </>
-      )}
+      {
+        !currentUser.length ? (
+          <>
+            {loaderCars && loaderPartners && loaderStickers ? (
+              <Loader/>
+            ) : (
+              <>
+                <div className="page">
+                  <div className="container">
+                    <Routes>
+                      <Route index element={<Cars data={users}/>}/>
+                      <Route path='/form' element={<Form/>}/>
+                      <Route path='/form/change' element={<ChangeForm/>}/>
+                      <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
+                      <Route path='/searchcar' element={<SearchCar data={users}/>}/>
+                      <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
+                      <Route path='/update-stickers' element={<UpdateStickersData/>}/>
+                      <Route path='/cart' element={<Cart cart={userCart}/>}/>
+                    </Routes>
+                  </div>
+                </div>
+                {
+                  location.pathname !== '/form' && location.pathname !== '/form/change' ? (
+                    <div className="bottom-navbar">
+                      <BottomNavigationBar cart={userCart}/>
+                    </div>
+                  ) : null
+                }
+              </>
+            )}
+          </>
+        ) : (
+          <Alert
+            message="Упс... Вы неавторизованный пользователь"
+            description="Пожалуйся авторизуйтесь через телеграмм бота"
+            type="error"
+          />
+        )
+      }
     </>
   );
 }

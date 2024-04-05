@@ -6,19 +6,14 @@ export const useAppStore = create((set) => ({
 }))
 
 export const useUsersStore = create((set) => ({
-  currentUser: {
-    allows_write_to_pm: true,
-    first_name: "Lesha",
-    id: 446012794,
-    language_code: "en",
-    last_name: "",
-    username: "all_lllll"
-  },
+  currentUser: {},
+  userStatus: null,
   users: [],
   cart: [],
   selectedPlace: null,
   available: false,
   updateCurrentUser: (data) => set(() => ({ currentUser: data })),
+  updateUserStatus: (data) => set(() => ({ userStatus: data })),
   updateUsers: (data) => set(() => ({ users: data })),
   updateCart: (data) => set(() => ({ cart: data })),
   updateSelectedPlace: (data) => set(() => ({ selectedPlace: data })),
