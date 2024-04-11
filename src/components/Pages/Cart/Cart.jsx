@@ -4,14 +4,16 @@ import Header from "../../Header/Header";
 import {checkAvailable, getTotalSumCart} from "../../../utils/cartUtils";
 import CartItem from "../../CartItem/CartItem";
 import {Empty, Select, Input, Modal} from "antd";
-const { TextArea } = Input;
+
+const {TextArea} = Input;
 import InputMask from 'react-input-mask';
 import {SITE} from "../../../utils/consts";
 import axios from "axios";
 import {useProductsCountStore, useUsersStore} from "../../../services/store";
 
-const Cart = ({cart}) => {
+const Cart = () => {
 
+  const userCart = useUsersStore((state) => state.cart);
   const currentUser = useUsersStore((state) => state.currentUser);
   const productStore = useProductsCountStore((state) => state.productStore);
   const selectedPlace = useUsersStore((state) => state.selectedPlace);
@@ -19,24 +21,24 @@ const Cart = ({cart}) => {
 
   const updateSelectedPlace = useUsersStore((state) => state.updateSelectedPlace);
   const updateAvailable = useUsersStore((state) => state.updateAvailableProducts);
+  const updateCart = useUsersStore((state) => state.updateCart);
 
 
   const [requested, setRequested] = useState(false);
   const [orderComment, setOrderComment] = useState('');
 
   const [phone, setPhone] = useState('');
-  const handleInputPhone = ({ target: { value } }) => setPhone(value.replace(/[\s_()]/g, ""));
-
+  const handleInputPhone = ({target: {value}}) => setPhone(value.replace(/[\s_()]/g, ""));
 
 
   useEffect(() => {
-    updateAvailable(checkAvailable(productStore, cart, selectedPlace))
-  }, [cart, available]);
+    updateAvailable(checkAvailable(productStore, userCart, selectedPlace))
+  }, [userCart, available]);
 
 
   const handleChange = (value) => {
     updateSelectedPlace(value)
-    updateAvailable(checkAvailable(productStore, cart, value))
+    updateAvailable(checkAvailable(productStore, userCart, value))
   };
 
   const textAreaChange = (e) => {
@@ -50,16 +52,17 @@ const Cart = ({cart}) => {
           orderData: {
             phone: phone,
             user: currentUser,
-            cart: cart,
+            cart: userCart,
             selectedPlace: selectedPlace,
             comment: orderComment.length && orderComment,
-            cartTotalCount: getTotalSumCart(cart).totalCount,
-            cartTotalSum: getTotalSumCart(cart).totalSum,
+            cartTotalCount: getTotalSumCart(userCart).totalCount,
+            cartTotalSum: getTotalSumCart(userCart).totalSum,
           },
         })
         .then((res) => {
-          console.log(res.status);
+          console.log(res);
         });
+      updateCart([]);
     } catch (e) {
       console.log(e)
     }
@@ -68,7 +71,6 @@ const Cart = ({cart}) => {
   const [isModalOrderOpen, setIsModalOrderOpen] = useState(false);
   const showModal = () => {
     setIsModalOrderOpen(true);
-    console.log(phone.replace(/[ ()]/g, "").length)
   };
   const handleSend = () => {
     if (currentUser.id && selectedPlace && phone.length === 12) {
@@ -84,67 +86,70 @@ const Cart = ({cart}) => {
 
   return (
     <>
-    <div className={s.cart__body}>
-      <Header title={"Корзина"}/>
-      {cart.length ? (
-        <>
-          <ul className={s.cart__items}>
-            {cart.map((item) => {
-              return <CartItem key={item.title} title={item.title} photo={item.photo} count={item.count}
-                               price={item.price}/>
-            })}
-          </ul>
-          <div className="cart__comment">
-            <TextArea placeholder="Комментарий к заказу" allowClear onChange={textAreaChange}  />
-          </div>
-          <div className={s.cart__footer}>
-            <div className={s.cart__footer_left}>
-              <div className={s.cart__results}>
-                <div className={s.cart__total_count}>{getTotalSumCart(cart).totalCount}&nbsp;шт</div>
-                <div className={s.cart__total_sum}><span>Итого:</span>&nbsp;{getTotalSumCart(cart).totalSum}&nbsp;₽
+      <div className={s.cart__body}>
+        <Header title={"Корзина"}/>
+        {userCart.length ? (
+          <>
+            <ul className={s.cart__items}>
+              {userCart.map((item) => {
+                return <CartItem key={item.title} title={item.title} photo={item.photo} count={item.count}
+                                 price={item.price}/>
+              })}
+            </ul>
+            <div className="cart__comment">
+              <TextArea placeholder="Комментарий к заказу" allowClear onChange={textAreaChange}/>
+            </div>
+            <div className={s.cart__footer}>
+              <div className={s.cart__footer_left}>
+                <div className={s.cart__results}>
+                  <div className={s.cart__total_count}>{getTotalSumCart(userCart).totalCount}&nbsp;шт</div>
+                  <div className={s.cart__total_sum}>
+                    <span>Итого:</span>&nbsp;{getTotalSumCart(userCart).totalSum}&nbsp;₽
+                  </div>
                 </div>
+                {selectedPlace !== null ? (
+                  <span
+                    className={s.cart__available}>{available ? 'В наличии' : 'По данном району продукция закончилась, выберите другой'}</span>
+                ) : ''}
+                {userCart.length && currentUser?.id && available ? (
+                  <button onClick={showModal} className={s.cart__button_order}>Продолжить</button>
+                ) : null}
               </div>
-              {selectedPlace !== null ? (
-                <span
-                  className={s.cart__available}>{available ? 'В наличии' : 'По данном району продукция закончилась, выберите другой'}</span>
-              ) : ''}
-              {cart.length && currentUser?.id && available ? (
-                <button onClick={showModal} className={s.cart__button_order}>Продолжить</button>
-              ) : null}
+              <div className={s.cart__footer_right}>
+                <Select
+                  className="cart__footer_select_ant"
+                  popupClassName="cart__footer_select_popup"
+                  placeholder={"Район самовывоза"}
+                  value={selectedPlace}
+                  onChange={handleChange}
+                  options={productStore}
+                  optionLabelProp={"label"}
+                  optionRender={(option) => {
+                    return (
+                      <div className="select__place-item">
+                        {option?.data.value}
+                      </div>
+                    )
+                  }}
+                />
+              </div>
             </div>
-            <div className={s.cart__footer_right}>
-              <Select
-                className="cart__footer_select_ant"
-                popupClassName="cart__footer_select_popup"
-                placeholder={"Район самовывоза"}
-                value={selectedPlace}
-                onChange={handleChange}
-                options={productStore}
-                optionLabelProp={"label"}
-                optionRender={(option) => {
-                  return (
-                    <div className="select__place-item">
-                      {option?.data.value}
-                    </div>
-                  )
-                }}
-              />
-            </div>
+          </>
+        ) : (
+          <div className={s.cart__empty}>
+            <Empty description={"Корзина пуста"}/>
           </div>
-        </>
-      ) : (
-        <div className={s.cart__empty}>
-          <Empty description={"Корзина пуста"}/>
-        </div>
-      )}
-    </div>
-      <Modal title="Ваш заказ" open={isModalOrderOpen} onOk={handleSend} onCancel={handleCancel} cancelText={'Отмена'} okText={'Оформить заказ'}>
+        )}
+      </div>
+      <Modal title="Ваш заказ" open={isModalOrderOpen} onOk={handleSend} onCancel={handleCancel} cancelText={'Отмена'}
+             okText={'Оформить заказ'}>
         <ul className={s.order__items}>
-          {cart.map((item) => {
+          {userCart.map((item) => {
             return (
               <li key={item.title} className={s.order__item}>
                 <div className={s.order__item_body}>
-                  <img className={s.order__item_photo} src={`${SITE}api/image/stickers/${item.photo}`} alt={item.title}/>
+                  <img className={s.order__item_photo} src={`${SITE}api/image/stickers/${item.photo}`}
+                       alt={item.title}/>
                   <div className={s.order__item_info}>
                     <h5 className={s.order__item_title}>{item.title}</h5>
                     <div className={s.order__item_count}>
@@ -160,8 +165,8 @@ const Cart = ({cart}) => {
         </ul>
         <div className={s.order__footer}>
           <div className={s.cart__results}>
-            <div className={s.cart__total_count}>{getTotalSumCart(cart).totalCount}&nbsp;шт</div>
-            <div className={s.cart__total_sum}><span>Итого:</span>&nbsp;{getTotalSumCart(cart).totalSum}&nbsp;₽
+            <div className={s.cart__total_count}>{getTotalSumCart(userCart).totalCount}&nbsp;шт</div>
+            <div className={s.cart__total_sum}><span>Итого:</span>&nbsp;{getTotalSumCart(userCart).totalSum}&nbsp;₽
             </div>
           </div>
           <div className={s.order__phone}>

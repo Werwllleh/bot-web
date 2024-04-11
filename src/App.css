@@ -266,3 +266,25 @@
 .bottom-navbar__link .Mui-selected .MuiSvgIcon-root {
   fill: #ffffff;
 }
+
+.ant-drawer-content {
+  position: relative;
+}
+
+.stickers__drawer-btns {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px 10px 30px;
+}
+
+.stickers__drawer-btn-save {
+  max-width: 150px;
+  width: 100%;
+}

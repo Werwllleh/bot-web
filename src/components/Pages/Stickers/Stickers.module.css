@@ -79,6 +79,23 @@
     letter-spacing: 0.05em;
 }
 
+.stickers__admin_update {
+    position: fixed;
+    top: 0;
+    right: 40px;
+    bottom: 0;
+    margin: auto 0;
+    background: rgba(22, 119, 255, 0.71);
+    height: 45px;
+    width: 45px !important;
+}
+
+.stickers__admin_update svg {
+    width: 20px;
+    height: 20px;
+}
+
+
 @media (max-width: 768px) {
     .stickers__grid {
         grid-template-columns: repeat(2, 200px);
@@ -98,10 +115,34 @@
     .sticker__price {
         font-size: 12px;
     }
+    .stickers__admin_update {
+        right: 0;
+    }
 }
 
 @media (max-width: 375px) {
     .stickers__grid {
         grid-template-columns: repeat(2, 150px);
     }
+}
+
+.sticker__values {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sticker__value {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sticker__value h4 {
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.sticker__value h4 span {
+    font-weight: 300;
 }

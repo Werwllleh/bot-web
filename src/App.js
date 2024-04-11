@@ -150,7 +150,7 @@ function App() {
                       <Route path='/searchcar' element={<SearchCar data={users}/>}/>
                       <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
                       <Route path='/update-stickers' element={<UpdateStickersData/>}/>
-                      <Route path='/cart' element={<Cart cart={userCart}/>}/>
+                      <Route path='/cart' element={<Cart />}/>
                     </Routes>
                   </div>
                 </div>

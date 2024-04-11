@@ -34,6 +34,9 @@ export const stickersTitles = {
     'vw_color': ['Наклейка Volkswagen цветная', 300],
     'vw_gray': ['Наклейка Volkswagen серая', 500],
     'vw_perl': ['Наклейка Volkswagen перламутр', 500],
+    'audi_color': ['Наклейка Audi цветная', 300],
+    'audi_gray': ['Наклейка Audi серая', 500],
+    'audi_perl': ['Наклейка Audi перламутр', 500],
 }
 
 export const userStatusValue = {
