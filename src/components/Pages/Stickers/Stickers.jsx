@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../Header/Header";
 import s from "../Stickers/Stickers.module.css";
-import {stickersInfo} from "../../../utils/stickersUtils";
+import {stickersInfo, updateStickersData} from "../../../utils/stickersUtils";
 import StickerItem from "./StickerItem";
 import {Button, Drawer, Input, Space} from "antd";
 import {EditOutlined} from "@ant-design/icons";
@@ -40,6 +40,12 @@ const Stickers = ({stickers}) => {
   };
 
 
+  const sendUpdatedData = () => {
+    console.log(sellerProducts)
+    updateStickersData(sellerProducts)
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }
 
 
 
@@ -70,7 +76,7 @@ const Stickers = ({stickers}) => {
               extra={
                 <div className={'stickers__drawer-btns'}>
                   <Button onClick={onClose}>Отмена</Button>
-                  <Button className={'stickers__drawer-btn-save'} type="primary" onClick={onClose}>
+                  <Button className={'stickers__drawer-btn-save'} type="primary" onClick={sendUpdatedData}>
                     Сохранить
                   </Button>
                 </div>

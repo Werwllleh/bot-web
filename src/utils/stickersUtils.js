@@ -8,6 +8,17 @@ export const getStickersData = async () => {
   )
 }
 
+export const updateStickersData = async (data) => {
+  return (
+    await axios.post(`https://script.google.com/macros/s/AKfycbwTu6m3wl_ZHt1_MHMbdQFi18KsDSCAF-9tz4U_5EclwrUAXy5LiTBCdb9imwvUS7Ev5w/exec`, {
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  )
+}
+
 export const stickersInfo = (stickersArr) => {
 
   const stickersData = [];
