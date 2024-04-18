@@ -10,7 +10,7 @@ export const getStickersData = async () => {
 
 export const updateStickersData = async (chatId, data) => {
   return (
-    await axios.post(`${SITE}/api/stickers-update`, {
+    await axios.post(`${SITE}api/stickers-update`, {
       chatId: chatId,
       data: data,
     })

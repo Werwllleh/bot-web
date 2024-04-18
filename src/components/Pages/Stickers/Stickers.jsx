@@ -9,6 +9,7 @@ import {useProductsCountStore, useUsersStore} from "../../../services/store";
 import StickersValueInputs from "./StickersValueInput";
 import {stickersTitles} from "../../../utils/consts";
 import StickersValueInput from "./StickersValueInput";
+import {getProductsData} from "../../../utils/productsUtils";
 
 
 const Stickers = ({stickers}) => {
@@ -20,7 +21,8 @@ const Stickers = ({stickers}) => {
   const currentUser = useUsersStore((state) => state.currentUser);
   const productStore = useProductsCountStore((state) => state.productStore);
 
-  console.log(seller);
+  const updateProductStore = useProductsCountStore((state) => state.updateProductStore);
+
 
   useEffect(() => {
 
@@ -34,7 +36,12 @@ const Stickers = ({stickers}) => {
   }, [currentUser, productStore]);
 
 
+
   const showDrawer = () => {
+    getProductsData()
+      .then((res) => {
+        return updateProductStore(res.data)
+      })
     setOpen(true);
   };
   const onClose = () => {
@@ -44,9 +51,15 @@ const Stickers = ({stickers}) => {
 
   const sendUpdatedData = () => {
     if (seller && currentUser.id) {
-      updateStickersData(currentUser.id, [1,2,3,4,5,6,7,8,9])
+      updateStickersData(currentUser.id, [1,0,0,0,5,4,7,12,9])
         .then((response) => {
-          console.log(response);
+          if (response.status === 200) {
+            setOpen(false);
+            getProductsData()
+              .then((res) => {
+                return updateProductStore(res.data)
+              })
+          }
         })
     }
   }
