@@ -20,6 +20,8 @@ const Stickers = ({stickers}) => {
   const currentUser = useUsersStore((state) => state.currentUser);
   const productStore = useProductsCountStore((state) => state.productStore);
 
+  console.log(seller);
+
   useEffect(() => {
 
     const checkSeller = productStore.some(item => Number(item.chatId) === currentUser.id);
@@ -41,12 +43,13 @@ const Stickers = ({stickers}) => {
 
 
   const sendUpdatedData = () => {
-    console.log(sellerProducts)
-    updateStickersData(sellerProducts)
-      .then(response => response.json())
-      .then(data => console.log(data));
+    if (seller && currentUser.id) {
+      updateStickersData(currentUser.id, [1,2,3,4,5,6,7,8,9])
+        .then((response) => {
+          console.log(response);
+        })
+    }
   }
-
 
 
   return (
@@ -76,7 +79,7 @@ const Stickers = ({stickers}) => {
               extra={
                 <div className={'stickers__drawer-btns'}>
                   <Button onClick={onClose}>Отмена</Button>
-                  <Button className={'stickers__drawer-btn-save'} type="primary" onClick={sendUpdatedData}>
+                  <Button className={'stickers__drawer-btn-save'} type="primary" onClick={() => sendUpdatedData()}>
                     Сохранить
                   </Button>
                 </div>
