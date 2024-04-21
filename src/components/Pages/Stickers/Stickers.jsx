@@ -6,8 +6,6 @@ import StickerItem from "./StickerItem";
 import {Button, Drawer, Input, Space} from "antd";
 import {EditOutlined} from "@ant-design/icons";
 import {useProductsCountStore, useUsersStore} from "../../../services/store";
-import StickersValueInputs from "./StickersValueInput";
-import {stickersTitles} from "../../../utils/consts";
 import StickersValueInput from "./StickersValueInput";
 import {getProductsData} from "../../../utils/productsUtils";
 
@@ -17,6 +15,7 @@ const Stickers = ({stickers}) => {
   const [open, setOpen] = useState(false);
   const [seller, setSeller] = useState(false);
   const [sellerProducts, setSellerProducts] = useState([]);
+  const [defaultProducts, setDefaultProducts] = useState([]);
 
   const currentUser = useUsersStore((state) => state.currentUser);
   const productStore = useProductsCountStore((state) => state.productStore);
@@ -25,6 +24,8 @@ const Stickers = ({stickers}) => {
 
 
   useEffect(() => {
+
+    setDefaultProducts(productStore);
 
     const checkSeller = productStore.some(item => Number(item.chatId) === currentUser.id);
     setSeller(checkSeller);
@@ -44,26 +45,56 @@ const Stickers = ({stickers}) => {
       })
     setOpen(true);
   };
+
   const onClose = () => {
     setOpen(false);
   };
 
 
+  const handleInputChange = (index, newValue) => {
+    // Создаем копию объекта sellerProducts
+    const updatedProductStore = [...productStore];
+    const currentUserProduct = updatedProductStore.find(item => Number(item.chatId) === Number(currentUser.id));
+
+    if (currentUserProduct) {
+      // Обновляем значение продукта по индексу
+      const productKeys = Object.keys(currentUserProduct.products);
+      if (index >= 0 && index < productKeys.length) {
+        const productKey = productKeys[index];
+        currentUserProduct.products[productKey] = Number(newValue);
+      } else {
+        console.error('Индекс выходит за пределы диапазона свойств в products');
+      }
+    } else {
+      console.error('Продукт не найден для текущего пользователя');
+    }
+
+    updateProductStore(updatedProductStore);
+
+  };
+
+
   const sendUpdatedData = () => {
+    setOpen(false);
+    const data = Object.values(productStore.filter(item => Number(item.chatId) === currentUser.id)[0].products)
     if (seller && currentUser.id) {
-      updateStickersData(currentUser.id, [1,0,0,0,5,4,7,12,9])
-        .then((response) => {
-          if (response.status === 200) {
-            setOpen(false);
-            getProductsData()
-              .then((res) => {
-                return updateProductStore(res.data)
-              })
-          }
-        })
+      console.log(data);
+      // updateStickersData(currentUser.id, Object.values(sellerProducts))
+      //   .then((response) => {
+      //     // Обработка успешного ответа
+      //   })
+      //   .catch((error) => {
+      //     // Обработка ошибки
+      //   });
     }
   }
 
+  const cancelChange = () => {
+    setOpen(false);
+    console.log(defaultProducts.filter(item => Number(item.chatId) === currentUser.id)[0].products)
+    console.log(sellerProducts);
+    updateProductStore(defaultProducts);
+  }
 
   return (
     <>
@@ -91,8 +122,8 @@ const Stickers = ({stickers}) => {
               open={open}
               extra={
                 <div className={'stickers__drawer-btns'}>
-                  <Button onClick={onClose}>Отмена</Button>
-                  <Button className={'stickers__drawer-btn-save'} type="primary" onClick={() => sendUpdatedData()}>
+                  <Button onClick={cancelChange}>Отмена</Button>
+                  <Button className={'stickers__drawer-btn-save'} type="primary" onClick={sendUpdatedData}>
                     Сохранить
                   </Button>
                 </div>
@@ -100,8 +131,8 @@ const Stickers = ({stickers}) => {
             >
               <div className={s.sticker__values}>
                 {
-                  Object.entries(sellerProducts).map((sticker) => {
-                    return <StickersValueInput key={sticker[0]} value={sticker}/>
+                  Object.entries(sellerProducts).map((sticker, index) => {
+                    return <StickersValueInput onInputChange={(index, newValue) => handleInputChange(index, newValue)} key={sticker[0]} sellerProducts={sellerProducts} index={index} value={sticker} />
                   })
                 }
               </div>
