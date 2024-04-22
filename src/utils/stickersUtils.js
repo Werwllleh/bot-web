@@ -40,3 +40,7 @@ export const stickersInfo = (stickersArr) => {
   return stickersData;
 
 }
+
+export const getSellerStickersCount = (array, currentId) => {
+  return array?.filter(item => Number(item.chatId) === currentId)[0]
+}

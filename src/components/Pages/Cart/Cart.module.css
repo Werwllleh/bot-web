@@ -126,6 +126,23 @@
     flex-direction: column;
     gap: 5px;
     margin: 20px 0 0 0 !important;
+    max-height: 200px;
+    overflow-x: scroll;
+    padding: 0 4px 0 0 !important;
+}
+
+.order__items::-webkit-scrollbar {
+    display: block;
+    width: 2px;
+}
+
+.order__items::-webkit-scrollbar-thumb {
+    background-color: #f29114;
+    border-radius: 10px;
+}
+
+.order__items::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 .order__item {

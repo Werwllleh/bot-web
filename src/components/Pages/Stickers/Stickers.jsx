@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../Header/Header";
 import s from "../Stickers/Stickers.module.css";
-import {stickersInfo, updateStickersData} from "../../../utils/stickersUtils";
+import {getSellerStickersCount, stickersInfo, updateStickersData} from "../../../utils/stickersUtils";
 import StickerItem from "./StickerItem";
 import {Button, Drawer, Input, Space} from "antd";
 import {EditOutlined} from "@ant-design/icons";
@@ -15,6 +15,7 @@ const Stickers = ({stickers}) => {
   const [open, setOpen] = useState(false);
   const [seller, setSeller] = useState(false);
   const [sellerProducts, setSellerProducts] = useState([]);
+
   const [defaultProducts, setDefaultProducts] = useState([]);
 
   const currentUser = useUsersStore((state) => state.currentUser);
@@ -25,24 +26,19 @@ const Stickers = ({stickers}) => {
 
   useEffect(() => {
 
-    setDefaultProducts(productStore);
-
-    const checkSeller = productStore.some(item => Number(item.chatId) === currentUser.id);
+    const checkSeller = getSellerStickersCount(productStore, currentUser.id);
     setSeller(checkSeller);
 
     if (checkSeller) {
-      setSellerProducts(productStore.filter(item => Number(item.chatId) === currentUser.id)[0].products)
+      setSellerProducts(getSellerStickersCount(productStore, currentUser.id)?.products)
     }
 
   }, [currentUser, productStore]);
 
 
 
+
   const showDrawer = () => {
-    getProductsData()
-      .then((res) => {
-        return updateProductStore(res.data)
-      })
     setOpen(true);
   };
 
@@ -76,24 +72,23 @@ const Stickers = ({stickers}) => {
 
   const sendUpdatedData = () => {
     setOpen(false);
-    const data = Object.values(productStore.filter(item => Number(item.chatId) === currentUser.id)[0].products)
+    const data = Object.values(getSellerStickersCount(productStore, currentUser.id)?.products)
+
     if (seller && currentUser.id) {
-      console.log(data);
-      // updateStickersData(currentUser.id, Object.values(sellerProducts))
-      //   .then((response) => {
-      //     // Обработка успешного ответа
-      //   })
-      //   .catch((error) => {
-      //     // Обработка ошибки
-      //   });
+
+      updateStickersData(currentUser.id, data)
+        .then((response) => {
+          // Обработка успешного ответа
+        })
+        .catch((error) => {
+          // Обработка ошибки
+        });
     }
   }
 
   const cancelChange = () => {
     setOpen(false);
-    console.log(defaultProducts.filter(item => Number(item.chatId) === currentUser.id)[0].products)
-    console.log(sellerProducts);
-    updateProductStore(defaultProducts);
+    // updateProductStore(defaultProducts);
   }
 
   return (
