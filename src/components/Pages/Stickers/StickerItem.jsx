@@ -4,7 +4,7 @@ import s from "./Stickers.module.css";
 import {Image} from "antd";
 import {SITE} from "../../../utils/consts";
 import Counter from "../../Counter/Counter";
-import {checkAvailable} from "../../../utils/cartUtils";
+
 
 
 const StickerItem = ({id, photo, title, price}) => {

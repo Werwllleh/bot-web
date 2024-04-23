@@ -16,8 +16,7 @@ import {getUsersData} from "./utils/usersUtils";
 import BottomNavigationBar from "./components/BottomNavigationBar/BottomNavigationBar";
 import Cart from "./components/Pages/Cart/Cart";
 import {getProductsData} from "./utils/productsUtils";
-import UpdateStickersData from "./components/Pages/UpdateStickresData/UpdateStickersData";
-import {Alert} from "antd";
+import {Alert, Result} from "antd";
 import {userStatusValue} from "./utils/consts";
 
 import Backdrop from '@mui/material/Backdrop';
@@ -55,20 +54,20 @@ function App() {
 
   useEffect(() => {
     tg.ready();
-    // updateCurrentUser(tg?.initDataUnsafe?.user)
-    updateCurrentUser({
-      allows_write_to_pm: true,
-      first_name: "Lesha",
-      id: 446012794,
-      language_code: "en",
-      last_name: "",
-      username: "all_lllll"
-    })
+    updateCurrentUser(tg?.initDataUnsafe?.user)
+    // updateCurrentUser({
+    //   allows_write_to_pm: true,
+    //   first_name: "Lesha",
+    //   id: 446012794,
+    //   language_code: "en",
+    //   last_name: "",
+    //   username: "all_lllll"
+    // })
 
   }, [tg])
 
   useEffect(() => {
-    const isAdmin = productsData.some(user => currentUser.id === Number(user.chatId));
+    const isAdmin = productsData.some(user => currentUser?.id === Number(user.chatId));
     const newUserStatus = isAdmin ? userStatusValue.ADMIN : userStatusValue.USER;
     updateUserStatus(newUserStatus);
   }, [userStatus, currentUser, productsData]);
@@ -102,11 +101,6 @@ function App() {
         setLoaderPartners(false);
       });
 
-
-
-  }, []);
-
-  useEffect(() => {
     getProductsData()
       .then((res) => {
         return updateProductStore(res.data)
@@ -114,6 +108,7 @@ function App() {
       .finally(() => {
         updateProductStoreLoading(false);
       });
+
 
   }, []);
 
@@ -124,7 +119,7 @@ function App() {
   return (
     <>
       {
-        !currentUser.length ? (
+        currentUser !== undefined && currentUser !== null ? (
           <>
             {loaderCars && loaderPartners && loaderStickers ? (
               <Loader/>
@@ -139,8 +134,7 @@ function App() {
                       <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
                       <Route path='/searchcar' element={<SearchCar data={users}/>}/>
                       <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
-                      <Route path='/update-stickers' element={<UpdateStickersData/>}/>
-                      <Route path='/cart' element={<Cart />}/>
+                      <Route path='/cart' element={<Cart/>}/>
                     </Routes>
                   </div>
                 </div>
@@ -155,10 +149,14 @@ function App() {
             )}
           </>
         ) : (
-          <Alert
-            message="Упс... Вы неавторизованный пользователь"
-            description="Пожалуйся авторизуйтесь через телеграмм бота"
-            type="error"
+          <Result
+            status="403"
+            title="403"
+            subTitle={
+              <>
+                Упс... Вы неавторизованный пользователь, используйте <a className={"ant-result__invite"} target={"_blank"} href={"https://t.me/VW21ClubBot"}>Telegram-bot</a>
+              </>
+            }
           />
         )
       }
