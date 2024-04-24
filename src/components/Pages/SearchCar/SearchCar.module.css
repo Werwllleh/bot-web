@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--tg-theme-text-color) !important;
+  color: inherit !important;
 }
 
 .cards {
@@ -37,7 +37,7 @@
   font-weight: 600;
   text-align: center;
   padding: 15px 0;
-  color: var(--tg-theme-text-color) !important;
+  color: inherit !important;
 }
 
 .input {
@@ -94,7 +94,7 @@
 }
 
 .list {
-  color: var(--tg-theme-text-color) !important;
+  color: inherit !important;
   font-weight: 300;
   font-size: 20px;
 }
@@ -130,7 +130,7 @@
 }
 
 .notFoundImg p {
-  color: var(--tg-theme-text-color) !important;
+  color: inherit !important;
   font-weight: 300;
   font-size: 26px;
 }
