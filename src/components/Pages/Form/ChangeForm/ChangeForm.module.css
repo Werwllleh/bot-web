@@ -3,6 +3,13 @@
   padding: 0 15px;
 }
 
+.form__body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
 .search_body {
   margin: 0 auto;
   padding: 0 10px;
@@ -10,13 +17,6 @@
 
 .result_body {
   padding: 30px 0;
-}
-
-.title {
-  font-weight: 600;
-  text-align: center;
-  padding: 15px 0;
-  color: var(--tg-theme-text-color) !important;
 }
 
 .input {
@@ -30,7 +30,6 @@
   -webkit-box-shadow: 0 0 5px rgba(205, 205, 205, 0.676);
   font-weight: 600;
   color: rgb(79, 79, 79);
-  margin: 15px 0 0 0;
 }
 
 .input.error {
@@ -59,7 +58,6 @@
 }
 
 .list {
-  color: var(--tg-theme-text-color) !important;
   font-weight: 300;
   font-size: 20px;
 }
@@ -93,15 +91,14 @@
 }
 
 .notFoundImg p {
-  color: var(--tg-theme-text-color) !important;
   font-weight: 300;
   font-size: 26px;
 }
 
 .select_body {
-  margin: 15px 0;
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
 .select_field {
@@ -156,14 +153,27 @@
 }
 
 .btnChangeForm {
-  display: none;
-  border: 1px solid var(--tg-theme-bg-color) !important;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  border: 1px solid #ececec !important;
   outline: none;
   box-shadow: 0 0 5px rgb(205 205 205 / 68%);
   border-radius: 5px;
   padding: 10px 7px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  color: #333333;
+  transition: all .3s ease-in-out;
 }
 
 .btnChangeForm.active {
-  display: block;
+  pointer-events: all;
+  opacity: 1;
+  visibility: visible;
+  border: 1px solid #248d00 !important;
+  background-color: #248d00;
+  color: #ffffff;
 }

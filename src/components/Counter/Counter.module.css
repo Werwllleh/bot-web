@@ -13,8 +13,12 @@
     padding: 5px;
 }
 
-.counter__button:hover {
-    background-color: rgba(243, 243, 243, 0.55);
+.counter__button svg {
+    transition: transform .2s linear;
+}
+
+.counter__button:hover svg {
+    transform: scale(1.1);
 }
 
 

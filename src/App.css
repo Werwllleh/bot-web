@@ -353,3 +353,31 @@
   font-size: 16px;
   letter-spacing: 0.05em;
 }
+
+.ant-select {
+  box-shadow: 0 0 5px rgba(205, 205, 205, 0.676) !important;
+  border-radius: 5px !important;
+  border: 1px solid rgba(205, 205, 205, 0.676) !important;
+  background-color: #ffffff;
+}
+
+.ant-select-selector {
+  padding: 4px 7px !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600;
+  color: rgb(79, 79, 79);
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.ant-select-single {
+  font-size: 16px !important;
+  height: auto !important;
+}
+
+.ant-select-selection-item {
+  font-weight: 600 !important;
+  color: rgb(79, 79, 79) !important;
+}

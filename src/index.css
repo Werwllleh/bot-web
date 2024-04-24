@@ -53,20 +53,21 @@ html {
 }
 
 body {
-    color: var(--tg-theme-text-color) !important;
-    background: var(--tg-theme-bg-color) !important;
+    color: #333333;
+    /*color: var(--tg-theme-text-color) !important;*/
+    /*background: var(--tg-theme-bg-color) !important;*/
     font-size: 18px;
     font-family: "Roboto", sans-serif !important;
 }
 
 .link {
-    color: var(--tg-theme-link-color);
+    /*color: var(--tg-theme-link-color);*/
 }
 
 .button {
     font-family: inherit;
-    background: var(--tg-theme-button-color) !important;
-    color: var(--tg-theme-button-text-color) !important;
+    /*background: var(--tg-theme-button-color) !important;*/
+    /*color: var(--tg-theme-button-text-color) !important;*/
     border: none;
     font-size: 18px;
 }

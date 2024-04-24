@@ -49,6 +49,7 @@
     border-radius: 7px;
     background-color: #f3f3f3;
     transition: background-color .3s ease-in-out;
+    overflow: hidden;
 }
 
 .sticker__footer_add {
