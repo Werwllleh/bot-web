@@ -9,9 +9,16 @@ import {useProductsCountStore, useUsersStore} from "../../../services/store";
 import StickersValueInput from "./StickersValueInput";
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
+import useTelegram from "../../../hooks/useTelegram";
 
 
 const Stickers = ({stickers}) => {
+
+  const {tg} = useTelegram();
+
+  useEffect(() => {
+    tg.expand();
+  }, []);
 
   const [open, setOpen] = useState(false);
   const [seller, setSeller] = useState(false);
@@ -130,7 +137,7 @@ const Stickers = ({stickers}) => {
     <>
       {contextHolder}
       <div className={s.stickers__body}>
-        <Header title={"Аттрибутика клуба"}/>
+        <Header title={"Атрибутика клуба"}/>
         <div className={s.stickers__grid}>
           {
             stickersInfo(stickers).map((sticker) => {
@@ -147,7 +154,7 @@ const Stickers = ({stickers}) => {
             <Drawer
               title="Обновить кол-во наклеек"
               placement={'left'}
-              width={400}
+              width={350}
               closable={false}
               onClose={onClose}
               open={open}

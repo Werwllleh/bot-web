@@ -9,8 +9,15 @@ import InputMask from 'react-input-mask';
 import {SITE} from "../../../utils/consts";
 import axios from "axios";
 import {useProductsCountStore, useUsersStore} from "../../../services/store";
+import useTelegram from "../../../hooks/useTelegram";
 
 const Cart = () => {
+
+  const {tg} = useTelegram();
+
+  useEffect(() => {
+    tg.expand();
+  }, []);
 
   const userCart = useUsersStore((state) => state.cart);
   const currentUser = useUsersStore((state) => state.currentUser);
@@ -22,6 +29,7 @@ const Cart = () => {
   const updateAvailable = useUsersStore((state) => state.updateAvailableProducts);
   const updateCart = useUsersStore((state) => state.updateCart);
 
+  const [sellerChatId, setSellerChatId] = useState(null);
   const [orderComment, setOrderComment] = useState('');
 
   const [phone, setPhone] = useState('');
@@ -66,6 +74,7 @@ const Cart = () => {
       axios
         .post(SITE + `api/order`, {
           orderData: {
+            sellerChatId: Number(productStore.filter((item) => item.value === selectedPlace)[0].chatId),
             phone: phone,
             user: currentUser,
             cart: userCart,

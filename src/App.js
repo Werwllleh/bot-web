@@ -16,13 +16,8 @@ import {getUsersData} from "./utils/usersUtils";
 import BottomNavigationBar from "./components/BottomNavigationBar/BottomNavigationBar";
 import Cart from "./components/Pages/Cart/Cart";
 import {getProductsData} from "./utils/productsUtils";
-import {Alert, Result} from "antd";
+import {Result} from "antd";
 import {userStatusValue} from "./utils/consts";
-
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 
 
 function App() {
