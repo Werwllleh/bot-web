@@ -309,6 +309,7 @@
   flex-direction: column;
   height: 100dvh;
   justify-content: center;
+  padding: 10px 20px;
 }
 
 .ant-result .ant-result-image {
