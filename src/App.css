@@ -297,6 +297,7 @@
   justify-content: center;
   gap: 15px;
   padding: 20px 10px 30px;
+  background-color: #ffffff;
 }
 
 .stickers__drawer-btn-save {

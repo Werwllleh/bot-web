@@ -111,7 +111,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    background: none !important;
+    color: #333333 !important;
 }
 
 .sticker__button_cart span {
@@ -119,6 +120,7 @@
     font-weight: 300;
     font-size: 16px;
     letter-spacing: 0.05em;
+    color: #333333 !important;
 }
 
 @media (max-width: 550px) {
@@ -181,6 +183,25 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+@media (max-width: 550px) {
+    max-height: 380px;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 3px 0 0;
+}
+
+.sticker__values::-webkit-scrollbar {
+    display: block;
+    width: 2px;               /* ширина scrollbar */
+}
+.sticker__values::-webkit-scrollbar-track {
+    background: #d5d5d5;        /* цвет дорожки */
+}
+.sticker__values::-webkit-scrollbar-thumb {
+    background-color: #1677FF;    /* цвет плашки */
+    border-radius: 7px;       /* закругления плашки */
 }
 
 .sticker__value {

@@ -11,9 +11,12 @@
     transition: background-color .3s ease-in-out;
     border-radius: 50%;
     padding: 5px;
+    background: none !important;
+
 }
 
 .counter__button svg {
+    fill: #5b4d4d !important;
     transition: transform .2s linear;
 }
 

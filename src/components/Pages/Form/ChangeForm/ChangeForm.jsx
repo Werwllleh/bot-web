@@ -185,8 +185,7 @@ const ChangeForm = () => {
             disabled={isDisabled}
             onClick={sendChangedData}
             className={
-              // isDisabled ? s.btnChangeForm : s.btnChangeForm + " " + s.active
-              s.btnChangeForm + " " + s.active
+              isDisabled ? s.btnChangeForm : s.btnChangeForm + " " + s.active
             }
             title={"Отправить данные"}
           />

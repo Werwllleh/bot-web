@@ -54,15 +54,15 @@ function App() {
 
   useEffect(() => {
     tg.ready();
-    // updateCurrentUser(tg?.initDataUnsafe?.user)
-    updateCurrentUser({
-      allows_write_to_pm: true,
-      first_name: "Lesha",
-      id: 446012794,
-      language_code: "en",
-      last_name: "",
-      username: "all_lllll"
-    })
+    updateCurrentUser(tg?.initDataUnsafe?.user)
+    // updateCurrentUser({
+    //   allows_write_to_pm: true,
+    //   first_name: "Lesha",
+    //   id: 446012794,
+    //   language_code: "en",
+    //   last_name: "",
+    //   username: "all_lllll"
+    // })
 
   }, [tg])
 

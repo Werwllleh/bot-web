@@ -53,7 +53,8 @@ html {
 }
 
 body {
-    color: #333333;
+    color: #333333 !important;
+    background-color: #ffffff !important;
     /*color: var(--tg-theme-text-color) !important;*/
     /*background: var(--tg-theme-bg-color) !important;*/
     font-size: 18px;
