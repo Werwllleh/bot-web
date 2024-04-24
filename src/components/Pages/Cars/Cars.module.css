@@ -28,6 +28,18 @@
     align-items: center;
 }
 
+.cars_grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+@media (max-width: 550px) {
+    .cars_grid {
+        gap: 0px;
+    }
+}
+
 .image {
     cursor: pointer;
     max-width: 150px;

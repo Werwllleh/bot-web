@@ -54,15 +54,15 @@ function App() {
 
   useEffect(() => {
     tg.ready();
-    updateCurrentUser(tg?.initDataUnsafe?.user)
-    // updateCurrentUser({
-    //   allows_write_to_pm: true,
-    //   first_name: "Lesha",
-    //   id: 446012794,
-    //   language_code: "en",
-    //   last_name: "",
-    //   username: "all_lllll"
-    // })
+    // updateCurrentUser(tg?.initDataUnsafe?.user)
+    updateCurrentUser({
+      allows_write_to_pm: true,
+      first_name: "Lesha",
+      id: 446012794,
+      language_code: "en",
+      last_name: "",
+      username: "all_lllll"
+    })
 
   }, [tg])
 
@@ -126,17 +126,15 @@ function App() {
             ) : (
               <>
                 <div className="page">
-                  <div className="container">
-                    <Routes>
-                      <Route index element={<Cars data={users}/>}/>
-                      <Route path='/form' element={<Form/>}/>
-                      <Route path='/form/change' element={<ChangeForm/>}/>
-                      <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
-                      <Route path='/searchcar' element={<SearchCar data={users}/>}/>
-                      <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
-                      <Route path='/cart' element={<Cart/>}/>
-                    </Routes>
-                  </div>
+                  <Routes>
+                    <Route index element={<Cars data={users}/>}/>
+                    <Route path='/form' element={<Form/>}/>
+                    <Route path='/form/change' element={<ChangeForm/>}/>
+                    <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
+                    <Route path='/searchcar' element={<SearchCar data={users}/>}/>
+                    <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
+                    <Route path='/cart' element={<Cart/>}/>
+                  </Routes>
                 </div>
                 {
                   location.pathname !== '/form' && location.pathname !== '/form/change' ? (

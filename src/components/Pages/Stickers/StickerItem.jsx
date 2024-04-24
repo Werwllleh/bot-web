@@ -7,17 +7,13 @@ import Counter from "../../Counter/Counter";
 
 
 
-const StickerItem = ({id, photo, title, price}) => {
+const StickerItem = ({id, photo, title, price, ozon}) => {
 
   const userCart = useUsersStore((state) => state.cart);
   const updateUserCart = useUsersStore((state) => state.updateCart);
 
   const index = userCart.findIndex(el => el.title === title);
   const item = userCart.find(el => el.title === title);
-
-  const productStore = useProductsCountStore((state) => state.productStore);
-  const selectedPlace = useUsersStore((state) => state.selectedPlace);
-  const updateAvailable = useUsersStore((state) => state.updateAvailableProducts);
 
   const addToCart = (id, title, price, photo) => {
     // Находим индекс товара в корзине (если он есть)
@@ -62,6 +58,7 @@ const StickerItem = ({id, photo, title, price}) => {
             </button>
           ) : <div className={s.sticker__counter}><Counter product={title}/></div> }
         </div>
+        {ozon ? <a className={s.sticker__ozon} target={"_blank"} href={ozon}>Купить на OZON</a> : <a className={s.sticker__ozon}>Скоро</a>}
       </div>
     </div>
   )

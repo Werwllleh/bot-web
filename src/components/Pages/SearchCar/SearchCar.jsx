@@ -62,9 +62,9 @@ const SearchCar = ({data}) => {
               <Swiper
                 centeredSlides={true}
                 breakpoints={{
-                  320: {
-                    slidesPerView: 1.25,
-                    spaceBetween: 20
+                  300: {
+                    slidesPerView: 1,
+                    spaceBetween: 10
                   },
                   450: {
                     slidesPerView: 1.5,

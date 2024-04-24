@@ -31,7 +31,8 @@ export const stickersInfo = (stickersArr) => {
           id: title,
           photo: itemFile,
           title: item[1][0],
-          price: item[1][1]
+          price: item[1][1],
+          ozon: item[1][2]
         })
       }
     });

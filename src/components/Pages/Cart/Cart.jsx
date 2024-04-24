@@ -3,8 +3,7 @@ import s from './Cart.module.css';
 import Header from "../../Header/Header";
 import {checkAvailable, getTotalSumCart} from "../../../utils/cartUtils";
 import CartItem from "../../CartItem/CartItem";
-import {Empty, Select, Input, Modal} from "antd";
-
+import {Empty, Select, Input, Modal, notification} from "antd";
 const {TextArea} = Input;
 import InputMask from 'react-input-mask';
 import {SITE} from "../../../utils/consts";
@@ -23,12 +22,29 @@ const Cart = () => {
   const updateAvailable = useUsersStore((state) => state.updateAvailableProducts);
   const updateCart = useUsersStore((state) => state.updateCart);
 
-
-  const [requested, setRequested] = useState(false);
   const [orderComment, setOrderComment] = useState('');
 
   const [phone, setPhone] = useState('');
   const handleInputPhone = ({target: {value}}) => setPhone(value.replace(/[\s_()]/g, ""));
+
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type) => {
+    if (type === 'success') {
+      api[type]({
+        message: 'Заявка отправлена',
+        description:
+          'Спасибо за поддержку 🤗',
+      });
+    }
+    if (type === 'error') {
+      api[type]({
+        message: 'Введите номер телефона',
+        description:
+          'Либо убедитесь в правильности ввода',
+      });
+    }
+  };
 
 
   useEffect(() => {
@@ -59,9 +75,6 @@ const Cart = () => {
             cartTotalSum: getTotalSumCart(userCart).totalSum,
           },
         })
-        .then((res) => {
-          console.log(res);
-        });
       updateCart([]);
     } catch (e) {
       console.log(e)
@@ -75,7 +88,10 @@ const Cart = () => {
   const handleSend = () => {
     if (currentUser.id && selectedPlace && phone.length === 12) {
       setIsModalOrderOpen(false);
-      sendOrderData()
+      sendOrderData();
+      openNotificationWithIcon('success');
+    } else {
+      openNotificationWithIcon('error');
     }
 
   };
@@ -86,10 +102,11 @@ const Cart = () => {
 
   return (
     <>
+      {contextHolder}
       <div className={s.cart__body}>
         <Header title={"Корзина"}/>
         {userCart.length ? (
-          <>
+          <div className="container">
             <ul className={s.cart__items}>
               {userCart.map((item) => {
                 return <CartItem key={item.title} title={item.title} photo={item.photo} count={item.count}
@@ -134,7 +151,7 @@ const Cart = () => {
                 />
               </div>
             </div>
-          </>
+          </div>
         ) : (
           <div className={s.cart__empty}>
             <Empty description={"Корзина пуста"}/>

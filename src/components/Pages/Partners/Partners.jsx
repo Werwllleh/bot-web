@@ -16,11 +16,13 @@ const Partners = ({data}) => {
 
 
   return (
-    <div className={s.partners_body}>
-      <Header title={"Партнеры клуба"}/>
-      <div className={s.content_body}>
-        <div className="content_accordion">
-          <Accordion data={data}/>
+    <div className="container">
+      <div className={s.partners_body}>
+        <Header title={"Партнеры клуба"}/>
+        <div className={s.content_body}>
+          <div className="content_accordion">
+            <Accordion data={data}/>
+          </div>
         </div>
       </div>
     </div>

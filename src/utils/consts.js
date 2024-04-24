@@ -28,15 +28,15 @@ export const cars = {
 }
 
 export const stickersTitles = {
-    'sk_color': ['Наклейка Skoda цветная', 300],
-    'sk_gray': ['Наклейка Skoda серая', 500],
-    'sk_perl': ['Наклейка Skoda перламутр', 500],
-    'vw_color': ['Наклейка Volkswagen цветная', 300],
-    'vw_gray': ['Наклейка Volkswagen серая', 500],
-    'vw_perl': ['Наклейка Volkswagen перламутр', 500],
-    'audi_color': ['Наклейка Audi цветная', 300],
-    'audi_gray': ['Наклейка Audi серая', 500],
-    'audi_perl': ['Наклейка Audi перламутр', 500],
+    'sk_color': ['Наклейка Skoda цветная', 300, 'https://ozon.ru/t/39jRKjA'],
+    'sk_gray': ['Наклейка Skoda антихром', 500, 'https://ozon.ru/t/PgdrqP4'],
+    'sk_perl': ['Наклейка Skoda перламутр', 500, ''],
+    'vw_color': ['Наклейка Volkswagen цветная', 300, 'https://ozon.ru/t/Zn0e8d2'],
+    'vw_gray': ['Наклейка Volkswagen антихром', 500, 'https://ozon.ru/t/bb9pKVn'],
+    'vw_perl': ['Наклейка Volkswagen перламутр', 500, ''],
+    'audi_color': ['Наклейка Audi цветная', 300, ''],
+    'audi_gray': ['Наклейка Audi антихром', 500, ''],
+    'audi_perl': ['Наклейка Audi перламутр', 500, ''],
 }
 
 export const userStatusValue = {

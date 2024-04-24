@@ -135,7 +135,7 @@ const Stickers = ({stickers}) => {
           {
             stickersInfo(stickers).map((sticker) => {
               return <StickerItem key={sticker.title} id={sticker.id} photo={sticker.photo} title={sticker.title}
-                                  price={sticker.price}/>
+                                  price={sticker.price} ozon={sticker.ozon}/>
             })
           }
         </div>
