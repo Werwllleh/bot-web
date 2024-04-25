@@ -1,0 +1,121 @@
+.page-feedback {
+
+  @media (max-width: 550px) {
+    margin: 100px 0 0 0;
+  }
+
+  &__rate {
+
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+
+    @media (max-width: 550px) {
+      flex-direction: column;
+    }
+
+    &-text {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      h2 {
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      span {
+        font-size: 16px;
+      }
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &__description {
+
+    margin: 30px 0 0 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      animation: showBlock .3s linear;
+    }
+
+    &-title {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      height: 25px;
+    }
+
+
+    textarea {
+      min-height: 70px;
+      font-family: inherit;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+  }
+
+  &__button {
+    margin: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 10px;
+    border-radius: 7px;
+    animation: showBlock .3s linear;
+    max-width: 200px;
+    width: 100%;
+
+
+    span {
+      font-family: inherit;
+      letter-spacing: 0.05em;
+      font-size: 15px;
+      line-height: 1;
+      font-weight: 500;
+      color: #000;
+    }
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      animation: showBlock .3s linear;
+    }
+
+  }
+
+  &__bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: .6;
+
+    & > div {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@keyframes showBlock {
+  0% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

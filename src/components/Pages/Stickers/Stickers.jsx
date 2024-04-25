@@ -107,9 +107,10 @@ const Stickers = ({stickers}) => {
 
   const sendUpdatedData = () => {
     setOpen(false);
-    const data = Object.values(getSellerStickersCount(updatedProductStoreState, currentUser.id)?.products)
 
     if (seller && currentUser.id) {
+      const data = Object.values(getSellerStickersCount(updatedProductStoreState, currentUser.id)?.products)
+
       if (isEqual(data, Object.values(getSellerStickersCount(productStore, currentUser.id)?.products))) {
         openNotificationWithIcon('warning')
       } else {
@@ -117,8 +118,9 @@ const Stickers = ({stickers}) => {
           updateStickersData(currentUser.id, data)
             .then((res) => {
               if (res.status === 200) {
-                updateProductStore(updatedProductStoreState)
-                openNotificationWithIcon('success')
+                const newProductStore = cloneDeep(updatedProductStoreState);
+                updateProductStore(newProductStore);
+                openNotificationWithIcon('success');
               }
             })
         } catch (e) {
