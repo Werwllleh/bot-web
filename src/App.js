@@ -50,6 +50,8 @@ function App() {
 
   useEffect(() => {
     tg.ready();
+    tg.expand();
+
     updateCurrentUser(tg?.initDataUnsafe?.user)
     // updateCurrentUser({
     //   allows_write_to_pm: true,
@@ -68,6 +70,10 @@ function App() {
     const newUserStatus = isAdmin ? userStatusValue.ADMIN : userStatusValue.USER;
     updateUserStatus(newUserStatus);
   }, [userStatus, currentUser, productsData]);
+
+  useEffect(() => {
+    console.log(currentUser)
+  }, [currentUser]);
 
   useEffect(() => {
 
@@ -116,7 +122,13 @@ function App() {
   return (
     <>
       {
-        currentUser !== undefined && currentUser !== null ? (
+        currentUser === undefined && location.pathname.startsWith('/form') ? (
+          <div className="page">
+            <Routes>
+              <Route path='/form' element={<Form/>}/>
+            </Routes>
+          </div>
+        ) : currentUser !== undefined && currentUser !== null ? (
           <>
             {loaderCars && loaderPartners && loaderStickers ? (
               <Loader/>
@@ -125,7 +137,6 @@ function App() {
                 <div className="page">
                   <Routes>
                     <Route index element={<Cars data={users}/>}/>
-                    <Route path='/form' element={<Form/>}/>
                     <Route path='/form/change' element={<ChangeForm/>}/>
                     <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
                     <Route path='/searchcar' element={<SearchCar data={users}/>}/>
@@ -135,7 +146,7 @@ function App() {
                   </Routes>
                 </div>
                 {
-                  location.pathname !== '/form' && location.pathname !== '/form/change' ? (
+                  !location.pathname.startsWith('/form') ? (
                     <div className="bottom-navbar">
                       <BottomNavigationBar cart={userCart}/>
                     </div>

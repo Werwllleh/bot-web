@@ -15,6 +15,8 @@ const Form = () => {
     const [carImage, setCarImage] = useState("");
     const {tg} = useTelegram();
 
+
+
     const onSendData = useCallback(() => {
         const data = {
             name,
@@ -43,7 +45,7 @@ const Form = () => {
         tg.MainButton.setParams({
             text: "Отправить данные",
         });
-    }, []);
+    }, [tg]);
 
     let patternCarNum = new RegExp(
         /^[АВЕКМНОРСТУХ]{1}[0-9]{3}[АВЕКМНОРСТУХ]{2}[0-9]{2,3}$/
