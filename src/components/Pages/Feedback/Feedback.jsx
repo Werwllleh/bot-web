@@ -2,11 +2,15 @@ import React, {useEffect, useState} from 'react';
 import "../../../styles/index.scss";
 import Header from "../../Header/Header";
 import {Rate, notification, Input, Button, Watermark} from 'antd';
+import {addFeedback} from "../../../utils/feedbacksUtils";
+import {useUsersStore} from "../../../services/store";
 
 const {TextArea} = Input;
 
 
 const Feedback = () => {
+
+  const currentUser = useUsersStore((state) => state.currentUser);
 
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
@@ -50,11 +54,23 @@ const Feedback = () => {
   }, [rating]);
 
   const sendFeedback = () => {
-    setRating(0);
-    setDescription('');
-    setDescriptionTitle('');
+    if (currentUser.id) {
+      const data = {
+        rate: rating,
+        text: description
+      };
 
-    openNotificationWithIcon('success')
+      try {
+        addFeedback(currentUser.id, data)
+        setRating(0);
+        setDescription('');
+        setDescriptionTitle('');
+        openNotificationWithIcon('success');
+      } catch (error) {
+        console.log('Ошибка добавления отзыва', error);
+      }
+
+    }
   }
 
   return (
@@ -64,7 +80,7 @@ const Feedback = () => {
       <div className="container">
         <div className="page-feedback">
           <div className="page-feedback__bg">
-            <Watermark content="vagcheb" />
+            <Watermark content="vagcheb"/>
           </div>
           <div className="page-feedback__rate">
             <div className="page-feedback__rate-text">
