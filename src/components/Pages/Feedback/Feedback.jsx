@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "../../../styles/index.scss";
 import Header from "../../Header/Header";
 import {Rate, notification, Input, Button, Watermark} from 'antd';
-import {addFeedback} from "../../../utils/feedbacksUtils";
+import {addFeedback, getFeedback} from "../../../utils/feedbacksUtils";
 import {useUsersStore} from "../../../services/store";
 
 const {TextArea} = Input;
@@ -15,6 +15,9 @@ const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
   const [descriptionTitle, setDescriptionTitle] = useState('');
+
+  const [currentFeedback, setCurrentFeedback] = useState({});
+  const [allFeeds, setAllFeeds] = useState([]);
 
 
   const changeRate = (value) => {
@@ -62,9 +65,7 @@ const Feedback = () => {
 
       try {
         addFeedback(currentUser.id, data)
-        setRating(0);
-        setDescription('');
-        setDescriptionTitle('');
+          .then(data => console.log(data))
         openNotificationWithIcon('success');
       } catch (error) {
         console.log('Ошибка добавления отзыва', error);
@@ -72,6 +73,23 @@ const Feedback = () => {
 
     }
   }
+
+  useEffect(() => {
+    getFeedback(currentUser)
+      .then(res => {
+        setCurrentFeedback(res.data.currentFeedback)
+        setAllFeeds(res.data.feedbacks)
+      })
+  }, []);
+
+  useEffect(() => {
+    if (currentFeedback) {
+      setRating(currentFeedback.rate);
+      setDescription(currentFeedback.text)
+    }
+    console.log(currentFeedback)
+    console.log(allFeeds)
+  }, [currentFeedback, allFeeds]);
 
   return (
     <>
@@ -92,12 +110,13 @@ const Feedback = () => {
           {rating > 0 ? (
             <div className={`page-feedback__description ${rating > 0 ? 'show' : ''}`}>
               <h3 className="page-feedback__description-title">{descriptionTitle}</h3>
-              <TextArea showCount maxLength={200} onChange={changeDescription} autoSize={true}/>
+              <TextArea showCount maxLength={200} onChange={changeDescription} value={description} autoSize={true}/>
             </div>
           ) : null}
           {rating > 0 && description.length > 7 ? (
-            <Button onClick={sendFeedback} className={`page-feedback__button ${rating > 0 ? 'show' : ''}`}>Отправить
-              отзыв</Button>
+            <Button onClick={sendFeedback} className={`page-feedback__button ${rating > 0 ? 'show' : ''}`}>
+              {currentFeedback ? 'Обновить отзыв' : 'Отправить отзыв'}
+            </Button>
           ) : null}
         </div>
       </div>
