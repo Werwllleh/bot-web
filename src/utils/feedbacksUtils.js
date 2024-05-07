@@ -12,6 +12,6 @@ export const addFeedback = async (chatId, data) => {
 
 export const getFeedback = async (chatId) => {
   return (
-    await axios.post(`${SITE}api/get-feedback`, chatId)
+    await axios.post(`${SITE}api/get-feedback`, {chatId})
   )
 }

@@ -19,6 +19,7 @@ import {getProductsData} from "./utils/productsUtils";
 import {Result} from "antd";
 import {userStatusValue} from "./utils/consts";
 import Feedback from "./components/Pages/Feedback/Feedback";
+import FeedbackList from "./components/Pages/Feedback/FeedbackList";
 
 
 function App() {
@@ -56,8 +57,8 @@ function App() {
     // updateCurrentUser({
     //   allows_write_to_pm: true,
     //   first_name: "Lesha",
-    //   id: 446012794,
-    //   // id: 361881710,
+    //   // id: 446012794,
+    //   id: 361881710,
     //   language_code: "en",
     //   last_name: "",
     //   username: "all_lllll"
@@ -143,6 +144,7 @@ function App() {
                     <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
                     <Route path='/cart' element={<Cart/>}/>
                     <Route path='/feedback' element={<Feedback />}/>
+                    <Route path='/feedback-list' element={<FeedbackList />}/>
                   </Routes>
                 </div>
                 {
