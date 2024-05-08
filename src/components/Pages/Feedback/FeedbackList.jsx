@@ -1,14 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../Header/Header";
-import {getFeedback} from "../../../utils/feedbacksUtils";
+import {getFeedback, verifyFeedback} from "../../../utils/feedbacksUtils";
 import Loader from "../../Loader/Loader";
-import {Rate, notification, Input, Button, Watermark, Checkbox} from 'antd';
+import {Rate, notification, Empty, Button, Watermark, Checkbox} from 'antd';
 import {getTime} from "../../../utils/utils";
 
 
 const FeedbackList = () => {
 
-  const [feedsList, setFeedsList] = useState([])
+  const [feedsList, setFeedsList] = useState([]);
+
+  const [api, contextHolder] = notification.useNotification();
+  const openNotificationWithIcon = (type) => {
+    if (type === 'success') {
+      api[type]({
+        message: 'Отзыв одобрен!',
+      });
+    }
+    if (type === 'error') {
+      api[type]({
+        message: 'Отзыв отклонен',
+      });
+    }
+  };
 
   useEffect(() => {
     getFeedback()
@@ -16,35 +30,56 @@ const FeedbackList = () => {
         setFeedsList(res.data.feedbacks)
       })
 
+    console.log(feedsList)
+
   }, []);
 
-  console.log(feedsList)
+  const changeVerify = (feedbackId, verifyStatus) => {
+    verifyFeedback(feedbackId, verifyStatus)
+      .then(res => {
+        if (res.status === 200) {
+          if (verifyStatus) {
+            openNotificationWithIcon('success');
+          } else {
+            openNotificationWithIcon('error');
+          }
+        }
+      })
+  }
 
   return (
     <>
+      {contextHolder}
       <Header title={'Админка отзывов'}/>
       <div className="container">
         <div className="page-admin-feedbacks admin-feedbacks">
           {feedsList.length ? (
             <ul className="admin-feedbacks__list">
               {feedsList.map((item) => {
+                console.log(item)
                 return (
                   <li key={item.id} className="admin-feedbacks__item">
                     <div className="admin-feedbacks__item-content">
-                      <h5 className="admin-feedbacks__item-name">{item.user}</h5>
+                      <h5 className="admin-feedbacks__item-name">{item.user} <span className="admin-feedbacks__item-anon">- {item.anonymous ? 'Анонимный' : 'Не анонимный'}</span></h5>
                       <div className="admin-feedbacks__item-date">{getTime(item.date)}</div>
                       <div className="admin-feedbacks__item-rate"><Rate value={item.rate} disabled={true}/></div>
                       <div className="admin-feedbacks__item-text">{item.text}</div>
                     </div>
                     <div className="admin-feedbacks__item-actions">
-                      <Button type="primary">Принять</Button>
-                      <Button type="primary">Отклонить</Button>
+                      <Button className="admin-feedbacks__item-accept" type="primary"
+                              onClick={() => changeVerify(item.id, true)}>Принять</Button>
+                      <Button className="admin-feedbacks__item-cancel" type="primary"
+                              onClick={() => changeVerify(item.id, false)}>Отклонить</Button>
                     </div>
                   </li>
                 )
               })}
             </ul>
-          ) : <Loader />}
+          ) : (
+            <div className={"admin-feedbacks__notfound"}>
+              <Empty description={"Новых отзывов нет"}/>
+            </div>
+          )}
         </div>
       </div>
 

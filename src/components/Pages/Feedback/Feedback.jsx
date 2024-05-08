@@ -8,6 +8,7 @@ import {useUsersStore} from "../../../services/store";
 import s from "../SearchCar/SearchCar.module.css";
 import {SITE} from "../../../utils/consts";
 import {getTime} from "../../../utils/utils";
+import NoisyCanvas from "../../NoiseCanvas/NoisyCanvas";
 
 const {TextArea} = Input;
 
@@ -42,7 +43,8 @@ const Feedback = () => {
   const openNotificationWithIcon = (type) => {
     if (type === 'success') {
       api[type]({
-        message: 'Спасибо за отзыв!',
+        message: 'Спасибо за оценку!',
+        description: 'Отзыв отправлен на модерацию'
       });
     }
     if (type === 'error') {
@@ -78,8 +80,14 @@ const Feedback = () => {
 
       try {
         addFeedback(currentUser.id, data)
-          .then(data => console.log(data))
-        openNotificationWithIcon('success');
+          .then(res => {
+            if (res.status === 200) {
+              openNotificationWithIcon('success');
+            } else {
+              openNotificationWithIcon('error');
+            }
+          })
+
       } catch (error) {
         console.log('Ошибка добавления отзыва', error);
       }
@@ -138,6 +146,9 @@ const Feedback = () => {
             ) : null}
           </div>
           <div className="page-feedback__slider">
+            {
+              allFeeds?.length > 0 && <h3 className="page-feedback__slider-title">Ваши отзывы {allFeeds?.length > 0 && <span>- {allFeeds?.length}</span>}</h3>
+            }
             <Swiper
               centeredSlides={true}
               spaceBetween={20}
@@ -160,7 +171,7 @@ const Feedback = () => {
                           <Rate value={feedback.rate} disabled={true}/>
                         </div>
                         <div className="page-feedback__slider-card__header">
-                          <div className="page-feedback__slider-card__name">{feedback.user}</div>
+                          <div className="page-feedback__slider-card__name">{anonymous ? <span className="page-feedback__slider-card__name-anon"><NoisyCanvas/></span> : feedback.user}</div>
                           <div className="page-feedback__slider-card__date">{getTime(feedback.date)}</div>
                         </div>
                         <div className="page-feedback__slider-card__text">{feedback.text}</div>
