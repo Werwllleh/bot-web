@@ -5,8 +5,6 @@ import {Rate, notification, Input, Button, Watermark, Checkbox} from 'antd';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {addFeedback, getFeedback} from "../../../utils/feedbacksUtils";
 import {useUsersStore} from "../../../services/store";
-import s from "../SearchCar/SearchCar.module.css";
-import {SITE} from "../../../utils/consts";
 import {getTime} from "../../../utils/utils";
 import NoisyCanvas from "../../NoiseCanvas/NoisyCanvas";
 
@@ -69,7 +67,6 @@ const Feedback = () => {
   }, [rating]);
 
 
-
   const sendFeedback = () => {
     if (currentUser.id) {
       const data = {
@@ -91,7 +88,6 @@ const Feedback = () => {
       } catch (error) {
         console.log('Ошибка добавления отзыва', error);
       }
-
     }
   }
 
@@ -147,7 +143,7 @@ const Feedback = () => {
           </div>
           <div className="page-feedback__slider">
             {
-              allFeeds?.length > 0 && <h3 className="page-feedback__slider-title">Ваши отзывы {allFeeds?.length > 0 && <span>- {allFeeds?.length}</span>}</h3>
+              allFeeds?.length > 0 && <h3 className="page-feedback__slider-title">Все отзывы {allFeeds?.length > 0 && <span>- {allFeeds?.length}</span>}</h3>
             }
             <Swiper
               centeredSlides={true}

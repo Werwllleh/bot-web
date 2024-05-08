@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../Header/Header";
 import {getFeedback, verifyFeedback} from "../../../utils/feedbacksUtils";
-import Loader from "../../Loader/Loader";
-import {Rate, notification, Empty, Button, Watermark, Checkbox} from 'antd';
+import {Rate, notification, Empty, Button} from 'antd';
 import {getTime} from "../../../utils/utils";
 
 
@@ -30,8 +29,6 @@ const FeedbackList = () => {
         setFeedsList(res.data.feedbacks)
       })
 
-    console.log(feedsList)
-
   }, []);
 
   const changeVerify = (feedbackId, verifyStatus) => {
@@ -43,9 +40,11 @@ const FeedbackList = () => {
           } else {
             openNotificationWithIcon('error');
           }
+          setFeedsList(feedsList.filter(feed => feed.id !== feedbackId))
         }
       })
   }
+
 
   return (
     <>
@@ -56,7 +55,6 @@ const FeedbackList = () => {
           {feedsList.length ? (
             <ul className="admin-feedbacks__list">
               {feedsList.map((item) => {
-                console.log(item)
                 return (
                   <li key={item.id} className="admin-feedbacks__item">
                     <div className="admin-feedbacks__item-content">
