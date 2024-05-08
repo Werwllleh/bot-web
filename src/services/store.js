@@ -1,13 +1,8 @@
 import { create } from 'zustand';
 
-export const useAppStore = create((set) => ({
-  menuStatus: false,
-  updateMenuStatus: (data) => set(() => ({ menuStatus: data })),
-}))
-
 export const useUsersStore = create((set) => ({
   currentUser: {},
-  userStatus: null,
+  userStatus: 'user',
   users: [],
   cart: [],
   selectedPlace: null,

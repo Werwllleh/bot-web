@@ -105,7 +105,7 @@
 
 .bottom-navbar .MuiBottomNavigation-root {
   position: fixed;
-  z-index: 5;
+  z-index: 4;
   bottom: 35px;
   left: 0;
   right: 0;

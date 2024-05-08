@@ -43,3 +43,5 @@ export const userStatusValue = {
     ADMIN: 'admin',
     USER: 'user',
 }
+
+export const admins = [446012794, 361881710]

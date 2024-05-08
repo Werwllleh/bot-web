@@ -6,7 +6,7 @@ import ChangeForm from './components/Pages/Form/ChangeForm/ChangeForm';
 import Cars from './components/Pages/Cars/Cars';
 import Partners from './components/Pages/Partners/Partners';
 import SearchCar from './components/Pages/SearchCar/SearchCar';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-dom';
 import {usePartnersStore, useProductsCountStore, useStickersStore, useUsersStore} from "./services/store";
 import Loader from "./components/Loader/Loader";
 import {getPartnersData, groupedPartnersFunc} from "./utils/partnersUtils";
@@ -17,7 +17,7 @@ import BottomNavigationBar from "./components/BottomNavigationBar/BottomNavigati
 import Cart from "./components/Pages/Cart/Cart";
 import {getProductsData} from "./utils/productsUtils";
 import {Result} from "antd";
-import {userStatusValue} from "./utils/consts";
+import {admins, userStatusValue} from "./utils/consts";
 import Feedback from "./components/Pages/Feedback/Feedback";
 import FeedbackList from "./components/Pages/Feedback/FeedbackList";
 
@@ -48,21 +48,23 @@ function App() {
   const userCart = useUsersStore((state) => state.cart);
   const userStatus = useUsersStore((state) => state.userStatus);
 
+  const location = useLocation();
+
 
   useEffect(() => {
     tg.ready();
     tg.expand();
 
-    // updateCurrentUser(tg?.initDataUnsafe?.user)
-    updateCurrentUser({
-      allows_write_to_pm: true,
-      first_name: "Lesha",
-      id: 446012794,
-      // id: 361881710,
-      language_code: "en",
-      last_name: "",
-      username: "all_lllll"
-    })
+    updateCurrentUser(tg?.initDataUnsafe?.user)
+    // updateCurrentUser({
+    //   allows_write_to_pm: true,
+    //   first_name: "Lesha",
+    //   id: 446012794,
+    //   // id: 361881710,
+    //   language_code: "en",
+    //   last_name: "",
+    //   username: "all_lllll"
+    // })
 
   }, [tg])
 
@@ -72,9 +74,10 @@ function App() {
     updateUserStatus(newUserStatus);
   }, [userStatus, currentUser, productsData]);
 
-  // useEffect(() => {
-  //   console.log(currentUser)
-  // }, [currentUser]);
+  useEffect(() => {
+    // console.log(userStatus)
+    // updateUserStatus()
+  }, [userStatus]);
 
   useEffect(() => {
 
@@ -119,6 +122,8 @@ function App() {
 
   const partnersSortedObject = groupedPartnersFunc(partners);
 
+  const admin = admins.includes(currentUser.id);
+
 
   return (
     <>
@@ -144,9 +149,12 @@ function App() {
                     <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
                     <Route path='/cart' element={<Cart/>}/>
                     <Route path='/feedback' element={<Feedback />}/>
-                    <Route path='/feedback-list' element={<FeedbackList />}/>
+                    {admin && (
+                      <Route path='/feedback-list' element={<FeedbackList />} />
+                    )}
                   </Routes>
                 </div>
+                {/*{!admin && <Navigate to="/" replace />}*/}
                 {
                   !location.pathname.startsWith('/form') ? (
                     <div className="bottom-navbar">
