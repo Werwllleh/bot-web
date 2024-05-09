@@ -21,3 +21,9 @@ export const verifyFeedback = async (feedbackId, verifyStatus) => {
     await axios.post(`${SITE}api/verify-feedback`, {feedbackId, verifyStatus})
   )
 }
+
+export const historyFeedbacks = async () => {
+  return (
+    await axios.post(`${SITE}api/history-feedbacks`)
+  )
+}

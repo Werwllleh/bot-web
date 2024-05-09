@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../Header/Header";
-import {getFeedback, verifyFeedback} from "../../../utils/feedbacksUtils";
-import {Rate, notification, Empty, Button} from 'antd';
+import {getFeedback, historyFeedbacks, verifyFeedback} from "../../../utils/feedbacksUtils";
+import {Rate, notification, Empty, Button, Collapse} from 'antd';
 import {getTime} from "../../../utils/utils";
 
 
 const FeedbackList = () => {
 
   const [feedsList, setFeedsList] = useState([]);
+  const [feedsListHistory, setFeedsListHistory] = useState([]);
 
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type) => {
@@ -29,7 +30,14 @@ const FeedbackList = () => {
         setFeedsList(res.data.feedbacks)
       })
 
+    historyFeedbacks()
+      .then(res => {
+        setFeedsListHistory(res.data.feedbacks)
+      })
+
   }, []);
+
+  console.log(feedsListHistory)
 
   const changeVerify = (feedbackId, verifyStatus) => {
     verifyFeedback(feedbackId, verifyStatus)
@@ -45,12 +53,11 @@ const FeedbackList = () => {
       })
   }
 
-
-  return (
-    <>
-      {contextHolder}
-      <Header title={'Админка отзывов'}/>
-      <div className="container">
+  const items = [
+    {
+      key: 'new-feeds',
+      label: 'Новые отзывы',
+      children: (
         <div className="page-admin-feedbacks admin-feedbacks">
           {feedsList.length ? (
             <ul className="admin-feedbacks__list">
@@ -79,8 +86,44 @@ const FeedbackList = () => {
             </div>
           )}
         </div>
-      </div>
+      ),
+    },
+    {
+      key: 'history-feeds',
+      label: 'История отзывов',
+      children: (
+        <div className="admin-feedbacks-history">
+          {
+            feedsListHistory.length && (
+              <ul className="admin-feedbacks__list">
+                {feedsListHistory.map((item) => {
+                  return (
+                    <li key={item.id} className="admin-feedbacks__item">
+                      <div className="admin-feedbacks__item-content">
+                        <div className="admin-feedbacks__item-status">Статус отзыва - {item.status === true ? 'одобрен' : 'не одобрен'}</div>
+                        <h5 className="admin-feedbacks__item-name">{item.user} <span className="admin-feedbacks__item-anon">- {item.anonymous ? 'Анонимный' : 'Не анонимный'}</span></h5>
+                        <div className="admin-feedbacks__item-date">{getTime(item.date)}</div>
+                        <div className="admin-feedbacks__item-rate"><Rate value={item.rate} disabled={true}/></div>
+                        <div className="admin-feedbacks__item-text">{item.text}</div>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            )
+          }
+        </div>
+      ),
+    },
+  ];
 
+  return (
+    <>
+      {contextHolder}
+      <Header title={'Админка отзывов'}/>
+      <div className="container">
+        <Collapse accordion items={items} defaultActiveKey={['new-feeds']} />
+      </div>
     </>
   );
 };
