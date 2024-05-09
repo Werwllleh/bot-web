@@ -108,7 +108,6 @@ const Feedback = () => {
     }
   }, [currentFeedback, allFeeds]);
 
-  console.log(allFeeds)
 
 
   return (
