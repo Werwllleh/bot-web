@@ -55,16 +55,16 @@ function App() {
     tg.ready();
     tg.expand();
 
-    updateCurrentUser(tg?.initDataUnsafe?.user)
-    // updateCurrentUser({
-    //   allows_write_to_pm: true,
-    //   first_name: "Lesha",
-    //   id: 446012794,
-    //   // id: 361881710,
-    //   language_code: "en",
-    //   last_name: "",
-    //   username: "all_lllll"
-    // })
+    // updateCurrentUser(tg?.initDataUnsafe?.user)
+    updateCurrentUser({
+      allows_write_to_pm: true,
+      first_name: "Lesha",
+      id: 446012794,
+      // id: 361881710,
+      language_code: "en",
+      last_name: "",
+      username: "all_lllll"
+    })
 
   }, [tg])
 
@@ -122,7 +122,7 @@ function App() {
 
   const partnersSortedObject = groupedPartnersFunc(partners);
 
-  const admin = admins.includes(currentUser.id);
+  const admin = admins.includes(currentUser?.id);
 
 
   return (

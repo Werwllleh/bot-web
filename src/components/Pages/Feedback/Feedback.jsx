@@ -108,6 +108,8 @@ const Feedback = () => {
     }
   }, [currentFeedback, allFeeds]);
 
+  console.log(allFeeds)
+
 
   return (
     <>
@@ -167,7 +169,7 @@ const Feedback = () => {
                           <Rate value={feedback.rate} disabled={true}/>
                         </div>
                         <div className="page-feedback__slider-card__header">
-                          <div className="page-feedback__slider-card__name">{anonymous ? <span className="page-feedback__slider-card__name-anon"><NoisyCanvas/></span> : feedback.user}</div>
+                          <div className="page-feedback__slider-card__name">{feedback.anonymous ? <span className="page-feedback__slider-card__name-anon"><NoisyCanvas/></span> : feedback.user}</div>
                           <div className="page-feedback__slider-card__date">{getTime(feedback.date)}</div>
                         </div>
                         <div className="page-feedback__slider-card__text">{feedback.text}</div>
