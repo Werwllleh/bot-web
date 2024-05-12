@@ -37,8 +37,6 @@ const FeedbackList = () => {
 
   }, []);
 
-  console.log(feedsListHistory)
-
   const changeVerify = (feedbackId, verifyStatus) => {
     verifyFeedback(feedbackId, verifyStatus)
       .then(res => {

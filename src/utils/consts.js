@@ -1,3 +1,6 @@
+import {FormOutlined, UsergroupAddOutlined} from "@ant-design/icons";
+import React from "react";
+
 export const SITE = 'https://vagcheb.ru/';
 export const VOLKSWAGEN = 'volkswagen';
 export const SKODA = 'skoda';
@@ -45,3 +48,16 @@ export const userStatusValue = {
 }
 
 export const admins = [446012794, 361881710]
+
+export const adminPages = [
+    {
+        icon: <FormOutlined />,
+        title: 'Список отзывов',
+        link: '/feedback-list'
+    },
+    {
+        icon: <UsergroupAddOutlined />,
+        title: 'Список пользователей',
+        link: '/user-list'
+    },
+]

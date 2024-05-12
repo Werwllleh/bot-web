@@ -20,6 +20,8 @@ import {Result} from "antd";
 import {admins, userStatusValue} from "./utils/consts";
 import Feedback from "./components/Pages/Feedback/Feedback";
 import FeedbackList from "./components/Pages/Feedback/FeedbackList";
+import Admin from "./components/Pages/Admin/Admin";
+import UserList from "./components/Pages/UserList/UserList";
 
 
 function App() {
@@ -55,16 +57,16 @@ function App() {
     tg.ready();
     tg.expand();
 
-    updateCurrentUser(tg?.initDataUnsafe?.user)
-    // updateCurrentUser({
-    //   allows_write_to_pm: true,
-    //   first_name: "Lesha",
-    //   id: 446012794,
-    //   // id: 361881710,
-    //   language_code: "en",
-    //   last_name: "",
-    //   username: "all_lllll"
-    // })
+    // updateCurrentUser(tg?.initDataUnsafe?.user)
+    updateCurrentUser({
+      allows_write_to_pm: true,
+      first_name: "Lesha",
+      id: 446012794,
+      // id: 361881710,
+      language_code: "en",
+      last_name: "",
+      username: "all_lllll"
+    })
 
   }, [tg])
 
@@ -148,13 +150,16 @@ function App() {
                     <Route path='/searchcar' element={<SearchCar data={users}/>}/>
                     <Route path='/stickers' element={<Stickers stickers={stickers}/>}/>
                     <Route path='/cart' element={<Cart/>}/>
-                    <Route path='/feedback' element={<Feedback />}/>
+                    <Route path='/feedback' element={<Feedback/>}/>
                     {admin && (
-                      <Route path='/feedback-list' element={<FeedbackList />} />
+                      <>
+                        <Route path='/admin' element={<Admin/>}/>
+                        <Route path='/feedback-list' element={<FeedbackList/>}/>
+                        <Route path='/user-list' element={<UserList/>}/>
+                      </>
                     )}
                   </Routes>
                 </div>
-                {/*{!admin && <Navigate to="/" replace />}*/}
                 {
                   !location.pathname.startsWith('/form') ? (
                     <div className="bottom-navbar">
@@ -171,7 +176,9 @@ function App() {
             title="403"
             subTitle={
               <>
-                Упс... Вы неавторизованный пользователь, используйте <a className={"ant-result__invite"} target={"_blank"} href={"https://t.me/VW21ClubBot"}>Telegram-bot</a>
+                Упс... Вы неавторизованный пользователь, используйте <a className={"ant-result__invite"}
+                                                                        target={"_blank"}
+                                                                        href={"https://t.me/VW21ClubBot"}>Telegram-bot</a>
               </>
             }
           />

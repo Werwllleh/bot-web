@@ -41,7 +41,7 @@ const Header = ({ title }) => {
                 </Link>
               </li>
             </ul>
-            {admins.includes(currentUser.id) ? (
+            {admins.includes(currentUser.id) && !location.pathname.startsWith('/admin') ? (
               <Link className="header__drawer-admin-btn" to={"/feedback-list"}>
                 <span className="header__drawer-link-icon"><FormOutlined /></span>
                 <p className="header__drawer-link-text">Админка</p>

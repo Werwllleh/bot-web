@@ -1,0 +1,47 @@
+.admin-page {
+
+  &__bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: .6;
+
+    & > div {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__body {
+  }
+
+  &__links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+
+    &-icon {
+      svg {
+        fill: #4F4F4FFF;
+        width: 25px;
+        height: 25px;
+      }
+
+    }
+
+    &-text {
+      color: #164155;
+    }
+  }
+}
