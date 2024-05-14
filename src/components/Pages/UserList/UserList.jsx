@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {getUsersData} from "../../../utils/usersUtils";
-import {Watermark, Button, Modal} from "antd";
+import {getUsersData, postUsersUpdatedData} from "../../../utils/usersUtils";
+import {Watermark, Modal} from "antd";
 import Header from "../../Header/Header";
 import {FormOutlined} from '@ant-design/icons';
 
@@ -18,14 +18,17 @@ const UserList = () => {
   }, []);
 
 
-  const showModal = (columnName, value) => {
+  const showModal = (chatId, columnName, value) => {
     setIsModalOpen(true);
     setModalData({
+      chatId: chatId,
       column: columnName,
       value: value
     })
   };
-  const handleSave = () => {
+  const handleSave = (chatId, column, value) => {
+    postUsersUpdatedData(chatId, column, value)
+      .then(res => console.log(res))
     setIsModalOpen(false);
     setModalData({});
     setModalInput('');
@@ -61,7 +64,7 @@ const UserList = () => {
                           <div key={index} className="admin-user-item__row">
                             <div className="admin-user-item__key">{data[0]}</div>
                             <div style={data[1] !== '' ? { marginRight: '15px' } : {}} className="admin-user-item__value">{data[1]}</div>
-                            {data[0] !== 'chatId' && data[0] !== 'id' && <div onClick={() => showModal(data[0], data[1])} className="admin-user-item__edit"><FormOutlined /></div>}
+                            {data[0] !== 'chatId' && data[0] !== 'id' && <div onClick={() => showModal(Number(user.chatId), data[0], data[1])} className="admin-user-item__edit"><FormOutlined /></div>}
                           </div>
                         )
                       })}
@@ -73,7 +76,7 @@ const UserList = () => {
           </ul>
         </div>
       </div>
-      <Modal title={`Столбец - ${modalData.column}`} wrapClassName={'admin-users__modal'} destroyOnClose={true} centered={true} open={isModalOpen} onOk={handleSave} okText={'Сохранить'} onCancel={handleCancel} cancelText={'Отмена'}>
+      <Modal title={`Столбец - ${modalData.column}`} wrapClassName={'admin-users__modal'} destroyOnClose={true} centered={true} open={isModalOpen} onOk={() => handleSave(modalData.chatId, modalData.column, modalInput)} okText={'Сохранить'} onCancel={handleCancel} cancelText={'Отмена'}>
         <div className="admin-users__modal-current-value">Текущее значение: {modalData.value}</div>
         <div className="admin-users__modal-new-value">
           <span>Новое значение:</span>
