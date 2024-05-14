@@ -26,10 +26,19 @@
   }
 
   &__link {
-    display: flex;
+    position: relative;
+    display: inline-flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
+    color: #164155;
+
+    &:hover {
+      .admin-page__link-text::before {
+        width: 100%;
+      }
+
+    }
 
     &-icon {
       svg {
@@ -41,7 +50,21 @@
     }
 
     &-text {
-      color: #164155;
+      position: relative;
+      display: block;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        width: 0;
+        height: 1px;
+        background-color: #164155;
+        transition: width .3s linear;
+      }
     }
   }
 }
