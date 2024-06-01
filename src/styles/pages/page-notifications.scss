@@ -1,0 +1,50 @@
+.notifications-page {
+
+  .notification-add {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    &__flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      width: 100%;
+
+      .notification-new__date {
+        flex: 0 0 30%;
+
+        .ant-picker {
+          width: 100%;
+          padding: 7px 11px;
+        }
+      }
+
+      .notification-add__select {
+        flex: 0 1 80%;
+      }
+    }
+
+    &__select {
+
+      .ant-select {
+        width: 100%;
+      }
+    }
+
+    &__select-flex {}
+
+    &__input {
+
+      .ant-input {
+        width: 100%;
+        padding: 7px 11px;
+      }
+    }
+
+    &__date {
+
+    }
+  }
+}

@@ -26,7 +26,7 @@ const Header = ({ title }) => {
     <>
       <header className={`header ${menuActive ? 'active' : ''}`}>
         <div className={"header__menu-burger"}>
-          <MenuBurgerButton active={menuActive} onClick={menuClick}/>
+          {currentUser !== undefined && <MenuBurgerButton active={menuActive} onClick={menuClick}/>}
         </div>
         <div className={"header__body"}>
           <h1 className={"title"}>{title}</h1>
@@ -41,7 +41,7 @@ const Header = ({ title }) => {
                 </Link>
               </li>
             </ul>
-            {admins.includes(currentUser.id) && !location.pathname.startsWith('/admin') ? (
+            {admins.includes(currentUser?.id) && !location.pathname.startsWith('/admin') ? (
               <Link className="header__drawer-admin-btn" to={"/admin"}>
                 <span className="header__drawer-link-icon"><FormOutlined /></span>
                 <p className="header__drawer-link-text">Админка</p>

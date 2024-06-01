@@ -22,6 +22,7 @@ import Feedback from "./components/Pages/Feedback/Feedback";
 import FeedbackList from "./components/Pages/Feedback/FeedbackList";
 import Admin from "./components/Pages/Admin/Admin";
 import UserList from "./components/Pages/UserList/UserList";
+import NotifyPage from "./components/Pages/NotifyPage/NotifyPage";
 
 
 function App() {
@@ -57,16 +58,16 @@ function App() {
     tg.ready();
     tg.expand();
 
-    updateCurrentUser(tg?.initDataUnsafe?.user)
-    // updateCurrentUser({
-    //   allows_write_to_pm: true,
-    //   first_name: "Lesha",
-    //   id: 446012794,
-    //   // id: 361881710,
-    //   language_code: "en",
-    //   last_name: "",
-    //   username: "all_lllll"
-    // })
+    // updateCurrentUser(tg?.initDataUnsafe?.user)
+    updateCurrentUser({
+      allows_write_to_pm: true,
+      first_name: "Lesha",
+      id: 446012794,
+      // id: 361881710,
+      language_code: "en",
+      last_name: "",
+      username: "all_lllll"
+    })
 
   }, [tg])
 
@@ -126,6 +127,8 @@ function App() {
 
   const admin = admins.includes(currentUser?.id);
 
+  // console.log(currentUser)
+
 
   return (
     <>
@@ -156,6 +159,7 @@ function App() {
                         <Route path='/admin' element={<Admin/>}/>
                         <Route path='/feedback-list' element={<FeedbackList/>}/>
                         <Route path='/user-list' element={<UserList/>}/>
+                        <Route path='/notification' element={<NotifyPage/>}/>
                       </>
                     )}
                   </Routes>
