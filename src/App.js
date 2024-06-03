@@ -22,7 +22,7 @@ import Feedback from "./components/Pages/Feedback/Feedback";
 import FeedbackList from "./components/Pages/Feedback/FeedbackList";
 import Admin from "./components/Pages/Admin/Admin";
 import UserList from "./components/Pages/UserList/UserList";
-import NotifyPage from "./components/Pages/NotifyPage/NotifyPage";
+import LocationPage from "./components/Pages/LocationPage/LocationPage";
 
 
 function App() {
@@ -159,7 +159,7 @@ function App() {
                         <Route path='/admin' element={<Admin/>}/>
                         <Route path='/feedback-list' element={<FeedbackList/>}/>
                         <Route path='/user-list' element={<UserList/>}/>
-                        <Route path='/notification' element={<NotifyPage/>}/>
+                        <Route path='/location' element={<LocationPage/>}/>
                       </>
                     )}
                   </Routes>

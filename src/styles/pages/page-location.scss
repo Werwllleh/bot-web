@@ -1,0 +1,41 @@
+.location-page {
+
+  &__switch {
+    margin: 0 0 15px 0;
+  }
+
+  &__options {
+    display: none;
+    gap: 15px;
+    align-items: center;
+    margin: 0 0 15px 0;
+
+    &.active {
+      display: flex;
+    }
+  }
+
+  &__date {
+    flex: 0 1 50%;
+    padding: 7px 11px;
+
+    .ant-picker-now {
+      display: none !important;
+    }
+  }
+
+  &__select {
+    border-radius: 6px !important;
+    flex: 0 1 50%;
+  }
+
+  &__text {
+    margin: 0 0 15px 0;
+  }
+
+  &__coordinates {
+    display: flex;
+    gap: 15px;
+    margin: 0 0 15px 0;
+  }
+}
