@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {DatePicker, Input, Select, Watermark, ConfigProvider} from "antd";
+const { TextArea } = Input;
 import Header from "../../Header/Header";
 import ruRu from 'antd/locale/ru_RU';
 import {places} from "../../../utils/consts";
@@ -11,6 +12,10 @@ const NotifyPage = () => {
   const [textNotify, setTextNotify] = useState('');
   const [placeNotify, setPlaceNotify] = useState('');
   const [dateNotify, setDateNotify] = useState('');
+
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+
 
 
   const typeChange = (value) => {
@@ -29,6 +34,15 @@ const NotifyPage = () => {
     setDateNotify(dateString);
     console.log(date, dateString);
   };
+
+  const onLatitude = (e) => {
+    setLatitude(e.target.value)
+  };
+  const onLongitude = (e) => {
+    setLongitude(e.target.value)
+  };
+
+
 
   return (
     <div className="container">
@@ -55,7 +69,7 @@ const NotifyPage = () => {
             />
           </div>
           <div className="notification-add__input">
-            <Input onChange={onTextChange} placeholder="Текст уведомления" />
+            <TextArea onChange={onTextChange} placeholder="Текст уведомления" allowClear />
           </div>
           <div className="notification-add__flex">
             <div className="notification-new__date">
@@ -71,9 +85,12 @@ const NotifyPage = () => {
               />
             </div>
           </div>
-          <div className="notification-add__input">
-            <Input placeholder="Напишите координаты" />
-          </div>
+          {placeNotify === 'other' && (
+            <div className="notification-add__input coordinates">
+              <Input onChange={onLatitude} placeholder="Широта" allowClear />
+              <Input onChange={onLongitude} placeholder="Долгота" allowClear />
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -24,6 +24,18 @@
       .notification-add__select {
         flex: 0 1 80%;
       }
+
+      @media (max-width: 650px) {
+        flex-direction: column;
+
+        .notification-new__date {
+          width: 100%;
+        }
+
+        .notification-add__select {
+          width: 100%;
+        }
+      }
     }
 
     &__select {
@@ -33,18 +45,34 @@
       }
     }
 
-    &__select-flex {}
+    &__select-flex {
+    }
 
     &__input {
 
       .ant-input {
+        padding: 0;
+      }
+
+      .ant-input-affix-wrapper {
         width: 100%;
         padding: 7px 11px;
+        font-weight: 600;
       }
     }
 
     &__date {
 
     }
+
+    .ant-picker .ant-picker-input > input {
+      font-weight: 600 !important;
+    }
+
+    .coordinates {
+      display: flex;
+      gap: 15px;
+    }
+
   }
 }
