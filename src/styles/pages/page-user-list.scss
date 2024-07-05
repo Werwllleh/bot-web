@@ -79,10 +79,23 @@
   }
 
   &__info {
+    position: relative;
+    flex: 1 1 50%;
     padding: 15px;
 
     @media (max-width: 500px) {
       padding: 15px 10px;
+    }
+  }
+
+  &__delete {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+
+    svg {
+      width: 25px;
+      height: 25px;
     }
   }
 

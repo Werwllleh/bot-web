@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {getUsersData, postUsersUpdatedData} from "../../../utils/usersUtils";
+import {getUsersData, postUserDelete, postUsersUpdatedData} from "../../../utils/usersUtils";
 import {Watermark, Modal, Image} from "antd";
 import Header from "../../Header/Header";
-import {FormOutlined} from '@ant-design/icons';
+import {FormOutlined, DeleteOutlined} from '@ant-design/icons';
 import {SITE} from "../../../utils/consts";
+import {useUsersStore} from "../../../services/store";
 
 const UserList = () => {
 
@@ -11,6 +12,9 @@ const UserList = () => {
   const [modalData, setModalData] = useState({});
   const [modalInput, setModalInput] = useState('');
   const [users, setUsers] = useState([]);
+
+
+  const updateUsers = useUsersStore((state) => state.updateUsers);
 
 
   useEffect(() => {
@@ -43,8 +47,19 @@ const UserList = () => {
     setModalInput(e.target.value)
   }
 
-  // console.log(users)
-  // console.log(modalData)
+  const deleteUser = (userId) => {
+
+    postUserDelete(userId)
+      .then(res => {
+        if (res.status === 200) {
+          getUsersData()
+            .then((res) => {
+              setUsers(res.data);
+              return updateUsers(res.data)
+            })
+        }
+      })
+  }
 
   return (
     <>
@@ -61,6 +76,9 @@ const UserList = () => {
                   <li key={user.id} className="admin-users__item admin-user-item">
                     <div className="admin-user-item__body">
                       <div className="admin-user-item__info">
+                        <div onClick={() => deleteUser(user.id)} className="admin-user-item__delete">
+                          <DeleteOutlined />
+                        </div>
                         {Object.entries(user).map((data, index) => {
                           return (
                             <div key={index} className="admin-user-item__row">
@@ -82,11 +100,6 @@ const UserList = () => {
                             mask: 'Просмотр',
                             toolbarRender: () => null,
                           }}
-                          // style={{
-                          //   objectFit: "cover",
-                          //   height: "150px",
-                          //   maxWidth: "150px",
-                          // }}
                           loading="lazy"
                           key={user.chatId}
                           onError={(e) => {

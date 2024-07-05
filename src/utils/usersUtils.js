@@ -16,3 +16,11 @@ export const postUsersUpdatedData = async (chatId, column, value) => {
     })
   )
 }
+
+export const postUserDelete = async (userId) => {
+  return (
+    await axios.post(`${SITE}api/delete-user`, {
+      userId: userId,
+    })
+  )
+}
