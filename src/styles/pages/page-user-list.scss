@@ -1,10 +1,14 @@
 .admin-users {
 
+  position: relative;
+
 
   &__list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
+    overflow-y: scroll;
+    max-height: 750px;
 
     @media (max-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
@@ -12,6 +16,7 @@
     @media (max-width: 660px) {
       grid-template-columns: 1fr;
     }
+
   }
 
   &__item {
@@ -59,6 +64,7 @@
       }
     }
   }
+
 }
 
 .admin-user-item {
@@ -90,8 +96,12 @@
 
   &__delete {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top: 15px;
     left: 15px;
+    cursor: pointer;
 
     svg {
       width: 25px;
@@ -158,4 +168,9 @@
       fill: #350068;
     }
   }
+}
+
+.search-field {
+  margin: 0 0 30px;
+  padding: 10px 0 0 0;
 }

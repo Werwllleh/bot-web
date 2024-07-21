@@ -58,7 +58,7 @@ const StickerItem = ({id, photo, title, price, ozon}) => {
             </button>
           ) : <div className={s.sticker__counter}><Counter product={title}/></div> }
         </div>
-        {ozon ? <a className={s.sticker__ozon} target={"_blank"} href={ozon}>Купить на OZON</a> : <a className={s.sticker__ozon}>Скоро</a>}
+        {/*{ozon ? <a className={s.sticker__ozon} target={"_blank"} href={ozon}>Купить на OZON</a> : <a className={s.sticker__ozon}>Скоро</a>}*/}
       </div>
     </div>
   )

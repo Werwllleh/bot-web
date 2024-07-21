@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./SearchCar.module.css";
 import {Image} from "antd";
@@ -9,29 +9,29 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/parallax';
 import Header from "../../Header/Header";
+import {debounce} from "lodash";
 
 const SearchCar = ({data}) => {
 
-  const [searcheble, setSearcheble] = useState('');
+  const [searchable, setSearchable] = useState('');
   const [foundCars, setFoundCars] = useState([]);
 
-  const onSearcheble = (e) => {
-    setSearcheble(e.target.value.toUpperCase());
+  const onSearchable = (e) => {
+    setSearchable(e.target.value);
   };
 
   useEffect(() => {
-    setFoundCars(data.filter(user => searcheble.length && user?.carGRZ?.startsWith(searcheble) || user?.carGRZ?.includes(searcheble)))
-  }, [searcheble]);
+    setFoundCars(data.filter(user =>
+      searchable.length &&
+      (user?.carGRZ?.startsWith(searchable) || user?.carGRZ?.includes(searchable))
+    ));
+  }, [searchable, data]);
 
-  const {tg} = useTelegram();
-
-  let patternCarNum = new RegExp(
-    /^[АВЕКМНОРСТУХ]{1}[0-9]{3}[АВЕКМНОРСТУХ]{2}[0-9]{2,3}$/
-  );
+  const { tg } = useTelegram();
 
   useEffect(() => {
     tg.expand();
-  }, []);
+  }, [tg]);
 
   const isRussian = (str) => {
     return /[а-яё0-9]/i.test(str);
@@ -44,20 +44,20 @@ const SearchCar = ({data}) => {
           <Header title={"Поиск авто"}/>
           <input
             maxLength={9}
-            className={`${s.input} ${!isRussian(searcheble) && searcheble.length ? s.error : ''}`}
+            className={`${s.input} ${!isRussian(searchable) && searchable.length ? s.error : ''}`}
             type="text"
             placeholder="Введи номер авто"
-            value={searcheble}
-            onChange={onSearcheble}
+            value={searchable}
+            onChange={onSearchable}
           />
-          {foundCars.length && searcheble.length ? (
+          {foundCars.length && searchable.length ? (
             <div className={s.cards__count}>
               {`Количество найденных авто: ${foundCars.length}`}
             </div>
           ) : null}
         </div>
         {
-          foundCars.length && searcheble.length ? (
+          foundCars.length && searchable.length ? (
             <div className={s.cards}>
               <Swiper
                 centeredSlides={true}
@@ -120,7 +120,7 @@ const SearchCar = ({data}) => {
                               <li>Год выпуска: <span>{card.carYear}</span></li>
                               {card.carNote ? (
                                 <li>
-                                  Примечание: <span>{card.carNote}</span>
+                                  Примечание: <br/> <span>{card.carNote}</span>
                                 </li>
                               ) : null}
                             </ul>
@@ -132,7 +132,7 @@ const SearchCar = ({data}) => {
                 }
               </Swiper>
             </div>
-          ) : !foundCars.length && searcheble.length ? (
+          ) : !foundCars.length && searchable.length ? (
             <div className={s.notFoundImg}>
               <img src={SITE + "api/icons/404.png"} alt="Not found"/>
               <p>Авто не найдено</p>
