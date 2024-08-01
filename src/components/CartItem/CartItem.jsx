@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './CartItem.module.css';
-import {SITE} from "../../utils/consts";
+import {API} from "../../utils/consts";
 import Counter from "../Counter/Counter";
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
@@ -28,15 +28,15 @@ const CartItem = ({title, photo, count, price}) => {
             <Image
               preview={{
                 mask: false,
-                src: `${SITE}api/image/stickers/${photo}`,
+                src: `${API}api/image/stickers/${photo}`,
                 imageRender: () => (
                   <div className="sticker__preview">
-                    <img src={`${SITE}api/image/stickers/${photo}`} alt={title}/>
+                    <img src={`${API}api/image/stickers/${photo}`} alt={title}/>
                   </div>
                 ),
                 toolbarRender: () => null,
               }}
-              src={`${SITE}api/image/stickers/${photo}`}
+              src={`${API}api/image/stickers/${photo}`}
               alt={title}
             />
           </div>

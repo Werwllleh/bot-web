@@ -6,7 +6,7 @@ import CartItem from "../../CartItem/CartItem";
 import {Empty, Select, Input, Modal, notification} from "antd";
 const {TextArea} = Input;
 import InputMask from 'react-input-mask';
-import {SITE} from "../../../utils/consts";
+import {API} from "../../../utils/consts";
 import axios from "axios";
 import {useProductsCountStore, useUsersStore} from "../../../services/store";
 import useTelegram from "../../../hooks/useTelegram";
@@ -72,7 +72,7 @@ const Cart = () => {
   const sendOrderData = () => {
     try {
       axios
-        .post(SITE + `api/order`, {
+        .post(API + `api/order`, {
           orderData: {
             sellerChatId: Number(productStore.filter((item) => item.value === selectedPlace)[0].chatId),
             phone: phone,

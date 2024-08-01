@@ -6,7 +6,7 @@ import ChangeForm from './components/Pages/Form/ChangeForm/ChangeForm';
 import Cars from './components/Pages/Cars/Cars';
 import Partners from './components/Pages/Partners/Partners';
 import SearchCar from './components/Pages/SearchCar/SearchCar';
-import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate, useLocation, MemoryRouter} from 'react-router-dom';
 import {usePartnersStore, useProductsCountStore, useStickersStore, useUsersStore} from "./services/store";
 import Loader from "./components/Loader/Loader";
 import {getPartnersData, groupedPartnersFunc} from "./utils/partnersUtils";
@@ -132,6 +132,7 @@ function App() {
 
   return (
     <>
+
       {
         currentUser === undefined && location.pathname.startsWith('/form') ? (
           <div className="page">
@@ -180,9 +181,9 @@ function App() {
             title="403"
             subTitle={
               <>
-                Упс... Вы неавторизованный пользователь, используйте <a className={"ant-result__invite"}
-                                                                        target={"_blank"}
-                                                                        href={"https://t.me/VW21ClubBot"}>Telegram-bot</a>
+                Упс... Вы неавторизованный пользователь, используйте
+                <a className={"ant-result__invite"} target={"_blank"}
+                   href={"https://t.me/VW21ClubBot"}>Telegram-bot</a>
               </>
             }
           />

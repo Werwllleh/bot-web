@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./SearchCar.module.css";
 import {Image} from "antd";
-import {SITE} from "../../../utils/consts";
+import {API} from "../../../utils/consts";
 
 import {Swiper, SwiperSlide} from 'swiper/react';
 
@@ -100,11 +100,11 @@ const SearchCar = ({data}) => {
                           <div className={s.image_body}>
                             <Image
                               preview={{
-                                src: SITE + `api/image/` + card.carImage,
+                                src: API + `api/image/` + card.carImage,
                               }}
                               width={300}
                               src={
-                                SITE + `api/image/small/` +
+                                API + `api/image/small/` +
                                 card.carImage +
                                 "_" +
                                 "small.jpeg"
@@ -134,7 +134,7 @@ const SearchCar = ({data}) => {
             </div>
           ) : !foundCars.length && searchable.length ? (
             <div className={s.notFoundImg}>
-              <img src={SITE + "api/icons/404.png"} alt="Not found"/>
+              <img src={API + "api/icons/404.png"} alt="Not found"/>
               <p>Авто не найдено</p>
             </div>
           ) : (

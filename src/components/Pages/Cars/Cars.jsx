@@ -3,7 +3,7 @@ import useTelegram from "../../../hooks/useTelegram";
 import s from "./Cars.module.css";
 import {Image} from "antd";
 import Header from "../../Header/Header";
-import {SITE} from "../../../utils/consts";
+import {API} from "../../../utils/consts";
 
 const Cars = ({data}) => {
 
@@ -21,12 +21,12 @@ const Cars = ({data}) => {
             {data.map((user) => (
               <Image
                 preview={{
-                  // src: SITE + "api/image/" + user.carImage,
+                  // src: API + "api/image/" + user.carImage,
                   mask: 'Просмотр',
                   imageRender: () => (
                     <div className={s.preview__block}>
                       <div className={s.preview__image}>
-                        <img src={`${SITE}api/image/${user.carImage}`} alt=""/>
+                        <img src={`${API}api/image/${user.carImage}`} alt=""/>
                       </div>
                       <div className={s.preview__info}>
                         <ul className={s.preview__list}>
@@ -66,9 +66,9 @@ const Cars = ({data}) => {
                 loading="lazy"
                 key={user.chatId}
                 onError={(e) => {
-                  e.target.src = `${SITE}api/icons/not_found.png`
+                  e.target.src = `${API}api/icons/not_found.png`
                 }}
-                src={`${SITE}api/image/small/${user.carImage}_small.jpeg`}
+                src={`${API}api/image/small/${user.carImage}_small.jpeg`}
                 alt={`${user.carbrand} ${user.carModel}`}
               />
             ))}

@@ -2,7 +2,7 @@ import {useProductsCountStore, useUsersStore} from "../../../services/store";
 import React from "react";
 import s from "./Stickers.module.css";
 import {Image} from "antd";
-import {SITE} from "../../../utils/consts";
+import {API} from "../../../utils/consts";
 import Counter from "../../Counter/Counter";
 
 
@@ -36,15 +36,15 @@ const StickerItem = ({id, photo, title, price, ozon}) => {
         <Image
           preview={{
             mask: false,
-            // src: `${SITE}api/image/stickers/${photo}`,
+            // src: `${API}api/image/stickers/${photo}`,
             imageRender: () => (
               <div className="sticker__preview">
-                <img src={`${SITE}api/image/stickers/${photo}`} alt={title}/>
+                <img src={`${API}api/image/stickers/${photo}`} alt={title}/>
               </div>
             ),
             toolbarRender: () => null,
           }}
-          src={`${SITE}api/image/stickers/${photo}`}
+          src={`${API}api/image/stickers/${photo}`}
           alt={title}
         />
       </div>

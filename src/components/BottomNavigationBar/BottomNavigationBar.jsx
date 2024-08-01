@@ -59,7 +59,7 @@ const BottomNavigationBar = ({cart}) => {
         ) : null}
         <BottomNavigationAction
           label="Корзина"
-          value="cart"
+          value="/cart"
           icon={<ShoppingCartIcon/>}
           selected={location.pathname === '/cart'}
         />

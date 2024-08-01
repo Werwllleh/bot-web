@@ -2,7 +2,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Space, message, Upload } from "antd";
 import React from "react";
 import axios from "axios";
-import {SITE} from "../../../../utils/consts";
+import {API} from "../../../../utils/consts";
 
 const UploadForm = ({ img }) => {
   const getBase64 = (img, callback) => {
@@ -48,7 +48,7 @@ const UploadForm = ({ img }) => {
 
   const handleRemove = async (file) => {
     let response = file.response;
-    await axios.post(SITE + "api/upload/remove", {
+    await axios.post(API + "api/upload/remove", {
       response,
     });
     img("");
@@ -58,7 +58,7 @@ const UploadForm = ({ img }) => {
     <Space direction="vertical" style={{ width: "100%" }} size="large">
       <Upload
         name="avatar"
-        action={ SITE + `api/upload`}
+        action={ API + `api/upload`}
         listType="picture"
         maxCount={1}
         beforeUpload={beforeUpload}

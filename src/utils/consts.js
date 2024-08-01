@@ -1,7 +1,8 @@
 import {FormOutlined, UsergroupAddOutlined, NotificationOutlined} from "@ant-design/icons";
 import React from "react";
 
-export const SITE = 'https://vagcheb.ru/';
+// export const SITE = 'https://vagcheb.ru/';
+export const API = 'https://vagcheb.ru/';
 export const VOLKSWAGEN = 'volkswagen';
 export const SKODA = 'skoda';
 export const AUDI = 'audi';

@@ -1,9 +1,9 @@
 import axios from "axios";
-import {SITE} from "./consts";
+import {API} from "./consts";
 
 export const addFeedback = async (chatId, data) => {
   return (
-    await axios.post(`${SITE}api/add-feedback`, {
+    await axios.post(`${API}api/add-feedback`, {
       chatId: chatId,
       data: data,
     })
@@ -12,18 +12,18 @@ export const addFeedback = async (chatId, data) => {
 
 export const getFeedback = async (chatId) => {
   return (
-    await axios.post(`${SITE}api/get-feedback`, {chatId})
+    await axios.post(`${API}api/get-feedback`, {chatId})
   )
 }
 
 export const verifyFeedback = async (feedbackId, verifyStatus) => {
   return (
-    await axios.post(`${SITE}api/verify-feedback`, {feedbackId, verifyStatus})
+    await axios.post(`${API}api/verify-feedback`, {feedbackId, verifyStatus})
   )
 }
 
 export const historyFeedbacks = async () => {
   return (
-    await axios.post(`${SITE}api/history-feedbacks`)
+    await axios.post(`${API}api/history-feedbacks`)
   )
 }

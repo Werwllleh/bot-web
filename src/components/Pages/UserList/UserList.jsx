@@ -3,7 +3,7 @@ import {getUsersData, postUserDelete, postUsersUpdatedData} from "../../../utils
 import {Watermark, Modal, Image, Input, Empty} from "antd";
 import Header from "../../Header/Header";
 import {FormOutlined, DeleteOutlined} from '@ant-design/icons';
-import {SITE} from "../../../utils/consts";
+import {API} from "../../../utils/consts";
 import {useUsersStore} from "../../../services/store";
 import {debounce} from "lodash";
 import Loader from "../../Loader/Loader";
@@ -144,19 +144,19 @@ const UserList = () => {
                         })}
                       </div>
                       <div className="admin-user-item__image">
-                        {/*<img src={`${SITE}api/image/small/${user.carImage}_small.jpeg`} alt=""/>*/}
+                        {/*<img src={`${API}api/image/small/${user.carImage}_small.jpeg`} alt=""/>*/}
                         <Image
                           preview={{
-                            src: SITE + "api/image/" + user.carImage,
+                            src: API + "api/image/" + user.carImage,
                             mask: 'Просмотр',
                             toolbarRender: () => null,
                           }}
                           loading="lazy"
                           key={user.chatId}
                           onError={(e) => {
-                            e.target.src = `${SITE}api/icons/not_found.png`
+                            e.target.src = `${API}api/icons/not_found.png`
                           }}
-                          src={`${SITE}api/image/small/${user.carImage}_small.jpeg`}
+                          src={`${API}api/image/small/${user.carImage}_small.jpeg`}
                           alt={`${user.carbrand} ${user.carModel}`}
                         />
                       </div>
@@ -186,19 +186,19 @@ const UserList = () => {
                         })}
                       </div>
                       <div className="admin-user-item__image">
-                        {/*<img src={`${SITE}api/image/small/${user.carImage}_small.jpeg`} alt=""/>*/}
+                        {/*<img src={`${API}api/image/small/${user.carImage}_small.jpeg`} alt=""/>*/}
                         <Image
                           preview={{
-                            src: SITE + "api/image/" + user.carImage,
+                            src: API + "api/image/" + user.carImage,
                             mask: 'Просмотр',
                             toolbarRender: () => null,
                           }}
                           loading="lazy"
                           key={user.chatId}
                           onError={(e) => {
-                            e.target.src = `${SITE}api/icons/not_found.png`
+                            e.target.src = `${API}api/icons/not_found.png`
                           }}
-                          src={`${SITE}api/image/small/${user.carImage}_small.jpeg`}
+                          src={`${API}api/image/small/${user.carImage}_small.jpeg`}
                           alt={`${user.carbrand} ${user.carModel}`}
                         />
                       </div>

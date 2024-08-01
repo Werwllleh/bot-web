@@ -4,7 +4,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import useTelegram from "../../../../hooks/useTelegram";
 import s from "./ChangeForm.module.css";
 import Header from "../../../Header/Header";
-import {AUDI, BENTLEY, cars, LAMBORGHINI, SEAT, SKODA, VOLKSWAGEN, URL, SITE} from "../../../../utils/consts";
+import {AUDI, BENTLEY, cars, LAMBORGHINI, SEAT, SKODA, VOLKSWAGEN, URL, API} from "../../../../utils/consts";
 import Button from "../../../Button/Button";
 import {useUsersStore} from "../../../../services/store";
 import {Select, notification} from 'antd';
@@ -64,7 +64,7 @@ const ChangeForm = () => {
     checkData;
     try {
       axios
-        .post(SITE + `api/change`, {
+        .post(API + `api/change`, {
           changedData: {
             curUser,
             carBrand,
