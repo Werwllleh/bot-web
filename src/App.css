@@ -75,6 +75,8 @@
 
 .sticker__photo .ant-image-img {
   transition: transform .3s ease-in-out;
+  object-fit: cover;
+  max-height: 239px;
 }
 
 .sticker__photo:hover .ant-image-img {

@@ -4,7 +4,7 @@ export const getProductsData = async () => {
 
   return (
     await axios.get(
-      'https://script.google.com/macros/s/AKfycbx7u6gMuL62On4vI9xdE51PdfzKkjzhJBm3Fw3ZVJ4tdASNj8MjYOvqifZJrYZl2cqB7A/exec'
+      'https://script.google.com/macros/s/AKfycbwTu6m3wl_ZHt1_MHMbdQFi18KsDSCAF-9tz4U_5EclwrUAXy5LiTBCdb9imwvUS7Ev5w/exec'
     )
   )
 };

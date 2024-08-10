@@ -78,7 +78,6 @@ const Stickers = ({stickers}) => {
   }, [seller]);
 
 
-
   const showDrawer = () => {
     setOpen(true);
   };
@@ -172,7 +171,8 @@ const Stickers = ({stickers}) => {
               <div className={s.sticker__values}>
                 {
                   Object.entries(getSellerStickersCount(productStore, currentUser.id)?.products).map((sticker, index) => {
-                    return <StickersValueInput onInputChange={(index, newValue) => handleInputChange(index, newValue)} key={sticker[0]} index={index} value={sticker} />
+                    return <StickersValueInput onInputChange={(index, newValue) => handleInputChange(index, newValue)}
+                                               key={sticker[0]} index={index} value={sticker}/>
                   })
                 }
               </div>

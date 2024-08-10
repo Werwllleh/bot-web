@@ -41,6 +41,7 @@ export const stickersTitles = {
   'audi_color': ['Наклейка Audi цветная', 300, ''],
   'audi_gray': ['Наклейка Audi антихром', 500, ''],
   'audi_perl': ['Наклейка Audi перламутр', 600, ''],
+  'aromatizers': ['Ароматизаторы', 150, ''],
 }
 
 export const userStatusValue = {

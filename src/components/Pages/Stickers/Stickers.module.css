@@ -23,7 +23,7 @@
     flex-direction: column;
     gap: 5px;
     padding: 0 7px;
-    /*width: 100%;*/
+    width: 100%;
 }
 
 .sticker__title {
@@ -37,8 +37,10 @@
 .sticker__price {
     display: block;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 0.05em;
+    color: #003fff;
+    font-weight: 500;
 }
 
 .sticker__footer {
@@ -166,7 +168,7 @@
     }
 
     .sticker__price {
-        font-size: 12px;
+        font-size: 14px;
     }
     .stickers__admin_update {
         right: 0;

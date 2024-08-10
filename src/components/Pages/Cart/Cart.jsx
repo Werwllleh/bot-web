@@ -174,7 +174,7 @@ const Cart = () => {
             return (
               <li key={item.title} className={s.order__item}>
                 <div className={s.order__item_body}>
-                  <img className={s.order__item_photo} src={`${SITE}api/image/stickers/${item.photo}`}
+                  <img className={s.order__item_photo} src={`${API}api/image/stickers/${item.photo}`}
                        alt={item.title}/>
                   <div className={s.order__item_info}>
                     <h5 className={s.order__item_title}>{item.title}</h5>
