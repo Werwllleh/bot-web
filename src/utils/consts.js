@@ -31,17 +31,19 @@ export const cars = {
   ]
 }
 
+const avitoLink = 'https://www.avito.ru/cheboksary/zapchasti_i_aksessuary/vw_club21_3995153485?utm_campaign=native&utm_medium=item_page_ios&utm_source=soc_sharing_seller';
+
 export const stickersTitles = {
-  'sk_color': ['Наклейка Skoda цветная', 300, 'https://ozon.ru/t/39jRKjA'],
-  'sk_gray': ['Наклейка Skoda антихром', 500, 'https://ozon.ru/t/PgdrqP4'],
-  'sk_perl': ['Наклейка Skoda перламутр', 600, ''],
-  'vw_color': ['Наклейка Volkswagen цветная', 300, 'https://ozon.ru/t/Zn0e8d2'],
-  'vw_gray': ['Наклейка Volkswagen антихром', 500, 'https://ozon.ru/t/bb9pKVn'],
-  'vw_perl': ['Наклейка Volkswagen перламутр', 600, ''],
-  'audi_color': ['Наклейка Audi цветная', 300, ''],
-  'audi_gray': ['Наклейка Audi антихром', 500, ''],
-  'audi_perl': ['Наклейка Audi перламутр', 600, ''],
-  'aromatizers': ['Ароматизаторы', 150, ''],
+  'sk_color': ['Наклейка Skoda цветная', 300, avitoLink],
+  'sk_gray': ['Наклейка Skoda антихром', 500, avitoLink],
+  'sk_perl': ['Наклейка Skoda перламутр', 600, avitoLink],
+  'vw_color': ['Наклейка Volkswagen цветная', 300, avitoLink],
+  'vw_gray': ['Наклейка Volkswagen антихром', 500, avitoLink],
+  'vw_perl': ['Наклейка Volkswagen перламутр', 600, avitoLink],
+  'audi_color': ['Наклейка Audi цветная', 300, avitoLink],
+  'audi_gray': ['Наклейка Audi антихром', 500, avitoLink],
+  'audi_perl': ['Наклейка Audi перламутр', 600, avitoLink],
+  'aromatizers': ['Ароматизаторы', 150, avitoLink],
 }
 
 export const userStatusValue = {

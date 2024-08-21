@@ -5,6 +5,8 @@ import Header from "../../Header/Header";
 import ruRu from 'antd/locale/ru_RU';
 import {places} from "../../../utils/consts";
 import {setLocation} from "../../../utils/locationUtils";
+import Loader from "../../Loader/Loader";
+import LoaderCar from "../../LoaderCar/LoaderCar";
 
 
 const LocationPage = () => {
@@ -16,6 +18,8 @@ const LocationPage = () => {
 
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
+
+  const [loading, setLoading] = useState(false);
 
 
   const onSwitch = (checked) => {
@@ -46,7 +50,7 @@ const LocationPage = () => {
     if (switchChoose === false) {
       setPlaceMeet('')
     }
-    console.log(switchChoose)
+    // console.log(switchChoose)
 
   }, [switchChoose]);
 
@@ -58,8 +62,18 @@ const LocationPage = () => {
   }
 
   const save = () => {
+    setLoading(true)
     setLocation('gogo')
-      .then(data => console.log(data))
+      .then(data => {
+        if (data.status === 200) {
+          console.log(data)
+          setLoading(false)
+        } else {
+          console.log('Ошибка')
+          setLoading(false)
+        }
+
+      })
     console.log(sendObject)
   }
 
@@ -93,7 +107,10 @@ const LocationPage = () => {
             </div>
           )}
           <TextArea rootClassName={"location-page__text"} onChange={onTextChange} placeholder="Текст уведомления" allowClear />
-          <Button type="primary" onClick={save}>Сохранить</Button>
+          <Button type="primary" onClick={save}>
+            Сохранить
+            {loading && <Loader />}
+          </Button>
         </div>
       </div>
     </div>
