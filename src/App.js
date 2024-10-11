@@ -122,18 +122,26 @@ function App() {
 
   }, []);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate('/partners')
+  }, []);
+
 
   const partnersSortedObject = groupedPartnersFunc(partners);
 
   const admin = admins.includes(currentUser?.id);
 
-  // console.log(currentUser)
-
 
   return (
     <>
-
-      {
+      <div className="page">
+        <Routes>
+          <Route index path='/partners' element={<Partners data={partnersSortedObject}/>}/>
+        </Routes>
+      </div>
+      {/*{
         currentUser === undefined && location.pathname.startsWith('/form') ? (
           <div className="page">
             <Routes>
@@ -188,7 +196,7 @@ function App() {
             }
           />
         )
-      }
+      }*/}
     </>
   );
 }
