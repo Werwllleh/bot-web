@@ -25,9 +25,9 @@ const Header = ({ title }) => {
   return (
     <>
       <header className={`header ${menuActive ? 'active' : ''}`}>
-        <div className={"header__menu-burger"}>
+        {/*<div className={"header__menu-burger"}>
           {currentUser !== undefined && <MenuBurgerButton active={menuActive} onClick={menuClick}/>}
-        </div>
+        </div>*/}
         <div className={"header__body"}>
           <h1 className={"title"}>{title}</h1>
         </div>
