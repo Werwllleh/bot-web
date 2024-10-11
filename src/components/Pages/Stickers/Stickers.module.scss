@@ -1,6 +1,70 @@
 .stickers__body {
+    padding: 20px 10px 120px;
+    height: 100%;
+
+    @media (max-width: 550px) {
+        padding: 20px 0 80px;
+    }
+}
+
+.stickers__content {
 
 }
+
+.stickers__repair {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    &_image {
+
+        svg {
+            max-width: 300px;
+            width: 100%;
+            max-height: 300px;
+            height: 100%;
+
+            @media (max-width: 550px) {
+                max-width: 200px;
+            }
+        }
+    }
+
+    &_text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        max-width: 400px;
+
+        p {
+            font-size: 26px;
+            font-weight: 600;
+            color: #263238;
+            text-align: center;
+            line-height: 1.45;
+
+            &:nth-child(2) {
+                font-size: 18px;
+            }
+
+            @media (max-width: 550px) {
+                font-size: 20px;
+
+                &:nth-child(2) {
+                    font-size: 16px;
+                }
+            }
+
+        }
+
+
+    }
+}
+
+
+
 
 .stickers__grid {
     margin: 30px 0 0 0;

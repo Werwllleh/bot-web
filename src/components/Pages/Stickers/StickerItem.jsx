@@ -1,6 +1,6 @@
 import {useProductsCountStore, useUsersStore} from "../../../services/store";
 import React from "react";
-import s from "./Stickers.module.css";
+import s from "./Stickers.module.scss";
 import {Image} from "antd";
 import {API} from "../../../utils/consts";
 import Counter from "../../Counter/Counter";

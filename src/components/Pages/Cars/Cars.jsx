@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import useTelegram from "../../../hooks/useTelegram";
-import s from "./Cars.module.css";
+import s from "./Cars.module.scss";
 import {Image} from "antd";
 import Header from "../../Header/Header";
 import {API} from "../../../utils/consts";

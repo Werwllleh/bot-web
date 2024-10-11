@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../Header/Header";
-import s from "../Stickers/Stickers.module.css";
+import s from "./Stickers.module.scss";
 import {getSellerStickersCount, stickersInfo, updateStickersData} from "../../../utils/stickersUtils";
 import StickerItem from "./StickerItem";
 import {Button, Drawer, notification} from "antd";
@@ -10,6 +10,7 @@ import StickersValueInput from "./StickersValueInput";
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import useTelegram from "../../../hooks/useTelegram";
+import {ReactComponent as RepairLogo} from '../../../images/icons/repair.svg';
 
 
 const Stickers = ({stickers}) => {
@@ -139,16 +140,29 @@ const Stickers = ({stickers}) => {
       {contextHolder}
       <div className={s.stickers__body}>
         <Header title={"Атрибутика клуба"}/>
-        <div className={s.stickers__grid}>
+        <div className="container">
+          <div className={s.stickers__content}>
+            <div className={s.stickers__repair}>
+              <div className={s.stickers__repair_image}>
+                <RepairLogo/>
+              </div>
+              <div className={s.stickers__repair_text}>
+                <p>Ведутся технические работы </p>
+                <p>Для покупки ароматизаторов и наклеек пишите админам в личные сообщения</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/*<div className={s.stickers__grid}>
           {
             stickersInfo(stickers).map((sticker) => {
               return <StickerItem key={sticker.title} id={sticker.id} photo={sticker.photo} title={sticker.title}
                                   price={sticker.price} link={sticker.ozon}/>
             })
           }
-        </div>
+        </div>*/}
       </div>
-      {
+      {/*{
         seller ? (
           <>
             <Button className={s.stickers__admin_update} type="primary" icon={<EditOutlined/>} onClick={showDrawer}/>
@@ -179,7 +193,7 @@ const Stickers = ({stickers}) => {
             </Drawer>
           </>
         ) : null
-      }
+      }*/}
     </>
   );
 };

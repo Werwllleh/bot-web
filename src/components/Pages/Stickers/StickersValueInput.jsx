@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import s from "../Stickers/Stickers.module.css";
+import s from "./Stickers.module.scss";
 import {Input} from "antd";
 import {stickersTitles} from "../../../utils/consts";
 

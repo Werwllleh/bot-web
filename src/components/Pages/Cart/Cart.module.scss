@@ -1,5 +1,11 @@
 .cart__body {
     position: relative;
+
+    padding: 20px 0 120px;
+
+    @media (max-width: 550px) {
+        padding: 20px 0 80px;
+    }
 }
 
 .cart__items {

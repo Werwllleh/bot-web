@@ -1,9 +1,3 @@
-.page {
-  margin: 100px 0 0 0;
-  padding: 20px 0 120px;
-}
-
-
 
 .container {
   position: relative;
@@ -13,74 +7,83 @@
   padding: 0 15px;
 }
 
+.page {
+  margin: 68px 0 0 0;
+
+  @media (max-width: 550px) {
+    margin: 58px 0 0 0;
+
+    .container {
+      padding: 0 10px;
+    }
+  }
+}
 
 
 .content_accordion {
   border-radius: 5px;
   overflow: hidden;
+
+  & .ant-collapse {
+    border: none;
+  }
+
+  &.ant-collapse-content {
+    border-top: none !important;
+    background-color: #f8f8f8;
+  }
+
+  & .ant-collapse-header {
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    background: linear-gradient(90deg, rgba(43, 42, 41, 0.9) 0%, rgba(198, 32, 58, 0.90) 60%, rgba(242, 145, 20, 0.90) 100%);
+    transition: background .3s ease-in-out;
+    padding: 18px 15px !important;
+  }
+
+  & .ant-collapse-header:hover,
+  & .ant-collapse-item-active .ant-collapse-header {
+    background: linear-gradient(90deg, rgba(43, 42, 41, 1) 0%, rgba(198, 32, 58, 1) 50%, rgba(242, 145, 20, 1) 100%);
+  }
+
+  & .ant-collapse-item:last-child {
+    border-bottom: none;
+  }
+
+  & .ant-collapse-header-text {
+    font-weight: 500;
+    color: rgb(255, 255, 255) !important;
+    font-size: 16px;
+  }
+
+  & .anticon svg {
+    fill: #ffffff;
+  }
+
+  & .ant-collapse-item-active .anticon svg {
+    transform: rotate(90deg);
+  }
+
+  & .ant-collapse-item-active .ant-collapse-header {
+    border-radius: 0 0 0 0 !important;
+  }
 }
 
-.content_accordion .ant-collapse {
-  border: none;
-}
-
-.content_accordion .ant-collapse-content {
-  border-top: none !important;
-  background-color: #f8f8f8;
-}
-
-.content_accordion .ant-collapse-header {
-  align-items: center !important;
-  flex-wrap: nowrap !important;
-  background: linear-gradient(90deg, rgba(43,42,41,0.9) 0%, rgba(198,32,58,0.90) 60%, rgba(242,145,20,0.90) 100%);
-  transition: background .3s ease-in-out;
-  padding: 18px 15px !important;
-}
-
-.content_accordion .ant-collapse-header:hover,
-.content_accordion .ant-collapse-item-active .ant-collapse-header{
-  background: linear-gradient(90deg, rgba(43,42,41,1) 0%, rgba(198,32,58,1) 50%, rgba(242,145,20,1) 100%);
-}
-
-.content_accordion .ant-collapse-item {
-
-}
-
-.content_accordion .ant-collapse-item:last-child {
-  border-bottom: none;
-}
-
-.content_accordion .ant-collapse-header-text {
-  font-weight: 500;
-  color: rgb(255, 255, 255) !important;
-  font-size: 16px;
-}
-
-.content_accordion .anticon svg {
-  fill: #ffffff;
-}
-
-.content_accordion .ant-collapse-item-active .anticon svg {
-  transform: rotate(90deg);
-}
-
-.content_accordion .ant-collapse-item-active .ant-collapse-header {
-  border-radius: 0 0 0 0 !important;
-}
 
 .sticker__photo {
   position: relative;
   cursor: pointer;
-}
 
-.sticker__photo .ant-image-img {
-  transition: transform .3s ease-in-out;
-  object-fit: cover;
-  max-height: 239px;
-}
+  & .ant-image-img {
+    transition: transform .3s ease-in-out;
+    object-fit: cover;
+    max-height: 239px;
+  }
 
-.sticker__photo:hover .ant-image-img {
-  transform: scale(1.1);
+  &:hover .ant-image-img {
+    transform: scale(1.1);
+  }
+
 }
 
 @media (max-width: 550px) {
@@ -97,8 +100,6 @@
   transform: scale(1.2);
   font-weight: 500;
 }
-
-
 
 
 .bottom-navbar {
@@ -138,7 +139,7 @@
   text-decoration: none;
 }
 
-.bottom-navbar__link .MuiButtonBase-root{
+.bottom-navbar__link .MuiButtonBase-root {
   max-width: 100px;
   width: 100%;
   height: 100%;
@@ -252,16 +253,6 @@
 
 .input__phone::placeholder {
   color: rgba(0, 0, 0, 0.25);
-}
-
-@media (max-width: 550px) {
-  .page {
-    padding: 0 0 80px;
-    margin: 70px 0 0 0;
-  }
-  .container {
-    padding: 0 10px;
-  }
 }
 
 @media (max-width: 500px) {

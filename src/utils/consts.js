@@ -31,7 +31,7 @@ export const cars = {
   ]
 }
 
-const avitoLink = 'https://www.avito.ru/cheboksary/zapchasti_i_aksessuary/vw_club21_3995153485?utm_campaign=native&utm_medium=item_page_ios&utm_source=soc_sharing_seller';
+const avitoLink = 'https://www.avito.ru/cheboksary/zapchasti_i_aksessuary/vw_club21_3995153485';
 
 export const stickersTitles = {
   'sk_color': ['Наклейка Skoda цветная', 300, avitoLink],

@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import useTelegram from "../../../hooks/useTelegram";
-import s from "./SearchCar.module.css";
+import s from "./SearchCar.module.scss";
 import {Image} from "antd";
 import {API} from "../../../utils/consts";
 
@@ -62,8 +62,8 @@ const SearchCar = ({data}) => {
               <Swiper
                 centeredSlides={true}
                 breakpoints={{
-                  300: {
-                    slidesPerView: 1,
+                  350: {
+                    slidesPerView: 1.25,
                     spaceBetween: 10
                   },
                   450: {

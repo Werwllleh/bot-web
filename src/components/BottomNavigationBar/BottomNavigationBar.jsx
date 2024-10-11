@@ -53,7 +53,7 @@ const BottomNavigationBar = ({cart}) => {
           selected={location.pathname === '/stickers'}
         />
       </Link>
-      <Link className="bottom-navbar__link" to={'/cart'}>
+      {/*<Link className="bottom-navbar__link" to={'/cart'}>
         {getTotalSumCart(cart).totalCount ? (
           <span className="cart-count">{getTotalSumCart(cart).totalCount}</span>
         ) : null}
@@ -63,7 +63,7 @@ const BottomNavigationBar = ({cart}) => {
           icon={<ShoppingCartIcon/>}
           selected={location.pathname === '/cart'}
         />
-      </Link>
+      </Link>*/}
     </BottomNavigation>
   );
 };

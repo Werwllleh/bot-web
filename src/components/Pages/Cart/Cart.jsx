@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import s from './Cart.module.css';
+import s from './Cart.module.scss';
 import Header from "../../Header/Header";
 import {checkAvailable, getTotalSumCart} from "../../../utils/cartUtils";
 import CartItem from "../../CartItem/CartItem";

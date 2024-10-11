@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import {useEffect, useState} from "react";
 import useTelegram from "./hooks/useTelegram";
 import Form from './components/Pages/Form/Form';
