@@ -93,3 +93,15 @@ export const places = [
     label: 'Другое место'
   }
 ]
+
+export const menu = [
+  {
+    title: 'Регистрация',
+    url: '/registration'
+  },
+  {
+    title: 'Наши авто',
+    url: '/'
+  },
+
+]

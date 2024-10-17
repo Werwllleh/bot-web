@@ -1,0 +1,24 @@
+
+$ff-main: "Hauora", sans-serif;
+$transition: .3s ease-in-out;
+
+
+//colors
+$accent-color: #3071ff;
+$accent-color-light: #3071FFAD;
+$error-color: #FF808060;
+$grey-light: #e8e8e8;
+
+
+//animate
+
+@mixin showAnim {
+  @keyframes showAnim {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

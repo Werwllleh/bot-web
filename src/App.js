@@ -17,12 +17,15 @@ import BottomNavigationBar from "./components/BottomNavigationBar/BottomNavigati
 import Cart from "./components/Pages/Cart/Cart";
 import {getProductsData} from "./utils/productsUtils";
 import {Result} from "antd";
-import {admins, userStatusValue} from "./utils/consts";
+import {admins, menu, userStatusValue} from "./utils/consts";
 import Feedback from "./components/Pages/Feedback/Feedback";
 import FeedbackList from "./components/Pages/Feedback/FeedbackList";
 import Admin from "./components/Pages/Admin/Admin";
 import UserList from "./components/Pages/UserList/UserList";
 import LocationPage from "./components/Pages/LocationPage/LocationPage";
+import Registration from "./components/Pages/Registration/Registration";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -50,8 +53,6 @@ function App() {
   const stickers = useStickersStore((state) => state.stickers);
   const userCart = useUsersStore((state) => state.cart);
   const userStatus = useUsersStore((state) => state.userStatus);
-
-  const location = useLocation();
 
 
   useEffect(() => {
@@ -124,23 +125,27 @@ function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate('/partners')
-  }, []);
 
 
   const partnersSortedObject = groupedPartnersFunc(partners);
 
-  const admin = admins.includes(currentUser?.id);
+  const {pathname} = useLocation();
+  const headerTitle = menu.filter(item => item.url === pathname)[0].title;
 
 
   return (
     <>
-      <div className="page">
-        <Routes>
-          <Route index path='/partners' element={<Partners data={partnersSortedObject}/>}/>
-        </Routes>
-      </div>
+      <Header title={headerTitle}/>
+      <main className="main">
+        <div className="content">
+          <Routes>
+            <Route index element={<Cars data={users}/>}/>
+            <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
+            <Route path='/registration' element={<Registration/>}/>
+          </Routes>
+        </div>
+      </main>
+      <Footer />
       {/*{
         currentUser === undefined && location.pathname.startsWith('/form') ? (
           <div className="page">

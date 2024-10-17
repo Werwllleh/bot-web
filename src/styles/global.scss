@@ -16,3 +16,29 @@
   border: none !important;
   border-color: transparent !important;
 }
+
+.ant-input {
+  border-bottom: 1px solid $accent-color-light;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  font-family: inherit;
+  border-radius: 0;
+  font-size: 1.6rem;
+  transition: border-bottom $transition;
+  padding: 0;
+
+  &:hover {
+    border-bottom: 1px solid $accent-color;
+  }
+
+  &:focus {
+    box-shadow: none;
+    border-bottom: 1px solid $accent-color;
+  }
+
+  &.error {
+    border-bottom: 1px solid $error-color;
+  }
+}

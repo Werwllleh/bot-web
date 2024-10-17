@@ -1,5 +1,11 @@
+@import "variables";
+@import "base";
+
 //components
+
 @import "./components/header";
+@import "./components/footer";
+@import "./components/input";
 @import "./components/menu-burger-button";
 
 

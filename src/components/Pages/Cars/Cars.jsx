@@ -15,7 +15,6 @@ const Cars = ({data}) => {
 
   return (
     <div className={s.cars_body}>
-        <Header title={"Автомобили нашего клуба"}/>
         <div className={s.image_grid}>
           <div className={s.cars_grid}>
             {data.map((user) => (
