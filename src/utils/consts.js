@@ -2,13 +2,11 @@ import {FormOutlined, UsergroupAddOutlined, NotificationOutlined} from "@ant-des
 import React from "react";
 
 // export const SITE = 'https://vagcheb.ru/';
-export const API = 'https://vagcheb.ru/';
-export const VOLKSWAGEN = 'volkswagen';
-export const SKODA = 'skoda';
-export const AUDI = 'audi';
-export const SEAT = 'seat';
-export const BENTLEY = 'bentley';
-export const LAMBORGHINI = 'lamborghini';
+export const API = 'http://localhost';
+// export const API = 'https://vagcheb.ru/';
+
+const SITE = 'http://localhost:5000';
+export const API_BASE = `${SITE}/api`;
 
 export const cars = {
   'volkswagen': [

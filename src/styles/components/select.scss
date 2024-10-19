@@ -1,0 +1,140 @@
+.select {
+  font-size: 1.6rem;
+  position: relative;
+
+  &.shown {
+    .select__header {
+      border-bottom-color: transparent;
+    }
+    .select__content {
+      pointer-events: all;
+      visibility: visible;
+      opacity: 1;
+      height: auto;
+    }
+  }
+
+  &__body {
+  }
+
+  &__input {
+  }
+
+  &__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #e8e8e8;
+    z-index: 0;
+    background-color: $white;
+    transition: border-color $transition;
+
+    &:hover {
+      border-bottom: 1px solid $accent-color-light;
+    }
+
+    &.icon {
+      padding-left: 3rem;
+    }
+
+    &.chosen {
+      border-bottom: 1px solid $accent-color;
+
+      .select__title {
+        color: $dark;
+      }
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0.5rem;
+    margin: auto 0;
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: $accent-color;
+    }
+  }
+
+  &__clear {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0.5rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    margin: auto 0;
+    display: flex;
+    cursor: pointer;
+    animation: showAnim 0.3s ease-in-out;
+    z-index: 3;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: $accent-color;
+    }
+  }
+
+  &__title {
+    width: 100%;
+    cursor: pointer;
+    padding: 0.5rem 2rem 0.5rem 0;
+    line-height: 1;
+    color: $grey;
+  }
+
+  &__content {
+    position: absolute; // Добавляем абсолютное позиционирование
+    top: 0; // Размещаем контент под заголовком
+    left: 0;
+    width: 100%; // Ширина равна ширине select
+    pointer-events: none;
+    visibility: hidden;
+    height: 0;
+    opacity: 0;
+    //transform: translateY(-2rem); // Начальное смещение вверх
+    transition: opacity $transition, transform $transition, height $transition; // Плавный переход
+    border: 1px solid $accent-color-light;
+    background-color: $white; // Добавляем фон, чтобы контент был виден
+    z-index: 1;
+
+  }
+
+  &__list {
+    height: 100%;
+    max-height: 40rem;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $accent-color-light;
+    }
+
+    &-item {
+      padding: 0.5rem 2rem 0.5rem 3rem;
+      cursor: pointer;
+      transition: background-color $transition, color $transition;
+
+      &:hover {
+        background-color: $accent-color-light;
+        color: $white;
+      }
+    }
+  }
+}

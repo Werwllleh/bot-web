@@ -3,9 +3,16 @@ import React, {useCallback, useEffect, useState} from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./Form.module.css";
 import Header from "../../Header/Header";
-import {AUDI, BENTLEY, cars, LAMBORGHINI, SEAT, SKODA, VOLKSWAGEN} from "../../../utils/consts";
 
 const Form = () => {
+  return (
+    <div>
+
+    </div>
+  );
+};
+
+/*const Form = () => {
     const [name, setName] = useState("");
     const [carBrand, setCarBrand] = useState('');
     const [carModel, setCarModel] = useState('');
@@ -203,6 +210,6 @@ const Form = () => {
             </div>
         </div>
     );
-};
+};*/
 
 export default Form;

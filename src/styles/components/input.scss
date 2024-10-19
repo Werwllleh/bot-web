@@ -49,8 +49,13 @@
       border-bottom: 1px solid $accent-color-light;
     }
 
-    &:focus {
+    &:focus,
+    &.active {
       border-bottom: 1px solid $accent-color;
+    }
+
+    &::placeholder {
+      color: $grey;
     }
   }
 

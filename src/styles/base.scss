@@ -91,6 +91,7 @@ legend {
 body, html {
   font-size: 10px;
   scroll-behavior: smooth;
+  color: $dark;
 }
 
 body {
@@ -130,4 +131,7 @@ body #root {
 .content {
   margin: 7rem 0 0 0;
   padding: 2rem 0 0 0;
+}
+button {
+  transition: background-color $transition, color $transition;
 }

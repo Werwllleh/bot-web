@@ -23,7 +23,7 @@ const Input = ({label, icon, placeholder, name, required}) => {
       <div className="input-field__field">
         {icon && <span className="input-field__icon">{icon}</span>}
         <input required={!!required} ref={input} value={value} onChange={onChange} name={name} placeholder={placeholder}
-               className={`input-field__input ${icon ? 'icon' : ''}`}/>
+               className={`input-field__input ${icon ? 'icon' : ''} ${value.length ? 'active' : ''}`}/>
         {value.length ? <span onClick={clearInput} className="input-field__clear"><CloseOutlined/></span> : ''}
       </div>
     </div>

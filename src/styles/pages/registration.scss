@@ -1,3 +1,37 @@
 .registration {
 
+  &__body {}
+
+  &__form {
+
+    &-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    &-footer {
+      margin: 2rem 0 0 0;
+    }
+
+    &-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      background-color: $accent-color-light;
+      width: 100%;
+      padding: 1rem;
+      color: $white;
+
+      &:hover {
+        background-color: $accent-color;
+      }
+    }
+  }
+
+  &__field {
+
+    &-input {}
+  }
 }

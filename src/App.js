@@ -83,7 +83,7 @@ function App() {
     // updateUserStatus()
   }, [userStatus]);
 
-  useEffect(() => {
+  /*useEffect(() => {
 
     getUsersData()
       .then((res) => {
@@ -121,7 +121,7 @@ function App() {
       });
 
 
-  }, []);
+  }, []);*/
 
   const navigate = useNavigate();
 
