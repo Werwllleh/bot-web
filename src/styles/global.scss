@@ -42,3 +42,9 @@
     border-bottom: 1px solid $error-color;
   }
 }
+
+.ant-btn,
+.ant-input,
+.ant-drawer {
+  font-family: inherit !important;
+}

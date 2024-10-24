@@ -1,11 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {CloseOutlined} from "@ant-design/icons";
 
-const Select = ({name, title, data, icon, onChange}) => {
+const Select = ({name, title, data, icon, onChange, value}) => {
 
   const selectRef = useRef(null);
   const [active, setActive] = useState(false);
-  const [value, setValue] = useState('');
 
   const showList = () => {
     setActive(!active)
@@ -13,20 +12,13 @@ const Select = ({name, title, data, icon, onChange}) => {
 
   const chooseValue = (e) => {
     const chosenValue = e.target.getAttribute('data-value');
-    setValue(chosenValue)
-    setActive(false)
-
-    if (onChange) {
-      onChange(chosenValue);
-    }
-  }
+    onChange(chosenValue); // Передаем выбранное значение
+    setActive(false);
+  };
 
   const clearSelect = () => {
-    setValue('');
-    if (onChange) {
-      onChange('');
-    }
-  }
+    onChange(''); // Сбрасываем значение
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {

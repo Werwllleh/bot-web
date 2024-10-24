@@ -1,0 +1,40 @@
+.ant-upload-select {
+  width: 100%;
+  display: flex !important;
+
+  & .ant-upload {
+    width: 100%;
+  }
+
+  .ant-btn {
+    width: 100%;
+    display: flex;
+    color: $grey;
+    font-weight: 600;
+
+    &:hover {
+      color: $accent-color-light !important;
+      border-color: $accent-color-light !important;
+    }
+  }
+}
+
+.ant-upload-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+
+  & .ant-upload-list-item-container {
+    flex: 0 1 32%;
+
+    .ant-upload-list-item-name {
+      max-width: 80px;
+      width: 100%;
+    }
+  }
+}

@@ -34,4 +34,67 @@
 
     &-input {}
   }
+
+  &__car-block {
+
+    border-top: 1px solid $semi-dark;
+    border-bottom: 1px solid $semi-dark;
+    padding: 2rem 0;
+
+    & .car-data-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    & .ant-upload-select .ant-btn {
+      color: $green !important;
+      border-color: $green !important;
+      box-shadow: none;
+      transition: all $transition !important;
+
+      &:hover {
+        background-color: $green-light;
+        border-color: $green-light !important;
+        color: $semi-dark !important;
+      }
+    }
+
+
+    &-controls {
+      display: flex;
+      align-items: center;
+
+      &-add {
+        color: $green;
+
+        &:hover {
+          border-color: $green-light;
+          background-color: $green-light;
+          color: $semi-dark;
+        }
+      }
+
+      &-delete {
+        color: $red;
+
+        &:hover {
+          border-color: $red-light;
+          background-color: $red-light;
+          color: $semi-dark;
+        }
+      }
+
+      button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        border: 1px solid $grey-light;
+      }
+    }
+  }
 }

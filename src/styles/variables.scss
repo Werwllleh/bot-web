@@ -1,16 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-$ff-main: "Hauora", sans-serif;
+$ff-main: "Montserrat", sans-serif;
 $transition: .3s ease-in-out;
 
 
 //colors
 $white: #ffffff;
 $dark: #444444;
+$semi-dark: #808080;
 $accent-color: #3071ff;
 $accent-color-light: #3071FFAD;
 $error-color: #FF808060;
 $grey-light: #e8e8e8;
 $grey: #bbbbbb;
+$green: #1bd700;
+$green-light: #bff4ab;
+$red: #ff3939;
+$red-light: #ffbfbf;
 
 
 //animate

@@ -95,7 +95,7 @@ body, html {
 }
 
 body {
-  font-family: $ff-main;
+  font-family: $ff-main !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -133,5 +133,5 @@ body #root {
   padding: 2rem 0 0 0;
 }
 button {
-  transition: background-color $transition, color $transition;
+  transition: background-color $transition, color $transition, border-color $transition, border-radius $transition;
 }
