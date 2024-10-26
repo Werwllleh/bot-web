@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { API_BASE } from "../../../../utils/consts";
 
-const UploadForm = ({ data }) => {
+const UploadForm = ({ index, data, maxCount }) => {
   const [images, setImages] = useState([]);
 
   // Передаем список изображений родительскому компоненту
@@ -13,18 +13,15 @@ const UploadForm = ({ data }) => {
   }, [images]);
 
   const beforeUpload = (file) => {
-    const isJpgOrPng =
-      file.type === "image/jpeg" ||
-      file.type === "image/jpg" ||
-      file.type === "image/png";
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png";
 
     if (!isJpgOrPng) {
       message.error("Только изображения в формате JPG или PNG!");
       return Upload.LIST_IGNORE;
     }
 
-    if (images.length >= 3) {
-      message.error("Можно загрузить не более 3 изображений.");
+    if (images.length >= maxCount) {
+      message.error(`Можно загрузить не более ${maxCount} изображений.`);
       return Upload.LIST_IGNORE;
     }
 
@@ -36,8 +33,8 @@ const UploadForm = ({ data }) => {
     if (info.file.status === "done") {
       setImages((prev) => {
         const newImages = [...prev, info.file.response];
-        if (newImages.length > 3) {
-          message.error("Достигнут лимит в 3 изображения.");
+        if (newImages.length > maxCount) {
+          message.error(`Достигнут лимит в ${maxCount} изображения.`);
           return prev; // Игнорируем добавление лишнего изображения
         }
         return newImages;
@@ -47,13 +44,14 @@ const UploadForm = ({ data }) => {
 
   const handleRemove = async (file) => {
     try {
-      const res = await axios.post(`${API_BASE}/upload/remove`, {
+      const response = await axios.post(`${API_BASE}/upload/remove`, {
         fileName: file.response,
       });
-
-      if (res.data.status === "delete") {
+      if (response.status === 200) {
         setImages((prev) => prev.filter((name) => name !== file.response));
         message.success("Изображение удалено.");
+      } else {
+        throw new Error("Ошибка при удалении файла на сервере.");
       }
     } catch (error) {
       message.error("Ошибка при удалении изображения.");
@@ -62,16 +60,16 @@ const UploadForm = ({ data }) => {
 
   return (
     <Upload
-      name="avatar"
+      name={`avatar${index}`}
       action={`${API_BASE}/upload`}
       listType="picture"
       multiple
-      maxCount={3}
+      maxCount={maxCount}
       beforeUpload={beforeUpload}
       onChange={handleChange}
       onRemove={handleRemove}
     >
-      <Button icon={<FileImageOutlined />}>Загрузить фото автомобиля*</Button>
+      <Button disabled={images.length >= maxCount} icon={<FileImageOutlined />}>Загрузить фото автомобиля*</Button>
     </Upload>
   );
 };

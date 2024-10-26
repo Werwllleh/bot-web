@@ -7,7 +7,6 @@
     &-body {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
     }
 
     &-footer {
@@ -37,21 +36,32 @@
 
   &__car-block {
 
-    border-top: 1px solid $semi-dark;
-    border-bottom: 1px solid $semi-dark;
-    padding: 2rem 0;
+    & + & {
+      padding: 1rem 0 0 0;
+      margin: 1rem 0 0 0;
+      border-top: .3rem solid $accent-color;
+    }
+
+    //border-top: 1px solid $semi-dark;
+    //border-bottom: 1px solid $semi-dark;
+    //padding: 2rem 0;
 
     & .car-data-fields {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
     }
 
     & .ant-upload-select .ant-btn {
+      height: auto;
+      padding: 1rem 2rem;
+      margin: 1rem 0 0.5rem 0;
+      border-radius: 0;
       color: $green !important;
       border-color: $green !important;
       box-shadow: none;
       transition: all $transition !important;
+      font-size: 1.5rem;
+      font-weight: 600;
 
       &:hover {
         background-color: $green-light;
@@ -62,6 +72,7 @@
 
 
     &-controls {
+      margin: 1rem 0 0 0;
       display: flex;
       align-items: center;
 

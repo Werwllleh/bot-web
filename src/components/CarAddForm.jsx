@@ -13,6 +13,14 @@ const CarAddForm = ({ index }) => {
   const [models, setModels] = useState([]);
   const [carImages, setCarImages] = useState("");
 
+  const validateCarNumber = new RegExp(
+    /^[АВЕКМНОРСТУХ]{1}[0-9]{2}[1-9]{1}[АВЕКМНОРСТУХ]{2}[0-9]{2,3}$/
+  );
+
+  useEffect(() => {
+    console.log(carImages)
+  }, [carImages]);
+
   useEffect(() => {
     getCars().then(res => {
       setCars(res.data)
@@ -28,10 +36,6 @@ const CarAddForm = ({ index }) => {
       setModels([]); // Если марка не выбрана, очищаем список моделей
     }
   }, [selectedBrand, cars]);
-
-  useEffect(() => {
-    console.log(carImages)
-  }, [carImages]);
 
   return (
     <div className="car-data-fields">
@@ -58,11 +62,11 @@ const CarAddForm = ({ index }) => {
         </div>
       ) : ''}
       <div className="registration__field">
-        <UploadForm data={setCarImages}/>
+        <UploadForm index={index} data={setCarImages} maxCount={3}/>
       </div>
       <div className="registration__field">
         <div className="registration__field-input">
-          <Input name={`car-number${index}`} placeholder={'Номер авто'} icon={<NumberOutlined/>}/>
+          <Input name={`car-number${index}`} placeholder={'Номер авто'} icon={<NumberOutlined/>} pattern={validateCarNumber}/>
         </div>
       </div>
       <div className="registration__field">

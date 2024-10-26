@@ -50,7 +50,7 @@
   &__icon {
     position: absolute;
     top: 0;
-    left: 0;
+    left: .5rem;
     bottom: 0.5rem;
     margin: auto 0;
     display: flex;
@@ -72,7 +72,7 @@
   &__clear {
     position: absolute;
     top: 0;
-    right: 0;
+    right: .5rem;
     bottom: 0.5rem;
     width: 1.7rem;
     height: 1.7rem;
@@ -92,7 +92,7 @@
   &__title {
     width: 100%;
     cursor: pointer;
-    padding: 0.5rem 2rem 0.5rem 0;
+    padding: 1.5rem 2rem 1.5rem 0;
     line-height: 1;
     color: $grey;
     font-weight: 400;

@@ -14,7 +14,7 @@
   &__icon {
     position: absolute;
     top: 0;
-    left: 0;
+    left: .5rem;
     bottom: .5rem;
     margin: auto 0;
     display: flex;
@@ -37,7 +37,7 @@
     width: 100%;
     font-size: 1.6rem;
     border-bottom: 1px solid $grey-light;
-    padding: .5rem 2rem .5rem 0;
+    padding: 1.5rem 2rem 1.5rem 0;
     line-height: 1;
     transition: all $transition;
 
@@ -68,7 +68,7 @@
   &__clear {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 0.5rem;
     bottom: .5rem;
     width: 1.7rem;
     height: 1.7rem;
@@ -76,6 +76,11 @@
     display: flex;
     cursor: pointer;
     animation: showAnim $transition;
+
+    & span {
+      width: 100%;
+      height: 100%;
+    }
 
     svg {
       width: 100%;
