@@ -2,7 +2,7 @@ import {FileImageOutlined} from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { API_BASE } from "../../../../utils/consts";
+import { API_BASE } from "../utils/consts";
 
 const UploadForm = ({ index, data, maxCount }) => {
   const [images, setImages] = useState([]);

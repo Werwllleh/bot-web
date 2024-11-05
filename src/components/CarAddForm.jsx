@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Select from "./Select";
 import {CarOutlined, NumberOutlined, SnippetsOutlined, CalendarOutlined, CarTwoTone} from "@ant-design/icons";
 import {getCars} from "../api/api-cars";
-import UploadForm from "./Pages/Form/Upload/Upload";
+import UploadForm from "./Upload";
 import Input from "./Input";
 
 const CarAddForm = ({ index }) => {
@@ -65,13 +65,13 @@ const CarAddForm = ({ index }) => {
       ) : ''}
       <div className="registration__field">
         <div className="registration__field-input">
-          <Input name={`car-number${index}`} placeholder={'Номер авто'} icon={<NumberOutlined/>} required={true}
+          <Input name={`car_number${index}`} placeholder={'Номер авто'} icon={<NumberOutlined/>} required={true}
                  pattern={validateCarNumber}/>
         </div>
       </div>
       <div className="registration__field">
         <div className="registration__field-input">
-          <Input name={`car-year${index}`} type={'number'} placeholder={'Год выпуска авто'} icon={<CalendarOutlined />} required={true}/>
+          <Input name={`car_year${index}`} type={'number'} placeholder={'Год выпуска авто'} icon={<CalendarOutlined />} required={true}/>
         </div>
       </div>
       <div className="registration__field">

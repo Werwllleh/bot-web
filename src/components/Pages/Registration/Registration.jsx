@@ -3,6 +3,7 @@ import Input from "../../Input";
 import {UserOutlined} from "@ant-design/icons";
 import CarAddForm from "../../CarAddForm";
 import {useUsersStore} from "../../../services/store";
+import {createUser} from "../../../api/users";
 
 
 const Registration = () => {
@@ -25,17 +26,29 @@ const Registration = () => {
       const carIndex = match[2] ? Number(match[2]) - 1 : 0; // Индекс машины (сдвинут на 1 для массива)
 
       // Если индекс 0, значит это пользовательские данные
-      if (carIndex === 0 && !["brand", "model", "car-number", "car-year", "images", "notation"].includes(propName)) {
+      if (carIndex === 0 && !["brand", "model", "car_number", "avatar", "car_year", "images", "notation"].includes(propName)) {
         groupedData.user[propName] = value;
         groupedData.user["chatId"] = currentUser?.id;
       } else {
-        if (!groupedData.cars[carIndex]) groupedData.cars[carIndex] = {};
-        groupedData.cars[carIndex][propName] = value;
+        if (!["avatar"].includes(propName)) {
+          if (!groupedData.cars[carIndex]) groupedData.cars[carIndex] = {};
+          groupedData.cars[carIndex][propName] = value;
+        }
       }
     });
 
-    console.log(groupedData);
+    if (groupedData) {
+      groupedData.cars.map(item => {
+        item.images = JSON.stringify(item.images.split(','));
+      })
+      // console.log(JSON.stringify(['image1.jpg', 'image2.jpg']))
+      console.log(groupedData);
 
+      createUser(groupedData).then(res => {
+        console.log(res.status)
+      })
+
+    }
 
   }
 

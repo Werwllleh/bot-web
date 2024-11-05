@@ -1,4 +1,4 @@
-import UploadForm from "./Upload/Upload";
+import UploadForm from "../../Upload";
 import React, {useCallback, useEffect, useState} from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./Form.module.css";
