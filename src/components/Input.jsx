@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {CloseOutlined} from "@ant-design/icons";
 
-const Input = ({label, icon, placeholder, name, required, pattern}) => {
+const Input = ({label, icon, placeholder, name, type, required, pattern}) => {
 
   const input = useRef();
   const [value, setValue] = useState('');
@@ -40,6 +40,14 @@ const Input = ({label, icon, placeholder, name, required, pattern}) => {
         setError(true)
       }
     }
+    if (name.includes('car-year')) {
+      const currentYear = new Date().getFullYear();
+      if (Number(value) >= 1800 && Number(value) <= currentYear) {
+        setError(false)
+      } else {
+        setError(true)
+      }
+    }
   }
 
   useEffect(() => {
@@ -47,14 +55,22 @@ const Input = ({label, icon, placeholder, name, required, pattern}) => {
   }, [value]);
 
 
-
   return (
     <div className="input-field">
       {label ? <label className="input-field__label">{label}</label> : ''}
       <div className="input-field__field">
         {icon && <span className="input-field__icon">{icon}</span>}
-        <input required={!!required} ref={input} value={value} onChange={onChange} name={name} placeholder={placeholder}
-               className={`input-field__input ${value.length && error ? 'error' : ''} ${icon ? 'icon' : ''} ${value.length && !error ? 'active' : ''}`}/>
+        <input
+          required={!!required}
+          ref={input}
+          inputMode={name.includes('car-year') ? "numeric" : "text"}
+          type={type !== '' ? type : 'text'}
+          value={value}
+          onChange={onChange}
+          name={name}
+          placeholder={placeholder}
+          className={`input-field__input ${value.length && error ? 'error' : ''} ${icon ? 'icon' : ''} ${value.length && !error ? 'active' : ''}`}
+        />
         {value.length ? <span onClick={clearInput} className="input-field__clear"><CloseOutlined/></span> : ''}
       </div>
     </div>

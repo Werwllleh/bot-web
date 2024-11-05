@@ -3,6 +3,7 @@
   display: flex !important;
 
   & .ant-upload {
+    position: relative;
     width: 100%;
   }
 
@@ -16,6 +17,16 @@
       color: $accent-color-light !important;
       border-color: $accent-color-light !important;
     }
+  }
+
+  .upload_input {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: -999;
   }
 }
 
@@ -31,6 +42,11 @@
 
   & .ant-upload-list-item-container {
     flex: 0 1 32%;
+    margin: 0 0 .5rem 0;
+
+    .ant-upload-list-item {
+      margin: 0;
+    }
 
     .ant-upload-list-item-name {
       max-width: 80px;

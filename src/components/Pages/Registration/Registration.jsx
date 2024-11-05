@@ -2,18 +2,41 @@ import React, {useRef, useState} from 'react';
 import Input from "../../Input";
 import {UserOutlined} from "@ant-design/icons";
 import CarAddForm from "../../CarAddForm";
+import {useUsersStore} from "../../../services/store";
 
 
 const Registration = () => {
 
   const form = useRef();
   const [cars, setCars] = useState([{}]); // Начинаем с одной пустой формы
+  const currentUser = useUsersStore((state) => state.currentUser);
 
   const submitForm = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
+    const formData = Array.from(data.entries());
 
-    console.log(Array.from(data.entries()))
+    const groupedData = { user: {}, cars: [] };
+
+    // Основная логика для группировки
+    formData.forEach(([key, value]) => {
+      const match = key.match(/(\D+)(\d*)$/); // Разделение имени ключа и номера
+      const propName = match[1]; // Название свойства
+      const carIndex = match[2] ? Number(match[2]) - 1 : 0; // Индекс машины (сдвинут на 1 для массива)
+
+      // Если индекс 0, значит это пользовательские данные
+      if (carIndex === 0 && !["brand", "model", "car-number", "car-year", "images", "notation"].includes(propName)) {
+        groupedData.user[propName] = value;
+        groupedData.user["chatId"] = currentUser?.id;
+      } else {
+        if (!groupedData.cars[carIndex]) groupedData.cars[carIndex] = {};
+        groupedData.cars[carIndex][propName] = value;
+      }
+    });
+
+    console.log(groupedData);
+
+
   }
 
   const handleAddCar = (index) => {
@@ -46,7 +69,7 @@ const Registration = () => {
               </div>
               {cars.map((_, index) => (
                 <div key={index} className="registration__car-block">
-                  <CarAddForm index={index > 0 ? index : ''} key={index} />
+                  <CarAddForm index={index > 0 ? index + 1 : ''} key={index} />
                   <div className="registration__car-block-controls">
                     <button type="button" className="registration__car-block-controls-add" onClick={() => handleAddCar(index)}>Добавить еще авто</button>
                     {index !== 0 && (

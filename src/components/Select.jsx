@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {CloseOutlined} from "@ant-design/icons";
 
-const Select = ({name, title, data, icon, onChange, value}) => {
+const Select = ({name, title, data, icon, onChange, value, required}) => {
 
   const selectRef = useRef(null);
   const [active, setActive] = useState(false);
@@ -37,7 +37,7 @@ const Select = ({name, title, data, icon, onChange, value}) => {
   return (
     <div ref={selectRef} className={`select ${active ? 'shown' : ''}`}>
       <div className="select__body">
-        <input className="select__input" type="hidden" name={name} value={value}/>
+        <input className="select__input" type="text" name={name} onChange={() => onChange(value)} value={value} required={!!required}/>
         <div className={`select__header ${icon ? 'icon' : ''} ${value.length ? 'chosen' : ''}`}>
           {icon && <div className="select__icon">{icon}</div>}
           <div onClick={showList} className="select__title">{value.length ? value : title}</div>

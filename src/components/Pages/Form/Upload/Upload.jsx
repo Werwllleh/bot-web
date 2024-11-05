@@ -69,6 +69,7 @@ const UploadForm = ({ index, data, maxCount }) => {
       onChange={handleChange}
       onRemove={handleRemove}
     >
+      <input className={"upload_input"} name={`images${index}`} type="text" defaultValue={images} required={true}/>
       <Button disabled={images.length >= maxCount} icon={<FileImageOutlined />}>Загрузить фото автомобиля*</Button>
     </Upload>
   );
