@@ -8,7 +8,18 @@ export const createUser = async (data) => {
       data: data
     })
   } catch (err) {
-    console.error('Ошибка создания пользователя:', err);
+    console.error('Ошибка создания пользователя: ', err);
+    throw err; // Пробрасываем ошибку, чтобы её можно было обработать в компоненте
+  }
+}
+
+export const getUserInfo = async (chatId) => {
+  try {
+    return await axios.post(`${API_BASE}/about-user`, {
+      chatId: chatId
+    })
+  } catch (err) {
+    console.error('Ошибка получения данных пользователя: ', err);
     throw err; // Пробрасываем ошибку, чтобы её можно было обработать в компоненте
   }
 }

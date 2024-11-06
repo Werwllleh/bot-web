@@ -1,11 +1,18 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {CloseOutlined} from "@ant-design/icons";
 
-const Input = ({label, icon, placeholder, name, type, required, pattern}) => {
+const Input = ({label, icon, placeholder, name, type, required, pattern, data}) => {
 
   const input = useRef();
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
+
+
+  useEffect(() => {
+    if (data) {
+      setValue(data)
+    }
+  }, [data]);
 
   useEffect(() => {
     if (value === '') {
@@ -25,22 +32,22 @@ const Input = ({label, icon, placeholder, name, type, required, pattern}) => {
 
   const validateField = () => {
     if (pattern) {
-      if (name.includes('car-number')) {
-        if (pattern.test(value.toUpperCase())) {
+      if (name.includes('car_number')) {
+        if (pattern.test(value.toUpperCase()) && !value.includes('000')) {
+          setError(false)
+        } else {
+          setError(true)
+        }
+      }
+      if (name.includes('name')) {
+        if (pattern.test(value)) {
           setError(false)
         } else {
           setError(true)
         }
       }
     }
-    if (name.includes('name')) {
-      if (value.length > 1) {
-        setError(false)
-      } else {
-        setError(true)
-      }
-    }
-    if (name.includes('car-year')) {
+    if (name.includes('car_year')) {
       const currentYear = new Date().getFullYear();
       if (Number(value) >= 1800 && Number(value) <= currentYear) {
         setError(false)
@@ -63,7 +70,7 @@ const Input = ({label, icon, placeholder, name, type, required, pattern}) => {
         <input
           required={!!required}
           ref={input}
-          inputMode={name.includes('car-year') ? "numeric" : "text"}
+          inputMode={name.includes('car_year') ? "numeric" : "text"}
           type={type !== '' ? type : 'text'}
           value={value}
           onChange={onChange}

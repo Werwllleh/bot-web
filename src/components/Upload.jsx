@@ -3,6 +3,7 @@ import { Button, message, Upload } from "antd";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { API_BASE } from "../utils/consts";
+import {deleteCarImage} from "../api/api-cars";
 
 const UploadForm = ({ index, data, maxCount }) => {
   const [images, setImages] = useState([]);
@@ -44,9 +45,7 @@ const UploadForm = ({ index, data, maxCount }) => {
 
   const handleRemove = async (file) => {
     try {
-      const response = await axios.post(`${API_BASE}/upload/remove`, {
-        fileName: file.response,
-      });
+      const response = await deleteCarImage(file.response);
       if (response.status === 200) {
         setImages((prev) => prev.filter((name) => name !== file.response));
         message.success("Изображение удалено.");
