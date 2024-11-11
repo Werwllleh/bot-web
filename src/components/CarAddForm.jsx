@@ -7,7 +7,7 @@ import Input from "./Input";
 import {validateCarNumber} from "../utils/patterns";
 import {notification} from "antd";
 
-const CarAddForm = ({index}) => {
+const CarAddForm = ({info, index}) => {
 
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type, message, description) => {
@@ -33,9 +33,13 @@ const CarAddForm = ({index}) => {
   const [carNumber, setCarNumber] = useState("");
   const [checkCarNumber, setCheckCarNumber] = useState(false);
 
+  useEffect(() => {
+    console.log(info)
+  }, [info]);
+
 
   useEffect(() => {
-    if (carNumber.length >= 8 && carNumber.length <= 9) {
+    if (!info?.car_number && carNumber.length >= 8 && carNumber.length <= 9) {
       getCarInfo(carNumber).then((res) => {
         if (res.data) {
           setCheckCarNumber(false)

@@ -2,7 +2,7 @@ import UploadForm from "../../Upload";
 import React, {useCallback, useEffect, useState} from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./Form.module.css";
-import Header from "../../Header/Header";
+import Header from "../../Header";
 
 const Form = () => {
   return (

@@ -3,7 +3,7 @@ import UploadForm from "../../../Upload";
 import React, {useEffect, useMemo, useState} from "react";
 import useTelegram from "../../../../hooks/useTelegram";
 import s from "./ChangeForm.module.css";
-import Header from "../../../Header/Header";
+import Header from "../../../Header";
 import {AUDI, BENTLEY, cars, LAMBORGHINI, SEAT, SKODA, VOLKSWAGEN, URL, API} from "../../../../utils/consts";
 import Button from "../../../Button/Button";
 import {useUsersStore} from "../../../../services/store";

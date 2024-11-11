@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import useTelegram from "../../../hooks/useTelegram";
 import s from "./Cars.module.scss";
 import {Image} from "antd";
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import {API} from "../../../utils/consts";
 
 const Cars = ({data}) => {

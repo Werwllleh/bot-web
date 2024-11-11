@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import "../../../styles/index.scss";
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import {Rate, notification, Input, Button, Watermark, Checkbox} from 'antd';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {addFeedback, getFeedback} from "../../../utils/feedbacksUtils";

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {DatePicker, Input, Select, Watermark, ConfigProvider, Switch, Button} from "antd";
 const { TextArea } = Input;
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import ruRu from 'antd/locale/ru_RU';
 import {places} from "../../../utils/consts";
 import {setLocation} from "../../../utils/locationUtils";

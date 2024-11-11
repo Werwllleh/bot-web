@@ -1,0 +1,14 @@
+.main-logo{
+
+  &__circle {
+    fill: $accent-color;
+  }
+
+  &__digit {
+    fill: $white;
+  }
+
+  &__symbol {
+    fill: $black;
+  }
+}

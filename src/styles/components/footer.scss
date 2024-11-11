@@ -1,7 +1,22 @@
 .footer {
   margin: auto 0 0 0;
+  background-color: $accent-color-dark;
+  padding: 15px 24px;
 
   &__body {
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
+
+  &__logo {
+    max-width: 12rem;
+    width: 100%;
+
+    .main-logo__symbol {
+      fill: $white;
+    }
+  }
+
+
 }

@@ -8,14 +8,10 @@ import {notification} from "antd";
 import {validateCarNumber, validateName} from "../../../utils/patterns";
 import {deleteCarImage, getCarInfo} from "../../../api/api-cars";
 import {useNavigate} from "react-router-dom";
+import {FORM_TYPE_CHANGE, FORM_TYPE_REGISTRATION} from "../../../utils/consts";
 
 
 const Registration = () => {
-
-  const form = useRef();
-  const [cars, setCars] = useState([{}]); // Начинаем с одной пустой формы
-  const currentUser = useUsersStore((state) => state.currentUser);
-  const [formValidate, setFormValidate] = useState(true)
 
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type, message, description) => {
@@ -32,6 +28,27 @@ const Registration = () => {
       });
     }
   };
+  const form = useRef();
+  const [cars, setCars] = useState([{}]); // Начинаем с одной пустой формы
+  const currentUser = useUsersStore((state) => state.currentUser);
+  const [formValidate, setFormValidate] = useState(true);
+  const [formType, setFormType] = useState(FORM_TYPE_REGISTRATION);
+
+  useEffect(() => {
+    getUserInfo(currentUser?.id).then(res => {
+      console.log(res)
+      if (res.data) {
+        setFormType(FORM_TYPE_CHANGE);
+        setCars(res.data.cars);
+      } else {
+        setFormType(FORM_TYPE_REGISTRATION)
+      }
+    })
+  }, [currentUser]);
+
+  useEffect(() => {
+    console.log(cars)
+  }, [cars]);
 
   const navigate = useNavigate();
 
@@ -206,18 +223,23 @@ const Registration = () => {
       {contextHolder}
       <div className="registration">
         <div className="container">
+          <h1 className="registration__title h1t">
+            {formType === FORM_TYPE_REGISTRATION ? 'Регистрация' : 'Обновление данных'}
+          </h1>
           <div className="registration__body">
             <form ref={form} onSubmit={submitForm} className="registration__form">
               <div className="registration__form-body">
-                <div className="registration__field">
-                  <div className="registration__field-input">
-                    <Input name={"name"} pattern={validateName} placeholder={'Как тебя зовут?'} icon={<UserOutlined/>}
-                           required={true}/>
+                {formType === FORM_TYPE_REGISTRATION && (
+                  <div className="registration__field">
+                    <div className="registration__field-input">
+                      <Input name={"name"} pattern={validateName} placeholder={'Как тебя зовут?'} icon={<UserOutlined/>}
+                             required={true}/>
+                    </div>
                   </div>
-                </div>
-                {cars.map((_, index) => (
+                )}
+                {cars.map((data, index) => (
                   <div key={index} className="registration__car-block">
-                    <CarAddForm index={index > 0 ? index + 1 : ''} key={index}/>
+                    <CarAddForm index={index > 0 ? index + 1 : ''} key={index} info={data}/>
                     <div className="registration__car-block-controls">
                       <button type="button" className="registration__car-block-controls-add"
                               onClick={() => handleAddCar(index)}>Добавить еще авто

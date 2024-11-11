@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import s from "./Stickers.module.scss";
 import {getSellerStickersCount, stickersInfo, updateStickersData} from "../../../utils/stickersUtils";
 import StickerItem from "./StickerItem";

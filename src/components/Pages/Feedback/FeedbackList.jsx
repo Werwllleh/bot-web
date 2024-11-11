@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import {getFeedback, historyFeedbacks, verifyFeedback} from "../../../utils/feedbacksUtils";
 import {Rate, notification, Empty, Button, Collapse} from 'antd';
 import {getTime} from "../../../utils/utils";

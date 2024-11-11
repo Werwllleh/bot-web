@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {getUsersData, postUserDelete, postUsersUpdatedData} from "../../../utils/usersUtils";
 import {Watermark, Modal, Image, Input, Empty} from "antd";
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import {FormOutlined, DeleteOutlined} from '@ant-design/icons';
 import {API} from "../../../utils/consts";
 import {useUsersStore} from "../../../services/store";

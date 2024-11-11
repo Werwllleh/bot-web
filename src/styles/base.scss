@@ -88,6 +88,10 @@ legend {
   display: block;
 }
 
+html {
+  background-color: $white !important;
+}
+
 body, html {
   font-size: 10px;
   scroll-behavior: smooth;

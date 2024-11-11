@@ -1,4 +1,6 @@
 
+
+
 .time-class {
   display: flex;
   align-items: center;
@@ -47,4 +49,10 @@
 .ant-input,
 .ant-drawer {
   font-family: inherit !important;
+}
+
+.h1t {
+  font-size: 3.8rem;
+  color: $black;
+  font-weight: 500;
 }

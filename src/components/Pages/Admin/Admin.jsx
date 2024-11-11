@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import {Link} from "react-router-dom";
 import {adminPages} from "../../../utils/consts";
 import {Watermark} from "antd";

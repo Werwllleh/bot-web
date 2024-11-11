@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import s from './Cart.module.scss';
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import {checkAvailable, getTotalSumCart} from "../../../utils/cartUtils";
 import CartItem from "../../CartItem/CartItem";
 import {Empty, Select, Input, Modal, notification} from "antd";

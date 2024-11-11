@@ -24,8 +24,8 @@ import Admin from "./components/Pages/Admin/Admin";
 import UserList from "./components/Pages/UserList/UserList";
 import LocationPage from "./components/Pages/LocationPage/LocationPage";
 import Registration from "./components/Pages/Registration/Registration";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -134,12 +134,13 @@ function App() {
   const partnersSortedObject = groupedPartnersFunc(partners);
 
   const {pathname} = useLocation();
-  const headerTitle = menu.filter(item => item.url === pathname)[0].title;
+
+  const headerColor = menu.filter(item => item.url === pathname)[0].color;
 
 
   return (
     <>
-      <Header title={headerTitle}/>
+      <Header color={headerColor}/>
       <main className="main">
         <div className="content">
           <Routes>

@@ -1,5 +1,6 @@
 import {FormOutlined, UsergroupAddOutlined, NotificationOutlined} from "@ant-design/icons";
 import React from "react";
+import TelegramIcon from "../components/icons/telegram-icon";
 
 // export const SITE = 'https://vagcheb.ru/';
 export const API = 'http://localhost';
@@ -95,11 +96,22 @@ export const places = [
 export const menu = [
   {
     title: 'Регистрация',
-    url: '/registration'
+    url: '/registration',
+    color: '#F4F7FB'
   },
   {
     title: 'Наши авто',
     url: '/'
   },
-
 ]
+
+export const socialLinks = [
+  {
+    title: 'telegram',
+    link: 'https://t.me/+A6S11dagaDA2OWMy',
+    icon: <TelegramIcon/>
+  }
+]
+
+export const FORM_TYPE_REGISTRATION = 'form_type_registration';
+export const FORM_TYPE_CHANGE = 'form_type_change';

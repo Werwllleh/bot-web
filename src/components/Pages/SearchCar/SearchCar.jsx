@@ -8,7 +8,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/parallax';
-import Header from "../../Header/Header";
+import Header from "../../Header";
 import {debounce} from "lodash";
 
 const SearchCar = ({data}) => {
