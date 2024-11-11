@@ -15,6 +15,7 @@ const Registration = () => {
   const form = useRef();
   const [cars, setCars] = useState([{}]); // Начинаем с одной пустой формы
   const currentUser = useUsersStore((state) => state.currentUser);
+  const [formValidate, setFormValidate] = useState(true)
 
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type, message, description) => {
@@ -50,7 +51,6 @@ const Registration = () => {
 
   const validateRegistrationForm = () => {
     const regForm = form.current;
-    let validateStatus = true; // Начинаем с предположения, что все валидно
     let delay = 0; // Задержка для первого уведомления
 
     const inputs = regForm.querySelectorAll('input');
@@ -81,7 +81,7 @@ const Registration = () => {
         if (inputName.includes('name')) {
           if (!validateName.test(input.value)) {
             addErrorClass(input);
-            validateStatus = false;
+            setFormValidate(false);
             showNotification('error', 'Имя не заполнено или заполнено некорректно', '', delay);
             delay += 500;
           }
@@ -90,7 +90,7 @@ const Registration = () => {
         if (inputName.includes('brand') || inputName.includes('model')) {
           if (input.value === '') {
             addErrorClass(input);
-            validateStatus = false;
+            setFormValidate(false);
             showNotification('error', 'Марка или модель не заполнены', '', delay);
             delay += 500;
           }
@@ -99,7 +99,7 @@ const Registration = () => {
         if (inputName.includes('car_number')) {
           if (!validateCarNumber.test(input.value.toUpperCase())) {
             addErrorClass(input);
-            validateStatus = false;
+            setFormValidate(false);
             showNotification('error', 'Номер авто заполнен некорректно', 'Русскими буквами в формате А777АА21 или А777АА121', delay);
             delay += 500;
           } else {
@@ -108,7 +108,7 @@ const Registration = () => {
 
               if (info) {
                 addErrorClass(input);
-                validateStatus = false;
+                setFormValidate(false);
                 showNotification('error', `Авто с номером ${input.value.toUpperCase().trim()} уже зарегистрирован`, '', delay);
                 delay += 500;
               }
@@ -120,7 +120,7 @@ const Registration = () => {
           const currentYear = new Date().getFullYear();
           if (Number(input.value) < 1800 || Number(input.value) > currentYear) {
             addErrorClass(input);
-            validateStatus = false;
+            setFormValidate(false);
             showNotification('error', 'Год указан некорректно', '', delay);
             delay += 500;
           }
@@ -128,11 +128,9 @@ const Registration = () => {
       }
 
       if (input.classList.contains('error')) {
-        validateStatus = false; // Если хотя бы один инпут содержит класс error, устанавливаем validateStatus в false
+        setFormValidate(false); // Если хотя бы один инпут содержит класс error, устанавливаем validateStatus в false
       }
     }
-
-    return validateStatus;
   };
 
   const submitForm = async (e) => {
@@ -144,11 +142,9 @@ const Registration = () => {
 
     const groupedData = {user: {}, cars: []};
 
-    const validateStatus = validateRegistrationForm();
+    validateRegistrationForm();
 
-    if (validateStatus) {
-      // Основная логика для группировки
-      console.log(validateStatus)
+    if (formValidate) {
       formData.forEach(([key, value]) => {
         const match = key.match(/(\D+)(\d*)$/); // Разделение имени ключа и номера
         const propName = match[1]; // Название свойства
@@ -168,7 +164,7 @@ const Registration = () => {
 
       if (groupedData) {
         groupedData.cars.map(item => {
-          if (item.images.length) {
+          if (item.images && item.images.length) {
             item.images = JSON.stringify(item.images.split(','));
           }
         })
@@ -180,7 +176,10 @@ const Registration = () => {
           console.log(res)
           if (res.status === 200 && res.data === 'OK') {
             openNotificationWithIcon('success', 'Регистрация прошла успешно!', '');
-          } else if (res.status === 200 && res.data === 'User already exists') {
+          } else {
+            openNotificationWithIcon('error', 'Что-то пошло не так(', '');
+          }
+          /*else if (res.status === 200 && res.data === 'User already exists') {
             if (groupedData.cars.length) {
               groupedData.cars.map(car => {
                 let images = JSON.parse(car.images);
@@ -196,9 +195,7 @@ const Registration = () => {
             setTimeout(() => {
               // navigate('/')
             }, 2000)
-          } else {
-            openNotificationWithIcon('error', 'Что-то пошло не так(', '');
-          }
+          }*/
         })
       }
     }

@@ -88,4 +88,14 @@
       fill: $accent-color;
     }
   }
+
+  &__error-message {
+    color: $black;
+    background-color: $error-color;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: .5rem 0;
+    pointer-events: none;
+  }
 }

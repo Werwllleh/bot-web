@@ -1,18 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {CloseOutlined} from "@ant-design/icons";
+import {getCarInfo} from "../api/api-cars";
 
 const Input = ({label, icon, placeholder, name, type, required, pattern, data}) => {
 
   const input = useRef();
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
-
-
-  useEffect(() => {
-    if (data) {
-      setValue(data)
-    }
-  }, [data]);
+  const [errorText, setErrorText] = useState(null);
 
   useEffect(() => {
     if (value === '') {
@@ -22,11 +17,31 @@ const Input = ({label, icon, placeholder, name, type, required, pattern, data}) 
 
   const onChange = (e) => {
     setValue(e.target.value)
+    if (data) {
+      data(e.target.value)
+    }
   }
+
+  /*useEffect(() => {
+    if (["car_number"].includes(name)) {
+      if (value.length >= 8 && value.length <= 9) {
+        getCarInfo(value).then((res) => {
+          if (res.data) {
+            setError(true);
+            setErrorText('Авто с данным номером уже зарегистрирован');
+          } else {
+            setError(false)
+            setErrorText(null);
+          }
+        })
+      }
+    }
+  }, [value]);*/
 
   const clearInput = () => {
     setValue('');
     setError(false);
+    setErrorText(null)
     input.current.focus();
   }
 
@@ -80,6 +95,7 @@ const Input = ({label, icon, placeholder, name, type, required, pattern, data}) 
         />
         {value.length ? <span onClick={clearInput} className="input-field__clear"><CloseOutlined/></span> : ''}
       </div>
+      {errorText && <div className="input-field__error-message">{errorText}</div>}
     </div>
   );
 };

@@ -30,6 +30,25 @@ const CarAddForm = ({index}) => {
   const [models, setModels] = useState([]);
   const [carImages, setCarImages] = useState("");
 
+  const [carNumber, setCarNumber] = useState("");
+  const [checkCarNumber, setCheckCarNumber] = useState(false);
+
+
+  useEffect(() => {
+    if (carNumber.length >= 8 && carNumber.length <= 9) {
+      getCarInfo(carNumber).then((res) => {
+        if (res.data) {
+          setCheckCarNumber(false)
+          openNotificationWithIcon('error', 'Авто с данным номером уже зарегистрирован!');
+        } else {
+          setCheckCarNumber(true)
+        }
+      })
+    } else {
+      setCheckCarNumber(false)
+    }
+  }, [carNumber]);
+
   useEffect(() => {
     getCars().then(res => {
       setCars(res.data)
@@ -76,8 +95,7 @@ const CarAddForm = ({index}) => {
         ) : ''}
         <div className="registration__field">
           <div className="registration__field-input">
-            <Input name={`car_number${index}`} placeholder={'Номер авто'} icon={<NumberOutlined/>} required={true}
-                   pattern={validateCarNumber}/>
+            <Input data={setCarNumber} name={`car_number${index}`} placeholder={'Номер авто'} icon={<NumberOutlined/>} required={true} pattern={validateCarNumber}/>
           </div>
         </div>
         <div className="registration__field">
@@ -86,9 +104,11 @@ const CarAddForm = ({index}) => {
                    required={true}/>
           </div>
         </div>
-        <div className="registration__field">
-          <UploadForm index={index} data={setCarImages} maxCount={3}/>
-        </div>
+        {checkCarNumber && (
+          <div className="registration__field">
+            <UploadForm index={index} data={setCarImages} maxCount={3}/>
+          </div>
+        )}
         <div className="registration__field">
           <div className="registration__field-input">
             <Input name={`notation${index}`} placeholder={'Примечание'} icon={<SnippetsOutlined/>}/>

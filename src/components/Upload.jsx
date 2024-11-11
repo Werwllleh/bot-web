@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_BASE } from "../utils/consts";
 import {deleteCarImage} from "../api/api-cars";
 
-const UploadForm = ({ index, data, maxCount }) => {
+const UploadForm = ({ index, data, maxCount, disabled }) => {
   const [images, setImages] = useState([]);
 
   // Передаем список изображений родительскому компоненту
@@ -69,7 +69,7 @@ const UploadForm = ({ index, data, maxCount }) => {
       onRemove={handleRemove}
     >
       <input className={"upload_input"} name={`images${index}`} type="text" defaultValue={images} required={true}/>
-      <Button disabled={images.length >= maxCount} icon={<FileImageOutlined />}>Загрузить фото автомобиля*</Button>
+      <Button disabled={images.length >= maxCount || disabled} icon={<FileImageOutlined />}>Загрузить фото автомобиля*</Button>
     </Upload>
   );
 };
