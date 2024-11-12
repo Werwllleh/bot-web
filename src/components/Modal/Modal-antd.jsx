@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Modal } from 'antd';
 
-const Modal = ({children}) => {
+const ModalAntd = ({children}) => {
 
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -31,4 +31,4 @@ const Modal = ({children}) => {
   );
 };
 
-export default Modal;
+export default ModalAntd;
