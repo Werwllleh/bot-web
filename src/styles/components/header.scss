@@ -14,9 +14,59 @@
     justify-content: space-between;
   }
 
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__link-social {
+    max-width: 3.2rem;
+    max-height: 3.2rem;
+    width: 100%;
+    height: 100%;
+  }
+
   &__logo {
     max-width: 15rem;
     width: 100%;
   }
+
+  &__profile {
+
+    &-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 100%;
+
+      span {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: $white;
+      }
+    }
+  }
+
 
 }

@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import useTelegram from "./hooks/useTelegram";
 import Form from './components/Pages/Form/Form';
 import ChangeForm from './components/Pages/Form/ChangeForm/ChangeForm';
-import Cars from './components/Pages/Cars/Cars';
+import Cars from './components/Pages/Cars';
 import Partners from './components/Pages/Partners/Partners';
 import SearchCar from './components/Pages/SearchCar/SearchCar';
 import {Routes, Route, useNavigate, Navigate, useLocation, MemoryRouter} from 'react-router-dom';
@@ -17,15 +17,19 @@ import BottomNavigationBar from "./components/BottomNavigationBar/BottomNavigati
 import Cart from "./components/Pages/Cart/Cart";
 import {getProductsData} from "./utils/productsUtils";
 import {Result} from "antd";
-import {admins, menu, userStatusValue} from "./utils/consts";
+import {admins, menu, route, userStatusValue} from "./utils/consts";
 import Feedback from "./components/Pages/Feedback/Feedback";
 import FeedbackList from "./components/Pages/Feedback/FeedbackList";
 import Admin from "./components/Pages/Admin/Admin";
 import UserList from "./components/Pages/UserList/UserList";
 import LocationPage from "./components/Pages/LocationPage/LocationPage";
-import Registration from "./components/Pages/Registration/Registration";
+import Registration from "./components/Pages/Registration";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import {getUserInfo} from "./api/api-users";
+import {OnlyAuth, OnlyUnAuth} from "./components/Pages/ProtectedRoute";
+import Profile from "./components/Pages/Profile";
+import NotFound from "./components/Pages/NotFound";
 
 
 function App() {
@@ -37,8 +41,12 @@ function App() {
   const [loaderPartners, setLoaderPartners] = useState(true);
   const [loaderStickers, setLoaderStickers] = useState(true);
 
-  const updateCurrentUser = useUsersStore((state) => state.updateCurrentUser);
-  const updateUserStatus = useUsersStore((state) => state.updateUserStatus);
+
+  const updateUserTelegramData = useUsersStore((state) => state.updateUserTelegramData);
+  const updateUserData = useUsersStore((state) => state.updateUserData);
+  const updateAuthChecked = useUsersStore((state) => state.updateAuthChecked);
+
+
   const updateUsers = useUsersStore((state) => state.updateUsers);
   const updatePartners = usePartnersStore((state) => state.updatePartners);
   const updateStickers = useStickersStore((state) => state.updateStickers);
@@ -47,12 +55,14 @@ function App() {
 
 
   const productsData = useProductsCountStore((state) => state.productStore);
-  const currentUser = useUsersStore((state) => state.currentUser);
+
+  const userTelegramData = useUsersStore((state) => state.userTelegramData);
+  const userData = useUsersStore((state) => state.userData);
+
   const users = useUsersStore((state) => state.users);
   const partners = usePartnersStore((state) => state.partners);
   const stickers = useStickersStore((state) => state.stickers);
   const userCart = useUsersStore((state) => state.cart);
-  const userStatus = useUsersStore((state) => state.userStatus);
 
 
   useEffect(() => {
@@ -60,32 +70,38 @@ function App() {
     tg.expand();
 
     // updateCurrentUser(tg?.initDataUnsafe?.user)
-    updateCurrentUser({
+    updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      id: 4460127941,
+      id: 446012794,
       // id: 361881710,
       language_code: "en",
       last_name: "",
       username: "all_lllll"
     })
+    updateAuthChecked(true)
 
   }, [tg])
 
   useEffect(() => {
-    console.log(currentUser)
-  }, [currentUser]);
+    if (userTelegramData) {
+      getUserInfo(userTelegramData?.id).then(res => {
+        if (res) {
+          updateUserData(res.data)
+        }
+      })
+    }
+  }, [userTelegramData]);
 
   useEffect(() => {
+    console.log(userData)
+  }, [userData]);
+
+  /*useEffect(() => {
     const isAdmin = productsData.some(user => currentUser?.id === Number(user.chatId));
     const newUserStatus = isAdmin ? userStatusValue.ADMIN : userStatusValue.USER;
     updateUserStatus(newUserStatus);
-  }, [userStatus, currentUser, productsData]);
-
-  useEffect(() => {
-    // console.log(userStatus)
-    // updateUserStatus()
-  }, [userStatus]);
+  }, [userStatus, currentUser, productsData]);*/
 
   /*useEffect(() => {
 
@@ -129,13 +145,11 @@ function App() {
 
   const navigate = useNavigate();
 
-
-
   const partnersSortedObject = groupedPartnersFunc(partners);
 
   const {pathname} = useLocation();
 
-  const headerColor = menu.filter(item => item.url === pathname)[0].color;
+  const headerColor = Object.values(route).filter(item => item?.url === pathname)[0]?.color;
 
 
   return (
@@ -144,9 +158,11 @@ function App() {
       <main className="main">
         <div className="content">
           <Routes>
-            <Route index element={<Cars data={users}/>}/>
-            <Route path='/partners' element={<Partners data={partnersSortedObject}/>}/>
-            <Route path='/registration' element={<Registration/>}/>
+            <Route index element={<OnlyAuth component={<Cars />} />}/>
+            <Route path={route.PARTNERS.url} element={<OnlyAuth component={<Partners data={partnersSortedObject}/>} />}/>
+            <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile />} />}/>
+            <Route path={route.REGISTER.url} element={<OnlyUnAuth component={<Registration/>}/>}/>
+            <Route path={route.NF_404.url} element={<NotFound />}/>
           </Routes>
         </div>
       </main>

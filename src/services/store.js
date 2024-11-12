@@ -1,14 +1,16 @@
 import { create } from 'zustand';
 
 export const useUsersStore = create((set) => ({
-  currentUser: {},
-  userStatus: 'user',
+  userTelegramData: {},
+  userData: {},
+  isAuthChecked: false,
   users: [],
   cart: [],
   selectedPlace: null,
   available: false,
-  updateCurrentUser: (data) => set(() => ({ currentUser: data })),
-  updateUserStatus: (data) => set(() => ({ userStatus: data })),
+  updateUserTelegramData: (data) => set(() => ({ userTelegramData: data })),
+  updateUserData: (data) => set(() => ({ userData: data })),
+  updateAuthChecked: (data) => set(() => ({ isAuthChecked: data })),
   updateUsers: (data) => set(() => ({ users: data })),
   updateCart: (data) => set(() => ({ cart: data })),
   updateSelectedPlace: (data) => set(() => ({ selectedPlace: data })),

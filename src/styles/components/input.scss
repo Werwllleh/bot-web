@@ -89,6 +89,23 @@
     }
   }
 
+  &__help {
+    display: flex;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+    transition: opacity $transition, height $transition;
+
+    &.show {
+      height: auto;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   &__error-message {
     color: $black;
     background-color: $error-color;

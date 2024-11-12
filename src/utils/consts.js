@@ -50,7 +50,7 @@ export const userStatusValue = {
   USER: 'user',
 }
 
-export const admins = [446012794, 361881710]
+export const admins = [446012794]
 
 export const adminPages = [
   {
@@ -103,7 +103,45 @@ export const menu = [
     title: 'Наши авто',
     url: '/'
   },
+  {
+    title: 'Партнеры',
+    url: '/partners',
+    color: '#F4F7FB'
+  },
+  {
+    title: 'Профиль',
+    url: '/profile',
+    color: '#F4F7FB'
+  },
 ]
+
+export const route = {
+  REGISTER: {
+    title: 'Регистрация',
+    url: '/registration',
+    color: '#F4F7FB'
+  },
+  PARTNERS: {
+    title: 'Партнеры',
+    url: '/partners',
+    color: '#F4F7FB'
+  },
+  PROFILE: {
+    title: 'Профиль',
+    url: '/profile',
+    color: '#F4F7FB'
+  },
+  CARS: {
+    title: '',
+    url: '/',
+    color: '#F4F7FB'
+  },
+  NF_404: {
+    title: '',
+    url: '*',
+    color: '#F4F7FB'
+  },
+}
 
 export const socialLinks = [
   {

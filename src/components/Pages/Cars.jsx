@@ -1,23 +1,15 @@
 import React, {useEffect} from "react";
-import useTelegram from "../../../hooks/useTelegram";
-import s from "./Cars.module.scss";
 import {Image} from "antd";
-import Header from "../../Header";
-import {API} from "../../../utils/consts";
+import {API} from "../../utils/consts";
 
-const Cars = ({data}) => {
-
-  const {tg} = useTelegram();
-
-  useEffect(() => {
-    tg.expand();
-  }, []);
+const Cars = () => {
 
   return (
-    <div className={s.cars_body}>
-        <div className={s.image_grid}>
-          <div className={s.cars_grid}>
-            {data.map((user) => (
+    <div className="page-cars">
+      <div className="container">
+        <h1 className="page-cars__title h1t">Наши авто</h1>
+        <div className="page-cars__body">
+          {/*{data.map((user) => (
               <Image
                 preview={{
                   // src: API + "api/image/" + user.carImage,
@@ -70,9 +62,9 @@ const Cars = ({data}) => {
                 src={`${API}api/image/small/${user.carImage}_small.jpeg`}
                 alt={`${user.carbrand} ${user.carModel}`}
               />
-            ))}
-          </div>
+            ))}*/}
         </div>
+      </div>
     </div>
   );
 };

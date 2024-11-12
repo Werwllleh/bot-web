@@ -2,9 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import {CloseOutlined} from "@ant-design/icons";
 import {getCarInfo} from "../api/api-cars";
 
-const Input = ({label, icon, placeholder, name, type, required, pattern, data}) => {
+const Input = ({label, icon, placeholder, name, type, required, pattern, helpMsg, data}) => {
 
   const input = useRef();
+  const [focused, setFocused] = useState(false);
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
   const [errorText, setErrorText] = useState(null);
@@ -22,26 +23,20 @@ const Input = ({label, icon, placeholder, name, type, required, pattern, data}) 
     }
   }
 
-  /*useEffect(() => {
-    if (["car_number"].includes(name)) {
-      if (value.length >= 8 && value.length <= 9) {
-        getCarInfo(value).then((res) => {
-          if (res.data) {
-            setError(true);
-            setErrorText('Авто с данным номером уже зарегистрирован');
-          } else {
-            setError(false)
-            setErrorText(null);
-          }
-        })
-      }
-    }
-  }, [value]);*/
+  const onFocus = (e) => {
+    setFocused(true)
+  }
+
+  const onBlur = (e) => {
+    setFocused(false)
+  }
+
 
   const clearInput = () => {
     setValue('');
     setError(false);
-    setErrorText(null)
+    setErrorText(null);
+    if (data) { data('')}
     input.current.focus();
   }
 
@@ -63,6 +58,7 @@ const Input = ({label, icon, placeholder, name, type, required, pattern, data}) 
       }
     }
     if (name.includes('car_year')) {
+      console.log(value)
       const currentYear = new Date().getFullYear();
       if (Number(value) >= 1800 && Number(value) <= currentYear) {
         setError(false)
@@ -88,6 +84,8 @@ const Input = ({label, icon, placeholder, name, type, required, pattern, data}) 
           inputMode={name.includes('car_year') ? "numeric" : "text"}
           type={type !== '' ? type : 'text'}
           value={value}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onChange={onChange}
           name={name}
           placeholder={placeholder}
@@ -95,6 +93,7 @@ const Input = ({label, icon, placeholder, name, type, required, pattern, data}) 
         />
         {value.length ? <span onClick={clearInput} className="input-field__clear"><CloseOutlined/></span> : ''}
       </div>
+      {helpMsg && <span className={`input-field__help ${(focused || error) && 'show'}`}>{helpMsg}</span>}
       {errorText && <div className="input-field__error-message">{errorText}</div>}
     </div>
   );

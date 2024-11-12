@@ -1,13 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Select from "./Select";
-import {CarOutlined, NumberOutlined, SnippetsOutlined, CalendarOutlined, CarTwoTone} from "@ant-design/icons";
+import {CarOutlined, NumberOutlined, SnippetsOutlined, CalendarOutlined} from "@ant-design/icons";
 import {getCarInfo, getCars} from "../api/api-cars";
 import UploadForm from "./Upload";
 import Input from "./Input";
 import {validateCarNumber} from "../utils/patterns";
 import {notification} from "antd";
 
-const CarAddForm = ({info, index}) => {
+const CarAddForm = ({info, index, status}) => {
 
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type, message, description) => {
@@ -33,13 +33,17 @@ const CarAddForm = ({info, index}) => {
   const [carNumber, setCarNumber] = useState("");
   const [checkCarNumber, setCheckCarNumber] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(info)
-  }, [info]);
+  }, [info]);*/
+
+  useEffect(() => {
+    status(checkCarNumber);
+  }, [checkCarNumber]);
 
 
   useEffect(() => {
-    if (!info?.car_number && carNumber.length >= 8 && carNumber.length <= 9) {
+    if (carNumber.length >= 8 && carNumber.length <= 9 && validateCarNumber.test(carNumber.toUpperCase())) {
       getCarInfo(carNumber).then((res) => {
         if (res.data) {
           setCheckCarNumber(false)
@@ -63,7 +67,6 @@ const CarAddForm = ({info, index}) => {
     if (selectedBrand) {
       setSelectedModel(''); // Обнуляем выбранную модель
       setModels(cars[selectedBrand] || []);
-
     } else {
       setModels([]); // Если марка не выбрана, очищаем список моделей
     }
@@ -91,7 +94,7 @@ const CarAddForm = ({info, index}) => {
               title="Модель авто"
               name={`model${index}`}
               data={models}
-              icon={<CarTwoTone/>}
+              icon={<CarOutlined/>}
               value={selectedModel}
               onChange={(model) => setSelectedModel(model)}
             />
@@ -99,12 +102,15 @@ const CarAddForm = ({info, index}) => {
         ) : ''}
         <div className="registration__field">
           <div className="registration__field-input">
-            <Input data={setCarNumber} name={`car_number${index}`} placeholder={'Номер авто'} icon={<NumberOutlined/>} required={true} pattern={validateCarNumber}/>
+            <Input helpMsg={'Русские символы, формат X777XX21 или формат X777XX121'} data={setCarNumber}
+                   name={`car_number${index}`} placeholder={'Номер авто'} icon={<NumberOutlined/>} required={true}
+                   pattern={validateCarNumber}/>
           </div>
         </div>
         <div className="registration__field">
           <div className="registration__field-input">
-            <Input name={`car_year${index}`} type={'number'} placeholder={'Год выпуска авто'} icon={<CalendarOutlined/>}
+            <Input helpMsg={'Укажите год вашего авто'}
+                   name={`car_year${index}`} type={'number'} placeholder={'Год выпуска авто'} icon={<CalendarOutlined/>}
                    required={true}/>
           </div>
         </div>
