@@ -84,9 +84,10 @@ function App() {
   }, [tg])
 
   useEffect(() => {
-    if (userTelegramData) {
+    if (userTelegramData?.id) {
+
       getUserInfo(userTelegramData?.id).then(res => {
-        if (res) {
+        if (res.data !== '') {
           updateUserData(res.data)
         }
       })

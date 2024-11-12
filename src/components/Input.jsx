@@ -58,7 +58,6 @@ const Input = ({label, icon, placeholder, name, type, required, pattern, helpMsg
       }
     }
     if (name.includes('car_year')) {
-      console.log(value)
       const currentYear = new Date().getFullYear();
       if (Number(value) >= 1800 && Number(value) <= currentYear) {
         setError(false)

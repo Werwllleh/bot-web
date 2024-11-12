@@ -9,6 +9,7 @@ import {validateCarNumber, validateName} from "../../utils/patterns";
 import {deleteCarImage, getCarInfo} from "../../api/api-cars";
 import {useNavigate} from "react-router-dom";
 import {route} from "../../utils/consts";
+import {checkObject} from "../../utils/checkObject";
 
 
 const Registration = () => {
@@ -42,13 +43,6 @@ const Registration = () => {
   const [carNumber, setCarNumber] = useState('');
   const [carAddFormStatus, setCarAddFormStatus] = useState(false);
 
-  /*useEffect(() => {
-    if (userData) {
-      setTimeout(() => {
-        navigate(route.CARS.url)
-      }, 1500)
-    }
-  }, [userData]);*/
 
   const navigate = useNavigate();
   // Добавление формы авто
@@ -123,7 +117,7 @@ const Registration = () => {
             getCarInfo(input.value.toUpperCase().trim()).then(res => {
               const info = res.data;
 
-              if (info) {
+              if (info !== '') {
                 addErrorClass(input);
                 setFormValidate(false);
                 showNotification('error', `Авто с номером ${input.value.toUpperCase().trim()} уже зарегистрирован`, '', delay);
@@ -161,7 +155,7 @@ const Registration = () => {
 
     validateRegistrationForm();
 
-    if (formValidate && !userData) {
+    if (formValidate && !checkObject(userData)) {
       formData.forEach(([key, value]) => {
         const match = key.match(/(\D+)(\d*)$/); // Разделение имени ключа и номера
         const propName = match[1]; // Название свойства
@@ -192,6 +186,7 @@ const Registration = () => {
             openNotificationWithIcon('success', 'Регистрация прошла успешно!', '');
 
             getUserInfo(userTelegramData?.id).then(res => {
+              console.log(res)
               if (res.data) {
                 updateAuthChecked(true);
                 updateUserData(res.data);

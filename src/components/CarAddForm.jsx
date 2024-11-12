@@ -33,9 +33,6 @@ const CarAddForm = ({info, index, status}) => {
   const [carNumber, setCarNumber] = useState("");
   const [checkCarNumber, setCheckCarNumber] = useState(false);
 
-  /*useEffect(() => {
-    console.log(info)
-  }, [info]);*/
 
   useEffect(() => {
     status(checkCarNumber);
@@ -45,7 +42,7 @@ const CarAddForm = ({info, index, status}) => {
   useEffect(() => {
     if (carNumber.length >= 8 && carNumber.length <= 9 && validateCarNumber.test(carNumber.toUpperCase())) {
       getCarInfo(carNumber).then((res) => {
-        if (res.data) {
+        if (res.data !== '') {
           setCheckCarNumber(false)
           openNotificationWithIcon('error', 'Авто с данным номером уже зарегистрирован!');
         } else {
