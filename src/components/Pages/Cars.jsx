@@ -6,11 +6,16 @@ import MainModal from "../MainModal/MainModal";
 import {Image} from 'antd';
 import {checkObject} from "../../utils/checkObject";
 import {API_BASE} from "../../utils/consts";
+import {CloseOutlined, SearchOutlined} from "@ant-design/icons";
 
 const Cars = () => {
 
   const [loading, setLoading] = useState(true);
   const [isModalActive, setModalActive] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(false);
+  const [searchCarNumber, setSearchCarNumber] = useState('');
+
+  const [carsList, setCarsList] = useState([]);
 
   const [selectedCarId, setSelectedCarId] = useState(null);
   const [selectedCarInfo, setSelectedCarInfo] = useState({});
@@ -25,6 +30,7 @@ const Cars = () => {
   useEffect(() => {
     if (usersCars.length) {
       setLoading(false);
+      setCarsList(usersCars)
     } else {
       setLoading(true);
       updateUsers();
@@ -78,8 +84,26 @@ const Cars = () => {
   }, [selectedCarId]);
 
   useEffect(() => {
-    console.log(selectedCarInfo)
-  }, [selectedCarInfo]);
+    console.log(searchCarNumber)
+  }, [searchCarNumber]);
+
+  const searchFieldFunc = () => {
+    if (isSearchActive) {
+      setIsSearchActive(false);
+      setSearchCarNumber('');
+    } else {
+      setIsSearchActive(true);
+    }
+  }
+
+  useEffect(() => {
+    if (searchCarNumber !== '') {
+      const filteredData = usersCars?.filter(car => car.car_number.includes(searchCarNumber));
+      setCarsList(filteredData);
+    } else {
+      setCarsList(usersCars);
+    }
+  }, [searchCarNumber]);
 
   return (
     <>
@@ -89,15 +113,22 @@ const Cars = () => {
         </div>
         <div className="page-cars__body">
           {loading && <div className="page-cars__loader"><Loader/></div>}
-          {!loading && usersCars.length && (
+          {!loading && carsList?.length && (
             <div className="page-cars__images">
-              {usersCars.map((car) => (
+              {carsList.map((car) => (
                 <CarImage openModal={handleModalOpen} car={car} key={car.id} isSelected={selectedCarId === car.id}
                           onSelect={handleCarSelect}/>
               ))}
             </div>
           )}
         </div>
+        <div className={`page-cars__search-field ${isSearchActive ? "active" : ""}`}>
+          <input value={searchCarNumber} onChange={(e) => setSearchCarNumber(e.target.value.toUpperCase())} type="text"
+                 className="page-cars__search-field-input"/>
+        </div>
+        <button onClick={searchFieldFunc} className="page-cars__search-button">
+          {isSearchActive ? <CloseOutlined/> : <SearchOutlined/>}
+        </button>
       </div>
       <MainModal className={"car-info-modal"} title={'Об авто'} isOpen={isModalActive} onClose={handleModalClose}>
         {checkObject(selectedCarInfo) && (
@@ -118,7 +149,8 @@ const Cars = () => {
               </div>
               <div className="car-info-modal__info-row">
                 <span className="car-info-modal__info-title">Авто:</span>
-                <p className="car-info-modal__info-value">{`${selectedCarInfo.car_brand} ${selectedCarInfo.car_model}`}</p>
+                <p
+                  className="car-info-modal__info-value">{`${selectedCarInfo.car_brand} ${selectedCarInfo.car_model}`}</p>
               </div>
               <div className="car-info-modal__info-row">
                 <span className="car-info-modal__info-title">Год:</span>

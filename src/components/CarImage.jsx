@@ -1,11 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Pagination} from "swiper/modules";
+import {EffectFade} from 'swiper/modules';
+import {Pagination, Autoplay} from "swiper/modules";
 import {API_BASE} from "../utils/consts";
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 
 
@@ -25,11 +27,17 @@ const CarImage = ({ car, openModal, isSelected, onSelect }) => {
         <div className="page-cars__car-body">
           <div className="page-cars__car-images">
             <Swiper
-              modules={[Pagination]}
+              modules={[Pagination, Autoplay, EffectFade]}
+              effect="fade"
               pagination={{clickable: true}}
               slidesPerView="auto"
               spaceBetween={0}
-              loop={true}
+              loop={JSON.parse(car.car_images).length > 1}
+              autoplay={{
+                delay: Math.floor(4000 + Math.random() * 4000), // Рандомное значение от 1500 до 3000
+                disableOnInteraction: true, // Автоплей будет отключаться при взаимодействии
+              }}
+
               // onSlideChange={() => console.log('slide change')}
               // onSwiper={(swiper) => console.log(swiper)}
             >

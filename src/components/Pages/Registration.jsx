@@ -37,6 +37,7 @@ const Registration = () => {
 
   const updateUserData = useUsersStore((state) => state.updateUserData);
   const updateAuthChecked = useUsersStore((state) => state.updateAuthChecked);
+  const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
 
   const [formValidate, setFormValidate] = useState(true);
 
@@ -189,6 +190,7 @@ const Registration = () => {
               if (res.data) {
                 updateAuthChecked(true);
                 updateUserData(res.data);
+                updateUsersCars();
 
                 setTimeout(() => {
                   navigate(route.CARS.url)
@@ -236,7 +238,7 @@ const Registration = () => {
                 {cars.map((data, index) => (
                   <div key={index} className="registration__car-block">
                     <CarAddForm index={index > 0 ? index + 1 : ''} key={index} status={setCarAddFormStatus}/>
-                    {/*<div className="registration__car-block-controls">
+                    <div className="registration__car-block-controls">
                       <button type="button" className="registration__car-block-controls-add"
                               onClick={() => handleAddCar(index)}>Добавить еще авто
                       </button>
@@ -244,7 +246,7 @@ const Registration = () => {
                         <button type="button" className="registration__car-block-controls-delete"
                                 onClick={() => handleRemoveCar(index)}>Удалить авто</button>
                       )}
-                    </div>*/}
+                    </div>
                   </div>
                 ))}
               </div>
