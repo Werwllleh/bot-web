@@ -111,6 +111,29 @@ const Cars = () => {
                 />
               </Image.PreviewGroup>
             </div>
+            <div className="car-info-modal__info">
+              <div className="car-info-modal__info-row">
+                <span className="car-info-modal__info-title">Владелец:</span>
+                <p className="car-info-modal__info-value">{selectedCarInfo.user.user_name}</p>
+              </div>
+              <div className="car-info-modal__info-row">
+                <span className="car-info-modal__info-title">Авто:</span>
+                <p className="car-info-modal__info-value">{`${selectedCarInfo.car_brand} ${selectedCarInfo.car_model}`}</p>
+              </div>
+              <div className="car-info-modal__info-row">
+                <span className="car-info-modal__info-title">Год:</span>
+                <p className="car-info-modal__info-value">{selectedCarInfo.car_year}</p>
+              </div>
+              <div className="car-info-modal__info-row">
+                <span className="car-info-modal__info-title">Номер:</span>
+                <p className="car-info-modal__info-value">{selectedCarInfo.car_number}</p>
+              </div>
+              {selectedCarInfo.car_note && <div className="car-info-modal__info-row">
+                <span className="car-info-modal__info-title">Примечание:</span>
+                <p className="car-info-modal__info-value">{selectedCarInfo.car_note}</p>
+
+              </div>}
+            </div>
           </div>
         )}
       </MainModal>

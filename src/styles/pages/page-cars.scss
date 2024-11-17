@@ -111,4 +111,42 @@
 
 .car-info-modal {
 
+  .modal__title {
+    font-size: 2rem;
+  }
+
+  &__content {}
+
+  &__images {}
+
+  &__info {
+    margin: 1rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+
+    &-row {
+      display: grid;
+      grid-template-columns: 12rem 1fr;
+      align-items: flex-start;
+      gap: .7rem;
+    }
+
+    &-title {
+      font-size: 1.6rem;
+      font-weight: 400;
+      text-align: right;
+    }
+
+    &-value {
+      flex: 0 1 50%;
+      width: 100%;
+      font-weight: 500;
+      font-size: 1.6rem;
+      color: $accent-color;
+      max-height: 15rem;
+      overflow-y: auto;
+    }
+
+  }
 }
