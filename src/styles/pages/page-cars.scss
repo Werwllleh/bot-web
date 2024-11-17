@@ -5,6 +5,110 @@
   }
 
   &__body {
+    margin: 2rem 0 0 0;
+  }
+
+  &__loader {
 
   }
+
+  &__images {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100rem;
+    width: 100%;
+    margin: 0 auto;
+
+  }
+
+  &__car {
+    flex: 1 1 50%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    &.selected {
+
+      .page-cars__car-bg {
+        opacity: 1;
+        visibility: visible;
+        background-color: rgba(149, 149, 149, 0.53);
+      }
+
+      .page-cars__car-about {
+        transform: translateY(0);
+      }
+    }
+
+    &-body {
+
+    }
+
+    &-images {
+
+      & .swiper {
+
+        .swiper-slide {
+          width: 100%;
+        }
+
+        .swiper-pagination {
+          bottom: .3rem;
+
+          .swiper-pagination-bullet {
+            background-color: $accent-color-light;
+          }
+
+          .swiper-pagination-bullet-active {
+            background-color: $accent-color;
+          }
+        }
+
+      }
+    }
+
+    &-image {
+      display: flex;
+      width: 100%;
+      height: 14rem;
+      object-fit: cover;
+    }
+
+    &-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 1;
+      transition: background $transition, opacity $transition, visibility $transition,;
+    }
+
+    &-about {
+      position: absolute;
+      transform: translateY(200%);
+      bottom: 0.6rem;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: .65rem .5rem;
+      background-color: $accent-color;
+      color: $white;
+      max-width: 80%;
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: transform $transition;
+    }
+  }
+}
+
+.car-info-modal {
+
 }

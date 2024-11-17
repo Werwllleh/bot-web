@@ -2,6 +2,7 @@
 @import "breakpoints";
 @import "base";
 
+
 //components
 
 @import "./components/main-logo";
@@ -12,6 +13,9 @@
 @import "./components/select";
 @import "./components/upload-button";
 @import "./components/modal";
+
+//icons
+@import "./components/icons/index";
 
 
 @import "./pages/index";

@@ -1,71 +1,120 @@
-import React, {useEffect} from "react";
-import {Image} from "antd";
-import {API} from "../../utils/consts";
+import React, {useEffect, useState} from "react";
+import {useUsersStore} from "../../services/store";
+import Loader from "../Loader/Loader";
+import CarImage from "../CarImage";
+import MainModal from "../MainModal/MainModal";
+import {Image} from 'antd';
+import {checkObject} from "../../utils/checkObject";
+import {API_BASE} from "../../utils/consts";
 
 const Cars = () => {
 
+  const [loading, setLoading] = useState(true);
+  const [isModalActive, setModalActive] = useState(false);
+
+  const [selectedCarId, setSelectedCarId] = useState(null);
+  const [selectedCarInfo, setSelectedCarInfo] = useState({});
+  const [imageList, setImageList] = useState([]);
+
+
+  const usersCars = useUsersStore((state) => state.usersCars);
+
+  const updateUsers = useUsersStore((state) => state.updateUsers);
+  const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
+
+  useEffect(() => {
+    if (usersCars.length) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+      updateUsers();
+      updateUsersCars();
+    }
+  }, [usersCars, updateUsers, updateUsersCars])
+
+  const handleModalOpen = () => {
+    setModalActive(true);
+  };
+  const handleModalClose = () => {
+    setModalActive(false);
+  };
+
+  const handleCarSelect = (carId) => {
+    if (selectedCarId !== carId) {
+      setSelectedCarId(carId);
+
+      // Находим данные о машине
+
+      let carData = usersCars.find(car => car.id === carId);
+      // Обновляем пути изображений, чтобы они содержали полный путь
+      const imageList = JSON.parse(carData.car_images).map(image => {
+        return `${API_BASE}/car/${image}`;
+      });
+
+      // Обновляем состояние с новым списком изображений
+      setImageList(imageList);
+
+      // Устанавливаем данные выбранной машины
+      setSelectedCarInfo(carData);
+    } else {
+      // Сбрасываем выделение при повторном клике на ту же машину
+      setSelectedCarId(null);
+      setSelectedCarInfo({});
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (selectedCarId) {
+        setSelectedCarId(null);
+      }
+    };
+
+    document.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [selectedCarId]);
+
+  useEffect(() => {
+    console.log(selectedCarInfo)
+  }, [selectedCarInfo]);
+
   return (
-    <div className="page-cars">
-      <div className="container">
-        <h1 className="page-cars__title h1t">Наши авто</h1>
+    <>
+      <div className="page-cars">
+        <div className="container">
+          <h1 className="page-cars__title h1t">Наши авто</h1>
+        </div>
         <div className="page-cars__body">
-          {/*{data.map((user) => (
-              <Image
-                preview={{
-                  // src: API + "api/image/" + user.carImage,
-                  mask: 'Просмотр',
-                  imageRender: () => (
-                    <div className={s.preview__block}>
-                      <div className={s.preview__image}>
-                        <img src={`${API}api/image/${user.carImage}`} alt=""/>
-                      </div>
-                      <div className={s.preview__info}>
-                        <ul className={s.preview__list}>
-                          <li>
-                            <span>Владелец:</span>
-                            <h5>{`${user.userName.toUpperCase()}`}</h5>
-                          </li>
-                          <li>
-                            <span>Авто:</span>
-                            <h5>{`${user.carbrand.toUpperCase()} ${user.carModel.toUpperCase()}`}</h5>
-                          </li>
-                          <li>
-                            <span>Гос.номер:</span>
-                            <h5>{`${user.carGRZ}`}</h5>
-                          </li>
-                          <li>
-                            <span>Год выпуска:</span>
-                            <h5>{`${user.carYear}`}</h5>
-                          </li>
-                          {user.carNote ? (
-                            <li>
-                              <span>Примечание:</span>
-                              <h5>{`${user.carNote}`}</h5>
-                            </li>
-                          ) : null}
-                        </ul>
-                      </div>
-                    </div>
-                  ),
-                  toolbarRender: () => null,
-                }}
-                style={{
-                  objectFit: "cover",
-                  height: "150px",
-                  maxWidth: "150px",
-                }}
-                loading="lazy"
-                key={user.chatId}
-                onError={(e) => {
-                  e.target.src = `${API}api/icons/not_found.png`
-                }}
-                src={`${API}api/image/small/${user.carImage}_small.jpeg`}
-                alt={`${user.carbrand} ${user.carModel}`}
-              />
-            ))}*/}
+          {loading && <div className="page-cars__loader"><Loader/></div>}
+          {!loading && usersCars.length && (
+            <div className="page-cars__images">
+              {usersCars.map((car) => (
+                <CarImage openModal={handleModalOpen} car={car} key={car.id} isSelected={selectedCarId === car.id}
+                          onSelect={handleCarSelect}/>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-    </div>
+      <MainModal className={"car-info-modal"} title={'Об авто'} isOpen={isModalActive} onClose={handleModalClose}>
+        {checkObject(selectedCarInfo) && (
+          <div className="car-info-modal__content">
+            <div className="car-info-modal__images">
+              <Image.PreviewGroup
+                items={imageList}
+              >
+                <Image
+                  src={imageList[Math.floor(Math.random() * (imageList.length - 1))]}
+                />
+              </Image.PreviewGroup>
+            </div>
+          </div>
+        )}
+      </MainModal>
+    </>
   );
 };
 

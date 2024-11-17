@@ -23,3 +23,12 @@ export const getUserInfo = async (chatId) => {
     throw err; // Пробрасываем ошибку, чтобы её можно было обработать в компоненте
   }
 }
+
+export const getAllUsers = async () => {
+  try {
+    return await axios.post(`${API_BASE}/all-users`)
+  } catch (err) {
+    console.error('Ошибка получения данных всех пользователей: ', err);
+    throw err; // Пробрасываем ошибку, чтобы её можно было обработать в компоненте
+  }
+}

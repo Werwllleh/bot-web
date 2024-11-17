@@ -1,20 +1,25 @@
 import { create } from 'zustand';
+import {getAllUsers} from "../api/api-users";
+import {getUsersCars} from "../api/api-cars";
 
 export const useUsersStore = create((set) => ({
   userTelegramData: {},
   userData: {},
   isAuthChecked: false,
   users: [],
-  cart: [],
-  selectedPlace: null,
-  available: false,
+  usersCars: [],
   updateUserTelegramData: (data) => set(() => ({ userTelegramData: data })),
   updateUserData: (data) => set(() => ({ userData: data })),
   updateAuthChecked: (data) => set(() => ({ isAuthChecked: data })),
-  updateUsers: (data) => set(() => ({ users: data })),
-  updateCart: (data) => set(() => ({ cart: data })),
-  updateSelectedPlace: (data) => set(() => ({ selectedPlace: data })),
-  updateAvailableProducts: (data) => set(() => ({ available: data })),
+  // updateUsers: (data) => set(() => ({ users: data })),
+  updateUsers: async () => {
+    const users = await getAllUsers();
+    set({ users: users.data });
+  },
+  updateUsersCars: async () => {
+    const usersCars = await getUsersCars();
+    set({ usersCars: usersCars.data });
+  },
 }))
 
 export const usePartnersStore = create((set) => ({

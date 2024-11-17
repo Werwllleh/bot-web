@@ -186,7 +186,6 @@ const Registration = () => {
             openNotificationWithIcon('success', 'Регистрация прошла успешно!', '');
 
             getUserInfo(userTelegramData?.id).then(res => {
-              console.log(res)
               if (res.data) {
                 updateAuthChecked(true);
                 updateUserData(res.data);

@@ -57,6 +57,7 @@ const UploadForm = ({ index, data, maxCount, disabled }) => {
     }
   };
 
+
   return (
     <Upload
       name={`avatar${index}`}

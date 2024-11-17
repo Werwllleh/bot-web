@@ -1,6 +1,7 @@
 import {FormOutlined, UsergroupAddOutlined, NotificationOutlined} from "@ant-design/icons";
 import React from "react";
 import TelegramIcon from "../components/icons/telegram-icon";
+import InstagramIcon from "../components/icons/instagram-icon";
 
 // export const SITE = 'https://vagcheb.ru/';
 export const API = 'http://localhost';
@@ -148,7 +149,12 @@ export const socialLinks = [
     title: 'telegram',
     link: 'https://t.me/+A6S11dagaDA2OWMy',
     icon: <TelegramIcon/>
-  }
+  },
+  {
+    title: 'instagram',
+    link: 'https://www.instagram.com/vag_club21',
+    icon: <InstagramIcon/>
+  },
 ]
 
 export const FORM_TYPE_REGISTRATION = 'form_type_registration';

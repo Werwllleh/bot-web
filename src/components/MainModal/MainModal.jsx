@@ -4,7 +4,7 @@ import {CloseOutlined} from "@ant-design/icons";
 
 const MODAL_CONTAINER_ID = "modal-container-id";
 
-const MainModal = ({isOpen, onClose, title, children}) => {
+const MainModal = ({isOpen, onClose, title, children, className}) => {
 
   const rootRef = useRef(null);
 
@@ -44,7 +44,7 @@ const MainModal = ({isOpen, onClose, title, children}) => {
   return (
     <Portal id={MODAL_CONTAINER_ID}>
       <div className={`bg-wrap ${isActive ? 'active' : ''}`} ref={rootRef}></div>
-      <div className={`modal ${isActive ? 'show' : ''}`}>
+      <div className={`modal ${className} ${isActive ? 'show' : ''}`}>
         <button type="button" className="modal__close" onClick={handleClose}>
           <CloseOutlined />
         </button>

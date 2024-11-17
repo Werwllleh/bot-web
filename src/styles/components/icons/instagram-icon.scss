@@ -1,0 +1,19 @@
+.instagram-icon {
+  position: relative;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 100%;
+  background: linear-gradient(206deg, #7024c4 0%, #c21975 41.55%, #da3f40 70.22%, #ef9a26 100%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__logo {
+    position: absolute;
+    margin-inline: auto;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    display: flex;
+  }
+}

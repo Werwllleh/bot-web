@@ -41,28 +41,21 @@ function App() {
   const [loaderPartners, setLoaderPartners] = useState(true);
   const [loaderStickers, setLoaderStickers] = useState(true);
 
+  const userTelegramData = useUsersStore((state) => state.userTelegramData);
 
   const updateUserTelegramData = useUsersStore((state) => state.updateUserTelegramData);
   const updateUserData = useUsersStore((state) => state.updateUserData);
+  const updateUsers = useUsersStore((state) => state.updateUsers);
+  const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
   const updateAuthChecked = useUsersStore((state) => state.updateAuthChecked);
 
 
-  const updateUsers = useUsersStore((state) => state.updateUsers);
+
   const updatePartners = usePartnersStore((state) => state.updatePartners);
-  const updateStickers = useStickersStore((state) => state.updateStickers);
-  const updateProductStore = useProductsCountStore((state) => state.updateProductStore);
-  const updateProductStoreLoading = useProductsCountStore((state) => state.updateProductStoreLoading);
 
-
-  const productsData = useProductsCountStore((state) => state.productStore);
-
-  const userTelegramData = useUsersStore((state) => state.userTelegramData);
   const userData = useUsersStore((state) => state.userData);
 
-  const users = useUsersStore((state) => state.users);
   const partners = usePartnersStore((state) => state.partners);
-  const stickers = useStickersStore((state) => state.stickers);
-  const userCart = useUsersStore((state) => state.cart);
 
 
   useEffect(() => {
@@ -73,7 +66,9 @@ function App() {
     updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      id: 446012794,
+      // id: 446012794, //me
+      // id: 777777777, //test
+      id: 111777111, //test2
       // id: 361881710,
       language_code: "en",
       last_name: "",
@@ -95,8 +90,13 @@ function App() {
   }, [userTelegramData]);
 
   useEffect(() => {
+    updateUsers();
+    updateUsersCars()
+  }, [updateUsers, updateUsersCars]);
+
+  /*useEffect(() => {
     console.log(userData)
-  }, [userData]);
+  }, [userData]);*/
 
   /*useEffect(() => {
     const isAdmin = productsData.some(user => currentUser?.id === Number(user.chatId));
