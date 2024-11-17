@@ -25,7 +25,7 @@ const CarImage = ({ car, openModal, isSelected, onSelect }) => {
     <>
       <div key={car.id} className={`page-cars__car ${isSelected ? 'selected' : ''}`} onClick={(e) => selectCar(e, car.id)}>
         <div className="page-cars__car-body">
-          <div className="page-cars__car-images">
+          <div className={`page-cars__car-images`}>
             <Swiper
               modules={[Pagination, Autoplay, EffectFade]}
               effect="fade"

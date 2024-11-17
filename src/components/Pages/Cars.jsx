@@ -113,14 +113,14 @@ const Cars = () => {
         </div>
         <div className="page-cars__body">
           {loading && <div className="page-cars__loader"><Loader/></div>}
-          {!loading && carsList?.length && (
-            <div className="page-cars__images">
+          {!loading && carsList?.length ? (
+            <div className={`page-cars__images ${isSearchActive ? 'ch' : ''}`}>
               {carsList.map((car) => (
                 <CarImage openModal={handleModalOpen} car={car} key={car.id} isSelected={selectedCarId === car.id}
                           onSelect={handleCarSelect}/>
               ))}
             </div>
-          )}
+          ) : <div>Авто не найдено</div>}
         </div>
         <div className={`page-cars__search-field ${isSearchActive ? "active" : ""}`}>
           <input value={searchCarNumber} onChange={(e) => setSearchCarNumber(e.target.value.toUpperCase())} type="text"
