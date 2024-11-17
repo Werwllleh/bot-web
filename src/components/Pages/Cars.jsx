@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useUsersStore} from "../../services/store";
 import Loader from "../Loader/Loader";
 import CarImage from "../CarImage";
@@ -10,6 +10,7 @@ import {CloseOutlined, SearchOutlined} from "@ant-design/icons";
 
 const Cars = () => {
 
+  const searchInput = useRef();
   const [loading, setLoading] = useState(true);
   const [isModalActive, setModalActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -84,7 +85,7 @@ const Cars = () => {
   }, [selectedCarId]);
 
   useEffect(() => {
-    console.log(searchCarNumber)
+    // console.log(searchCarNumber)
   }, [searchCarNumber]);
 
   const searchFieldFunc = () => {
@@ -93,12 +94,20 @@ const Cars = () => {
       setSearchCarNumber('');
     } else {
       setIsSearchActive(true);
+      setTimeout(() => {
+        searchInput.current.focus();
+      }, 300)
     }
+  }
+
+  const searchFieldClearFunc = () => {
+    setSearchCarNumber('');
+    searchInput.current.focus();
   }
 
   useEffect(() => {
     if (searchCarNumber !== '') {
-      const filteredData = usersCars?.filter(car => car.car_number.includes(searchCarNumber));
+      const filteredData = carsList?.filter(car => car.car_number.includes(searchCarNumber));
       setCarsList(filteredData);
     } else {
       setCarsList(usersCars);
@@ -120,11 +129,19 @@ const Cars = () => {
                           onSelect={handleCarSelect}/>
               ))}
             </div>
-          ) : <div>Авто не найдено</div>}
+          ) : (
+            <div className="page-cars__not-found">
+              <img src="../../images/not-found.png" alt="not found" />
+              Авто не найдено
+            </div>
+          )}
         </div>
         <div className={`page-cars__search-field ${isSearchActive ? "active" : ""}`}>
-          <input value={searchCarNumber} onChange={(e) => setSearchCarNumber(e.target.value.toUpperCase())} type="text"
+          <input ref={searchInput} placeholder="Поиск авто по номеру" value={searchCarNumber}
+                 onChange={(e) => setSearchCarNumber(e.target.value.toUpperCase())} type="text"
                  className="page-cars__search-field-input"/>
+          {searchCarNumber !== '' &&
+            <button onClick={searchFieldClearFunc} className="page-cars__search-field-clear"><CloseOutlined/></button>}
         </div>
         <button onClick={searchFieldFunc} className="page-cars__search-button">
           {isSearchActive ? <CloseOutlined/> : <SearchOutlined/>}

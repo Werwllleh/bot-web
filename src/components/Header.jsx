@@ -1,15 +1,22 @@
 import React, {useEffect, useState} from "react";
 import MenuBurgerButton from "./MenuBurgerButton/MenuBurgerButton";
 import {Link} from "react-router-dom";
-import {FormOutlined, MessageOutlined} from "@ant-design/icons";
+import {CloseOutlined, FormOutlined, MessageOutlined} from "@ant-design/icons";
 import {useUsersStore} from "../services/store";
-import {admins, route, socialLinks} from "../utils/consts";
+import {admins, menu, route, socialLinks} from "../utils/consts";
 import MainLogo from "./MainLogo";
 import {checkObject} from "../utils/checkObject";
+import TelegramIcon from "./icons/telegram-icon";
 
-const Header = ({ color, title }) => {
+const Header = ({ color }) => {
 
   const userData = useUsersStore((state) => state.userData);
+
+  const [isMenuActive, setIsMenuActive] = useState(false);
+
+  const showMenu = () => {
+    setIsMenuActive(!isMenuActive);
+  }
 
   return (
     <>
@@ -24,16 +31,59 @@ const Header = ({ color, title }) => {
                 <Link className="header__link-social" key={social.title} to={social.link}>{social.icon}</Link>
               ))}
             </div>
-            {checkObject(userData) && (
-              <div className="header__profile">
-                <Link style={{backgroundColor: userData?.user_color}} className="header__profile-link" to={route.PROFILE.url}>
-                  <span>{userData.user_name?.slice(0, 2).toUpperCase()}</span>
-                </Link>
-              </div>
-            )}
+            <button className={`header__menu ${isMenuActive ? 'active' : ''}`} onClick={showMenu}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
           </div>
         </div>
       </header>
+      <div className="menu">
+        <div onClick={() => setIsMenuActive(false)} className={`bg-wrap ${isMenuActive ? 'active' : ''}`}></div>
+        <div className={`menu__wrap ${isMenuActive ? 'active' : ''}`}>
+          <div onClick={() => setIsMenuActive(false)} className="menu__close">
+            <CloseOutlined/>
+          </div>
+          <div className="menu__body">
+            <div className="menu__header"></div>
+            <div className="menu__profile">
+              {checkObject(userData) && (
+                <div className="header__profile">
+                  <Link onClick={() => setIsMenuActive(false)} style={{backgroundColor: userData?.user_color}}
+                        className="header__profile-link"
+                        to={route.PROFILE.url}>
+                    <span>{userData.user_name?.slice(0, 2).toUpperCase()}</span>
+                  </Link>
+                </div>
+              )}
+            </div>
+            <nav className="menu__nav">
+              <ul className="menu__nav-list">
+                {menu.map(route => {
+                  return (
+                    <li key={route.url} className="menu__nav-item">
+                      <Link className="menu__nav-link" onClick={() => setIsMenuActive(false)}
+                            to={route.url}>{route.title}</Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </nav>
+            <div className="menu__footer">
+              <div className="menu__socials">
+                <p>Мы в соцсетях:</p>
+                <div className="menu__socials-links">
+                  {socialLinks.map(social => (
+                    <Link onClick={() => setIsMenuActive(false)} className="menu__socials-link" key={social.title}
+                          target="_blank" to={social.link}>{social.icon}</Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
 
   );

@@ -96,11 +96,6 @@ export const places = [
 
 export const menu = [
   {
-    title: 'Регистрация',
-    url: '/registration',
-    color: '#F4F7FB'
-  },
-  {
     title: 'Наши авто',
     url: '/'
   },
@@ -133,7 +128,7 @@ export const route = {
     color: '#F4F7FB'
   },
   CARS: {
-    title: '',
+    title: 'Наши авто',
     url: '/',
     color: '#F4F7FB'
   },
