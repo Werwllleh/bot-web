@@ -118,7 +118,8 @@
     right: 0;
     bottom: 0;
     height: 100%;
-    width: 50%;
+    max-width: 30rem;
+    width: 100%;
     background-color: #ffffffeb;
     transform: translateX(100%);
     z-index: 7;

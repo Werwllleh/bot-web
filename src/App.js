@@ -4,7 +4,7 @@ import useTelegram from "./hooks/useTelegram";
 import Form from './components/Pages/Form/Form';
 import ChangeForm from './components/Pages/Form/ChangeForm/ChangeForm';
 import Cars from './components/Pages/Cars';
-import Partners from './components/Pages/Partners/Partners';
+import Partners from './components/Pages/Partners';
 import SearchCar from './components/Pages/SearchCar/SearchCar';
 import {Routes, Route, useNavigate, Navigate, useLocation, MemoryRouter} from 'react-router-dom';
 import {usePartnersStore, useProductsCountStore, useStickersStore, useUsersStore} from "./services/store";

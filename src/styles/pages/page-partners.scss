@@ -1,0 +1,18 @@
+.page-partners {
+
+  &__title {}
+
+  &__body {
+    margin: 2rem 0 0 0;
+  }
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__filter {
+
+  }
+}
