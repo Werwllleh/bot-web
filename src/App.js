@@ -57,7 +57,6 @@ function App() {
 
   const partners = usePartnersStore((state) => state.partners);
 
-
   useEffect(() => {
     tg.ready();
     tg.expand();

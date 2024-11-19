@@ -161,3 +161,27 @@
   }
 }
 
+.ant-image-preview-mask {
+  background-color: rgb(0 0 0 / 60%);
+}
+
+.ant-image-preview-progress {
+  font-family: $ff-main !important;
+  margin-bottom: 16px;
+  color: $white;
+  font-size: 2rem;
+}
+.ant-image-preview-switch-left,
+.ant-image-preview-switch-right {
+  color: $white;
+  background: rgb(0 0 0 / 55%);
+
+  &.ant-image-preview-switch-left-disabled,
+  &.ant-image-preview-switch-right-disabled {
+    opacity: 0;
+  }
+
+  &:hover {
+    background: rgb(0 0 0 / 50%);
+  }
+}

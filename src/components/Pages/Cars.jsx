@@ -44,6 +44,7 @@ const Cars = () => {
   };
   const handleModalClose = () => {
     setModalActive(false);
+    setSelectedCarId(null);
   };
 
   const handleCarSelect = (carId) => {
@@ -153,11 +154,17 @@ const Cars = () => {
             <div className="car-info-modal__images">
               <Image.PreviewGroup
                 items={imageList}
+                movable
               >
                 <Image
                   src={imageList[Math.floor(Math.random() * (imageList.length - 1))]}
+                  preview={{
+                    mask: 'Просмотр',
+                    movable: false
+                  }}
                 />
               </Image.PreviewGroup>
+              <button className="car-info-modal__image-show"><SearchOutlined /></button>
             </div>
             <div className="car-info-modal__info">
               <div className="car-info-modal__info-row">

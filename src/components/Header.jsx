@@ -3,12 +3,11 @@ import MenuBurgerButton from "./MenuBurgerButton/MenuBurgerButton";
 import {Link} from "react-router-dom";
 import {CloseOutlined, FormOutlined, MessageOutlined} from "@ant-design/icons";
 import {useUsersStore} from "../services/store";
-import {admins, menu, route, socialLinks} from "../utils/consts";
+import {menu, route, socialLinks} from "../utils/consts";
 import MainLogo from "./MainLogo";
 import {checkObject} from "../utils/checkObject";
-import TelegramIcon from "./icons/telegram-icon";
 
-const Header = ({ color }) => {
+const Header = ({color}) => {
 
   const userData = useUsersStore((state) => state.userData);
 
@@ -31,11 +30,13 @@ const Header = ({ color }) => {
                 <Link className="header__link-social" key={social.title} to={social.link}>{social.icon}</Link>
               ))}
             </div>
-            <button className={`header__menu ${isMenuActive ? 'active' : ''}`} onClick={showMenu}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+            {checkObject(userData) && (
+              <button className={`header__menu ${isMenuActive ? 'active' : ''}`} onClick={showMenu}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            )}
           </div>
         </div>
       </header>
