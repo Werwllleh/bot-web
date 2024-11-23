@@ -20,6 +20,7 @@
     max-width: 100rem;
     width: 100%;
     margin: 0 auto;
+    padding: 0 0 3rem 0;
 
     overflow-y: auto;
     overflow-x: hidden;
@@ -209,6 +210,25 @@
         fill: $accent-color-dark;
       }
 
+    }
+  }
+
+  &__not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    &-image {
+      display: flex;
+      max-width: 26rem;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    &-text {
+      font-weight: 500;
+      font-size: 2rem;
     }
   }
 }

@@ -132,8 +132,8 @@ const Cars = () => {
             </div>
           ) : (
             <div className="page-cars__not-found">
-              <img src="../../images/not-found.png" alt="not found" />
-              Авто не найдено
+              <img className="page-cars__not-found-image" src={`${API_BASE}/bot/not-found.png`} alt="not found" />
+              <p className="page-cars__not-found-text">Авто не найдено</p>
             </div>
           )}
         </div>

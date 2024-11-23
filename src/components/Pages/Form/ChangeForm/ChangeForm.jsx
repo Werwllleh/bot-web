@@ -1,3 +1,4 @@
+/*
 import axios from "axios";
 import UploadForm from "../../../Upload";
 import React, {useEffect, useMemo, useState} from "react";
@@ -196,3 +197,4 @@ const ChangeForm = () => {
 };
 
 export default ChangeForm;
+*/
