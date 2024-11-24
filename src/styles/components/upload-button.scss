@@ -31,9 +31,9 @@
 }
 
 .ant-upload-list {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .7rem;
 
   &::before,
   &::after {
@@ -42,14 +42,17 @@
 
   & .ant-upload-list-item-container {
     flex: 0 1 32%;
-    margin: 0 0 .5rem 0;
+    margin: 0;
 
     .ant-upload-list-item {
       margin: 0;
+      height: 52px !important;
     }
 
+
+
     .ant-upload-list-item-name {
-      max-width: 80px;
+      max-width: 55px;
       width: 100%;
     }
   }

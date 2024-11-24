@@ -245,7 +245,8 @@
     position: relative;
     display: flex;
     justify-content: center;
-    max-width: 31rem;
+    //max-width: 31rem;
+    margin: 0 auto;
   }
 
   &__image-show {

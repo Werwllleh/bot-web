@@ -3,13 +3,14 @@ import MenuBurgerButton from "./MenuBurgerButton/MenuBurgerButton";
 import {Link} from "react-router-dom";
 import {CloseOutlined, FormOutlined, MessageOutlined} from "@ant-design/icons";
 import {useUsersStore} from "../services/store";
-import {menu, route, socialLinks} from "../utils/consts";
+import {adminPages, menu, route, socialLinks} from "../utils/consts";
 import MainLogo from "./MainLogo";
 import {checkObject} from "../utils/checkObject";
 
 const Header = ({color}) => {
 
   const userData = useUsersStore((state) => state.userData);
+  const isAdmin = useUsersStore((state) => state.isAdmin);
 
   const [isMenuActive, setIsMenuActive] = useState(false);
 
@@ -70,6 +71,21 @@ const Header = ({color}) => {
                   )
                 })}
               </ul>
+              {isAdmin && (
+                <div className="menu__admin">
+                  {/*<h5 className="menu__admin-title">Админ панель</h5>*/}
+                  <ul className="menu__nav-list menu__admin-list">
+                    {adminPages.map(route => {
+                      return (
+                        <li key={route.url} className="menu__nav-item">
+                          <Link className="menu__nav-link" onClick={() => setIsMenuActive(false)}
+                                to={route.url}>{route.title}</Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              )}
             </nav>
             <div className="menu__footer">
               <div className="menu__socials">

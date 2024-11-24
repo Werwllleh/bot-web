@@ -175,15 +175,39 @@
     &-list {
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 1rem;
+
     }
 
     &-item {}
 
     &-link {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 500;
       color: $accent-color;
+    }
+  }
+
+  &__admin {
+    margin: 5rem -1rem 0 -1rem;
+    padding: 3rem 1rem;
+    background-color: $grey-light;
+
+    &-title {
+      text-align: center;
+      font-weight: 600;
+      font-size: 2rem;
+      color: $accent-color-dark;
+      margin: 0 0 2rem 0;
+    }
+
+    &-list {
+
+      .menu__nav-link {
+        font-size: 1.8rem;
+        color: $accent-color;
+      }
     }
   }
 

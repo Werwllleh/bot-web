@@ -6,10 +6,14 @@ export const useUsersStore = create((set) => ({
   userTelegramData: {},
   userData: {},
   isAuthChecked: false,
+  isAdmin: false,
   users: [],
   usersCars: [],
   updateUserTelegramData: (data) => set(() => ({ userTelegramData: data })),
-  updateUserData: (data) => set(() => ({ userData: data })),
+  updateUserData: (data) => set(() => ({
+    userData: data,
+    isAdmin: data.user_admin
+  })),
   updateAuthChecked: (data) => set(() => ({ isAuthChecked: data })),
   // updateUsers: (data) => set(() => ({ users: data })),
   updateUsers: async () => {

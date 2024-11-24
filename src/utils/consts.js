@@ -33,24 +33,6 @@ export const userStatusValue = {
 
 export const admins = [446012794]
 
-export const adminPages = [
-  {
-    icon: <FormOutlined/>,
-    title: 'Список отзывов',
-    link: '/feedback-list'
-  },
-  {
-    icon: <UsergroupAddOutlined/>,
-    title: 'Список пользователей',
-    link: '/user-list'
-  },
-  {
-    icon: <NotificationOutlined/>,
-    title: 'Уведомления',
-    link: '/notification'
-  },
-]
-
 export const places = [
   {
     value: '56.143734, 47.237596',
@@ -89,7 +71,7 @@ export const menu = [
     url: '/profile',
     color: '#F4F7FB'
   },
-]
+];
 
 export const route = {
   REGISTER: {
@@ -112,12 +94,55 @@ export const route = {
     url: '/',
     color: '#F4F7FB'
   },
+  ADMIN: {
+    title: 'Админ панель',
+    url: '/admin',
+    color: '#F4F7FB'
+  },
+  ADMIN_PARTNERS: {
+    title: 'Управление партнерами',
+    url: '/admin/partners',
+    color: '#F4F7FB'
+  },
+  ADMIN_USERS: {
+    title: 'Управление пользователями',
+    url: '/admin/users',
+    color: '#F4F7FB'
+  },
+  ADMIN_MEET: {
+    title: 'Управление встречами',
+    url: '/admin/meet',
+    color: '#F4F7FB'
+  },
   NF_404: {
     title: '',
     url: '*',
     color: '#F4F7FB'
   },
 }
+
+export const adminPages = [
+  {
+    title: route.ADMIN.title,
+    url: route.ADMIN.url,
+    color: route.ADMIN.color,
+  },
+  {
+    title: route.ADMIN_PARTNERS.title,
+    url: route.ADMIN_PARTNERS.url,
+    color: route.ADMIN_PARTNERS.color,
+  },
+  {
+    title: route.ADMIN_USERS.title,
+    url: route.ADMIN_USERS.url,
+    color: route.ADMIN_USERS.color,
+  },
+  {
+    title: route.ADMIN_MEET.title,
+    url: route.ADMIN_MEET.url,
+    color: route.ADMIN_MEET.color,
+  },
+]
 
 export const socialLinks = [
   {
@@ -131,6 +156,3 @@ export const socialLinks = [
     icon: <InstagramIcon/>
   },
 ]
-
-export const FORM_TYPE_REGISTRATION = 'form_type_registration';
-export const FORM_TYPE_CHANGE = 'form_type_change';

@@ -1,0 +1,30 @@
+.page-admin-partners {
+
+  &__title {}
+
+  &__body {
+    margin: 3rem 0 0 0;
+  }
+
+  &__categories {}
+
+  .categories-block {
+    margin: 0 -1.5rem;
+    padding: 3rem 0 1.5rem;
+    background-color: $grey-light;
+
+    &__items {}
+
+    &__button {
+      margin: 0 auto;
+      background-color: $accent-color-light;
+      color: $white;
+    }
+  }
+
+  &__partners {}
+
+  .partners-block {
+
+  }
+}
