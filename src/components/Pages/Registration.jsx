@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Input from "../Input";
-import {UserOutlined} from "@ant-design/icons";
+import {Input} from 'antd';
+import {CarOutlined, UserOutlined} from "@ant-design/icons";
 import CarAddForm from "../CarAddForm";
 import {useUsersStore} from "../../services/store";
 import {createUser, getUserInfo} from "../../api/api-users";
@@ -43,6 +43,7 @@ const Registration = () => {
   const [formValidate, setFormValidate] = useState(true);
   const [formData, setFormData] = useState({});
 
+  const [userName, setUserName] = useState('');
   const [carNumber, setCarNumber] = useState('');
   const [carAddFormStatus, setCarAddFormStatus] = useState(false);
 
@@ -185,8 +186,7 @@ const Registration = () => {
                 car.images = [];
               })
             }
-          }
-          else {
+          } else {
             openNotificationWithIcon('error', 'Что-то пошло не так(', '');
           }
 
@@ -198,7 +198,7 @@ const Registration = () => {
   return (
     <>
       {contextHolder}
-      {loading && <Loader />}
+      {loading && <Loader/>}
       <div className={`registration ${loading ? 'block-blur' : ''}`}>
         <div className="container">
           <h1 className="registration__title h1t">Регистрация</h1>
@@ -206,9 +206,16 @@ const Registration = () => {
             <form ref={form} onSubmit={submitForm} className="registration__form">
               <div className="registration__form-body">
                 <div className="registration__field">
-                  <div className="registration__field-input">
-                    <Input helpMsg={'Русские символы'} name={"name"} pattern={validateName} placeholder={'Как тебя зовут?'} icon={<UserOutlined/>}
-                           required={true}/>
+                  <div className="registration__field-icon"><UserOutlined/></div>
+                  <div className="registration__field-input input-antd">
+                    <Input
+                      required={true}
+                      className={`${userName !== '' && !validateName.test(userName) ? 'error' : '' }`}
+                      name="userName"
+                      placeholder="Как тебя зовут"
+                      value={userName === '' ? null : userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                    />
                   </div>
                 </div>
                 <div className="registration__car-block">

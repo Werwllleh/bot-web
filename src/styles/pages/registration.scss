@@ -37,17 +37,76 @@
   }
 
   &__field {
-    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
     transition: opacity $transition, height $transition, visibility $transition;
+    width: 100%;
 
-    &.hide {
-      visibility: hidden;
-      max-height: 0;
-      pointer-events: none;
-      opacity: 0;
+
+    &-select {
+      width: 100%;
+
+      &.select-antd .ant-select{
+        box-shadow: none !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: 1px solid #004C9D !important;
+        border-radius: 0 !important;
+        background-color: #ffffff;
+        width: 100%;
+        font-size: 1.6rem;
+        font-family: inherit !important;
+        padding: 0.7rem;
+
+        .ant-select-selector {
+          padding: 0 0 0 2rem !important;
+        }
+      }
     }
 
-    &-input {}
+    &-input {
+      width: 100%;
+
+      &.input-antd .ant-input {
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: 1px solid #004C9D !important;
+        border-radius: 0 !important;
+        outline: none;
+        font-family: inherit;
+        font-size: 1.6rem;
+        transition: border-bottom 0.3s ease-in-out;
+        padding: .9rem 0.7rem .9rem 2.5rem;
+      }
+    }
+
+    &-upload {
+      width: 100%;
+
+      .ant-upload-list {
+        flex-wrap: wrap;
+
+        .ant-upload-list-item-container {
+          flex: 0 1 49% !important;
+        }
+      }
+    }
+
+    &-icon {
+      position: absolute;
+      left: 0;
+      bottom: 1rem;
+      z-index: 1;
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        fill: $accent-color;
+      }
+    }
   }
 
   &__car-block {

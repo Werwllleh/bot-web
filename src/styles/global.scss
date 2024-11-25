@@ -59,7 +59,16 @@
     font-size: 1.6rem;
     transition: border-bottom 0.3s ease-in-out;
     padding: .85rem 2.6rem .85rem .7rem;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
+    color: #4f4f4f !important;
+
+    &.error {
+      border-color: $red !important;
+    }
+  }
+
+  .ant-input-outlined {
+    box-shadow: none !important;
   }
 
   &__clear {
@@ -96,6 +105,7 @@
   }
 
   .ant-select-selection-placeholder {
+    font-size: 1.6rem !important;
     font-weight: 500 !important;
     inset-inline-start: 0 !important;
   }
