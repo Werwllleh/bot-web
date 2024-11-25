@@ -1,0 +1,72 @@
+.loader {
+  position: fixed;
+  margin-inline: auto;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12rem;
+  height: 12rem;
+  z-index: 5;
+
+  &__body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+
+    span {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 3rem;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    margin-inline: auto;
+    inset-inline: 0;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      animation: loader-resize 1s infinite alternate-reverse;
+      fill: $accent-color;
+      width: 11rem;
+      height: 11rem;
+    }
+  }
+
+
+}
+
+@keyframes loader-resize {
+  0% {
+    fill: $accent-color;
+  }
+  25% {
+    fill: mix($accent-color, $red, 25%);
+  }
+  50% {
+    fill: mix($red, $green, 50%);
+  }
+  75% {
+    fill: mix($green, $accent-color, 75%);
+  }
+  100% {
+    fill: $accent-color;
+  }
+}

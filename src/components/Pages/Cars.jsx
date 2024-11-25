@@ -8,6 +8,15 @@ import {checkObject} from "../../utils/checkObject";
 import {API_BASE} from "../../utils/consts";
 import {CloseOutlined, SearchOutlined} from "@ant-design/icons";
 
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Pagination, Autoplay} from "swiper/modules";
+import {EffectFade} from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+
 const Cars = () => {
 
   const searchInput = useRef();
@@ -42,6 +51,7 @@ const Cars = () => {
   const handleModalOpen = () => {
     setModalActive(true);
   };
+
   const handleModalClose = () => {
     setModalActive(false);
     setSelectedCarId(null);
@@ -154,15 +164,36 @@ const Cars = () => {
             <div className="car-info-modal__images">
               <Image.PreviewGroup
                 items={imageList}
-                movable
+                movable={false}
               >
-                <Image
-                  src={imageList[Math.floor(Math.random() * (imageList.length - 1))]}
-                  preview={{
-                    mask: 'Просмотр',
-                    movable: false
+                <Swiper
+                  modules={[Pagination, Autoplay, EffectFade]}
+                  effect="fade"
+                  pagination={{clickable: true}}
+                  autoHeight={true}
+                  slidesPerView="auto"
+                  spaceBetween={0}
+                  loop={imageList.length > 1}
+                  autoplay={{
+                    delay: Math.floor(4000 + Math.random() * 4000), // Рандомное значение от 1500 до 3000
+                    disableOnInteraction: true, // Автоплей будет отключаться при взаимодействии
                   }}
-                />
+                >
+                  {imageList.map((image) => {
+                    return (
+                      <SwiperSlide key={image}>
+                        <Image
+                          className="page-cars__car-image"
+                          src={image}
+                          preview={{
+                            mask: false,
+                            movable: false
+                          }}
+                        />
+                      </SwiperSlide>
+                    )
+                  })}
+                </Swiper>
               </Image.PreviewGroup>
               <button className="car-info-modal__image-show"><SearchOutlined /></button>
             </div>

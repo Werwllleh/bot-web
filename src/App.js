@@ -53,13 +53,16 @@ function App() {
     updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      id: 446012794, //me
+      // id: 446012794, //me
       // id: 777777777, //test
       // id: 111777111, //test2
       // id: 111888111, //test3
       // id: 111999111, //test4
       // id: 111000111, //test5
-      // id: 361881710,
+      // id: 361881710, //test6
+      // id: 361442710, //test7
+      // id: 361442999, //test8
+      id: 388442999, //test9
       language_code: "en",
       last_name: "",
       username: "all_lllll"

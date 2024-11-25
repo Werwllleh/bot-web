@@ -95,7 +95,6 @@
             background-color: $accent-color;
           }
         }
-
       }
     }
 
@@ -104,6 +103,7 @@
       width: 100%;
       height: 14rem;
       object-fit: cover;
+      cursor: pointer;
     }
 
     &-bg {
@@ -127,10 +127,7 @@
       right: 0;
       margin: 0 auto;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: .65rem .5rem;
+      padding: .65rem .5rem !important;
       background-color: $accent-color;
       color: $white;
       max-width: 80%;
@@ -187,6 +184,8 @@
       height: 4rem;
       border: 1px solid $grey-light;
       background-color: $grey-light;
+      border-radius: $border-radius;
+      overflow: hidden;
       padding: .5rem 3rem .5rem .5rem;
       font-size: 1.4rem;
       font-weight: 600;
@@ -245,8 +244,42 @@
     position: relative;
     display: flex;
     justify-content: center;
-    //max-width: 31rem;
     margin: 0 auto;
+
+    & .swiper {
+
+      .swiper-slide {
+        width: 100%;
+
+        .ant-image {
+          display: flex;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .page-cars__car-image {
+          max-width: 45rem;
+          object-fit: contain;
+        }
+      }
+
+      .swiper-pagination {
+        bottom: .3rem;
+
+        .swiper-pagination-bullet {
+          width: 1.5rem;
+          height: .2rem;
+          border-radius: .3rem;
+          background-color: $accent-color-light;
+          margin: 0 .2rem;
+        }
+
+        .swiper-pagination-bullet-active {
+          background-color: $accent-color;
+        }
+      }
+    }
+
   }
 
   &__image-show {

@@ -53,9 +53,9 @@
 
   .ant-input {
     border: 1px solid $accent-color !important;
+    border-radius: $border-radius !important;
     outline: none;
     font-family: inherit;
-    border-radius: 0;
     font-size: 1.6rem;
     transition: border-bottom 0.3s ease-in-out;
     padding: .85rem 2.6rem .85rem .7rem;
@@ -82,8 +82,8 @@
 
   .ant-select {
     box-shadow: none !important;
-    border-radius: 0 !important;
     border: 1px solid $accent-color !important;
+    border-radius: $border-radius !important;
     background-color: #ffffff;
     width: 100%;
     font-size: 1.6rem;
@@ -193,4 +193,17 @@
   padding: 1.2rem 1rem;
   font-size: 1.4rem;
   font-weight: 500;
+}
+
+.block-blur {
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  pointer-events: none;
+  user-select: none; /* Запрещаем выделение текста */
+  -webkit-user-select: none; /* Для Safari и других WebKit-браузеров */
+  -moz-user-select: none; /* Для Firefox */
+  -ms-user-select: none; /* Для Internet Explorer/Edge */
 }

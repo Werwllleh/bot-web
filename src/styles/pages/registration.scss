@@ -17,6 +17,7 @@
 
     &-footer {
       margin: 2rem 0 0 0;
+      transition: opacity $transition;
     }
 
     &-submit {
@@ -36,6 +37,15 @@
   }
 
   &__field {
+    height: 100%;
+    transition: opacity $transition, height $transition, visibility $transition;
+
+    &.hide {
+      visibility: hidden;
+      max-height: 0;
+      pointer-events: none;
+      opacity: 0;
+    }
 
     &-input {}
   }
@@ -55,6 +65,7 @@
     & .car-data-fields {
       display: flex;
       flex-direction: column;
+      gap: .7rem;
     }
 
     & .ant-upload-select .ant-btn {
@@ -80,7 +91,7 @@
     &-controls {
       margin: 1rem 0 0 0;
       display: flex;
-      align-items: center;
+      align-items: stretch;
 
       &-add {
         color: $green;

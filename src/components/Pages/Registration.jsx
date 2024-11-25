@@ -10,6 +10,7 @@ import {deleteCarImage, getCarInfo} from "../../api/api-cars";
 import {useNavigate} from "react-router-dom";
 import {route} from "../../utils/consts";
 import {checkObject} from "../../utils/checkObject";
+import Loader from "../Loader/Loader";
 
 
 const Registration = () => {
@@ -40,28 +41,17 @@ const Registration = () => {
   const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
 
   const [formValidate, setFormValidate] = useState(true);
+  const [formData, setFormData] = useState({});
 
   const [carNumber, setCarNumber] = useState('');
   const [carAddFormStatus, setCarAddFormStatus] = useState(false);
 
+  const [loading, setLoading] = useState(false)
+
 
   const navigate = useNavigate();
-  // Добавление формы авто
-  const handleAddCar = (index) => {
-    const newCars = [...cars];
-    newCars.splice(index + 1, 0, {}); // Вставляем новую форму после текущей
-    setCars(newCars);
 
-  };
-  // Удаление формы авто
-  const handleRemoveCar = (index) => {
-    if (cars.length > 1) {
-      const newCars = cars.filter((_, i) => i !== index); // Удаляем форму по индексу
-      setCars(newCars);
-    }
-  };
-
-  const validateRegistrationForm = () => {
+  /*const validateRegistrationForm = () => {
     const regForm = form.current;
     let delay = 0; // Задержка для первого уведомления
 
@@ -143,7 +133,7 @@ const Registration = () => {
         setFormValidate(false); // Если хотя бы один инпут содержит класс error, устанавливаем validateStatus в false
       }
     }
-  };
+  };*/
 
   const submitForm = async (e) => {
 
@@ -154,26 +144,7 @@ const Registration = () => {
 
     const groupedData = {user: {}, cars: []};
 
-    validateRegistrationForm();
-
     if (formValidate && !checkObject(userData)) {
-      formData.forEach(([key, value]) => {
-        const match = key.match(/(\D+)(\d*)$/); // Разделение имени ключа и номера
-        const propName = match[1]; // Название свойства
-        const carIndex = match[2] ? Number(match[2]) - 1 : 0; // Индекс машины (сдвинут на 1 для массива)
-
-        // Если индекс 0, значит это пользовательские данные
-        if (carIndex === 0 && !["brand", "model", "car_number", "avatar", "car_year", "images", "notation"].includes(propName)) {
-          groupedData.user[propName] = value;
-          groupedData.user["chatId"] = userTelegramData?.id;
-        } else {
-          if (!["avatar"].includes(propName)) {
-            if (!groupedData.cars[carIndex]) groupedData.cars[carIndex] = {};
-            groupedData.cars[carIndex][propName] = value;
-          }
-        }
-      });
-
       if (groupedData) {
         groupedData.cars.map(item => {
           if (item.images && item.images.length) {
@@ -182,19 +153,23 @@ const Registration = () => {
         })
 
         formValidate && await createUser(groupedData).then(res => {
-          console.log(res)
+          // console.log(res)
+          setLoading(true);
           if (res.status === 200 && res.data === 'OK') {
-            openNotificationWithIcon('success', 'Регистрация прошла успешно!', '');
-
             getUserInfo(userTelegramData?.id).then(res => {
               if (res.data) {
-                updateAuthChecked(true);
-                updateUserData(res.data);
-                updateUsersCars();
 
                 setTimeout(() => {
-                  navigate(route.CARS.url)
-                }, 1500)
+                  setLoading(false);
+                  openNotificationWithIcon('success', 'Регистрация прошла успешно!', '');
+
+                  setTimeout(() => {
+                    updateAuthChecked(true);
+                    updateUserData(res.data);
+                    updateUsersCars();
+                    navigate(route.CARS.url)
+                  }, 1000)
+                }, 4000)
               }
             })
 
@@ -223,7 +198,8 @@ const Registration = () => {
   return (
     <>
       {contextHolder}
-      <div className="registration">
+      {loading && <Loader />}
+      <div className={`registration ${loading ? 'block-blur' : ''}`}>
         <div className="container">
           <h1 className="registration__title h1t">Регистрация</h1>
           <div className="registration__body">
@@ -235,22 +211,11 @@ const Registration = () => {
                            required={true}/>
                   </div>
                 </div>
-                {cars.map((data, index) => (
-                  <div key={index} className="registration__car-block">
-                    <CarAddForm index={index > 0 ? index + 1 : ''} key={index} status={setCarAddFormStatus}/>
-                    <div className="registration__car-block-controls">
-                      <button type="button" className="registration__car-block-controls-add"
-                              onClick={() => handleAddCar(index)}>Добавить еще авто
-                      </button>
-                      {index !== 0 && (
-                        <button type="button" className="registration__car-block-controls-delete"
-                                onClick={() => handleRemoveCar(index)}>Удалить авто</button>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                <div className="registration__car-block">
+                  <CarAddForm data={setFormData} status={setCarAddFormStatus}/>
+                </div>
               </div>
-              {carAddFormStatus && (
+              {carAddFormStatus && formValidate && (
                 <div className="registration__form-footer">
                   <button type="submit" className="registration__form-submit">Отправить</button>
                 </div>

@@ -31,8 +31,9 @@
 }
 
 .ant-upload-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
   gap: .7rem;
 
   &::before,
@@ -41,19 +42,36 @@
   }
 
   & .ant-upload-list-item-container {
-    flex: 0 1 32%;
+    flex: 0 1 49% !important;
     margin: 0;
 
     .ant-upload-list-item {
       margin: 0;
-      height: 52px !important;
+      height: 7rem !important;
+      padding: .4rem !important;
+      gap: .5rem !important;
     }
 
+    .ant-upload-list-item-thumbnail {
+      max-width: 5.5rem !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-height: 5.5rem !important;
+      line-height: 1 !important;
+    }
 
+    .ant-upload-list-item-image {
+      display: flex !important;
+      object-fit: cover !important;
+    }
 
     .ant-upload-list-item-name {
-      max-width: 55px;
-      width: 100%;
+      //max-width: 7rem;
+      padding: 0 !important;
+    }
+
+    .ant-upload-list-item-actions {
+      margin: 0 0 0 auto !important;
     }
   }
 }

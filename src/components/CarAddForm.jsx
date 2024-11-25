@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import Select from "./Select";
 import {CarOutlined, NumberOutlined, SnippetsOutlined, CalendarOutlined} from "@ant-design/icons";
 import {getCarInfo, getCars} from "../api/api-cars";
 import UploadForm from "./Upload";
 import Input from "./Input";
 import {validateCarNumber} from "../utils/patterns";
 import {notification} from "antd";
+import { Select } from 'antd';
+
 
 const CarAddForm = ({info, index, status}) => {
 
@@ -33,13 +34,11 @@ const CarAddForm = ({info, index, status}) => {
   const [carNumber, setCarNumber] = useState("");
   const [checkCarNumber, setCheckCarNumber] = useState(false);
 
-
-  useEffect(() => {
-    status(checkCarNumber);
-  }, [checkCarNumber]);
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (carNumber.length >= 8 && carNumber.length <= 9 && validateCarNumber.test(carNumber.toUpperCase())) {
       getCarInfo(carNumber).then((res) => {
         if (res.data !== '') {
@@ -52,7 +51,7 @@ const CarAddForm = ({info, index, status}) => {
     } else {
       setCheckCarNumber(false)
     }
-  }, [carNumber]);
+  }, [carNumber]);*/
 
   useEffect(() => {
     getCars().then(res => {
@@ -60,21 +59,38 @@ const CarAddForm = ({info, index, status}) => {
     })
   }, []);
 
-  useEffect(() => {
-    if (selectedBrand) {
-      setSelectedModel(''); // Обнуляем выбранную модель
-      setModels(cars[selectedBrand] || []);
-    } else {
-      setModels([]); // Если марка не выбрана, очищаем список моделей
+  const selectBrand = (value) => {
+    setBrand(value)
+    if (model) {
+      setModel('')
     }
-  }, [selectedBrand, cars]);
+  }
+
+  const selectModel = (value) => {
+    setModel(value)
+  }
+
+  useEffect(() => {
+    console.log(brand)
+    if (brand) {
+      console.log()
+    }
+
+
+  }, [brand]);
 
   return (
     <>
       {contextHolder}
       <div className="car-data-fields">
-        <div className="registration__field">
+        <div className="registration__field select-antd">
           <Select
+            placeholder="Марка авто"
+            onChange={selectBrand}
+            value={brand}
+            options={cars.brands}
+          />
+          {/*<Select
             required={true}
             title="Марка авто"
             name={`brand${index}`}
@@ -82,11 +98,17 @@ const CarAddForm = ({info, index, status}) => {
             icon={<CarOutlined/>}
             value={selectedBrand}
             onChange={(brand) => setSelectedBrand(brand)}
-          />
+          />*/}
         </div>
-        {models?.length ? (
-          <div className="registration__field">
+        {brand !== '' && (
+          <div className="registration__field select-antd">
             <Select
+              placeholder="Модель авто"
+              onChange={selectModel}
+              value={model}
+              options={cars?.models[brand.toUpperCase()]}
+            />
+            {/*<Select
               required={true}
               title="Модель авто"
               name={`model${index}`}
@@ -94,9 +116,9 @@ const CarAddForm = ({info, index, status}) => {
               icon={<CarOutlined/>}
               value={selectedModel}
               onChange={(model) => setSelectedModel(model)}
-            />
+            />*/}
           </div>
-        ) : ''}
+        )}
         <div className="registration__field">
           <div className="registration__field-input">
             <Input helpMsg={'Русские символы, формат X777XX21 или формат X777XX121'} data={setCarNumber}
@@ -111,11 +133,9 @@ const CarAddForm = ({info, index, status}) => {
                    required={true}/>
           </div>
         </div>
-        {checkCarNumber && (
-          <div className="registration__field">
-            <UploadForm index={index} data={setCarImages} maxCount={3}/>
-          </div>
-        )}
+        <div className={`registration__field ${!checkCarNumber ? 'hide' : ''}`}>
+          <UploadForm index={index} data={setCarImages} maxCount={4}/>
+        </div>
         <div className="registration__field">
           <div className="registration__field-input">
             <Input name={`notation${index}`} placeholder={'Примечание'} icon={<SnippetsOutlined/>}/>

@@ -52,8 +52,8 @@ const CarImage = ({ car, openModal, isSelected, onSelect }) => {
           </div>
         </div>
         <div className={`page-cars__car-bg`}>
-          <button ref={carButtonAbout} onClick={openModal}
-                  className={`page-cars__car-about`}>Подробнее
+          <button ref={carButtonAbout} onClick={openModal} className={`page-cars__car-about style-btn`}>
+            Подробнее
           </button>
         </div>
       </div>
