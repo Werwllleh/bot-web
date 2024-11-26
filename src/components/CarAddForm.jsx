@@ -4,42 +4,20 @@ import {getCarInfo, getCars} from "../api/api-cars";
 import UploadForm from "./Upload";
 import { Input } from 'antd';
 import {validateCarNumber, validateName} from "../utils/patterns";
-import {notification} from "antd";
 import {Select} from 'antd';
 
 
-const CarAddForm = ({info, index, status}) => {
+const CarAddForm = ({data}) => {
 
-  const [api, contextHolder] = notification.useNotification();
-  const openNotificationWithIcon = (type, message, description) => {
-    if (type === 'success') {
-      api[type]({
-        message: message,
-        description: description
-      });
-    }
-    if (type === 'error') {
-      api[type]({
-        message: message,
-        description: description
-      });
-    }
-  };
   const [cars, setCars] = useState({});
-  const [selectedBrand, setSelectedBrand] = useState('');
-  const [selectedModel, setSelectedModel] = useState('');
-  const [models, setModels] = useState([]);
-  const [carImages, setCarImages] = useState("");
-
-
-  const [checkCarNumber, setCheckCarNumber] = useState(false);
-
 
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [carNumber, setCarNumber] = useState('');
   const [carYear, setCarYear] = useState(0);
+  const [carImages, setCarImages] = useState([]);
   const [carNote, setCarNote] = useState('');
+
 
 
   /*useEffect(() => {
@@ -65,23 +43,32 @@ const CarAddForm = ({info, index, status}) => {
 
   const selectBrand = (value) => {
     setBrand(value)
-    if (model) {
-      setModel('')
-    }
+    setModel('')
   }
 
   const selectModel = (value) => {
     setModel(value)
   }
 
+  useEffect(() => {
+    data({
+      brand: brand,
+      model: model,
+      carNumber: carNumber,
+      carYear: carYear,
+      images: carImages,
+      carNote: carNote,
+    })
+  }, [brand, model, carNumber, carYear, carImages, carNote]);
+
 
   return (
     <>
-      {contextHolder}
       <div className="car-data-fields">
         <div className="registration__field">
           <div className="registration__field-icon"><CarOutlined/></div>
           <div className="registration__field-select select-antd">
+            <input name="brand" className="select-antd__value" type="text" defaultValue={brand} required/>
             <Select
               showSearch
               placeholder="Марка авто"
@@ -95,11 +82,12 @@ const CarAddForm = ({info, index, status}) => {
           <div className="registration__field">
             <div className="registration__field-icon"><CarOutlined/></div>
             <div className="registration__field-select select-antd">
+              <input name="model" className="select-antd__value" type="text" defaultValue={model} required/>
               <Select
                 showSearch
                 placeholder="Модель авто"
-                onChange={selectModel}
                 value={model === '' ? null : model}
+                onChange={selectModel}
                 options={cars?.models[brand.toUpperCase()]}
               />
             </div>
@@ -134,7 +122,7 @@ const CarAddForm = ({info, index, status}) => {
         </div>
         <div className="registration__field">
           <div className="registration__field-upload">
-            <UploadForm data={setCarImages} maxCount={4}/>
+            <UploadForm images={setCarImages} maxCount={4}/>
           </div>
         </div>
         <div className="registration__field">

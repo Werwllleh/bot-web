@@ -31,10 +31,6 @@ export const usePartnersStore = create((set) => ({
   updatePartners: (data) => set(() => ({ partners: data })),
 }))
 
-export const useStickersStore = create((set) => ({
-  stickers: [],
-  updateStickers: (data) => set(() => ({ stickers: data })),
-}))
 
 export const useProductsCountStore = create((set) => ({
   productStore: [],

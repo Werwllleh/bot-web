@@ -1,34 +1,38 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Navigate, useLocation} from "react-router-dom";
 import {useUsersStore} from "../../services/store";
 import {checkObject} from "../../utils/checkObject";
+import Loader from "../Loader/Loader";
 
 const ProtectedRoute = ({ onlyUnAuth = false, component, adminOnly = false }) => {
   const isAuthChecked = useUsersStore((state) => state.isAuthChecked);
   const userData = useUsersStore((state) => state.userData);
   const isAdmin = useUsersStore((state) => state.isAdmin);
 
+
   const location = useLocation();
+
 
   if (!isAuthChecked) {
     console.log("Чекаем пользователя");
-    // Запрос еще выполняется
-    // Выводим прелоадер
-    return null;
+    return <Loader/>;
   }
 
   if (onlyUnAuth && checkObject(userData)) {
+    // setLoading(false);
     // Пользователь авторизован, но роут предназначен для неавторизованного пользователя
     const { from } = location.state || { from: { pathname: "/" } };
     return <Navigate to={from} replace />;
   }
 
   if (!onlyUnAuth && !checkObject(userData)) {
+    // setLoading(false);
     // Пользователь не авторизован
     return <Navigate to="/registration" state={{ from: location }} />;
   }
 
   if (adminOnly && !isAdmin) {
+    // setLoading(false);
     // Пользователь не является администратором
     return <Navigate to="/" state={{ from: location }} />;
   }

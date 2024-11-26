@@ -2,10 +2,11 @@ import axios from "axios";
 import {API_BASE} from "../utils/consts";
 
 
-export const createUser = async (data) => {
+export const createUser = async (chatId, data) => {
   try {
     return await axios.post(`${API_BASE}/create-user`, {
-      data: data
+      chat_id: chatId,
+      username: data
     })
   } catch (err) {
     console.error('Ошибка создания пользователя: ', err);

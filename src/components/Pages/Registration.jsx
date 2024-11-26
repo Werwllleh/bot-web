@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Input} from 'antd';
 import {CarOutlined, UserOutlined} from "@ant-design/icons";
 import CarAddForm from "../CarAddForm";
@@ -6,17 +6,18 @@ import {useUsersStore} from "../../services/store";
 import {createUser, getUserInfo} from "../../api/api-users";
 import {notification} from "antd";
 import {validateCarNumber, validateName} from "../../utils/patterns";
-import {deleteCarImage, getCarInfo} from "../../api/api-cars";
+import {addUserCar, deleteCarImage, getCarInfo} from "../../api/api-cars";
 import {useNavigate} from "react-router-dom";
 import {route} from "../../utils/consts";
 import {checkObject} from "../../utils/checkObject";
 import Loader from "../Loader/Loader";
+import * as yup from "yup";
 
 
 const Registration = () => {
 
   const [api, contextHolder] = notification.useNotification();
-  const openNotificationWithIcon = (type, message, description) => {
+  const showNotification = (type, message, description) => {
     if (type === 'success') {
       api[type]({
         message: message,
@@ -31,7 +32,6 @@ const Registration = () => {
     }
   };
   const form = useRef();
-  const [cars, setCars] = useState([{}]); // Начинаем с одной пустой формы
 
   const userTelegramData = useUsersStore((state) => state.userTelegramData);
   const userData = useUsersStore((state) => state.userData);
@@ -40,159 +40,137 @@ const Registration = () => {
   const updateAuthChecked = useUsersStore((state) => state.updateAuthChecked);
   const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
 
-  const [formValidate, setFormValidate] = useState(true);
-  const [formData, setFormData] = useState({});
+  const [carForm, setCarForm] = useState({});
 
   const [userName, setUserName] = useState('');
-  const [carNumber, setCarNumber] = useState('');
-  const [carAddFormStatus, setCarAddFormStatus] = useState(false);
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
+  const registrationSchema = yup.object().shape({
+    user: yup.string().required('Поле имя обязательное')
+      .test(
+        'only-russian-letters', // Название теста (опционально)
+        'В поле имя только русские символы', // Сообщение об ошибке
+        (value) => {
+          if (!value) return false; // Сразу возвращаем ошибку, если значение отсутствует
+          return validateName.test(value); // Проверяем значение
+        }
+      ),
+    car: yup.object().shape({
+      brand: yup.string().required('Укажите марку поле'),
+      model: yup.string().required('Укажите модель авто'),
+      carNumber: yup.string().required('Укажите номер авто').min(8, 'Проверьте количество символов номера авто').max(9, 'Проверьте количество символов номера авто').test(
+        'pattern car number', // Название теста (опционально)
+        'Формат номера А001АА21 или А001АА121, русскими символами', // Сообщение об ошибке
+        (value) => {
+          if (!value) return false; // Сразу возвращаем ошибку, если значение отсутствует
+          return validateCarNumber.test(value.toUpperCase()); // Проверяем значение
+        }
+      ),
+      carYear: yup.number().required('Укажите год выпуска авто')
+        .test(
+          'check car year', // Название теста (опционально)
+          'Введите корректный год', // Сообщение об ошибке
+          (value) => {
+            if (!value) return false; // Сразу возвращаем ошибку, если значение отсутствует
+
+            const currentYear = new Date().getFullYear();
+            return value >= 1800 && value <= currentYear
+          }
+        ),
+      images: yup.array().required('Загрузите фотографии авто'),
+      carNote: yup.string(),
+    }),
+  })
 
   const navigate = useNavigate();
 
-  /*const validateRegistrationForm = () => {
-    const regForm = form.current;
-    let delay = 0; // Задержка для первого уведомления
+  const addCarFunc = async (telegramId, carData) => {
+    const checkUserData = await getUserInfo(telegramId)
 
-    const inputs = regForm.querySelectorAll('input');
+    if (checkUserData) {
 
-    const addErrorClass = (input) => {
-      if (!input.classList.contains('error')) {
-        input.classList.add('error');
-      }
-    };
+      const checkAuto = await getCarInfo(carData.carNumber);
 
-    const removeErrorClass = (input) => {
-      if (input.classList.contains('error')) {
-        input.classList.remove('error');
-      }
-    };
+      const chat_id = checkUserData.data.chat_id;
+      const userData = checkUserData.data;
 
-    const showNotification = (type, message, description, delay) => {
-      setTimeout(() => {
-        openNotificationWithIcon(type, message, description);
-      }, delay);
-    };
+      if (checkAuto.data === '') {
+        await addUserCar(chat_id, carData)
+          .then(result => {
+            if (result.status === 200) {
+              showNotification('success', 'Авто добавлено!');
+              updateUsersCars();
 
-    for (let i = 0; i < inputs.length; i++) {
-      const input = inputs[i];
-      const inputName = input.getAttribute('name');
-
-      if (inputName) {
-        if (inputName.includes('name')) {
-          if (!validateName.test(input.value)) {
-            addErrorClass(input);
-            setFormValidate(false);
-            showNotification('error', 'Имя не заполнено или заполнено некорректно', '', delay);
-            delay += 500;
-          }
-        }
-
-        if (inputName.includes('brand') || inputName.includes('model')) {
-          if (input.value === '') {
-            addErrorClass(input);
-            setFormValidate(false);
-            showNotification('error', 'Марка или модель не заполнены', '', delay);
-            delay += 500;
-          }
-        }
-
-        if (inputName.includes('car_number')) {
-          if (!validateCarNumber.test(input.value.toUpperCase())) {
-            addErrorClass(input);
-            setFormValidate(false);
-            showNotification('error', 'Номер авто заполнен некорректно', 'Русскими буквами в формате А777АА21 или А777АА121', delay);
-            delay += 500;
-          } else {
-            getCarInfo(input.value.toUpperCase().trim()).then(res => {
-              const info = res.data;
-
-              if (info !== '') {
-                addErrorClass(input);
-                setFormValidate(false);
-                showNotification('error', `Авто с номером ${input.value.toUpperCase().trim()} уже зарегистрирован`, '', delay);
-                delay += 500;
-              }
-            })
-          }
-        }
-
-        if (inputName.includes('car_year')) {
-          const currentYear = new Date().getFullYear();
-          if (Number(input.value) < 1800 || Number(input.value) > currentYear) {
-            addErrorClass(input);
-            setFormValidate(false);
-            showNotification('error', 'Год указан некорректно', '', delay);
-            delay += 500;
-          }
-        }
-      }
-
-      if (input.classList.contains('error')) {
-        setFormValidate(false); // Если хотя бы один инпут содержит класс error, устанавливаем validateStatus в false
+              setTimeout(() => {
+                updateAuthChecked(true);
+                updateUserData(userData);
+                setLoading(false);
+                navigate(route.CARS.url);
+              }, 1500)
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } else {
+        setLoading(false);
+        showNotification('error', 'Авто c таким номером уже существует!');
       }
     }
-  };*/
+  }
+
 
   const submitForm = async (e) => {
 
     e.preventDefault();
 
-    const data = new FormData(e.target);
-    const formData = Array.from(data.entries());
+    const submitForm = {
+      user: userName,
+      car: carForm
+    }
 
-    const groupedData = {user: {}, cars: []};
+    await registrationSchema.validate(submitForm)
+      .then(async () => {
+        setLoading(true)
 
-    if (formValidate && !checkObject(userData)) {
-      if (groupedData) {
-        groupedData.cars.map(item => {
-          if (item.images && item.images.length) {
-            item.images = JSON.stringify(item.images.split(','));
-          }
-        })
+        try {
+          await createUser(userTelegramData?.id, submitForm.user)
+            .then(async (res) => {
+              console.log(res)
+              if (res.status === 200) {
+                showNotification('success', 'Пользователь успешно добавлен');
 
-        formValidate && await createUser(groupedData).then(res => {
-          // console.log(res)
-          setLoading(true);
-          if (res.status === 200 && res.data === 'OK') {
-            getUserInfo(userTelegramData?.id).then(res => {
-              if (res.data) {
-
-                setTimeout(() => {
-                  setLoading(false);
-                  openNotificationWithIcon('success', 'Регистрация прошла успешно!', '');
-
-                  setTimeout(() => {
-                    updateAuthChecked(true);
-                    updateUserData(res.data);
-                    updateUsersCars();
-                    navigate(route.CARS.url)
-                  }, 1000)
-                }, 4000)
+                await addCarFunc(userTelegramData?.id, submitForm.car);
               }
             })
-
-          } else if (res.status === 200 && res.data === 'User already exists') {
-            if (groupedData.cars.length) {
-              groupedData.cars.map(car => {
-                let images = JSON.parse(car.images);
-                if (images.length) {
-                  images.map(async (image) => {
-                    await deleteCarImage(image)
-                  })
+            .catch(async (err) => {
+              const errorMsg = err.response?.data?.message;
+              if (errorMsg !== undefined) {
+                if (errorMsg === 'User was created') {
+                  await addCarFunc(userTelegramData?.id, submitForm.car);
+                } else {
+                  showNotification(
+                    'error',
+                    'Произошла ошибка',
+                    'Обновите страницу и попробуйте еще раз');
+                  setLoading(false)
                 }
-                car.images = [];
-              })
-            }
-          } else {
-            openNotificationWithIcon('error', 'Что-то пошло не так(', '');
-          }
+              }
+            })
+        } catch (err) {
+          console.log(err)
+          setLoading(false);
+        }
 
-        })
-      }
-    }
+      })
+      .catch((error) => {
+        if (error?.errors?.length) {
+          const errorText = error?.errors[0];
+          // console.error(errorText);
+          showNotification('error', errorText)
+        }
+      });
   }
 
   return (
@@ -210,7 +188,7 @@ const Registration = () => {
                   <div className="registration__field-input input-antd">
                     <Input
                       required={true}
-                      className={`${userName !== '' && !validateName.test(userName) ? 'error' : '' }`}
+                      className={`${userName !== '' && !validateName.test(userName) ? 'error' : ''}`}
                       name="userName"
                       placeholder="Как тебя зовут"
                       value={userName === '' ? null : userName}
@@ -219,14 +197,12 @@ const Registration = () => {
                   </div>
                 </div>
                 <div className="registration__car-block">
-                  <CarAddForm data={setFormData} status={setCarAddFormStatus}/>
+                  <CarAddForm data={setCarForm}/>
                 </div>
               </div>
-              {carAddFormStatus && formValidate && (
-                <div className="registration__form-footer">
-                  <button type="submit" className="registration__form-submit">Отправить</button>
-                </div>
-              )}
+              <div className="registration__form-footer">
+                <button type="submit" className="registration__form-submit">Отправить</button>
+              </div>
             </form>
           </div>
         </div>

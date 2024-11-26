@@ -1,6 +1,18 @@
 import axios from "axios";
 import {API_BASE} from "../utils/consts";
 
+
+export const addUserCar = async (chatId, data) => {
+  try {
+    return await axios.post(`${API_BASE}/add-car`, {
+      chatId: chatId,
+      data: data
+    });
+  } catch (err) {
+    console.error('Ошибка добавления авто:', err);
+  }
+};
+
 //список авто при регистрации
 export const getCars = async () => {
   try {

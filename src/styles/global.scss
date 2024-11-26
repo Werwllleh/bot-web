@@ -88,6 +88,17 @@
 }
 
 .select-antd {
+  position: relative;
+
+  &__value {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
+    width: 100%;
+    pointer-events: none;
+    user-select: none;
+  }
 
   .ant-select {
     box-shadow: none !important;

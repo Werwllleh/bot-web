@@ -31,6 +31,10 @@ const Cars = () => {
   const [selectedCarInfo, setSelectedCarInfo] = useState({});
   const [imageList, setImageList] = useState([]);
 
+  useEffect(() => {
+    console.log(selectedCarInfo)
+  }, [selectedCarInfo]);
+
 
   const usersCars = useUsersStore((state) => state.usersCars);
 
@@ -64,6 +68,7 @@ const Cars = () => {
       // Находим данные о машине
 
       let carData = usersCars.find(car => car.id === carId);
+      console.log(carData)
       // Обновляем пути изображений, чтобы они содержали полный путь
       const imageList = JSON.parse(carData.car_images).map(image => {
         return `${API_BASE}/car/${image}`;

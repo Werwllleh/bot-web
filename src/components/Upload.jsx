@@ -5,13 +5,13 @@ import axios from "axios";
 import { API_BASE } from "../utils/consts";
 import {deleteCarImage} from "../api/api-cars";
 
-const UploadForm = ({ index, data, maxCount, disabled }) => {
-  const [images, setImages] = useState([]);
+const UploadForm = ({ images, maxCount, disabled }) => {
+  const [formImages, setFormImages] = useState([]);
 
   // Передаем список изображений родительскому компоненту
   useEffect(() => {
-    data(images);
-  }, [images]);
+    images(formImages);
+  }, [formImages]);
 
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png";
@@ -21,7 +21,7 @@ const UploadForm = ({ index, data, maxCount, disabled }) => {
       return Upload.LIST_IGNORE;
     }
 
-    if (images.length >= maxCount) {
+    if (formImages.length >= maxCount) {
       message.error(`Можно загрузить не более ${maxCount} изображений.`);
       return Upload.LIST_IGNORE;
     }
@@ -32,7 +32,7 @@ const UploadForm = ({ index, data, maxCount, disabled }) => {
 
   const handleChange = (info) => {
     if (info.file.status === "done") {
-      setImages((prev) => {
+      setFormImages((prev) => {
         const newImages = [...prev, info.file.response];
         if (newImages.length > maxCount) {
           message.error(`Достигнут лимит в ${maxCount} изображения.`);
@@ -47,7 +47,7 @@ const UploadForm = ({ index, data, maxCount, disabled }) => {
     try {
       const response = await deleteCarImage(file.response);
       if (response.status === 200) {
-        setImages((prev) => prev.filter((name) => name !== file.response));
+        setFormImages((prev) => prev.filter((name) => name !== file.response));
         message.success("Изображение удалено.");
       } else {
         throw new Error("Ошибка при удалении файла на сервере.");
@@ -60,7 +60,7 @@ const UploadForm = ({ index, data, maxCount, disabled }) => {
 
   return (
     <Upload
-      name={`avatar${index}`}
+      name="avatar"
       action={`${API_BASE}/upload`}
       listType="picture"
       multiple
@@ -69,8 +69,8 @@ const UploadForm = ({ index, data, maxCount, disabled }) => {
       onChange={handleChange}
       onRemove={handleRemove}
     >
-      <input className={"upload_input"} name={`images${index}`} type="text" defaultValue={images} required={true}/>
-      <Button disabled={images.length >= maxCount || disabled} icon={<FileImageOutlined />}>Загрузить фото автомобиля*</Button>
+      <input className={"upload_input"} name="images" type="text" defaultValue={formImages} required={true}/>
+      <Button disabled={formImages.length >= maxCount || disabled} icon={<FileImageOutlined />}>Загрузить фото автомобиля*</Button>
     </Upload>
   );
 };
