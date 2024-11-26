@@ -27,4 +27,35 @@
   .partners-block {
 
   }
+
+  &__modal {
+
+  }
+}
+
+.partners__modal {
+  padding: 2rem 0;
+
+  &-body {}
+
+  &-form {}
+
+  &-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &-input {}
+
+  &-form-footer {
+    margin: 3rem 0 0 0;
+  }
+
+  &-form-submit {
+    margin: 0 auto;
+    background-color: $accent-color-light;
+    color: $white;
+    padding: 1rem !important;
+  }
 }

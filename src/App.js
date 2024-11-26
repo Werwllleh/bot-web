@@ -53,8 +53,8 @@ function App() {
     updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      // id: 446012794, //me
-      id: 1, //test
+      id: 446012794, //me
+      // id: 1, //test
       // id: 2, //test2
       // id: 3, //test3
       // id: 4, //test4
@@ -108,7 +108,9 @@ function App() {
             <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile />} />}/>
             <Route path={route.REGISTER.url} element={<OnlyUnAuth component={<Registration/>}/>}/>
             <Route path={route.ADMIN.url} element={<OnlyAdminRoute component={<AdminPanel />} />} />
-            <Route path={route.ADMIN_PARTNERS.url} element={<OnlyAdminRoute component={<AdminPartners/>} />}/>
+            <Route path={route.ADMIN_PARTNERS.url} element={<OnlyAdminRoute component={<AdminPartners/>} />}>
+              <Route path={`${route.ADMIN_PARTNERS.url}/categories`} element={<OnlyAdminRoute component={<AdminPartners/>} />} />
+            </Route>
             <Route path={route.ADMIN_USERS.url} element={<OnlyAdminRoute component={<AdminUsers/>} />}/>
             <Route path={route.ADMIN_MEET.url} element={<OnlyAdminRoute component={<AdminMeet/>} />}/>
             <Route path={route.NF_404.url} element={<NotFound />}/>

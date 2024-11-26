@@ -31,11 +31,6 @@ const Cars = () => {
   const [selectedCarInfo, setSelectedCarInfo] = useState({});
   const [imageList, setImageList] = useState([]);
 
-  useEffect(() => {
-    console.log(selectedCarInfo)
-  }, [selectedCarInfo]);
-
-
   const usersCars = useUsersStore((state) => state.usersCars);
 
   const updateUsers = useUsersStore((state) => state.updateUsers);
@@ -68,7 +63,6 @@ const Cars = () => {
       // Находим данные о машине
 
       let carData = usersCars.find(car => car.id === carId);
-      console.log(carData)
       // Обновляем пути изображений, чтобы они содержали полный путь
       const imageList = JSON.parse(carData.car_images).map(image => {
         return `${API_BASE}/car/${image}`;
@@ -147,7 +141,7 @@ const Cars = () => {
             </div>
           ) : (
             <div className="page-cars__not-found">
-              <img className="page-cars__not-found-image" src={`${API_BASE}/bot/not-found.png`} alt="not found" />
+              <img className="page-cars__not-found-image" src={`${API_BASE}/bot/not-found.png`} alt="not found"/>
               <p className="page-cars__not-found-text">Авто не найдено</p>
             </div>
           )}
@@ -200,7 +194,7 @@ const Cars = () => {
                   })}
                 </Swiper>
               </Image.PreviewGroup>
-              <button className="car-info-modal__image-show"><SearchOutlined /></button>
+              <button className="car-info-modal__image-show"><SearchOutlined/></button>
             </div>
             <div className="car-info-modal__info">
               <div className="car-info-modal__info-row">
