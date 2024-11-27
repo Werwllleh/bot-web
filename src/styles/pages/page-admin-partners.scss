@@ -9,14 +9,45 @@
   &__categories {}
 
   .categories-block {
-    margin: 0 -1.5rem;
-    padding: 3rem 0 1.5rem;
-    background-color: $grey-light;
+    &__tags {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
-    &__items {}
+    &__tag {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background-color: $semi-white;
+      border-radius: $border-radius;
+      padding: 1rem 2rem;
+
+      &-label {
+        flex: 0 1 auto;
+        font-size: 1.4rem;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      &-icon {
+        flex: 0 0 auto;
+        cursor: pointer;
+
+        svg {
+          width: 1.6rem;
+          height: 1.6rem;
+          fill: $accent-color;
+        }
+      }
+    }
 
     &__button {
-      margin: 0 auto;
+      margin: 3rem auto 0;
       background-color: $accent-color-light;
       color: $white;
     }
@@ -26,6 +57,25 @@
 
   .partners-block {
 
+    &__partner-add {
+      position: fixed;
+      z-index: 2;
+      width: 4rem;
+      height: 4rem;
+      bottom: 1rem;
+      right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $accent-color;
+      border-radius: 100%;
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        fill: #ffffff;
+      }
+    }
   }
 
   &__modal {
@@ -38,7 +88,16 @@
 
   &-body {}
 
-  &-form {}
+  &-form {
+
+    &-note {
+      margin: 1rem 0 0 0;
+      font-weight: 500;
+      font-size: 1.1rem;
+      text-align: justify;
+      color: $semi-dark;
+    }
+  }
 
   &-form-fields {
     display: flex;
@@ -47,6 +106,23 @@
   }
 
   &-input {}
+
+  &-select {
+
+    &.select-antd {
+
+      .ant-select {
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: 1px solid $accent-color-light !important;
+        border-radius: 0 !important;
+        padding: 0.7rem 0.7rem 0.7rem 0 !important;
+      }
+
+    }
+
+  }
 
   &-form-footer {
     margin: 3rem 0 0 0;

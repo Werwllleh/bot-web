@@ -71,6 +71,7 @@ const CarAddForm = ({data}) => {
             <input name="brand" className="select-antd__value" type="text" defaultValue={brand} required/>
             <Select
               showSearch
+              optionFilterProp="label"
               placeholder="Марка авто"
               onChange={selectBrand}
               value={brand === '' ? null : brand}
@@ -85,6 +86,7 @@ const CarAddForm = ({data}) => {
               <input name="model" className="select-antd__value" type="text" defaultValue={model} required/>
               <Select
                 showSearch
+                optionFilterProp="label"
                 placeholder="Модель авто"
                 value={model === '' ? null : model}
                 onChange={selectModel}

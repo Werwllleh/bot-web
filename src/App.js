@@ -19,6 +19,8 @@ import AdminPanel from "./components/Pages/AdminPages/AdminPanel";
 import AdminPartners from "./components/Pages/AdminPages/AdminPartners";
 import AdminUsers from "./components/Pages/AdminPages/AdminUsers";
 import AdminMeet from "./components/Pages/AdminPages/AdminMeet";
+import AdminPartnersCategories from "./components/Pages/AdminPages/AdminPartnersCategories";
+import AdminPartnersAll from "./components/Pages/AdminPages/AdminPartnersAll";
 
 
 function App() {
@@ -40,10 +42,19 @@ function App() {
 
 
   const updatePartners = usePartnersStore((state) => state.updatePartners);
+  const updatePartnersCategories = usePartnersStore((state) => state.updatePartnersCategories);
+
 
   const userData = useUsersStore((state) => state.userData);
 
-  const partners = usePartnersStore((state) => state.partners);
+  const partners = usePartnersStore((state) => state.partnersList);
+
+  useEffect(() => {
+    updateUsers();
+    updateUsersCars();
+    updatePartnersCategories();
+  }, [updateUsers, updateUsersCars, updatePartnersCategories]);
+
 
   useEffect(() => {
     tg.ready();
@@ -67,7 +78,7 @@ function App() {
 
     setTimeout(() => {
       updateAuthChecked(true)
-    }, 1000)
+    }, 1200)
 
 
   }, [tg])
@@ -84,9 +95,8 @@ function App() {
   }, [userTelegramData]);
 
   useEffect(() => {
-    updateUsers();
-    updateUsersCars()
-  }, [updateUsers, updateUsersCars]);
+    console.log(userData)
+  }, [userData]);
 
   const navigate = useNavigate();
 
@@ -103,21 +113,21 @@ function App() {
       <main className="main">
         <div className="content">
           <Routes>
-            <Route index element={<OnlyAuth component={<Cars />} />}/>
-            <Route path={route.PARTNERS.url} element={<OnlyAuth component={<Partners data={partnersSortedObject}/>} />}/>
-            <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile />} />}/>
+            <Route index element={<OnlyAuth component={<Cars/>}/>}/>
+            <Route path={route.PARTNERS.url} element={<OnlyAuth component={<Partners data={partnersSortedObject}/>}/>}/>
+            <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile/>}/>}/>
             <Route path={route.REGISTER.url} element={<OnlyUnAuth component={<Registration/>}/>}/>
-            <Route path={route.ADMIN.url} element={<OnlyAdminRoute component={<AdminPanel />} />} />
-            <Route path={route.ADMIN_PARTNERS.url} element={<OnlyAdminRoute component={<AdminPartners/>} />}>
-              <Route path={`${route.ADMIN_PARTNERS.url}/categories`} element={<OnlyAdminRoute component={<AdminPartners/>} />} />
-            </Route>
-            <Route path={route.ADMIN_USERS.url} element={<OnlyAdminRoute component={<AdminUsers/>} />}/>
-            <Route path={route.ADMIN_MEET.url} element={<OnlyAdminRoute component={<AdminMeet/>} />}/>
-            <Route path={route.NF_404.url} element={<NotFound />}/>
+            <Route path={route.NF_404.url} element={<NotFound/>}/>
+            <Route path={route.ADMIN.url} element={<OnlyAdminRoute component={<AdminPanel/>}/>}/>
+            <Route path={route.ADMIN_PARTNERS.url} element={<OnlyAdminRoute component={<AdminPartners/>}/>}/>
+            <Route path={`${route.ADMIN_PARTNERS.url}/all`} element={<OnlyAdminRoute component={<AdminPartnersAll/>}/>}/>
+            <Route path={`${route.ADMIN_PARTNERS.url}/categories`} element={<OnlyAdminRoute component={<AdminPartnersCategories/>}/>}/>
+            <Route path={route.ADMIN_USERS.url} element={<OnlyAdminRoute component={<AdminUsers/>}/>}/>
+            <Route path={route.ADMIN_MEET.url} element={<OnlyAdminRoute component={<AdminMeet/>}/>}/>
           </Routes>
         </div>
       </main>
-      <Footer />
+      <Footer/>
     </>
   );
 }

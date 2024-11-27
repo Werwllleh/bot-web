@@ -145,6 +145,14 @@
     font-weight: 400 !important;
   }
 
+  .ant-select-item {
+
+  }
+
+  .ant-select-item-option {
+
+  }
+
   .anticon-close {
     svg {
       fill: $white !important;
@@ -163,6 +171,12 @@
 
   .rc-virtual-list-scrollbar-thumb {
     background: $accent-color !important;
+  }
+
+  .ant-select-item-option-content {
+    font-family: $ff-main !important;
+    font-weight: 500 !important;
+    font-size: 1.4rem;
   }
 }
 

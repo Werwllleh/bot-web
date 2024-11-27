@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Input, Select} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
+import {usePartnersStore} from "../../services/store";
 
 
 const Partners = () => {
@@ -8,13 +9,7 @@ const Partners = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchCategories, setSearchCategories] = useState([]);
 
-  const options = [];
-  for (let i = 10; i < 36; i++) {
-    options.push({
-      label: i.toString(36) + i,
-      value: i.toString(36) + i,
-    });
-  }
+  const partnersCategories = usePartnersStore((state) => state.partnersCategories);
 
   const handleChange = (value) => {
     setSearchCategories([...value])
@@ -48,7 +43,8 @@ const Partners = () => {
                 mode="multiple"
                 placeholder="Выбери категории"
                 onChange={handleChange}
-                options={options}
+                options={partnersCategories}
+                optionFilterProp="label"
                 maxTagCount="responsive"
               />
             </div>
