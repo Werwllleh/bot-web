@@ -41,3 +41,11 @@ export const addPartner = async (chatId, data) => {
     console.error('Ошибка добавления партнера:', err);
   }
 };
+
+export const getPartners = async () => {
+  try {
+    return await axios.get(`${API_BASE}/get-partners`);
+  } catch (err) {
+    console.error('Ошибка получения партнеров:', err);
+  }
+};

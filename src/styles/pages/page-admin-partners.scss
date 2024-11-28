@@ -85,6 +85,58 @@
         fill: #ffffff;
       }
     }
+
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: .5rem;
+
+      .partner-card {
+        flex: 1 1 49%;
+        padding: 1.5rem 1rem;
+        border-radius: $border-radius;
+        overflow: hidden;
+        background-color: $semi-white;
+
+        &__body {
+          display: flex;
+          flex-direction: column;
+          gap: .5rem;
+        }
+
+        &__title {
+          font-weight: 500;
+          font-size: 1.6rem;
+          text-align: center;
+        }
+
+        &__description {
+          font-size: 1.6rem;
+          text-align: center;
+        }
+
+        &__links {
+          display: flex;
+          align-items: flex-start;
+        }
+
+        &__link {}
+
+        &__phones {}
+
+        &__phone {}
+
+
+      }
+    }
+
+    &__notfound {
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: #ff3939;
+      text-align: center;
+    }
   }
 
   &__modal {

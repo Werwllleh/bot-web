@@ -40,7 +40,6 @@ function App() {
   const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
   const updateAuthChecked = useUsersStore((state) => state.updateAuthChecked);
 
-
   const updatePartners = usePartnersStore((state) => state.updatePartners);
   const updatePartnersCategories = usePartnersStore((state) => state.updatePartnersCategories);
 
@@ -52,8 +51,9 @@ function App() {
   useEffect(() => {
     updateUsers();
     updateUsersCars();
+    updatePartners()
     updatePartnersCategories();
-  }, [updateUsers, updateUsersCars, updatePartnersCategories]);
+  }, [updateUsers, updateUsersCars, updatePartners, updatePartnersCategories]);
 
 
   useEffect(() => {

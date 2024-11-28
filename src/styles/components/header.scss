@@ -176,17 +176,31 @@
     &-list {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 1rem;
+      gap: .5rem;
 
     }
 
     &-item {}
 
     &-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 2rem;
       font-weight: 500;
       color: $accent-color;
+      padding: .5rem 1rem;
+      text-align: center;
+      border-radius: $border-radius;
+      transition: color $transition, background-color $transition;
+
+      &.active {
+        background-color: $accent-color;
+        color: $white !important;
+
+      }
     }
   }
 

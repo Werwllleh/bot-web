@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import MenuBurgerButton from "./MenuBurgerButton/MenuBurgerButton";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {CloseOutlined, FormOutlined, MessageOutlined} from "@ant-design/icons";
 import {useUsersStore} from "../services/store";
 import {adminPages, menu, route, socialLinks} from "../utils/consts";
@@ -65,8 +65,8 @@ const Header = ({color}) => {
                 {menu.map(route => {
                   return (
                     <li key={route.url} className="menu__nav-item">
-                      <Link className="menu__nav-link" onClick={() => setIsMenuActive(false)}
-                            to={route.url}>{route.title}</Link>
+                      <NavLink className={({ isActive }) => `menu__nav-link${isActive ? " active" : ""}`} onClick={() => setIsMenuActive(false)}
+                            to={route.url}>{route.title}</NavLink>
                     </li>
                   )
                 })}
@@ -78,8 +78,13 @@ const Header = ({color}) => {
                     {adminPages.map(route => {
                       return (
                         <li key={route.url} className="menu__nav-item">
-                          <Link className="menu__nav-link" onClick={() => setIsMenuActive(false)}
-                                to={route.url}>{route.title}</Link>
+                          <NavLink
+                            className={({ isActive }) => `menu__nav-link${isActive ? " active" : ""}`}
+                            onClick={() => setIsMenuActive(false)}
+                            to={route.url}
+                          >
+                            {route.title}
+                          </NavLink>
                         </li>
                       )
                     })}
