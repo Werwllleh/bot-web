@@ -44,7 +44,7 @@ const MainModal = ({isOpen, onClose, title, children, className}) => {
   return (
     <Portal id={MODAL_CONTAINER_ID}>
       <div className={`bg-wrap ${isActive ? 'active' : ''}`} ref={rootRef}></div>
-      <div className={`modal ${className} ${isActive ? 'show' : ''}`}>
+      <div className={`modal ${className ? className : '' } ${isActive ? 'show' : ''}`}>
         <button type="button" className="modal__close" onClick={handleClose}>
           <CloseOutlined />
         </button>

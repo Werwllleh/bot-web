@@ -26,7 +26,8 @@
   inset-block-start: 45%;
   transform: translateY(0);
   border-radius: $border-radius;
-  max-width: 80%;
+  min-width: 20rem;
+  max-width: max-content;
   min-height: 5rem;
   z-index: 7;
   background: rgba(255, 255, 255, 1);

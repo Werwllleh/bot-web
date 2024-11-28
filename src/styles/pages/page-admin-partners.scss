@@ -9,12 +9,21 @@
   &__categories {}
 
   .categories-block {
+
+
     &__tags {
       display: flex;
       flex-wrap: wrap;
       align-items: stretch;
       justify-content: space-between;
       gap: 1rem;
+    }
+
+    &__not-found {
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: $red;
+      text-align: center;
     }
 
     &__tag {
@@ -85,8 +94,11 @@
 
 .partners__modal {
   padding: 2rem 0;
+  min-width: 35rem;
+  //max-width: 95%;
 
-  &-body {}
+  &-body {
+  }
 
   &-form {
 
@@ -96,6 +108,7 @@
       font-size: 1.1rem;
       text-align: justify;
       color: $semi-dark;
+      max-width: 35rem;
     }
   }
 

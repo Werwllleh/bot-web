@@ -50,8 +50,12 @@ const AdminPartnersAll = () => {
       return showNotification('error', 'Выбери категорию партнера!')
     }
 
+    const categoriesId = partnersCategories
+      .filter(item => formCategories.includes(item.value)) // Оставляем только те объекты, value которых есть в arr2
+      .map(item => item.id); // Получаем массив id из отфильтрованных объектов
+
     const submitForm = {
-      categories: formCategories,
+      categories: categoriesId,
       title: values.title,
       description: values.description,
       links: values.links.split(','),
@@ -62,7 +66,19 @@ const AdminPartnersAll = () => {
 
     await addPartner(userData.chat_id, submitForm)
       .then(() => {
+        handleModalClose();
         showNotification('success', 'Партнер добавлен')
+        /*setTimeout(() => {
+          setFormCategories([])
+          setValues({
+            title: "",
+            description: "",
+            links: "",
+            phones: "",
+            address_text: "",
+            address_coordinates: "",
+          })
+        }, 300)*/
       })
       .catch(() => {
         showNotification('error', 'Ошибка при добавлении партнера!')
@@ -113,6 +129,7 @@ const AdminPartnersAll = () => {
                     placeholder="Категории партнера"
                     onChange={handleSelectCategories}
                     options={partnersCategories}
+                    value={formCategories}
                     optionFilterProp="label"
                     maxTagCount="responsive"
                   />

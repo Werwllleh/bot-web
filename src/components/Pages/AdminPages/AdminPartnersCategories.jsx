@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import MainModal from "../../MainModal/MainModal";
-import {Input,notification} from "antd";
+import {Input, notification} from "antd";
 import {useForm} from "../../../hooks/useForm";
 import {DeleteOutlined} from "@ant-design/icons";
 import {addPartnerCategory, deletePartnerCategory} from "../../../api/api-partners";
@@ -95,19 +95,20 @@ const AdminPartnersCategories = () => {
           <h1 className="page-admin-partners__title h1t">Категории партнеров</h1>
           <div className="page-admin-partners__body">
             <div className="page-admin-partners__categories categories-block">
-              <div className="categories-block__tags">
-                {partnersCategories.length > 0 && (
-                  partnersCategories.map((tag) => {
-                    return (
-                      <div key={tag.id} className="categories-block__tag" data-value={tag.value}>
-                        <p className="categories-block__tag-label">{tag.label}</p>
-                        <span onClick={() => deleteCategory(tag.id)}
-                              className="categories-block__tag-icon"><DeleteOutlined/></span>
-                      </div>
-                    )
-                  })
-                )}
-              </div>
+              {partnersCategories.length > 0 ? (
+                <div className="categories-block__tags">
+                  {partnersCategories.map((tag) => (
+                    <div key={tag.id} className="categories-block__tag" data-value={tag.value}>
+                      <p className="categories-block__tag-label">{tag.label}</p>
+                      <span onClick={() => deleteCategory(tag.id)} className="categories-block__tag-icon">
+                        <DeleteOutlined/>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="categories-block__not-found">Добавьте категории партнеров</div>
+              )}
               <button onClick={showModal} className="categories-block__button style-btn">
                 Добавить категорию
               </button>
