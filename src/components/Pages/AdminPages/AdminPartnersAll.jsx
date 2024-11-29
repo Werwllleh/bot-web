@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Input, notification, Select} from "antd";
 const { TextArea } = Input;
-import {PlusOutlined} from "@ant-design/icons";
+import {PlusOutlined, InfoCircleTwoTone} from "@ant-design/icons";
 import MainModal from "../../MainModal/MainModal";
 import {useForm} from "../../../hooks/useForm";
 import {usePartnersStore, useUsersStore} from "../../../services/store";
-import {addPartner} from "../../../api/api-partners";
+import {addPartner, deletePartner} from "../../../api/api-partners";
 import {Link} from "react-router-dom";
 import {validateCoordinates, validateLinks, validatePhoneNumbers} from "../../../utils/patterns";
+import button from "../../Button/Button";
 
 const AdminPartnersAll = () => {
 
@@ -28,23 +29,28 @@ const AdminPartnersAll = () => {
     }
   };
 
-  const partners = usePartnersStore((state) => state.partnersList);
+  const partners = usePartnersStore((state) => state.partnersListAdmin);
   const partnersCategories = usePartnersStore((state) => state.partnersCategories);
   const userData = useUsersStore((state) => state.userData);
 
-  const updatePartners = usePartnersStore((state) => state.updatePartners);
+  const updatePartnersAdmin = usePartnersStore((state) => state.updatePartnersAdmin);
   const updatePartnersCategories = usePartnersStore((state) => state.updatePartnersCategories);
 
   useEffect(() => {
-    updatePartners()
+    updatePartnersAdmin()
     updatePartnersCategories()
-  }, [updatePartners, updatePartnersCategories])
+  }, [updatePartnersAdmin, updatePartnersCategories])
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(partners)
-  }, [partners])
+  }, [partners])*/
 
-  const [formCategories, setFormCategories] = useState([])
+  const [formCategories, setFormCategories] = useState([]);
+  const [partnerId, setPartnerId] = useState(null);
+
+  /*useEffect(() => {
+    console.log(formCategories)
+  }, [formCategories]);*/
 
   const initialFormValues = {
     title: "",
@@ -79,7 +85,7 @@ const AdminPartnersAll = () => {
       address_coordinates: values.address_coordinates,
     }
 
-    if (typeof values.links === 'string') {
+    if (typeof values.links === 'string' && values.links !== '') {
 
       const links = validateLinks(values.links.split(','))
 
@@ -99,7 +105,7 @@ const AdminPartnersAll = () => {
       }
     }
 
-    if (typeof values.phones === 'string') {
+    if (typeof values.phones === 'string' && values.phones !== '') {
 
       const phones = validatePhoneNumbers(values.phones.split(','))
 
@@ -123,9 +129,7 @@ const AdminPartnersAll = () => {
 
       const coordinates = validateCoordinates(values.address_coordinates.split(','))
 
-      console.log(coordinates)
-
-      if (coordinates.length) {
+      if (coordinates !== null) {
         submitForm.address_coordinates = coordinates;
         setValues((prevValues) => ({
           ...prevValues,
@@ -142,48 +146,102 @@ const AdminPartnersAll = () => {
 
     }
 
-    await addPartner(userData.chat_id, submitForm)
-      .then(() => {
-        handleModalClose();
-        updatePartners();
-        showNotification('success', 'Партнер добавлен')
-        setTimeout(() => {
-          setFormCategories([])
-          setValues({
-            title: "",
-            description: "",
-            links: "",
-            phones: "",
-            address_text: "",
-            address_coordinates: "",
-          })
-          submitForm = {
-            categories: [],
-            title: "",
-            description: "",
-            links: "",
-            phones: "",
-            address_text: "",
-            address_coordinates: "",
-          }
-        }, 300)
-      })
-      .catch(() => {
-        showNotification('error', 'Ошибка при добавлении партнера!')
-      })
+    if (values.links !== '' || values.phones !== '') {
+      await addPartner(userData.chat_id, submitForm, partnerId)
+        .then((res) => {
+          handleModalClose();
+          updatePartnersAdmin();
+          showNotification('success', res.data.message)
+          setTimeout(() => {
+            setFormCategories([])
+            setValues({
+              title: "",
+              description: "",
+              links: "",
+              phones: "",
+              address_text: "",
+              address_coordinates: "",
+            })
+            submitForm = {
+              categories: [],
+              title: "",
+              description: "",
+              links: "",
+              phones: "",
+              address_text: "",
+              address_coordinates: "",
+            }
+          }, 300)
+        })
+        .catch((err) => {
+          showNotification('error', err.data.message)
+        })
+    } else {
+      showNotification('error', 'Укажите ссылки или телефоны')
+    }
+
+  }
+
+  const deletePartnerFunc = async () => {
+    if (partnerId) {
+      await deletePartner(userData.chat_id, partnerId)
+        .then(res => {
+          handleModalClose();
+          updatePartnersAdmin();
+          showNotification('success', res.data.message)
+        })
+        .catch((res) => {
+          showNotification('error', res.data.message)
+        })
+    }
   }
 
   const handleSelectCategories = (value) => {
     setFormCategories([...value])
   }
 
-  const showModal = () => {
+  const showModalCreate = () => {
     updatePartnersCategories()
+    setModalActive(true);
+  }
+
+  const showModalAbout = (partnerId) => {
+    setPartnerId(partnerId);
+
+    updatePartnersCategories()
+
+    const data = partners.filter(partner => partner.id === partnerId)[0];
+
+    setFormCategories(data.categories);
+    setValues({
+      title: data.title,
+      description: data.description,
+      links: data.links,
+      phones: data.phones,
+      address_text: data.address_text,
+      address_coordinates: data.address_coordinates,
+    })
+
     setModalActive(true);
   }
 
   const handleModalClose = () => {
     setModalActive(false);
+
+    if (partnerId) {
+      setPartnerId(null)
+      setTimeout(() => {
+        setFormCategories([])
+        setValues({
+          title: "",
+          description: "",
+          links: "",
+          phones: "",
+          address_text: "",
+          address_coordinates: "",
+        })
+      }, 200)
+    }
   };
 
   return (
@@ -194,19 +252,20 @@ const AdminPartnersAll = () => {
           <h1 className="page-admin-partners__title h1t">Все партнеры</h1>
           <div className="page-admin-partners__body">
             <div className="page-admin-partners__partners partners-block">
-              <button onClick={showModal} className="partners-block__partner-add"><PlusOutlined /></button>
+              <button onClick={showModalCreate} className="partners-block__partner-add"><PlusOutlined /></button>
               {partners.length ? (
-                <ul className="partners-block__list">
+                <div className="partners-block__list">
                   {partners.map(partner => {
                     return (
                       <div key={partner.id} className="partners-block__partner partner-card">
                         <div className="partner-card__body">
                           <h5 className="partner-card__title">{partner.title}</h5>
-                          {partner.links.length && (<div className="partner-card__links">
+                          {/*{partner.links.length && (<div className="partner-card__links">
                             <span>Ссылки:</span>
                             <ul className="partner-card__links-list">
                               {partner.links.map((link, index) => (
-                                <li key={index}><Link target="_blank" to={link} className="partner-card__link" >{link}</Link></li>
+                                <li key={index}><Link target="_blank" to={link}
+                                                      className="partner-card__link">{link}</Link></li>
                               ))}
                             </ul>
                           </div>)}
@@ -214,16 +273,21 @@ const AdminPartnersAll = () => {
                             <span>Телефоны:</span>
                             <ul className="partner-card__phones-list">
                               {partner.phones.map((phone, index) => (
-                                <li key={index}><Link to={`tel:${phone}`} className="partner-card__phone">{phone}</Link></li>
+                                <li key={index}><Link to={`tel:${phone}`} className="partner-card__phone">{phone}</Link>
+                                </li>
                               ))}
                             </ul>
-                          </div>)}
+                          </div>)}*/}
                           {partner.description && <p className="partner-card__description">{partner.description}</p>}
                         </div>
+                        <button onClick={() => showModalAbout(partner.id)} className="partner-card__about style-btn">
+                          <span className="partner-card__about-text">Подробнее</span>
+                          <span className="partner-card__about-icon"><InfoCircleTwoTone/></span>
+                        </button>
                       </div>
                     )
                   })}
-                </ul>
+                </div>
               ) : (
                 <div className="partners-block__notfound">Партнеров еще нет</div>
               )}
@@ -239,7 +303,7 @@ const AdminPartnersAll = () => {
       >
         <div className="partners__modal">
           <div className="partners__modal-body">
-            <form onSubmit={savePartner} className="partners__modal-form">
+            <form className="partners__modal-form">
               <div className="partners__modal-form-fields">
                 <div className="partners__modal-select select-antd">
                   <Select
@@ -263,8 +327,9 @@ const AdminPartnersAll = () => {
                   />
                 </div>
                 <div className="partners__modal-input">
-                  <Input
+                  <TextArea
                     required={true}
+                    autoSize={true}
                     className=""
                     name="description"
                     placeholder="Описание"
@@ -274,7 +339,6 @@ const AdminPartnersAll = () => {
                 </div>
                 <div className="partners__modal-input">
                   <Input
-                    required={true}
                     className=""
                     name="links"
                     placeholder="Ссылки"
@@ -284,7 +348,6 @@ const AdminPartnersAll = () => {
                 </div>
                 <div className="partners__modal-input">
                   <Input
-                    required={true}
                     className=""
                     name="phones"
                     placeholder="Телефоны"
@@ -318,9 +381,10 @@ const AdminPartnersAll = () => {
                 Множественные поля, такие как: ссылки, телефоны и координаты адреса указываются через запятую!
               </div>
               <div className="partners__modal-form-footer">
-                <button className="partners__modal-form-submit style-btn">
-                  Сохранить партнера
+                <button type="submit" onClick={savePartner} className="partners__modal-form-submit style-btn">
+                  {partnerId ? 'Обновить данные' : 'Сохранить партнера'}
                 </button>
+                {partnerId && <button type="button" onClick={deletePartnerFunc} className="partners__modal-form-delete style-btn">Удалить партнера</button>}
               </div>
             </form>
           </div>

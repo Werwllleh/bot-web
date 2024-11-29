@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Input, Select} from "antd";
-import {CloseOutlined} from "@ant-design/icons";
+import {CloseOutlined, InfoCircleTwoTone} from "@ant-design/icons";
 import {usePartnersStore} from "../../services/store";
+import button from "../Button/Button";
 
 
 const Partners = () => {
@@ -9,7 +10,20 @@ const Partners = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchCategories, setSearchCategories] = useState([]);
 
+  const partners = usePartnersStore((state) => state.partnersListUsers);
   const partnersCategories = usePartnersStore((state) => state.partnersCategories);
+
+  const updatePartnersUsers = usePartnersStore((state) => state.updatePartnersUsers);
+  const updatePartnersCategories = usePartnersStore((state) => state.updatePartnersCategories);
+
+  useEffect(() => {
+    updatePartnersUsers();
+    updatePartnersCategories();
+  }, [updatePartnersUsers, updatePartnersCategories]);
+
+  useEffect(() => {
+    console.log(partners)
+  }, [partners]);
 
   const handleChange = (value) => {
     setSearchCategories([...value])
@@ -49,8 +63,45 @@ const Partners = () => {
               />
             </div>
           </div>
-          <div className="page-partners__partners partners-list">
-
+          <div className="page-partners__partners partners-list partners-block">
+            {partners.length ? (
+              <div className="partners-block__list">
+                {partners.map(partner => {
+                  return (
+                    <div key={partner.id} className="partners-block__partner partner-card">
+                      <div className="partner-card__body">
+                        <h5 className="partner-card__title">{partner.title}</h5>
+                        {/*{partner.links.length && (<div className="partner-card__links">
+                            <span>Ссылки:</span>
+                            <ul className="partner-card__links-list">
+                              {partner.links.map((link, index) => (
+                                <li key={index}><Link target="_blank" to={link}
+                                                      className="partner-card__link">{link}</Link></li>
+                              ))}
+                            </ul>
+                          </div>)}
+                          {partner.phones.length && (<div className="partner-card__phones">
+                            <span>Телефоны:</span>
+                            <ul className="partner-card__phones-list">
+                              {partner.phones.map((phone, index) => (
+                                <li key={index}><Link to={`tel:${phone}`} className="partner-card__phone">{phone}</Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>)}*/}
+                        {partner.description && <p className="partner-card__description">{partner.description}</p>}
+                      </div>
+                      <button onClick={() => showModalAbout(partner.id)} className="partner-card__about style-btn">
+                        <span className="partner-card__about-text">Подробнее</span>
+                        <span className="partner-card__about-icon"><InfoCircleTwoTone/></span>
+                      </button>
+                    </div>
+                  )
+                })}
+              </div>
+            ) : (
+              <div className="partners-block__notfound">Партнеров еще нет</div>
+            )}
           </div>
         </div>
       </div>

@@ -40,20 +40,21 @@ function App() {
   const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
   const updateAuthChecked = useUsersStore((state) => state.updateAuthChecked);
 
-  const updatePartners = usePartnersStore((state) => state.updatePartners);
+  const updatePartnersUsers = usePartnersStore((state) => state.updatePartnersUsers);
+  const updatePartnersAdmin = usePartnersStore((state) => state.updatePartnersAdmin);
   const updatePartnersCategories = usePartnersStore((state) => state.updatePartnersCategories);
 
 
   const userData = useUsersStore((state) => state.userData);
 
-  const partners = usePartnersStore((state) => state.partnersList);
+  const partners = usePartnersStore((state) => state.partnersListUsers);
 
   useEffect(() => {
     updateUsers();
     updateUsersCars();
-    updatePartners()
+    updatePartnersUsers()
     updatePartnersCategories();
-  }, [updateUsers, updateUsersCars, updatePartners, updatePartnersCategories]);
+  }, [updateUsers, updateUsersCars, updatePartnersUsers, updatePartnersCategories]);
 
 
   useEffect(() => {
@@ -95,6 +96,11 @@ function App() {
   }, [userTelegramData]);
 
   useEffect(() => {
+
+    if (userData.user_admin) {
+      updatePartnersAdmin()
+    }
+
     console.log(userData)
   }, [userData]);
 

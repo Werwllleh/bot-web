@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import {getAllUsers} from "../api/api-users";
 import {getUsersCars} from "../api/api-cars";
-import {getPartners, getPartnersCategories} from "../api/api-partners";
+import {getPartnersAdmin, getPartnersCategories, getPartnersUsers} from "../api/api-partners";
 
 export const useUsersStore = create((set) => ({
   userTelegramData: {},
@@ -28,11 +28,16 @@ export const useUsersStore = create((set) => ({
 }))
 
 export const usePartnersStore = create((set) => ({
-  partnersList: [],
+  partnersListUsers: [],
+  partnersListAdmin: [],
   partnersCategories: [],
-  updatePartners: async () => {
-    const allPartners = await getPartners();
-    set({ partnersList: allPartners.data });
+  updatePartnersAdmin: async () => {
+    const allPartners = await getPartnersAdmin();
+    set({ partnersListAdmin: allPartners.data });
+  },
+  updatePartnersUsers: async () => {
+    const allPartners = await getPartnersUsers();
+    set({ partnersListUsers: allPartners.data });
   },
   updatePartnersCategories: async () => {
     const partnersCategoriesList = await getPartnersCategories();

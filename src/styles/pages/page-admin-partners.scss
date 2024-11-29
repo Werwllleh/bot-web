@@ -94,10 +94,35 @@
 
       .partner-card {
         flex: 1 1 49%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         padding: 1.5rem 1rem;
         border-radius: $border-radius;
         overflow: hidden;
         background-color: $semi-white;
+
+        &__about {
+          margin: auto auto 0 auto;
+          gap: .5rem;
+          background-color: $accent-color;
+          padding: .7rem 1rem;
+
+          &-text {
+            color: $white;
+          }
+
+          &-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+              width: 1.8rem;
+              height: 1.8rem;
+            }
+          }
+        }
 
         &__body {
           display: flex;
@@ -106,13 +131,13 @@
         }
 
         &__title {
-          font-weight: 500;
-          font-size: 1.6rem;
+          font-weight: 600;
+          font-size: 1.8rem;
           text-align: center;
         }
 
         &__description {
-          font-size: 1.6rem;
+          font-size: 1.2rem;
           text-align: center;
         }
 
@@ -191,12 +216,20 @@
 
   &-form-footer {
     margin: 3rem 0 0 0;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 1rem;
   }
 
   &-form-submit {
-    margin: 0 auto;
     background-color: $accent-color-light;
     color: $white;
+    padding: 1rem !important;
+  }
+
+  &-form-delete {
+    background-color: $error-color;
     padding: 1rem !important;
   }
 }
