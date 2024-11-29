@@ -7,6 +7,7 @@ import {useForm} from "../../../hooks/useForm";
 import {usePartnersStore, useUsersStore} from "../../../services/store";
 import {addPartner} from "../../../api/api-partners";
 import {Link} from "react-router-dom";
+import {validateCoordinates, validateLinks, validatePhoneNumbers} from "../../../utils/patterns";
 
 const AdminPartnersAll = () => {
 
@@ -59,6 +60,7 @@ const AdminPartnersAll = () => {
   const savePartner = async (e) => {
     e.preventDefault();
 
+
     if (!formCategories.length) {
       return showNotification('error', 'Выбери категорию партнера!')
     }
@@ -67,14 +69,77 @@ const AdminPartnersAll = () => {
       .filter(item => formCategories.includes(item.value)) // Оставляем только те объекты, value которых есть в arr2
       .map(item => item.id); // Получаем массив id из отфильтрованных объектов
 
-    const submitForm = {
+    let submitForm = {
       categories: categoriesId,
-      title: values.title,
-      description: values.description,
-      links: values.links.split(','),
-      phones: values.phones.split(','),
-      address_text: values.address_text,
-      address_coordinates: values.address_coordinates.split(','),
+      title: values.title.trim(),
+      description: values.description.trim(),
+      links: values.links,
+      phones: values.phones,
+      address_text: values.address_text.trim(),
+      address_coordinates: values.address_coordinates,
+    }
+
+    if (typeof values.links === 'string') {
+
+      const links = validateLinks(values.links.split(','))
+
+      if (links.length) {
+        submitForm.links = links;
+        setValues((prevValues) => ({
+          ...prevValues,
+          links: links,
+        }));
+      } else {
+        submitForm.links = '';
+        setValues((prevValues) => ({
+          ...prevValues,
+          links: '',
+        }));
+        return showNotification('error', 'Укажите ссылки в корректном формате!')
+      }
+    }
+
+    if (typeof values.phones === 'string') {
+
+      const phones = validatePhoneNumbers(values.phones.split(','))
+
+      if (phones.length) {
+        submitForm.phones = phones;
+        setValues((prevValues) => ({
+          ...prevValues,
+          phones: phones,
+        }));
+      } else {
+        submitForm.phones = '';
+        setValues((prevValues) => ({
+          ...prevValues,
+          phones: '',
+        }));
+        return showNotification('error', 'Укажите телефоны в правильных форматах!', 'Добавьте код города, если номер городской')
+      }
+    }
+
+    if (typeof values.address_coordinates === 'string') {
+
+      const coordinates = validateCoordinates(values.address_coordinates.split(','))
+
+      console.log(coordinates)
+
+      if (coordinates.length) {
+        submitForm.address_coordinates = coordinates;
+        setValues((prevValues) => ({
+          ...prevValues,
+          address_coordinates: coordinates,
+        }));
+      } else {
+        submitForm.address_coordinates = '';
+        setValues((prevValues) => ({
+          ...prevValues,
+          address_coordinates: '',
+        }));
+        return showNotification('error', 'Укажите координаты в правильном формате!', 'Например: 56.149283,47.196224')
+      }
+
     }
 
     await addPartner(userData.chat_id, submitForm)
@@ -92,13 +157,20 @@ const AdminPartnersAll = () => {
             address_text: "",
             address_coordinates: "",
           })
+          submitForm = {
+            categories: [],
+            title: "",
+            description: "",
+            links: "",
+            phones: "",
+            address_text: "",
+            address_coordinates: "",
+          }
         }, 300)
       })
       .catch(() => {
         showNotification('error', 'Ошибка при добавлении партнера!')
       })
-
-    console.log(submitForm)
   }
 
   const handleSelectCategories = (value) => {
@@ -134,15 +206,15 @@ const AdminPartnersAll = () => {
                             <span>Ссылки:</span>
                             <ul className="partner-card__links-list">
                               {partner.links.map((link, index) => (
-                                <li><Link key={index} target="_blank" to={link} className="partner-card__link" >{link}</Link></li>
+                                <li key={index}><Link target="_blank" to={link} className="partner-card__link" >{link}</Link></li>
                               ))}
                             </ul>
                           </div>)}
                           {partner.phones.length && (<div className="partner-card__phones">
                             <span>Телефоны:</span>
                             <ul className="partner-card__phones-list">
-                              {partner.phones.map((link, index) => (
-                                <li><Link key={index} to={`tel:${link}`} className="partner-card__phone">{link}</Link></li>
+                              {partner.phones.map((phone, index) => (
+                                <li key={index}><Link to={`tel:${phone}`} className="partner-card__phone">{phone}</Link></li>
                               ))}
                             </ul>
                           </div>)}

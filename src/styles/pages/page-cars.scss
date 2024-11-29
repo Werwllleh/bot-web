@@ -22,13 +22,13 @@
     margin: 0 auto;
     padding: 0 0 3rem 0;
 
-    overflow-y: auto;
+    /*overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
     transition: max-height .5s ease-in-out;
     max-height: calc(100vh - 22.1rem);
     scrollbar-color: $accent-color transparent;
-    scrollbar-width: thin;
+    scrollbar-width: thin;*/
 
     &.ch {
       max-height: calc(100vh - 28.1rem);
@@ -245,7 +245,7 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    max-width: 45rem;
+    max-width: 32rem;
 
     & .swiper {
 
@@ -323,13 +323,16 @@
     }
 
     &-value {
-      flex: 0 1 50%;
+      max-width: 22rem;
       width: 100%;
       font-weight: 500;
       font-size: 1.6rem;
       color: $accent-color;
       max-height: 15rem;
       overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-color: $accent-color transparent;
+      scrollbar-width: thin;
     }
 
   }

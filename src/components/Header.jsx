@@ -20,7 +20,7 @@ const Header = ({color}) => {
 
   return (
     <>
-      <header className={`header`} style={{backgroundColor: color}}>
+      <header className={`header`} style={{backgroundColor: color ? color : '#ffffff'}}>
         <div className="header__body">
           <div className="header__logo">
             <Link to={route.CARS.url}><MainLogo/></Link>

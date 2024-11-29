@@ -90,6 +90,8 @@ legend {
 
 html {
   background-color: $white !important;
+  scrollbar-color: $accent-color transparent;
+  scrollbar-width: thin;
 }
 
 body, html {
@@ -123,6 +125,13 @@ body #root {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  transition: max-height .5s ease-in-out;
+  margin: 7rem 0 6rem;
+  padding: 0 0 3rem 0;
 }
 
 .container {
@@ -134,7 +143,7 @@ body #root {
 }
 
 .content {
-  margin: 7rem 0 0 0;
+  //margin: 7rem 0 0 0;
   padding: 2rem 0 0 0;
 
   @include mobile {

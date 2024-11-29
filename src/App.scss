@@ -14,7 +14,7 @@
 }
 
 
-.content_accordion {
+/*.content_accordion {
   border-radius: 5px;
   overflow: hidden;
 
@@ -61,10 +61,10 @@
   & .ant-collapse-item-active .ant-collapse-header {
     border-radius: 0 0 0 0 !important;
   }
-}
+}*/
 
 
-.sticker__photo {
+/*.sticker__photo {
   position: relative;
   cursor: pointer;
 
@@ -78,9 +78,9 @@
     transform: scale(1.1);
   }
 
-}
+}*/
 
-@media (max-width: 550px) {
+/*@media (max-width: 550px) {
   .sticker__photo .ant-image-img {
     max-width: 140px;
   }
@@ -158,9 +158,10 @@
   justify-content: center;
   font-size: 14px;
   z-index: 1;
-}
+}*/
 
 
+/*
 .sticker__preview {
   background: #ffffffd9;
   padding: 40px;
@@ -207,7 +208,7 @@
 }
 
 .cart__footer_select_ant.ant-select-open .ant-select-selector {
-  /*border-color: #f27814 !important;*/
+  !*border-color: #f27814 !important;*!
 }
 
 .cart__footer_select_popup .ant-select-item {
@@ -258,8 +259,8 @@
     max-width: 60px;
   }
   .bottom-navbar__link .MuiBottomNavigationAction-root {
-    /*padding-top: 14px;*/
-    /*padding: 14px 5px 0;*/
+    !*padding-top: 14px;*!
+    !*padding: 14px 5px 0;*!
   }
   .cart__footer_select_ant {
     max-width: none;
@@ -389,3 +390,4 @@
 }
 
 
+*/
