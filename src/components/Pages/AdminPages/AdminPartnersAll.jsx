@@ -41,16 +41,10 @@ const AdminPartnersAll = () => {
     updatePartnersCategories()
   }, [updatePartnersAdmin, updatePartnersCategories])
 
-  /*useEffect(() => {
-    console.log(partners)
-  }, [partners])*/
 
-  const [formCategories, setFormCategories] = useState([]);
-  const [partnerId, setPartnerId] = useState(null);
+  const [selectCategories, setSelectCategories] = useState([]);
+  const [partnerData, setPartnerData] = useState({});
 
-  /*useEffect(() => {
-    console.log(formCategories)
-  }, [formCategories]);*/
 
   const initialFormValues = {
     title: "",
@@ -67,16 +61,15 @@ const AdminPartnersAll = () => {
     e.preventDefault();
 
 
-    if (!formCategories.length) {
+    if (!selectCategories.length) {
       return showNotification('error', 'Выбери категорию партнера!')
     }
 
-    const categoriesId = partnersCategories
-      .filter(item => formCategories.includes(item.value)) // Оставляем только те объекты, value которых есть в arr2
-      .map(item => item.id); // Получаем массив id из отфильтрованных объектов
+    const formCategoriesIds = selectCategories.map(category => category.id);
+
 
     let submitForm = {
-      categories: categoriesId,
+      categories: formCategoriesIds,
       title: values.title.trim(),
       description: values.description.trim(),
       links: values.links,
@@ -84,6 +77,8 @@ const AdminPartnersAll = () => {
       address_text: values.address_text.trim(),
       address_coordinates: values.address_coordinates,
     }
+
+
 
     if (typeof values.links === 'string' && values.links !== '') {
 
@@ -147,35 +142,38 @@ const AdminPartnersAll = () => {
     }
 
     if (values.links !== '' || values.phones !== '') {
-      await addPartner(userData.chat_id, submitForm, partnerId)
-        .then((res) => {
-          handleModalClose();
-          updatePartnersAdmin();
-          showNotification('success', res.data.message)
-          setTimeout(() => {
-            setFormCategories([])
-            setValues({
-              title: "",
-              description: "",
-              links: "",
-              phones: "",
-              address_text: "",
-              address_coordinates: "",
-            })
-            submitForm = {
-              categories: [],
-              title: "",
-              description: "",
-              links: "",
-              phones: "",
-              address_text: "",
-              address_coordinates: "",
-            }
-          }, 300)
-        })
-        .catch((err) => {
-          showNotification('error', err.data.message)
-        })
+      if (submitForm.categories.length) {
+        await addPartner(userData.chat_id, submitForm, partnerData.id)
+          .then((res) => {
+            updatePartnersAdmin();
+            handleModalClose();
+            showNotification('success', res.data.message)
+            setTimeout(() => {
+              setValues({
+                title: "",
+                description: "",
+                links: "",
+                phones: "",
+                address_text: "",
+                address_coordinates: "",
+              })
+              submitForm = {
+                categories: [],
+                title: "",
+                description: "",
+                links: "",
+                phones: "",
+                address_text: "",
+                address_coordinates: "",
+              }
+            }, 300)
+          })
+          .catch((err) => {
+            showNotification('error', err.data.message)
+          })
+      } else {
+        return showNotification('error', 'Выбери категорию партнера!')
+      }
     } else {
       showNotification('error', 'Укажите ссылки или телефоны')
     }
@@ -183,8 +181,8 @@ const AdminPartnersAll = () => {
   }
 
   const deletePartnerFunc = async () => {
-    if (partnerId) {
-      await deletePartner(userData.chat_id, partnerId)
+    if (partnerData) {
+      await deletePartner(userData.chat_id, partnerData.id)
         .then(res => {
           handleModalClose();
           updatePartnersAdmin();
@@ -197,7 +195,11 @@ const AdminPartnersAll = () => {
   }
 
   const handleSelectCategories = (value) => {
-    setFormCategories([...value])
+    /*partnersCategories
+      .filter(item => data.categories.includes(item.value))
+      .map(item => item.id) // Получаем массив id из отфильтрованных объектов*/
+
+    setSelectCategories(partnersCategories.filter(item => value.includes(item.value)))
   }
 
   const showModalCreate = () => {
@@ -205,22 +207,29 @@ const AdminPartnersAll = () => {
     setModalActive(true);
   }
 
-  const showModalAbout = (partnerId) => {
-    setPartnerId(partnerId);
-
+  const showModalAbout = (selectPartnerId) => {
     updatePartnersCategories()
 
-    const data = partners.filter(partner => partner.id === partnerId)[0];
+    if (selectPartnerId) {
+      const data = partners.filter(partner => partner.id === selectPartnerId)[0];
+      setPartnerData(data);
+      setSelectCategories(data.categories);
 
-    setFormCategories(data.categories);
-    setValues({
-      title: data.title,
-      description: data.description,
-      links: data.links,
-      phones: data.phones,
-      address_text: data.address_text,
-      address_coordinates: data.address_coordinates,
-    })
+      /*setFormCategoriesIds (
+        partnersCategories
+          .filter(item => data.categories.includes(item.value))
+          .map(item => item.id) // Получаем массив id из отфильтрованных объектов
+      );*/
+
+      setValues({
+        title: data.title,
+        description: data.description,
+        links: data.links,
+        phones: data.phones,
+        address_text: data.address_text,
+        address_coordinates: data.address_coordinates,
+      })
+    }
 
     setModalActive(true);
   }
@@ -228,10 +237,10 @@ const AdminPartnersAll = () => {
   const handleModalClose = () => {
     setModalActive(false);
 
-    if (partnerId) {
-      setPartnerId(null)
+    if (partnerData) {
+      setPartnerData({})
       setTimeout(() => {
-        setFormCategories([])
+        setSelectCategories([])
         setValues({
           title: "",
           description: "",
@@ -311,7 +320,7 @@ const AdminPartnersAll = () => {
                     placeholder="Категории партнера"
                     onChange={handleSelectCategories}
                     options={partnersCategories}
-                    value={formCategories}
+                    value={selectCategories}
                     optionFilterProp="label"
                     maxTagCount="responsive"
                   />
@@ -382,9 +391,9 @@ const AdminPartnersAll = () => {
               </div>
               <div className="partners__modal-form-footer">
                 <button type="submit" onClick={savePartner} className="partners__modal-form-submit style-btn">
-                  {partnerId ? 'Обновить данные' : 'Сохранить партнера'}
+                  {partnerData ? 'Обновить данные' : 'Сохранить партнера'}
                 </button>
-                {partnerId && <button type="button" onClick={deletePartnerFunc} className="partners__modal-form-delete style-btn">Удалить партнера</button>}
+                {partnerData && <button type="button" onClick={deletePartnerFunc} className="partners__modal-form-delete style-btn">Удалить партнера</button>}
               </div>
             </form>
           </div>

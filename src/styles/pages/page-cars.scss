@@ -21,26 +21,12 @@
     width: 100%;
     margin: 0 auto;
     padding: 0 0 3rem 0;
-
-    /*overflow-y: auto;
+    overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
     transition: max-height .5s ease-in-out;
-    max-height: calc(100vh - 22.1rem);
     scrollbar-color: $accent-color transparent;
-    scrollbar-width: thin;*/
-
-    &.ch {
-      max-height: calc(100vh - 28.1rem);
-    }
-
-    @include tablet {
-      max-height: calc(100vh - 19.1rem);
-
-      &.ch {
-        max-height: calc(100vh - 25.1rem);
-      }
-    }
+    scrollbar-width: thin;
 
   }
 
@@ -238,7 +224,8 @@
     font-size: 2rem;
   }
 
-  &__content {}
+  &__content {
+  }
 
   &__images {
     position: relative;

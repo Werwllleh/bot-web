@@ -20,6 +20,10 @@ import 'swiper/css/effect-fade';
 const Cars = () => {
 
   const searchInput = useRef();
+  const searchField = useRef();
+
+  const [searchFieldHeight, setSearchFieldHeight] = useState(0);
+
   const [loading, setLoading] = useState(true);
   const [isModalActive, setModalActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -101,9 +105,11 @@ const Cars = () => {
   const searchFieldFunc = () => {
     if (isSearchActive) {
       setIsSearchActive(false);
+      setSearchFieldHeight(0);
       setSearchCarNumber('');
     } else {
       setIsSearchActive(true);
+      setSearchFieldHeight(searchField.current.scrollHeight);
       setTimeout(() => {
         searchInput.current.focus();
       }, 300)
@@ -133,7 +139,7 @@ const Cars = () => {
         <div className="page-cars__body">
           {loading && <div className="page-cars__loader"><Loader/></div>}
           {!loading && carsList?.length ? (
-            <div className={`page-cars__images ${isSearchActive ? 'ch' : ''}`}>
+            <div style={{maxHeight: `calc(100vh - 6.6rem - 4.5rem - 16rem - ${searchFieldHeight}px)`}} className="page-cars__images">
               {carsList.map((car) => (
                 <CarImage openModal={handleModalOpen} car={car} key={car.id} isSelected={selectedCarId === car.id}
                           onSelect={handleCarSelect}/>
@@ -146,7 +152,7 @@ const Cars = () => {
             </div>
           )}
         </div>
-        <div className={`page-cars__search-field ${isSearchActive ? "active" : ""}`}>
+        <div ref={searchField} className={`page-cars__search-field ${isSearchActive ? "active" : ""}`}>
           <input ref={searchInput} placeholder="Поиск авто по номеру" value={searchCarNumber}
                  onChange={(e) => setSearchCarNumber(e.target.value.toUpperCase())} type="text"
                  className="page-cars__search-field-input"/>

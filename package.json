@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@yandex/ymaps3-types": "^1.0.15395607",
     "css-loader": "^7.1.2",
     "sass": "^1.80.4"
   }

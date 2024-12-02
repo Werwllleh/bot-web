@@ -92,6 +92,7 @@ html {
   background-color: $white !important;
   scrollbar-color: $accent-color transparent;
   scrollbar-width: thin;
+  overflow: hidden;
 }
 
 body, html {
@@ -125,13 +126,12 @@ body #root {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-
-  overflow-y: auto;
-  overflow-x: hidden;
   height: 100%;
+  max-height: calc(100dvh - 6.564rem - 5.91rem);
+  //height: 100vh;
   transition: max-height .5s ease-in-out;
   margin: 7rem 0 6rem;
-  padding: 0 0 3rem 0;
+  //padding: 0 0 3rem 0;
 }
 
 .container {
