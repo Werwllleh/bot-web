@@ -63,6 +63,12 @@
         .ant-select-selector {
           padding: 0 0 0 2rem !important;
         }
+
+        .ant-select-selection-item {
+          font-weight: 600;
+          color: #4f4f4f !important;
+        }
+
       }
     }
 
@@ -131,13 +137,14 @@
       height: auto;
       padding: 1rem 2rem;
       margin: 0.5rem 0;
-      border-radius: 0;
       color: $green !important;
       border-color: $green !important;
       box-shadow: none;
       transition: all $transition !important;
       font-size: 1.5rem;
       font-weight: 600;
+      border-radius: $border-radius;
+      overflow: hidden;
 
       &:hover {
         background-color: $green-light;

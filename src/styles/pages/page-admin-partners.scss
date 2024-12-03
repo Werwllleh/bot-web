@@ -172,6 +172,14 @@
       overflow: hidden;
       background-color: $semi-white;
 
+      &.not-rec {
+        background-color: $error-color;
+
+        .partner-card__title {
+          text-decoration: line-through;
+        }
+      }
+
       &__about {
         margin: auto auto 0 auto;
         gap: .5rem;
@@ -180,6 +188,13 @@
 
         &-text {
           color: $white;
+        }
+
+        &-not-rec {
+          color: $red;
+          text-align: center;
+          font-size: 2rem;
+          font-weight: 600;
         }
 
         &-icon {

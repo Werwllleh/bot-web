@@ -9,6 +9,7 @@ import {addPartner, deletePartner} from "../../../api/api-partners";
 import {Link} from "react-router-dom";
 import {validateCoordinates, validateLinks, validatePhoneNumbers} from "../../../utils/patterns";
 import button from "../../Button/Button";
+import {checkObject} from "../../../utils/checkObject";
 
 const AdminPartnersAll = () => {
 
@@ -45,6 +46,10 @@ const AdminPartnersAll = () => {
   const [selectCategories, setSelectCategories] = useState([]);
   const [partnerData, setPartnerData] = useState({});
 
+  useEffect(() => {
+    console.log(partnerData)
+  }, [partnerData]);
+
 
   const initialFormValues = {
     title: "",
@@ -80,7 +85,7 @@ const AdminPartnersAll = () => {
 
 
 
-    if (typeof values.links === 'string' && values.links !== '') {
+    if (typeof values.links === 'string' && values.links !== '' && values.links !== '-') {
 
       const links = validateLinks(values.links.split(','))
 
@@ -100,7 +105,7 @@ const AdminPartnersAll = () => {
       }
     }
 
-    if (typeof values.phones === 'string' && values.phones !== '') {
+    if (typeof values.phones === 'string' && values.phones !== '' && values.phones !== '-') {
 
       const phones = validatePhoneNumbers(values.phones.split(','))
 
@@ -120,7 +125,7 @@ const AdminPartnersAll = () => {
       }
     }
 
-    if (typeof values.address_coordinates === 'string') {
+    if (typeof values.address_coordinates === 'string' && values.address_coordinates !== '-') {
 
       const coordinates = validateCoordinates(values.address_coordinates.split(','))
 
@@ -391,9 +396,9 @@ const AdminPartnersAll = () => {
               </div>
               <div className="partners__modal-form-footer">
                 <button type="submit" onClick={savePartner} className="partners__modal-form-submit style-btn">
-                  {partnerData ? 'Обновить данные' : 'Сохранить партнера'}
+                  {checkObject(partnerData) ? 'Обновить данные' : 'Сохранить партнера'}
                 </button>
-                {partnerData && <button type="button" onClick={deletePartnerFunc} className="partners__modal-form-delete style-btn">Удалить партнера</button>}
+                {checkObject(partnerData) && <button type="button" onClick={deletePartnerFunc} className="partners__modal-form-delete style-btn">Удалить партнера</button>}
               </div>
             </form>
           </div>

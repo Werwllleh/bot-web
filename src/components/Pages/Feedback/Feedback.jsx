@@ -5,7 +5,6 @@ import {Rate, notification, Input, Button, Watermark, Checkbox} from 'antd';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {addFeedback, getFeedback} from "../../../utils/feedbacksUtils";
 import {useUsersStore} from "../../../services/store";
-import {getTime} from "../../../utils/utils";
 import NoisyCanvas from "../../NoiseCanvas/NoisyCanvas";
 
 const {TextArea} = Input;
@@ -13,7 +12,7 @@ const {TextArea} = Input;
 
 const Feedback = () => {
 
-  const currentUser = useUsersStore((state) => state.currentUser);
+  // const currentUser = useUsersStore((state) => state.currentUser);
 
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');

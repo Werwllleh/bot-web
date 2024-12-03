@@ -7,7 +7,9 @@
   &__date {
     font-weight: 400;
   }
-  &__time {}
+
+  &__time {
+  }
 
 }
 
@@ -144,6 +146,10 @@
 
   }
 
+  .ant-select-single {
+    height: auto !important;
+  }
+
   .ant-select-multiple .ant-select-selection-overflow {
     gap: .5rem !important;
     flex-wrap: nowrap !important;
@@ -205,6 +211,7 @@
   color: $white;
   font-size: 2rem;
 }
+
 .ant-image-preview-switch-left,
 .ant-image-preview-switch-right {
   color: $white;

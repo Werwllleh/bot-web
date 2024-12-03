@@ -7,11 +7,11 @@ export const num_word = (value, words) => {
   return words[2];
 }
 
-function padZero(num) {
+/*function padZero(num) {
   return (num < 10 ? '0' : '') + num;
-}
+}*/
 
-function formatDate(date) {
+/*function formatDate(date) {
   // Получаем компоненты даты и времени
   let day = padZero(date.getDate());
   let month = padZero(date.getMonth() + 1); // Месяцы в Date объекте начинаются с 0
@@ -26,10 +26,20 @@ function formatDate(date) {
       <span className={'time-class__time'}>{hours}:{minutes}</span>
     </div>
   );
-}
+}*/
 
+/*
 export const getTime = (nowDate) => {
   let dateObject = new Date(nowDate);
   dateObject.setHours(dateObject.getHours());
   return formatDate(dateObject);
+}*/
+
+export const getRandomColor = () => {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }

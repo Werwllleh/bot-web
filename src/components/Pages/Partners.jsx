@@ -67,17 +67,40 @@ const Partners = () => {
     }, 300)
   };
 
+  const hideFilters = () => {
+    filters.current.style.maxHeight = "0";
+    setPartnersListHeight(0)
+    setFiltersActive(false);
+  }
+
   const showFilters = () => {
     if (isFiltersActive) {
-      filters.current.style.maxHeight = "0";
-      setPartnersListHeight(0)
-      setFiltersActive(false);
+      hideFilters();
     } else {
       filters.current.style.maxHeight = `${filters.current.scrollHeight}px`;
       setPartnersListHeight(filters.current.scrollHeight)
       setFiltersActive(true);
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const filtersBlock = document.querySelector(".page-partners__filters");
+      const filtersOptionsList = document.querySelector(".rc-virtual-list");
+      if (filtersBlock && !filtersBlock.contains(e.target) && filtersOptionsList && !filtersOptionsList.contains(e.target)) {
+        hideFilters();
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      // Удаляем обработчик при размонтировании компонента
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+
 
   useEffect(() => {
 
@@ -128,38 +151,22 @@ const Partners = () => {
                 </div>
               </div>
             </div>
-            <div style={{maxHeight: `calc(100vh - 6.6rem - 4.5rem - 16rem - ${partnersListHeight}px)`}} className="page-partners__partners partners-list partners-block">
+            <div className="page-partners__partners partners-list partners-block">
               {partnersFiltered.length ? (
                 <div className="partners-block__list">
                   {partnersFiltered.map(partner => {
                     return (
-                      <div key={partner.id} className="partners-block__partner partner-card">
+                      <div key={partner.id} className={`partners-block__partner partner-card ${!partner.rejected ? '' : 'not-rec'}`}>
                         <div className="partner-card__body">
                           <h5 className="partner-card__title">{partner.title}</h5>
-                          {/*{partner.links.length && (<div className="partner-card__links">
-                            <span>Ссылки:</span>
-                            <ul className="partner-card__links-list">
-                              {partner.links.map((link, index) => (
-                                <li key={index}><Link target="_blank" to={link}
-                                                      className="partner-card__link">{link}</Link></li>
-                              ))}
-                            </ul>
-                          </div>)}
-                          {partner.phones.length && (<div className="partner-card__phones">
-                            <span>Телефоны:</span>
-                            <ul className="partner-card__phones-list">
-                              {partner.phones.map((phone, index) => (
-                                <li key={index}><Link to={`tel:${phone}`} className="partner-card__phone">{phone}</Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>)}*/}
                           {partner.description && <p className="partner-card__description">{partner.description}</p>}
                         </div>
-                        <button onClick={() => showModalAbout(partner.id)} className="partner-card__about style-btn">
-                          <span className="partner-card__about-text">Подробнее</span>
-                          <span className="partner-card__about-icon"><InfoCircleTwoTone/></span>
-                        </button>
+                        {!partner.rejected ? (
+                          <button onClick={() => showModalAbout(partner.id)} className="partner-card__about style-btn">
+                            <span className="partner-card__about-text">Подробнее</span>
+                            <span className="partner-card__about-icon"><InfoCircleTwoTone/></span>
+                          </button>
+                        ) : <span className="partner-card__about-not-rec">Не советуем!</span>}
                       </div>
                     )
                   })}
@@ -179,24 +186,24 @@ const Partners = () => {
       >
         {checkObject(partnerAboutData) && (
           <div className="page-users-partners-modal__body">
-            {partnerAboutData.address_coordinates && <div className="page-users-partners-modal__address">
+            {partnerAboutData.address_coordinates !== '-' ? (<div className="page-users-partners-modal__address">
               <div className="page-users-partners-modal__address-text">{partnerAboutData.address_text}</div>
               <Link target="_blank"
                     to={`https://yandex.ru/maps/?ll=${partnerAboutData.address_coordinates.reverse()}&z=20&l=map`}
                     className="page-users-partners-modal__address-link style-btn">
                 Показать на карте
               </Link>
-            </div>}
+            </div>) : null}
             <div className="page-users-partners-modal__contacts">
               {/*<h5 className="page-users-partners-modal__contacts-title">Контакты:</h5>*/}
-              {partnerAboutData.phones.length && partnerAboutData.phones.map(phone => {
+              {partnerAboutData.phones !== '-' && partnerAboutData.phones.length ? partnerAboutData.phones.map(phone => {
                 return <Link className="page-users-partners-modal__contacts-link" key={phone}
                              to={`tel:${phone}`}><PhoneIcon/></Link>
-              })}
-              {partnerAboutData.links.length && partnerAboutData.links.map(link => {
+              }) : null}
+              {partnerAboutData.links !== '-' && partnerAboutData.links.length  ? partnerAboutData.links.map(link => {
                 return <Link className="page-users-partners-modal__contacts-link" target="_blank" key={link}
                              to={link}><SiteIcon/></Link>
-              })}
+              }) : null}
             </div>
             {partnerAboutData.description &&
               <div className="page-users-partners-modal__description">{partnerAboutData.description}</div>}

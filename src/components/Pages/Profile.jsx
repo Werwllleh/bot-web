@@ -1,17 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import {useUsersStore} from "../../services/store";
 import MainModal from "../MainModal/MainModal";
+import {getUserInfo} from "../../api/api-users";
 
 const Profile = () => {
 
   const [isModalActive, setModalActive] = useState(false);
   const [selectedCar, setSelectedCar] = useState(false);
 
+  const userTelegramData = useUsersStore((state) => state.userTelegramData);
+
   const userData = useUsersStore((state) => state.userData);
+  const updateUserData = useUsersStore((state) => state.updateUserData);
 
   useEffect(() => {
-    console.log(userData)
-  }, [userData]);
+    if (userTelegramData?.id) {
+
+      getUserInfo(userTelegramData?.id).then(res => {
+        if (res.data !== '') {
+          updateUserData(res.data)
+        }
+      })
+    }
+  }, [userTelegramData]);
 
 
   const handleModalOpen = (carId) => {

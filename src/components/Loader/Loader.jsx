@@ -6,8 +6,19 @@ const Loader = () => {
 		<div className="loader">
 			<div className="loader__body">
 				<div className="loader__text">
-					<span>vag</span>
-					<span>club21</span>
+					<p>
+						<span>v</span>
+						<span>a</span>
+						<span>g</span>
+					</p>
+					<p>
+						<span>c</span>
+						<span>l</span>
+						<span>u</span>
+						<span>b</span>
+						<span>2</span>
+						<span>1</span>
+					</p>
 				</div>
 				<div className="loader__icon">
 					<LoadingOutlined />

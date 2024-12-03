@@ -10,6 +10,8 @@
   width: 12rem;
   height: 12rem;
   z-index: 5;
+  user-select: none;
+  pointer-events: none;
 
   &__body {
     position: relative;
@@ -24,10 +26,25 @@
     align-items: center;
     z-index: 1;
 
-    span {
+    p {
       font-weight: 700;
       text-transform: uppercase;
       font-size: 3rem;
+      animation: colorChange 3s infinite;
+
+      span {
+        margin: 0;
+        display: inline-block;
+
+      }
+
+      &:nth-child(1) {
+        animation-delay: 0s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: 0.25s;
+      }
     }
   }
 
@@ -43,7 +60,7 @@
     justify-content: center;
 
     svg {
-      animation: loader-resize 1s infinite alternate-reverse;
+      animation: loader-resize .5s infinite alternate-reverse;
       fill: $accent-color;
       width: 11rem;
       height: 11rem;
@@ -58,15 +75,33 @@
     fill: $accent-color;
   }
   25% {
-    fill: mix($accent-color, $red, 25%);
+    fill: mix(#003fff, #7b00ff, 25%);
   }
   50% {
-    fill: mix($red, $green, 50%);
+    fill: mix(#7b00ff, #ff0000, 50%);
   }
   75% {
-    fill: mix($green, $accent-color, 75%);
+    fill: mix(#ff0000, $accent-color, 75%);
   }
   100% {
     fill: $accent-color;
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: .75;
+  }
+  50% {
+    opacity: .5;
+  }
+  75% {
+    opacity: .75;
+  }
+  100% {
+    opacity: 1;
   }
 }

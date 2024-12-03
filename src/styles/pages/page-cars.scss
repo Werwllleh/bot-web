@@ -20,7 +20,7 @@
     max-width: 100rem;
     width: 100%;
     margin: 0 auto;
-    padding: 0 0 3rem 0;
+    padding: 0 0 1rem 0;
     overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
@@ -233,6 +233,8 @@
     justify-content: center;
     margin: 0 auto;
     max-width: 32rem;
+    border-radius: $border-radius;
+    overflow: hidden;
 
     & .swiper {
 

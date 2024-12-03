@@ -101,12 +101,13 @@ const Registration = () => {
             if (result.status === 200) {
               showNotification('success', 'Авто добавлено!');
               updateUsersCars();
+              updateUserData(userData);
 
               setTimeout(() => {
                 updateAuthChecked(true);
-                updateUserData(userData);
                 setLoading(false);
-                navigate(route.CARS.url);
+                // navigate(route.CARS.url);
+                navigate(-1);
               }, 1500)
             }
           })
@@ -140,8 +141,8 @@ const Registration = () => {
               console.log(res)
               if (res.status === 200) {
                 showNotification('success', 'Пользователь успешно добавлен');
-
                 await addCarFunc(userTelegramData?.id, submitForm.car);
+                updateUsersCars();
               }
             })
             .catch(async (err) => {
@@ -201,7 +202,7 @@ const Registration = () => {
                 </div>
               </div>
               <div className="registration__form-footer">
-                <button type="submit" className="registration__form-submit">Отправить</button>
+                <button type="submit" className="registration__form-submit style-btn">Отправить</button>
               </div>
             </form>
           </div>

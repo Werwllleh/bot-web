@@ -139,7 +139,7 @@ const Cars = () => {
         <div className="page-cars__body">
           {loading && <div className="page-cars__loader"><Loader/></div>}
           {!loading && carsList?.length ? (
-            <div style={{maxHeight: `calc(100vh - 6.6rem - 4.5rem - 16rem - ${searchFieldHeight}px)`}} className="page-cars__images">
+            <div className="page-cars__images">
               {carsList.map((car) => (
                 <CarImage openModal={handleModalOpen} car={car} key={car.id} isSelected={selectedCarId === car.id}
                           onSelect={handleCarSelect}/>

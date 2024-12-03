@@ -3,12 +3,28 @@ import {Navigate, useLocation} from "react-router-dom";
 import {useUsersStore} from "../../services/store";
 import {checkObject} from "../../utils/checkObject";
 import Loader from "../Loader/Loader";
+import {getUserInfo} from "../../api/api-users";
 
 const ProtectedRoute = ({ onlyUnAuth = false, component, adminOnly = false }) => {
   const isAuthChecked = useUsersStore((state) => state.isAuthChecked);
+
+  const userTelegramData = useUsersStore((state) => state.userTelegramData);
   const userData = useUsersStore((state) => state.userData);
   const isAdmin = useUsersStore((state) => state.isAdmin);
 
+  const updateUserData = useUsersStore((state) => state.updateUserData);
+
+
+  useEffect(() => {
+    if (userTelegramData?.id) {
+
+      getUserInfo(userTelegramData?.id).then(res => {
+        if (res.data !== '') {
+          updateUserData(res.data)
+        }
+      })
+    }
+  }, [userTelegramData]);
 
   const location = useLocation();
 
