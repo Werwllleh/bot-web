@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {CarOutlined, NumberOutlined, SnippetsOutlined, CalendarOutlined, UserOutlined} from "@ant-design/icons";
+import {CarOutlined, NumberOutlined, SnippetsOutlined, CalendarOutlined} from "@ant-design/icons";
 import {getCarInfo, getCars} from "../api/api-cars";
 import UploadForm from "./Upload";
 import { Input } from 'antd';

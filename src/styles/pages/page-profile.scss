@@ -89,13 +89,69 @@
   &__modal {
 
     .modal-info {
+      min-width: 32rem;
+      max-width: 34rem;
 
+      &__car {
+        font-weight: 600;
+        font-size: 1.6rem;
+        margin: 0 0 1rem 0;
+      }
+
+      &__images {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: .5rem;
+      }
+
+      &__image {
+        position: relative;
+        flex: 0 1 49%;
+        display: flex;
+        flex-direction: column;
+
+        &-img {
+
+          img {
+            display: flex;
+            border-radius: $border-radius;
+            overflow: hidden;
+            user-select: none;
+            pointer-events: none;
+            object-fit: cover;
+          }
+        }
+
+        &-action {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          left: .5rem;
+          bottom: .5rem;
+          cursor: pointer;
+
+          svg {
+            width: 2.2rem;
+            height: 2.2rem;
+            fill: $accent-color;
+          }
+        }
+      }
+
+      &__note {
+        margin: 1rem 0 0 0;
+        font-size: 1.4rem;
+        font-weight: 400;
+      }
     }
 
     .modal-add {
       margin: 0 -.5rem 0 0;
       padding: 1rem .5rem 2rem 0;
       min-width: 32rem;
+      max-width: 32rem;
       max-height: 45rem;
       overflow-y: auto;
       scrollbar-color: $accent-color transparent;
@@ -111,6 +167,10 @@
             display: flex;
             flex-direction: column;
             gap: .5rem;
+
+            .ant-upload-select {
+              margin: 0 0 1rem 0;
+            }
 
             .ant-upload-list {
               display: grid;
