@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Portal from "./Portal";
 import {CloseOutlined} from "@ant-design/icons";
+import {getScrollbarWidth, offsetContent} from "../../utils/utils";
 
 const MODAL_CONTAINER_ID = "modal-container-id";
 
@@ -13,6 +14,10 @@ const MainModal = ({isOpen, onClose, title, children, className}) => {
   useEffect(() => {
     setIsActive(isOpen)
   }, [isOpen]);
+
+  useEffect(() => {
+    offsetContent(isActive)
+  }, [isActive])
 
   useEffect(() => {
     const handleWrapperClick = (event) => {

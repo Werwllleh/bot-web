@@ -93,6 +93,10 @@ html {
   scrollbar-color: $accent-color transparent;
   scrollbar-width: thin;
   overflow-x: hidden;
+
+  &.block {
+    overflow-y: hidden;
+  }
 }
 
 body, html {

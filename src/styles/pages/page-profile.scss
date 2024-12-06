@@ -1,4 +1,5 @@
 .page-profile {
+  position: relative;
 
   &__title {}
 
@@ -55,5 +56,78 @@
     font-weight: 500;
     font-size: 1.4rem;
     padding: 1rem 1.5rem;
+  }
+
+  &__add-car {
+    position: fixed;
+    left: 50%;
+    bottom: 7rem;
+    transform: translate(-50%, -50%);
+    gap: 1rem;
+    font-size: 1.5rem !important;
+    padding: 1rem !important;
+    color: $accent-color;
+    border: 1px solid $accent-color;
+    background-color: $white;
+
+    .anticon {
+      transition: transform $transition;
+      transform: rotate(0);
+    }
+
+    &:hover {
+      background-color: $accent-color;
+      color: $white;
+
+      .anticon {
+        transform: rotate(360deg);
+      }
+    }
+
+  }
+
+  &__modal {
+
+    .modal-info {
+
+    }
+
+    .modal-add {
+      margin: 0 -.5rem 0 0;
+      padding: 1rem .5rem 2rem 0;
+      min-width: 32rem;
+      max-height: 45rem;
+      overflow-y: auto;
+      scrollbar-color: $accent-color transparent;
+      scrollbar-width: thin;
+
+      &__body {}
+
+      &__form {
+
+        &-fileds {
+
+          .car-data-fields {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+
+            .ant-upload-list {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+            }
+          }
+
+        }
+
+        &-submit {
+          margin: 3rem auto 0 auto;
+          background-color: $accent-color;
+          color: $white;
+          padding: 1rem;
+          width: 70%;
+        }
+      }
+    }
   }
 }

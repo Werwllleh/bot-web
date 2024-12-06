@@ -3,7 +3,7 @@
   &__title {}
 
   &__body {
-    margin: 3rem 0 0 0;
+    padding: 3rem 0;
   }
 
   &__categories {}
@@ -62,7 +62,8 @@
     }
   }
 
-  &__partners {}
+  &__partners {
+  }
 
   &__modal {
 
@@ -113,6 +114,28 @@
     }
 
   }
+
+  &-active {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    &-text {
+      font-weight: 500;
+      font-size: 1.4rem;
+    }
+
+    &-switch {
+
+      &.switch-not-recommended {
+
+        .ant-switch.ant-switch-checked {
+          background: $error-color;
+        }
+      }
+    }
+  }
+
 
   &-form-footer {
     margin: 3rem 0 0 0;
@@ -172,6 +195,14 @@
       overflow: hidden;
       background-color: $semi-white;
 
+      &.active {
+        background-color: $green-light;
+      }
+
+      &.rejected {
+        background-color: $error-color;
+      }
+
       &.not-rec {
         background-color: $error-color;
 
@@ -191,6 +222,7 @@
         }
 
         &-not-rec {
+          margin: auto 0 0 0;
           color: $red;
           text-align: center;
           font-size: 2rem;

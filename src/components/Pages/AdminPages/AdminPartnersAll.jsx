@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Input, notification, Select} from "antd";
-const { TextArea } = Input;
+import {Input, notification, Select, Switch} from "antd";
+
+const {TextArea} = Input;
 import {PlusOutlined, InfoCircleTwoTone} from "@ant-design/icons";
 import MainModal from "../../MainModal/MainModal";
 import {useForm} from "../../../hooks/useForm";
 import {usePartnersStore, useUsersStore} from "../../../services/store";
-import {addPartner, deletePartner} from "../../../api/api-partners";
+import {addPartner, deletePartner, updatePartnerStatus} from "../../../api/api-partners";
 import {Link} from "react-router-dom";
 import {validateCoordinates, validateLinks, validatePhoneNumbers} from "../../../utils/patterns";
 import button from "../../Button/Button";
@@ -44,10 +45,16 @@ const AdminPartnersAll = () => {
 
 
   const [selectCategories, setSelectCategories] = useState([]);
+
   const [partnerData, setPartnerData] = useState({});
+  const [partnerDataActive, setPartnerDataActive] = useState(false);
+  const [partnerDataRejected, setPartnerDataRejected] = useState(false);
 
   useEffect(() => {
-    console.log(partnerData)
+    if (partnerData) {
+      setPartnerDataActive(partnerData.active);
+      setPartnerDataRejected(partnerData.rejected)
+    }
   }, [partnerData]);
 
 
@@ -82,7 +89,6 @@ const AdminPartnersAll = () => {
       address_text: values.address_text.trim(),
       address_coordinates: values.address_coordinates,
     }
-
 
 
     if (typeof values.links === 'string' && values.links !== '' && values.links !== '-') {
@@ -185,6 +191,10 @@ const AdminPartnersAll = () => {
 
   }
 
+  const approvePartnerFunc = async () => {
+
+  }
+
   const deletePartnerFunc = async () => {
     if (partnerData) {
       await deletePartner(userData.chat_id, partnerData.id)
@@ -258,6 +268,27 @@ const AdminPartnersAll = () => {
     }
   };
 
+  const onActiveStatus = async (checked) => {
+    if (partnerData) {
+      setPartnerDataActive(checked)
+      await updatePartnerStatus(userData.chat_id, partnerData.id, {
+        active: checked
+      })
+      updatePartnersAdmin();
+    }
+  };
+
+  const onRejectedStatus = async (checked) => {
+    if (partnerData) {
+      setPartnerDataRejected(checked)
+      await updatePartnerStatus(userData.chat_id, partnerData.id, {
+        rejected: checked
+      })
+    }
+    updatePartnersAdmin();
+  };
+
+
   return (
     <>
       {contextHolder}
@@ -266,32 +297,17 @@ const AdminPartnersAll = () => {
           <h1 className="page-admin-partners__title h1t">Все партнеры</h1>
           <div className="page-admin-partners__body">
             <div className="page-admin-partners__partners partners-block">
-              <button onClick={showModalCreate} className="partners-block__partner-add"><PlusOutlined /></button>
+              <button onClick={showModalCreate} className="partners-block__partner-add"><PlusOutlined/></button>
               {partners.length ? (
                 <div className="partners-block__list">
                   {partners.map(partner => {
                     return (
-                      <div key={partner.id} className="partners-block__partner partner-card">
+                      <div
+                        key={partner.id}
+                        className={`partners-block__partner partner-card ${partner.active ? 'active' : ''} ${partner.rejected ? 'rejected' : ''}`}
+                      >
                         <div className="partner-card__body">
                           <h5 className="partner-card__title">{partner.title}</h5>
-                          {/*{partner.links.length && (<div className="partner-card__links">
-                            <span>Ссылки:</span>
-                            <ul className="partner-card__links-list">
-                              {partner.links.map((link, index) => (
-                                <li key={index}><Link target="_blank" to={link}
-                                                      className="partner-card__link">{link}</Link></li>
-                              ))}
-                            </ul>
-                          </div>)}
-                          {partner.phones.length && (<div className="partner-card__phones">
-                            <span>Телефоны:</span>
-                            <ul className="partner-card__phones-list">
-                              {partner.phones.map((phone, index) => (
-                                <li key={index}><Link to={`tel:${phone}`} className="partner-card__phone">{phone}</Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>)}*/}
                           {partner.description && <p className="partner-card__description">{partner.description}</p>}
                         </div>
                         <button onClick={() => showModalAbout(partner.id)} className="partner-card__about style-btn">
@@ -390,6 +406,22 @@ const AdminPartnersAll = () => {
                     onChange={handleChange}
                   />
                 </div>
+                {checkObject(partnerData) && (
+                  <>
+                    <div className="partners__modal-active">
+                      <span className="partners__modal-active-text">Не рекомендованный</span>
+                      <div className="partners__modal-active-switch switch-not-recommended">
+                        <Switch onChange={onRejectedStatus} value={partnerDataRejected}/>
+                      </div>
+                    </div>
+                    <div className="partners__modal-active">
+                      <span className="partners__modal-active-text">Показать</span>
+                      <div className="partners__modal-active-switch">
+                        <Switch onChange={onActiveStatus} value={partnerDataActive}/>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="partners__modal-form-note">
                 Множественные поля, такие как: ссылки, телефоны и координаты адреса указываются через запятую!
@@ -398,7 +430,9 @@ const AdminPartnersAll = () => {
                 <button type="submit" onClick={savePartner} className="partners__modal-form-submit style-btn">
                   {checkObject(partnerData) ? 'Обновить данные' : 'Сохранить партнера'}
                 </button>
-                {checkObject(partnerData) && <button type="button" onClick={deletePartnerFunc} className="partners__modal-form-delete style-btn">Удалить партнера</button>}
+                {checkObject(partnerData) && <button type="button" onClick={deletePartnerFunc}
+                                                     className="partners__modal-form-delete style-btn">Удалить
+                  партнера</button>}
               </div>
             </form>
           </div>

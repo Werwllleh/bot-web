@@ -43,3 +43,45 @@ export const getRandomColor = () => {
   }
   return color;
 }
+
+export const getScrollbarWidth = () => {
+
+  // Creating invisible container
+  const outer = document.createElement('div');
+  outer.style.visibility = 'hidden';
+  outer.style.overflow = 'scroll'; // forcing scrollbar to appear
+  outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+  document.body.appendChild(outer);
+
+  // Creating inner element and placing it in the container
+  const inner = document.createElement('div');
+  outer.appendChild(inner);
+
+  // Calculating difference between container's full width and the child width
+  const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
+
+  // Removing temporary elements from the DOM
+  outer.parentNode.removeChild(outer);
+
+  return scrollbarWidth;
+
+}
+
+export const offsetContent = (active) => {
+
+  const htmlBody = document.querySelector('html');
+  const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
+
+  if (active) {
+    htmlBody.classList.add('block');
+    // htmlBody.style.marginRight = `${getScrollbarWidth()}px`;
+    // header.style.marginRight = `${getScrollbarWidth()}px`;
+    // footer.style.marginRight = `${getScrollbarWidth()}px`;
+  } else {
+    // htmlBody.style.marginRight = '';
+    // header.style.marginRight = '';
+    // footer.style.marginRight = '';
+    htmlBody.classList.remove('block');
+  }
+}

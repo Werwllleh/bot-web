@@ -69,3 +69,15 @@ export const getPartnersUsers = async () => {
     console.error('Ошибка получения партнеров:', err);
   }
 };
+
+export const updatePartnerStatus = async (chatId, partnerId, data) => {
+  try {
+    return await axios.post(`${API_BASE}/update-partner-status`, {
+      chatId: chatId,
+      partnerId: partnerId,
+      data: data
+    });
+  } catch (err) {
+    console.error('Ошибка добавления партнера:', err);
+  }
+};

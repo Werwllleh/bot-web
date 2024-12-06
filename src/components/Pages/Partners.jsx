@@ -87,7 +87,8 @@ const Partners = () => {
     const handleClickOutside = (e) => {
       const filtersBlock = document.querySelector(".page-partners__filters");
       const filtersOptionsList = document.querySelector(".rc-virtual-list");
-      if (filtersBlock && !filtersBlock.contains(e.target) && filtersOptionsList && !filtersOptionsList.contains(e.target)) {
+
+      if (filtersBlock && !filtersBlock.contains(e.target) && !filtersOptionsList || filtersBlock && !filtersBlock.contains(e.target) && filtersOptionsList && !filtersOptionsList.contains(e.target)) {
         hideFilters();
       }
     };
