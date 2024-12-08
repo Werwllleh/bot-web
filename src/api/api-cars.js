@@ -40,12 +40,14 @@ export const getCarInfo = async (car_number) => {
   }
 };
 
-export const deleteCarImage = async (file) => {
+export const deleteCarImage = async (file, data) => {
   try {
     return await axios.post(`${API_BASE}/upload/remove`, {
       fileName: file,
+      data
     });
   } catch (err) {
     console.error('Ошибка удаления файла:', err);
   }
 }
+

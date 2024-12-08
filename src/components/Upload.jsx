@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_BASE } from "../utils/consts";
 import {deleteCarImage} from "../api/api-cars";
 
-const UploadForm = ({ images, maxCount, disabled }) => {
+const UploadForm = ({ images, maxCount, disabled, actionData }) => {
   const [formImages, setFormImages] = useState([]);
 
   // Передаем список изображений родительскому компоненту
@@ -62,6 +62,7 @@ const UploadForm = ({ images, maxCount, disabled }) => {
     <Upload
       name="avatar"
       action={`${API_BASE}/upload`}
+      data={actionData ? actionData : ''}
       listType="picture"
       multiple
       maxCount={maxCount}

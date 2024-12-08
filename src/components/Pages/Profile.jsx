@@ -5,9 +5,10 @@ import {getUserInfo} from "../../api/api-users";
 import {DeleteFilled, DeleteOutlined, PlusOutlined} from '@ant-design/icons';
 import {checkObject} from "../../utils/checkObject";
 import CarAddForm from "../CarAddForm";
-import {addUserCar, getCarInfo} from "../../api/api-cars";
-import {notification} from "antd";
+import {addUserCar, deleteCarImage, getCarInfo} from "../../api/api-cars";
+import {notification, Upload} from "antd";
 import {API_BASE} from "../../utils/consts";
+import UploadForm from "../Upload";
 
 const Profile = () => {
 
@@ -31,6 +32,8 @@ const Profile = () => {
 
   const [carForm, setCarForm] = useState({});
   const [selectedCar, setSelectedCar] = useState({});
+
+  const [carImages, setCarImages] = useState([]);
 
   const userTelegramData = useUsersStore((state) => state.userTelegramData);
 
@@ -84,11 +87,25 @@ const Profile = () => {
     if (addNewCar.status === 200) {
       showNotification('success', 'Авто добавлен');
       handleModalClose();
+      getUserInfo(userTelegramData?.id).then(res => {
+        if (res.data !== '') {
+          updateUserData(res.data)
+        }
+      })
     } else {
       showNotification('error', 'Ошибка при добавлении авто')
     }
 
-    console.log(addNewCar)
+  }
+
+  const deleteProfileCarImage = async (image, data) => {
+    await deleteCarImage(image, data);
+    getUserInfo(userTelegramData?.id).then(res => {
+      if (res.data !== '') {
+        updateUserData(res.data)
+        setSelectedCar(res.data?.cars.filter(car => car.car_id === data.car_id)[0])
+      }
+    })
 
   }
 
@@ -126,27 +143,49 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <button onClick={addCarForm} className="page-profile__add-car style-btn">Добавить авто <PlusOutlined /> </button>
+        <button onClick={addCarForm} className="page-profile__add-car style-btn">Добавить авто <PlusOutlined/></button>
       </div>
-      <MainModal title={checkObject(selectedCar) ? 'Данные авто' : 'Добавить авто'} isOpen={isModalActive} onClose={handleModalClose}>
+      <MainModal title={checkObject(selectedCar) ? 'Данные авто' : 'Добавить авто'} isOpen={isModalActive}
+                 onClose={handleModalClose}>
         {checkObject(selectedCar) ? (
           <div className="page-profile__modal">
             <div className="page-profile__modal-info modal-info">
               <div className="modal-info__car">
                 {selectedCar?.car_brand} {selectedCar?.car_model} {selectedCar?.car_year} - {selectedCar?.car_number}
               </div>
-              <div className="modal-info__images">
-                {selectedCar.car_images.length && selectedCar.car_images.map((image) => {
-                  return (
-                    <div key={image} className="modal-info__image">
-                      <div className="modal-info__image-img">
-                        <img src={`${API_BASE}/car/${image}`} alt=""/>
+              {selectedCar.car_images.length > 0 && (
+                <div className="modal-info__images">
+                  {selectedCar.car_images.map((image) => {
+                    return (
+                      <div key={image} className="modal-info__image">
+                        <div className="modal-info__image-img">
+                          <img src={`${API_BASE}/car/${image}`} alt=""/>
+                        </div>
+                        {selectedCar.car_images.length > 1 && (
+                          <div onClick={() => deleteProfileCarImage(image, {
+                            chat_id: userData?.chat_id,
+                            car_id: selectedCar?.car_id
+                          })} className="modal-info__image-action"><DeleteFilled/></div>
+                        )}
                       </div>
-                      <div className="modal-info__image-action"><DeleteFilled /></div>
-                    </div>
-                  )
-                })}
-              </div>
+                    )
+                  })}
+
+                </div>
+              )}
+              {selectedCar.car_images.length >= 1 && selectedCar.car_images.length < 4 && (
+                <div className="modal-info__upload">
+                  <UploadForm
+                    actionData={
+                      {
+                        chat_id: userData?.chat_id,
+                        car_id: selectedCar?.car_id,
+                        downloadType: 'non-stop'
+                      }
+                    }
+                    images={setCarImages} maxCount={4 - selectedCar.car_images.length}/>
+                </div>
+              )}
               {selectedCar?.car_note && <div className="modal-info__note">{selectedCar?.car_note}</div>}
             </div>
           </div>
