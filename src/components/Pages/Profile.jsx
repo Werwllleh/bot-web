@@ -2,13 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {useUsersStore} from "../../services/store";
 import MainModal from "../MainModal/MainModal";
 import {getUserInfo} from "../../api/api-users";
-import {DeleteFilled, DeleteOutlined, PlusOutlined} from '@ant-design/icons';
+import {DeleteFilled, PlusOutlined, LoadingOutlined} from '@ant-design/icons';
 import {checkObject} from "../../utils/checkObject";
 import CarAddForm from "../CarAddForm";
 import {addUserCar, deleteCarImage, getCarInfo} from "../../api/api-cars";
-import {notification, Upload} from "antd";
+import {notification, message, Upload} from "antd";
 import {API_BASE} from "../../utils/consts";
-import UploadForm from "../Upload";
 
 const Profile = () => {
 
@@ -33,12 +32,13 @@ const Profile = () => {
   const [carForm, setCarForm] = useState({});
   const [selectedCar, setSelectedCar] = useState({});
 
-  const [carImages, setCarImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const userTelegramData = useUsersStore((state) => state.userTelegramData);
 
   const userData = useUsersStore((state) => state.userData);
   const updateUserData = useUsersStore((state) => state.updateUserData);
+  const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
 
   useEffect(() => {
     if (userTelegramData?.id) {
@@ -50,11 +50,6 @@ const Profile = () => {
       })
     }
   }, [userTelegramData]);
-
-  useEffect(() => {
-    console.log(selectedCar)
-  }, [selectedCar]);
-
 
   const handleModalOpen = (carId) => {
     setModalActive(true);
@@ -102,12 +97,53 @@ const Profile = () => {
     await deleteCarImage(image, data);
     getUserInfo(userTelegramData?.id).then(res => {
       if (res.data !== '') {
-        updateUserData(res.data)
-        setSelectedCar(res.data?.cars.filter(car => car.car_id === data.car_id)[0])
+        updateUserData(res.data);
+        setSelectedCar(res.data?.cars.filter(car => car.car_id === data.car_id)[0]);
+        updateUsersCars();
       }
     })
 
   }
+
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png";
+
+    if (!isJpgOrPng) {
+      message.error("Только изображения в формате JPG или PNG!");
+      return Upload.LIST_IGNORE;
+    }
+
+    message.success("Изображение добавлено.");
+    return true;
+  };
+
+  const handleChange = (info, car_id) => {
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === "done") {
+      setLoading(false);
+      getUserInfo(userTelegramData?.id).then(res => {
+        if (res.data !== '') {
+          updateUserData(res.data);
+          setSelectedCar(res.data.cars.filter(car => car.car_id === car_id)[0]);
+          updateUsersCars();
+        }
+      })
+    }
+  };
+
+  const uploadButton = (
+    <button type="button" className="modal-info__upload-button">
+      <div className="modal-info__upload-button-icon">
+        {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      </div>
+      <div className="modal-info__upload-button-text">
+        Добавить фото
+      </div>
+    </button>
+  );
 
   return (
     <>
@@ -129,7 +165,7 @@ const Profile = () => {
                 <div className="page-profile__row-title">Твои авто</div>
                 <div className="page-profile__row-value">
                   <div className="page-profile__cars">
-                    {userData?.cars.length && userData?.cars.map(car => {
+                    {userData?.cars?.length && userData?.cars.map(car => {
                       return (
                         <button onClick={() => handleModalOpen(car.car_id)} key={car.car_id}
                                 className="page-profile__car">
@@ -170,20 +206,30 @@ const Profile = () => {
                       </div>
                     )
                   })}
-
-                </div>
-              )}
-              {selectedCar.car_images.length >= 1 && selectedCar.car_images.length < 4 && (
-                <div className="modal-info__upload">
-                  <UploadForm
-                    actionData={
-                      {
-                        chat_id: userData?.chat_id,
-                        car_id: selectedCar?.car_id,
-                        downloadType: 'non-stop'
-                      }
-                    }
-                    images={setCarImages} maxCount={4 - selectedCar.car_images.length}/>
+                  {selectedCar.car_images.length >= 1 && selectedCar.car_images.length < 4 && (
+                    <div className="modal-info__upload">
+                      <Upload
+                        name="avatar"
+                        listType="picture-card"
+                        className="avatar-uploader"
+                        showUploadList={false}
+                        action={`${API_BASE}/upload`}
+                        data={
+                          {
+                            chat_id: userData?.chat_id,
+                            car_id: selectedCar?.car_id,
+                            downloadType: 'non-stop'
+                          }
+                        }
+                        // multiple
+                        maxCount={1}
+                        beforeUpload={beforeUpload}
+                        onChange={(info) => handleChange(info, selectedCar?.car_id)}
+                      >
+                        {uploadButton}
+                      </Upload>
+                    </div>
+                  )}
                 </div>
               )}
               {selectedCar?.car_note && <div className="modal-info__note">{selectedCar?.car_note}</div>}
