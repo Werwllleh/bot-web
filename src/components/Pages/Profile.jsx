@@ -5,7 +5,7 @@ import {getUserInfo} from "../../api/api-users";
 import {DeleteFilled, PlusOutlined, LoadingOutlined} from '@ant-design/icons';
 import {checkObject} from "../../utils/checkObject";
 import CarAddForm from "../CarAddForm";
-import {addUserCar, deleteCarImage, getCarInfo} from "../../api/api-cars";
+import {addUserCar, deleteCarImage, deleteUserCar, getCarInfo} from "../../api/api-cars";
 import {notification, message, Upload} from "antd";
 import {API_BASE} from "../../utils/consts";
 
@@ -51,6 +51,10 @@ const Profile = () => {
     }
   }, [userTelegramData]);
 
+  useEffect(() => {
+    console.log(userData)
+  }, [userData])
+
   const handleModalOpen = (carId) => {
     setModalActive(true);
     setSelectedCar(userData?.cars.filter(car => car.car_id === carId)[0])
@@ -66,6 +70,16 @@ const Profile = () => {
 
   const addCarForm = () => {
     setModalActive(true);
+  }
+
+  const deleteCar = async (carId) => {
+    await deleteUserCar(userData.chat_id, carId);
+    getUserInfo(userTelegramData?.id).then(res => {
+      if (res.data !== '') {
+        updateUserData(res.data);
+        updateUsersCars();
+      }
+    })
   }
 
   const saveNewCar = async (e) => {
@@ -167,10 +181,14 @@ const Profile = () => {
                   <div className="page-profile__cars">
                     {userData?.cars?.length && userData?.cars.map(car => {
                       return (
-                        <button onClick={() => handleModalOpen(car.car_id)} key={car.car_id}
-                                className="page-profile__car">
-                          {`${car.car_brand} ${car.car_model} - ${car.car_number}`}
-                        </button>
+                        <div key={car.car_id} className="page-profile__car">
+                          <button onClick={() => handleModalOpen(car.car_id)}
+                                  className="page-profile__car-about style-btn">
+                            {`${car.car_brand} ${car.car_model} - ${car.car_number}`}
+                          </button>
+                          {userData?.cars?.length > 1 &&
+                            <button onClick={() => deleteCar(car.car_id)} className="page-profile__car-delete"><DeleteFilled/></button>}
+                        </div>
                       )
                     })}
                   </div>

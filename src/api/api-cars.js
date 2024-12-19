@@ -13,6 +13,17 @@ export const addUserCar = async (chatId, data) => {
   }
 };
 
+export const deleteUserCar = async (chatId, carId) => {
+  try {
+    return await axios.post(`${API_BASE}/delete-car`, {
+      chatId: chatId,
+      carId: carId
+    });
+  } catch (err) {
+    console.error('Ошибка удаления авто:', err);
+  }
+};
+
 //список авто при регистрации
 export const getCars = async () => {
   try {

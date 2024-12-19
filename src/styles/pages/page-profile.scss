@@ -35,6 +35,7 @@
     }
 
     &-value {
+      width: 100%;
     }
   }
 
@@ -50,16 +51,36 @@
   }
 
   &__car {
-    cursor: pointer;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $accent-color;
     border-radius: $border-radius;
-    color: $white;
-    font-weight: 500;
-    font-size: 1.4rem;
-    padding: 1rem 1.5rem;
+    overflow: hidden;
+
+    &-about {
+      flex: 1 1 100%;
+      background-color: $accent-color;
+      color: $white;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.4rem;
+      border-radius: 0 !important;
+    }
+
+    &-delete {
+      flex: 0 0 20%;
+      background-color: $grey-light;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span {
+
+        svg {
+          width: 2rem;
+          height: 2rem;
+          fill: $accent-color-light;
+        }
+      }
+    }
   }
 
   &__add-car {

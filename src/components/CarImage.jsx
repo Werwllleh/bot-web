@@ -45,6 +45,9 @@ const CarImage = ({ car, openModal, isSelected, onSelect }) => {
                 return (
                   <SwiperSlide key={image}>
                     <img src={`${API_BASE}/car/${image}`} alt="" className="page-cars__car-image"/>
+                    <div className="page-cars__car-image-bg">
+                      <img src={`${API_BASE}/car/${image}`} alt=""/>
+                    </div>
                   </SwiperSlide>
                 )
               })}
