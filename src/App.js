@@ -1,5 +1,4 @@
-import './App.scss';
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import useTelegram from "./hooks/useTelegram";
 import Cars from './components/Pages/Cars';
 import Partners from './components/Pages/Partners';
@@ -7,7 +6,6 @@ import {Routes, Route, useNavigate, useLocation} from 'react-router-dom';
 import {usePartnersStore, useUsersStore} from "./services/store";
 import {groupedPartnersFunc} from "./utils/partnersUtils";
 import {route} from "./utils/consts";
-import Feedback from "./components/Pages/Feedback/Feedback";
 import Registration from "./components/Pages/Registration";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -29,10 +27,6 @@ function App() {
 
 
   const {tg} = useTelegram();
-
-  const [loaderCars, setLoaderCars] = useState(true);
-  const [loaderPartners, setLoaderPartners] = useState(true);
-  const [loaderStickers, setLoaderStickers] = useState(true);
 
   const userTelegramData = useUsersStore((state) => state.userTelegramData);
 
@@ -67,8 +61,8 @@ function App() {
     updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      id: 446012794, //me
-      // id: 1, //test
+      // id: 446012794, //me
+      id: 1, //test
       // id: 2, //test2
       // id: 3, //test3
       // id: 4, //test4
@@ -105,7 +99,7 @@ function App() {
       updatePartnersAdmin()
     }
 
-    console.log(userData)
+    // console.log(userData)
   }, [userData]);
 
   const navigate = useNavigate();
