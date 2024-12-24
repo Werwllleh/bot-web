@@ -112,7 +112,7 @@ const Registration = () => {
             }
           })
           .catch((err) => {
-            console.log(err)
+            // console.log(err)
           })
       } else {
         setLoading(false);
@@ -138,7 +138,7 @@ const Registration = () => {
         try {
           await createUser(userTelegramData?.id, submitForm.user)
             .then(async (res) => {
-              console.log(res)
+              // console.log(res)
               if (res.status === 200) {
                 showNotification('success', 'Пользователь успешно добавлен');
                 await addCarFunc(userTelegramData?.id, submitForm.car);
@@ -160,7 +160,7 @@ const Registration = () => {
               }
             })
         } catch (err) {
-          console.log(err)
+          // console.log(err)
           setLoading(false);
         }
 

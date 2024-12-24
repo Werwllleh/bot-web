@@ -57,23 +57,16 @@ function App() {
     tg.ready();
     tg.expand();
 
-    // updateCurrentUser(tg?.initDataUnsafe?.user)
-    updateUserTelegramData({
+    updateUserTelegramData(tg?.initDataUnsafe?.user)
+    /*updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
       // id: 446012794, //me
-      id: 1, //test
-      // id: 2, //test2
-      // id: 3, //test3
-      // id: 4, //test4
-      // id: 5, //test5
-      // id: 6, //test6
-      // id: 7, //test7
-      // id: 8, //test8
+      // id: 1, //test
       language_code: "en",
       last_name: "",
       username: "all_lllll"
-    })
+    })*/
 
     setTimeout(() => {
       updateAuthChecked(true)

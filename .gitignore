@@ -8,6 +8,7 @@
 /prod-backups
 .pnp.js
 /stickers
+.env
 
 # testing
 /coverage

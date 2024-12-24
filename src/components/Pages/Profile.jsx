@@ -52,7 +52,7 @@ const Profile = () => {
   }, [userTelegramData]);
 
   useEffect(() => {
-    console.log(userData)
+    // console.log(userData)
   }, [userData])
 
   const handleModalOpen = (carId) => {

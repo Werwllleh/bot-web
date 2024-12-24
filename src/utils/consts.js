@@ -2,11 +2,7 @@ import React from "react";
 import TelegramIcon from "../components/icons/telegram-icon";
 import InstagramIcon from "../components/icons/instagram-icon";
 
-// export const SITE = 'https://vagcheb.ru/';
-// export const API = 'http://localhost';
-// export const API = 'https://vagcheb.ru/';
-
-const SITE = 'http://localhost:5000';
+const SITE = process.env.REACT_APP_SITE;
 export const API_BASE = `${SITE}/api`;
 
 export const places = [
