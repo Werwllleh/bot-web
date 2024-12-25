@@ -62,11 +62,11 @@ function App() {
     /*updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      // id: 446012794, //me
+      // id: 446012794,
       // id: 1, //test
       language_code: "en",
       last_name: "",
-      username: "all_lllll"
+      username: ""
     })*/
 
     setTimeout(() => {
