@@ -1,8 +1,8 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import useTelegram from "./hooks/useTelegram";
 import Cars from './components/Pages/Cars';
 import Partners from './components/Pages/Partners';
-import {Routes, Route, useNavigate, useLocation} from 'react-router-dom';
+import {Routes, Route, useNavigate, useLocation, Navigate} from 'react-router-dom';
 import {usePartnersStore, useUsersStore} from "./services/store";
 import {groupedPartnersFunc} from "./utils/partnersUtils";
 import {route} from "./utils/consts";
@@ -19,6 +19,7 @@ import AdminUsers from "./components/Pages/AdminPages/AdminUsers";
 import AdminMeet from "./components/Pages/AdminPages/AdminMeet";
 import AdminPartnersCategories from "./components/Pages/AdminPages/AdminPartnersCategories";
 import AdminPartnersAll from "./components/Pages/AdminPages/AdminPartnersAll";
+import {checkObject} from "./utils/checkObject";
 
 
 
@@ -85,6 +86,7 @@ function App() {
       })
     }
   }, [userTelegramData]);
+
 
   useEffect(() => {
 

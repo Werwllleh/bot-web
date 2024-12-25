@@ -7,7 +7,7 @@ import {createUser, getUserInfo} from "../../api/api-users";
 import {notification} from "antd";
 import {validateCarNumber, validateName} from "../../utils/patterns";
 import {addUserCar, deleteCarImage, getCarInfo} from "../../api/api-cars";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {route} from "../../utils/consts";
 import {checkObject} from "../../utils/checkObject";
 import Loader from "../Loader/Loader";
@@ -121,7 +121,6 @@ const Registration = () => {
     }
   }
 
-
   const submitForm = async (e) => {
 
     e.preventDefault();
@@ -178,36 +177,47 @@ const Registration = () => {
     <>
       {contextHolder}
       {loading && <Loader/>}
-      <div className={`registration ${loading ? 'block-blur' : ''}`}>
-        <div className="container">
-          <h1 className="registration__title h1t">Регистрация</h1>
-          <div className="registration__body">
-            <form ref={form} onSubmit={submitForm} className="registration__form">
-              <div className="registration__form-body">
-                <div className="registration__field">
-                  <div className="registration__field-icon"><UserOutlined/></div>
-                  <div className="registration__field-input input-antd">
-                    <Input
-                      required={true}
-                      className={`${userName !== '' && !validateName.test(userName) ? 'error' : ''}`}
-                      name="userName"
-                      placeholder="Как тебя зовут"
-                      value={userName === '' ? null : userName}
-                      onChange={(e) => setUserName(e.target.value)}
-                    />
+      {userTelegramData !== undefined ? (
+        <div className={`registration ${loading ? 'block-blur' : ''}`}>
+          <div className="container">
+            <h1 className="registration__title h1t">Регистрация</h1>
+            <div className="registration__body">
+              <form ref={form} onSubmit={submitForm} className="registration__form">
+                <div className="registration__form-body">
+                  <div className="registration__field">
+                    <div className="registration__field-icon"><UserOutlined/></div>
+                    <div className="registration__field-input input-antd">
+                      <Input
+                        required={true}
+                        className={`${userName !== '' && !validateName.test(userName) ? 'error' : ''}`}
+                        name="userName"
+                        placeholder="Как тебя зовут"
+                        value={userName === '' ? null : userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="registration__car-block">
+                    <CarAddForm data={setCarForm}/>
                   </div>
                 </div>
-                <div className="registration__car-block">
-                  <CarAddForm data={setCarForm}/>
+                <div className="registration__form-footer">
+                  <button type="submit" className="registration__form-submit style-btn">Отправить</button>
                 </div>
-              </div>
-              <div className="registration__form-footer">
-                <button type="submit" className="registration__form-submit style-btn">Отправить</button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="access-denied-block">
+          <div className="access-denied-block__body">
+            <p className="access-denied-block__text">
+              Пожалуйста, авторизуйся через
+            </p>
+            <Link className="access-denied-block__link" to={"https://t.me/VW21ClubBot"}>приложение</Link>
+          </div>
+        </div>
+      )}
     </>
   );
 };

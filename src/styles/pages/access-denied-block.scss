@@ -1,0 +1,37 @@
+.access-denied-block {
+  position: fixed;
+  margin-inline: auto;
+  inset-inline: 0;
+  inset-block-start: 30%;
+  transform: translateY(-80%);
+
+  &__body {
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__text {
+    pointer-events: none;
+    user-select: none;
+    text-align: center;
+  }
+
+  &__link {
+    display: inline-flex;
+    background-color: $accent-color;
+    border-radius: $border-radius;
+    padding: .7rem 3rem;
+    color: $semi-white;
+    font-weight: 500;
+    transition: background-color $transition, color $transition;
+
+    &:hover {
+      color: $accent-color;
+      background-color: $semi-white;
+    }
+  }
+}

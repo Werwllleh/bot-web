@@ -1,6 +1,7 @@
 {
   "name": "bot-web",
   "version": "0.1.0",
+  "homepage": "https://bot.vagclub21.ru/",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.5.1",

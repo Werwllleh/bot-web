@@ -4,6 +4,7 @@ import {useUsersStore} from "../../services/store";
 import {checkObject} from "../../utils/checkObject";
 import Loader from "../Loader/Loader";
 import {getUserInfo} from "../../api/api-users";
+import {route} from "../../utils/consts";
 
 const ProtectedRoute = ({ onlyUnAuth = false, component, adminOnly = false }) => {
   const isAuthChecked = useUsersStore((state) => state.isAuthChecked);
@@ -44,7 +45,7 @@ const ProtectedRoute = ({ onlyUnAuth = false, component, adminOnly = false }) =>
   if (!onlyUnAuth && !checkObject(userData)) {
     // setLoading(false);
     // Пользователь не авторизован
-    return <Navigate to="/registration" state={{ from: location }} />;
+    return <Navigate to={route.REGISTER.url} state={{ from: location }} />;
   }
 
   if (adminOnly && !isAdmin) {
