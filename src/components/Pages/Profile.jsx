@@ -98,7 +98,8 @@ const Profile = () => {
       handleModalClose();
       getUserInfo(userTelegramData?.id).then(res => {
         if (res.data !== '') {
-          updateUserData(res.data)
+          updateUserData(res.data);
+          updateUsersCars();
         }
       })
     } else {

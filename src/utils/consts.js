@@ -28,23 +28,6 @@ export const places = [
   }
 ]
 
-export const menu = [
-  {
-    title: 'Наши авто',
-    url: '/'
-  },
-  {
-    title: 'Партнеры',
-    url: '/partners',
-    color: '#F4F7FB'
-  },
-  {
-    title: 'Профиль',
-    url: '/profile',
-    color: '#F4F7FB'
-  },
-];
-
 export const route = {
   REGISTER: {
     title: 'Регистрация',
@@ -64,6 +47,11 @@ export const route = {
   CARS: {
     title: 'Наши авто',
     url: '/',
+    color: '#F4F7FB'
+  },
+  MEET: {
+    title: 'Встреча клуба',
+    url: '/meet',
     color: '#F4F7FB'
   },
   ADMIN: {
@@ -92,6 +80,28 @@ export const route = {
     color: '#F4F7FB'
   },
 }
+
+export const menu = [
+  {
+    title: route.CARS.title,
+    url: route.CARS.url
+  },
+  {
+    title: route.PARTNERS.title,
+    url: route.PARTNERS.url,
+    color: '#F4F7FB'
+  },
+  {
+    title: route.PROFILE.title,
+    url: route.PROFILE.url,
+    color: '#F4F7FB'
+  },
+  {
+    title: route.MEET.title,
+    url: route.MEET.url,
+    color: '#F4F7FB'
+  },
+];
 
 export const adminPages = [
   {

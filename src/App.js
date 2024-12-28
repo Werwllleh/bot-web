@@ -20,14 +20,15 @@ import AdminMeet from "./components/Pages/AdminPages/AdminMeet";
 import AdminPartnersCategories from "./components/Pages/AdminPages/AdminPartnersCategories";
 import AdminPartnersAll from "./components/Pages/AdminPages/AdminPartnersAll";
 import {checkObject} from "./utils/checkObject";
-
+import Meet from "./components/Pages/Meet";
+import {YMaps} from "@pbe/react-yandex-maps";
 
 
 
 function App() {
 
 
-  const {tg} = useTelegram();
+  const {tg, user} = useTelegram();
 
   const userTelegramData = useUsersStore((state) => state.userTelegramData);
 
@@ -58,16 +59,19 @@ function App() {
     tg.ready();
     tg.expand();
 
+    console.log(tg);
+    console.log(tg?.initDataUnsafe?.user);
+
     updateUserTelegramData(tg?.initDataUnsafe?.user)
-    /*updateUserTelegramData({
-      allows_write_to_pm: true,
-      first_name: "Lesha",
-      // id: 446012794,
-      // id: 1, //test
-      language_code: "en",
-      last_name: "",
-      username: ""
-    })*/
+    // updateUserTelegramData({
+    //   allows_write_to_pm: true,
+    //   first_name: "Lesha",
+    //   id: process.env.REACT_APP_ADMIN_CHAT_ID,
+    //   // id: 1, //test
+    //   language_code: "en",
+    //   last_name: "",
+    //   username: ""
+    // })
 
     setTimeout(() => {
       updateAuthChecked(true)
@@ -107,7 +111,11 @@ function App() {
 
 
   return (
-    <>
+    <YMaps query={{
+      apikey: process.env.REACT_APP_YANDEX_VERIFICATION,
+      ns: "use-load-option",
+      load: "package.full"
+    }}>
       <Header color={headerColor}/>
       <main className="main">
         <div className="content">
@@ -115,6 +123,7 @@ function App() {
             <Route index element={<OnlyAuth component={<Cars/>}/>}/>
             <Route path={route.PARTNERS.url} element={<OnlyAuth component={<Partners data={partnersSortedObject}/>}/>}/>
             <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile/>}/>}/>
+            <Route path={route.MEET.url} element={<OnlyAuth component={<Meet/>}/>}/>
             <Route path={route.REGISTER.url} element={<OnlyUnAuth component={<Registration/>}/>}/>
             <Route path={route.NF_404.url} element={<NotFound/>}/>
             <Route path={route.ADMIN.url} element={<OnlyAdminRoute component={<AdminPanel/>}/>}/>
@@ -127,7 +136,7 @@ function App() {
         </div>
       </main>
       <Footer/>
-    </>
+    </YMaps>
   );
 }
 

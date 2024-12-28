@@ -267,3 +267,10 @@
   -moz-user-select: none; /* Для Firefox */
   -ms-user-select: none; /* Для Internet Explorer/Edge */
 }
+
+.ymaps-2-1-79-gotoymaps,
+.ymaps-2-1-79-gototaxi,
+.ymaps-2-1-79-gototech,
+.ymaps-2-1-79-copyright__wrap {
+  display: none !important;
+}

@@ -1,0 +1,43 @@
+.page-meet {
+
+
+  &__title {
+  }
+
+  &__body {
+    margin: 2rem 0 0 0;
+  }
+
+  &__map {
+    margin: 2rem 0;
+  }
+
+  &__about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-date {
+      font-size: 3.5rem;
+      font-weight: 500;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    &-description {
+      margin: 2rem 0 0 0;
+      font-size: 2rem;
+      font-weight: 300;
+      text-align: center;
+      line-height: 1.55;
+    }
+  }
+
+  &__expired {
+    display: inline-block;
+    margin: 2rem 0 0 0;
+    font-size: 2.4rem;
+    font-weight: 400;
+    text-align: center;
+  }
+}
