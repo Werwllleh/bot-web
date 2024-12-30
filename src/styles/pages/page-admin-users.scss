@@ -1,0 +1,81 @@
+.page-admin-users {
+
+  &__title {
+  }
+
+  &__body {
+    margin: 2rem 0 0 0;
+    padding: 0 0 2rem 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+  }
+
+  &__user {
+
+  }
+
+  .user-card {
+    position: relative;
+    border-radius: $border-radius;
+    overflow: hidden;
+    cursor: pointer;
+
+    &__body {
+      padding: 1.5rem 1rem;
+    }
+
+    &__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      filter: blur(10rem);
+    }
+
+    &__header {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    &__id {
+      font-weight: 500;
+      font-size: 1.6rem;
+    }
+
+    &__name {
+      font-size: 2rem;
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    &__field {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.4rem;
+      font-weight: 300;
+
+      &-text {
+      }
+
+      &-value {
+        font-weight: 400;
+      }
+    }
+  }
+
+  &__modal {
+
+  }
+}

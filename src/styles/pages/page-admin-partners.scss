@@ -75,7 +75,10 @@
   min-width: 35rem;
   //max-width: 95%;
 
+
   &-body {
+    max-height: 30rem;
+    overflow-y: auto;
   }
 
   &-form {

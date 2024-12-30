@@ -232,11 +232,9 @@
     }
 
     .modal-add {
-      margin: 0 -.5rem 0 0;
       padding: 1rem .5rem 2rem 0;
-      min-width: 32rem;
-      max-width: 32rem;
-      max-height: 45rem;
+      min-width: 33rem;
+      max-height: 40rem;
       overflow-y: auto;
       scrollbar-color: $accent-color transparent;
       scrollbar-width: thin;

@@ -63,15 +63,15 @@ function App() {
     console.log(tg?.initDataUnsafe?.user);
 
     updateUserTelegramData(tg?.initDataUnsafe?.user)
-    // updateUserTelegramData({
-    //   allows_write_to_pm: true,
-    //   first_name: "Lesha",
-    //   id: process.env.REACT_APP_ADMIN_CHAT_ID,
-    //   // id: 1, //test
-    //   language_code: "en",
-    //   last_name: "",
-    //   username: ""
-    // })
+    /*updateUserTelegramData({
+      allows_write_to_pm: true,
+      first_name: "Lesha",
+      id: process.env.REACT_APP_ADMIN_CHAT_ID,
+      // id: 1, //test
+      language_code: "en",
+      last_name: "",
+      username: ""
+    })*/
 
     setTimeout(() => {
       updateAuthChecked(true)

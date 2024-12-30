@@ -44,7 +44,7 @@ const Meet = () => {
                 </div>
                 <div className="page-meet__about">
                   <h2 className="page-meet__about-date">
-                    {dayjs(meetData?.date).format('YYYY-MM-DD HH:mm')}
+                    {dayjs(meetData?.date).format('DD-MM-YYYY HH:mm')}
                   </h2>
                   <div className="page-meet__about-description">
                     {meetData?.description}
