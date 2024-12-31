@@ -1,0 +1,37 @@
+.user-about-info {
+
+  &__body {
+  }
+
+  &__message {
+  }
+
+  &__cars {
+    margin: 0 0 1rem 0;
+  }
+
+  &__car {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    p {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    &-text {
+    }
+
+    &-submit {
+      margin: 2rem 0 0 0;
+      background-color: $accent-color-light;
+      padding: .8rem 1rem !important;
+      color: $white;
+    }
+  }
+}

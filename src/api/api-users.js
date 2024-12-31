@@ -33,3 +33,12 @@ export const getAllUsers = async () => {
     throw err; // Пробрасываем ошибку, чтобы её можно было обработать в компоненте
   }
 }
+
+export const sendUserMessage = async (chatId, message) => {
+  try {
+    return await axios.post(`${API_BASE}/send-message`)
+  } catch (err) {
+    console.error('Ошибка отправки сообщения: ', err);
+    throw err; // Пробрасываем ошибку, чтобы её можно было обработать в компоненте
+  }
+}

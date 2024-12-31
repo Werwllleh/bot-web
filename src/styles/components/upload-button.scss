@@ -28,6 +28,19 @@
     opacity: 0;
     z-index: -999;
   }
+
+  .upload_note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: $grey;
+    user-select: none;
+    margin: 0 0 .5rem 0;
+  }
 }
 
 .ant-upload-list {

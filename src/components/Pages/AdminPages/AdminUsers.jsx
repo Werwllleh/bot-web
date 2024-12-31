@@ -3,6 +3,8 @@ import {useUsersStore} from "../../../services/store";
 import dayjs from "dayjs";
 import MainModal from "../../MainModal/MainModal";
 import {checkObject} from "../../../utils/checkObject";
+import UserAboutInfo from "../../UserAboutInfo";
+
 
 const AdminUsers = () => {
 
@@ -68,6 +70,10 @@ const AdminUsers = () => {
                             className="user-card__field-value">{dayjs(user.createdAt).format('DD-MM-YYYY HH:mm')}</div>
                         </div>
                         <div className="user-card__field">
+                          <p className="user-card__field-text">id:</p>
+                          <div className="user-card__field-value">{user.id}</div>
+                        </div>
+                        <div className="user-card__field">
                           <p className="user-card__field-text">chatId:</p>
                           <div className="user-card__field-value">{user.chat_id}</div>
                         </div>
@@ -88,9 +94,7 @@ const AdminUsers = () => {
         onClose={handleModalClose}
       >
         <div className="page-admin-users__modal-body">
-          <div className="page-admin-users__modal-info">
-            {checkObject(aboutDataModal) && aboutDataModal.id}
-          </div>
+          <UserAboutInfo data={aboutDataModal} />
         </div>
       </MainModal>
     </>
