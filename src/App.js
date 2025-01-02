@@ -22,6 +22,7 @@ import AdminPartnersAll from "./components/Pages/AdminPages/AdminPartnersAll";
 import {checkObject} from "./utils/checkObject";
 import Meet from "./components/Pages/Meet";
 import {YMaps} from "@pbe/react-yandex-maps";
+import SnowMode from "./components/snow-mode";
 
 
 
@@ -62,16 +63,16 @@ function App() {
     console.log(tg);
     console.log(tg?.initDataUnsafe?.user);
 
-    updateUserTelegramData(tg?.initDataUnsafe?.user)
-    /*updateUserTelegramData({
+    // updateUserTelegramData(tg?.initDataUnsafe?.user)
+    updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      // id: process.env.REACT_APP_ADMIN_CHAT_ID,
-      id: 3, //test
+      id: process.env.REACT_APP_ADMIN_CHAT_ID,
+      // id: 3, //test
       language_code: "en",
       last_name: "",
       username: ""
-    })*/
+    })
 
     setTimeout(() => {
       updateAuthChecked(true)
@@ -116,6 +117,7 @@ function App() {
       ns: "use-load-option",
       load: "package.full"
     }}>
+      <SnowMode />
       <Header color={headerColor}/>
       <main className="main">
         <div className="content">
