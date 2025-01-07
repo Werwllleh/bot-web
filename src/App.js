@@ -67,8 +67,8 @@ function App() {
     /*updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      id: process.env.REACT_APP_ADMIN_CHAT_ID,
-      // id: 3, //test
+      // id: process.env.REACT_APP_ADMIN_CHAT_ID,
+      id: 2, //test
       language_code: "en",
       last_name: "",
       username: ""
