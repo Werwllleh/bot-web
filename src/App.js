@@ -60,15 +60,15 @@ function App() {
     tg.ready();
     tg.expand();
 
-    console.log(tg);
-    console.log(tg?.initDataUnsafe?.user);
+    /*console.log(tg);
+    console.log(tg?.initDataUnsafe?.user);*/
 
     updateUserTelegramData(tg?.initDataUnsafe?.user)
     /*updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
       // id: process.env.REACT_APP_ADMIN_CHAT_ID,
-      id: 2, //test
+      id: 1, //test
       language_code: "en",
       last_name: "",
       username: ""

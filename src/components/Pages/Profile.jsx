@@ -5,9 +5,11 @@ import {getUserInfo} from "../../api/api-users";
 import {DeleteFilled, PlusOutlined, LoadingOutlined} from '@ant-design/icons';
 import {checkObject} from "../../utils/checkObject";
 import CarAddForm from "../CarAddForm";
-import {addUserCar, deleteCarImage, deleteUserCar, getCarInfo} from "../../api/api-cars";
-import {notification, message, Upload} from "antd";
+import {addUserCar, changeCarData, deleteCarImage, deleteUserCar, getCarInfo} from "../../api/api-cars";
+import {notification, message, Upload, Input, Form} from "antd";
 import {API_BASE} from "../../utils/consts";
+import {validateCarNumber} from "../../utils/patterns";
+import dayjs from "dayjs";
 
 const Profile = () => {
 
@@ -74,7 +76,7 @@ const Profile = () => {
 
   const deleteCar = async (carId) => {
     await deleteUserCar(userData.chat_id, carId);
-    getUserInfo(userTelegramData?.id).then(res => {
+    await getUserInfo(userTelegramData?.id).then(res => {
       if (res.data !== '') {
         updateUserData(res.data);
         updateUsersCars();
@@ -110,7 +112,7 @@ const Profile = () => {
 
   const deleteProfileCarImage = async (image, data) => {
     await deleteCarImage(image, data);
-    getUserInfo(userTelegramData?.id).then(res => {
+    await getUserInfo(userTelegramData?.id).then(res => {
       if (res.data !== '') {
         updateUserData(res.data);
         setSelectedCar(res.data?.cars.filter(car => car.car_id === data.car_id)[0]);
@@ -132,20 +134,61 @@ const Profile = () => {
     return true;
   };
 
-  const handleChange = (info, car_id) => {
+  const handleChange = async (info, car_id) => {
     if (info.file.status === 'uploading') {
       setLoading(true);
       return;
     }
     if (info.file.status === "done") {
       setLoading(false);
-      getUserInfo(userTelegramData?.id).then(res => {
+      await getUserInfo(userTelegramData?.id).then(res => {
         if (res.data !== '') {
           updateUserData(res.data);
           setSelectedCar(res.data.cars.filter(car => car.car_id === car_id)[0]);
           updateUsersCars();
         }
       })
+    }
+  };
+
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    // console.log(selectedCar)
+  }, [selectedCar]);
+
+  const handleSubmit = async (values) => {
+    try {
+
+      if (!validateCarNumber.test(values.carNumber)) {
+        return showNotification('error', 'Номер введен не корректно')
+      }
+
+      if (Number(values.carYear) < 1800 || Number(values.carYear) > dayjs().year()) {
+        return showNotification('error', 'Год введен не корректно')
+      }
+
+      await changeCarData(userData.chat_id, selectedCar?.car_id, values)
+        .then(res => {
+          if (res.status === 200) {
+            getUserInfo(userTelegramData?.id).then(res => {
+              if (res.data !== '') {
+                updateUserData(res.data);
+                setSelectedCar(res.data.cars.filter(car => car.car_id === selectedCar?.car_id)[0]);
+                updateUsersCars();
+              }
+            })
+            return showNotification('success', res.data)
+          }
+          if (res.status === 203) {
+            return showNotification('error', res.data)
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    } catch (error) {
+      message.error(error.message || 'Ошибка отправки данных.');
     }
   };
 
@@ -205,9 +248,6 @@ const Profile = () => {
         {checkObject(selectedCar) ? (
           <div className="page-profile__modal">
             <div className="page-profile__modal-info modal-info">
-              <div className="modal-info__car">
-                {selectedCar?.car_brand} {selectedCar?.car_model} {selectedCar?.car_year} - {selectedCar?.car_number}
-              </div>
               {selectedCar.car_images.length > 0 && (
                 <div className="modal-info__images">
                   {selectedCar.car_images.map((image) => {
@@ -251,7 +291,35 @@ const Profile = () => {
                   )}
                 </div>
               )}
-              {selectedCar?.car_note && <div className="modal-info__note">{selectedCar?.car_note}</div>}
+              <div className="modal-info__car">
+                <Form form={form} onFinish={handleSubmit} initialValues={{
+                  carNumber: selectedCar?.car_number,
+                  carYear: selectedCar?.car_year,
+                  carNote: selectedCar?.car_note,
+                }} variant="borderless" className="modal-info__car-form" layout="vertical">
+                  <div className="modal-info__car-model">{selectedCar?.car_brand} {selectedCar?.car_model}</div>
+                  <div className="modal-info__car-number input-antd">
+                    <Form.Item name="carNumber">
+                      <Input />
+                    </Form.Item>
+                  </div>
+                  <div className="modal-info__car-year input-antd">
+                    <Form.Item name="carYear">
+                      <Input type="tel" placeholder="Год выпуска авто" />
+                    </Form.Item>
+                  </div>
+                  <div className="modal-info__car-note input-antd">
+                    <Form.Item name="carNote">
+                      <Input placeholder="Примечание" />
+                    </Form.Item>
+                  </div>
+                  <div className="modal-info__car-submit">
+                    <button className="style-btn" type="submit">
+                      Отправить
+                    </button>
+                  </div>
+                </Form>
+              </div>
             </div>
           </div>
         ) : (

@@ -62,3 +62,14 @@ export const deleteCarImage = async (file, data) => {
   }
 }
 
+export const changeCarData = async (chatId, carId, data) => {
+  try {
+    return await axios.post(`${API_BASE}/change-car-data`, {
+      chatId: chatId,
+      carId: carId,
+      data: data,
+    });
+  } catch (err) {
+    console.error('Ошибка изменения данных:', err);
+  }
+}

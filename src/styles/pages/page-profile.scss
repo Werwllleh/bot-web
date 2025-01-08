@@ -118,9 +118,57 @@
       max-width: 34rem;
 
       &__car {
-        font-weight: 600;
-        font-size: 1.6rem;
-        margin: 0 0 1rem 0;
+        margin: 2rem 0 0 0;
+
+
+        .input-antd {
+
+          .ant-form-item {
+            margin: 0;
+          }
+
+          .ant-input {
+            padding: 0.5rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            font-family: $ff-main !important;
+          }
+        }
+
+        &-form {
+          display: flex;
+          flex-direction: column;
+          gap: .5rem;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        &-model {
+          text-transform: uppercase;
+        }
+
+        &-number {
+        }
+
+        &-year {
+        }
+
+        &-note {
+        }
+
+        &-submit {
+          margin: 1rem 0 0 0;
+          display: flex;
+          justify-content: center;
+
+          button {
+            padding: 1rem 3rem;
+            background-color: $accent-color-light;
+            color: $white;
+            line-height: 1;
+            font-family: $ff-main;
+          }
+        }
       }
 
       &__images {
@@ -135,18 +183,28 @@
         flex-direction: column;
 
         &-img {
+          position: relative;
+          border-radius: $border-radius;
+          overflow: hidden;
           height: 100%;
+
+          &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: $dark;
+            opacity: 0.4;
+          }
 
           img {
             display: flex;
-            border-radius: $border-radius;
-            overflow: hidden;
             user-select: none;
             pointer-events: none;
             object-fit: cover;
             height: 100%;
             width: 100%;
-            max-height: 13rem;
+            max-height: 10rem;
           }
         }
 
@@ -224,11 +282,11 @@
         }
       }
 
-      &__note {
+      /*&__note {
         margin: 2rem 0 0 0;
         font-size: 1.4rem;
         font-weight: 400;
-      }
+      }*/
     }
 
     .modal-add {

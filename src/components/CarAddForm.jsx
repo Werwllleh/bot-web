@@ -5,6 +5,7 @@ import UploadForm from "./Upload";
 import { Input } from 'antd';
 import {validateCarNumber, validateName} from "../utils/patterns";
 import {Select} from 'antd';
+import dayjs from "dayjs";
 
 
 const CarAddForm = ({data}) => {
@@ -113,12 +114,12 @@ const CarAddForm = ({data}) => {
           <div className="registration__field-input input-antd">
             <Input
               required={true}
-              className={`${carYear === 0 ? '' : Number(carYear) < 1800 || Number(carYear) > new Date().getFullYear() ? 'error' : ''}`}
+              className={`${carYear === 0 ? '' : Number(carYear) < 1800 || Number(carYear) > dayjs().year() ? 'error' : ''}`}
               name="carYear"
               placeholder="Год выпуска авто"
               value={carYear === 0 ? null : carYear}
               onChange={(e) => setCarYear(e.target.value)}
-              type="number"
+              type="tel"
             />
           </div>
         </div>
