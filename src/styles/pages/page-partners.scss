@@ -1,3 +1,5 @@
+@use "../variables";
+
 .page-partners {
 
   padding: 6rem 0 0 0;
@@ -27,15 +29,15 @@
       width: 100%;
       font-size: 1.4rem;
       font-weight: 600;
-      color: $accent-color;
-      background-color: $white;
-      border: 1px solid $accent-color;
-      border-radius: $border-radius;
+      color: variables.$accent-color;
+      background-color: variables.$white;
+      border: 1px solid variables.$accent-color;
+      border-radius: variables.$border-radius;
       overflow: hidden;
 
       &.active {
-        background-color: $accent-color;
-        color: $white;
+        background-color: variables.$accent-color;
+        color: variables.$white;
       }
     }
 
@@ -48,7 +50,7 @@
       visibility: hidden;
       max-height: 0;
       margin: 0;
-      transition: margin $transition, max-height $transition, opacity $transition, visibility $transition;
+      transition: margin variables.$transition, max-height variables.$transition, opacity variables.$transition, visibility variables.$transition;
 
       &.show {
         margin: 1rem 0 0 0;
@@ -83,7 +85,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     height: 100%;
-    scrollbar-color: $accent-color transparent;
+    scrollbar-color: variables.$accent-color transparent;
     scrollbar-width: thin;
 
     .partners-block__notfound {
@@ -123,9 +125,9 @@
       align-items: center;
       width: 3.6rem;
       height: 3.6rem;
-      border-radius: $border-radius;
+      border-radius: variables.$border-radius;
       overflow: hidden;
-      background-color: $grey-light;
+      background-color: variables.$grey-light;
 
       svg {
         position: absolute;
@@ -135,7 +137,7 @@
         inset-inline: 0;
         inset-block-start: 50%;
         transform: translateY(-50%);
-        fill: $accent-color;
+        fill: variables.$accent-color;
       }
     }
 
@@ -196,8 +198,8 @@
 
     &-link {
       font-size: 1.3rem !important;
-      background-color: $accent-color;
-      color: $white;
+      background-color: variables.$accent-color;
+      color: variables.$white;
       padding: 1rem .5rem !important;
     }
   }

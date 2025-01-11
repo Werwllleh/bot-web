@@ -8,6 +8,7 @@ import MainModal from "../MainModal/MainModal";
 import {checkObject} from "../../utils/checkObject";
 import SiteIcon from "../icons/site-icon";
 import PhoneIcon from "../icons/phone-icon";
+import {getScrollbarWidth, withoutTwitching} from "../../utils/utils";
 
 
 const Partners = () => {
@@ -148,6 +149,14 @@ const Partners = () => {
                     options={partnersCategories}
                     optionFilterProp="label"
                     maxTagCount="responsive"
+                    showSearch={false}
+                    onDropdownVisibleChange={(open) => {
+                      if (open) {
+                        withoutTwitching(open);
+                      } else {
+                        withoutTwitching(open);
+                      }
+                    }}
                   />
                 </div>
               </div>

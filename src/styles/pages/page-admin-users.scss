@@ -1,3 +1,5 @@
+@use "../variables";
+
 .page-admin-users {
 
   &__title {
@@ -20,7 +22,7 @@
 
   .user-card {
     position: relative;
-    border-radius: $border-radius;
+    border-radius: variables.$border-radius;
     overflow: hidden;
     cursor: pointer;
 

@@ -1,4 +1,6 @@
-@include showAnim;
+@use "../variables";
+
+@include variables.showAnim;
 
 .input-field {
 
@@ -29,38 +31,38 @@
     svg {
       width: 100%;
       height: 100%;
-      fill: $accent-color;
+      fill: variables.$accent-color;
     }
   }
 
   &__input {
     width: 100%;
     font-size: 1.6rem;
-    border-bottom: 1px solid $grey-light;
+    border-bottom: 1px solid variables.$grey-light;
     padding: 1rem 2rem 1rem 0;
     line-height: 1;
-    transition: all $transition;
+    transition: all variables.$transition;
 
     &.icon {
       padding-left: 3rem;
     }
 
     &.error {
-      background-color: $error-color;
-      border-bottom: 1px solid $error-color;
+      background-color: variables.$error-color;
+      border-bottom: 1px solid variables.$error-color;
     }
 
     &:hover {
-      border-bottom: 1px solid $accent-color-light;
+      border-bottom: 1px solid variables.$accent-color-light;
     }
 
     &:focus,
     &.active {
-      border-bottom: 1px solid $accent-color;
+      border-bottom: 1px solid variables.$accent-color;
     }
 
     &::placeholder {
-      color: $grey;
+      color: variables.$grey;
       opacity: 1;
     }
   }
@@ -75,7 +77,7 @@
     margin: auto 0;
     display: flex;
     cursor: pointer;
-    animation: showAnim $transition;
+    animation: showAnim variables.$transition;
 
     & span {
       width: 100%;
@@ -85,7 +87,7 @@
     svg {
       width: 100%;
       height: 100%;
-      fill: $accent-color;
+      fill: variables.$accent-color;
     }
   }
 
@@ -97,7 +99,7 @@
     pointer-events: none;
     font-weight: 500;
     font-size: 1.2rem;
-    transition: opacity $transition, height $transition;
+    transition: opacity variables.$transition, height variables.$transition;
 
     &.show {
       height: auto;
@@ -107,8 +109,8 @@
   }
 
   &__error-message {
-    color: $black;
-    background-color: $error-color;
+    color: variables.$black;
+    background-color: variables.$error-color;
     text-align: center;
     font-size: 1.4rem;
     font-weight: 500;

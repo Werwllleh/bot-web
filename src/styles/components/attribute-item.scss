@@ -1,0 +1,50 @@
+@use "../variables";
+
+.product {
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__images {
+    position: relative;
+    overflow: hidden;
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100% !important;
+
+    }
+
+  }
+
+  &__image {
+    display: flex;
+    object-fit: contain;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    margin: 0 auto;
+    pointer-events: none;
+    user-select: none;
+    max-height: 20rem;
+    height: 100%;
+  }
+
+  &__title {
+    margin: 1rem 0 0 0;
+    text-align: center;
+    color: variables.$accent-color;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+}

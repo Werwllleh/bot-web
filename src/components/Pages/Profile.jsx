@@ -315,7 +315,7 @@ const Profile = () => {
                   </div>
                   <div className="modal-info__car-submit">
                     <button className="style-btn" type="submit">
-                      Отправить
+                      Обновить данные
                     </button>
                   </div>
                 </Form>

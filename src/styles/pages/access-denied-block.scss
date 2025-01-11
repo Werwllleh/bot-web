@@ -1,3 +1,5 @@
+@use "../variables";
+
 .access-denied-block {
   position: fixed;
   margin-inline: auto;
@@ -23,16 +25,16 @@
 
   &__link {
     display: inline-flex;
-    background-color: $accent-color;
-    border-radius: $border-radius;
+    background-color: variables.$accent-color;
+    border-radius: variables.$border-radius;
     padding: .7rem 3rem;
-    color: $semi-white;
+    color: variables.$semi-white;
     font-weight: 500;
-    transition: background-color $transition, color $transition;
+    transition: background-color variables.$transition, color variables.$transition;
 
     &:hover {
-      color: $accent-color;
-      background-color: $semi-white;
+      color: variables.$accent-color;
+      background-color: variables.$semi-white;
     }
   }
 }

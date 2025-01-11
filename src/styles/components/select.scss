@@ -1,3 +1,5 @@
+@use "../variables";
+
 .select {
   font-size: 1.6rem;
   position: relative;
@@ -35,11 +37,11 @@
     width: 100%;
     border-bottom: 1px solid #e8e8e8;
     z-index: 0;
-    background-color: $white;
-    transition: border-color $transition;
+    background-color: variables.$white;
+    transition: border-color variables.$transition;
 
     &:hover {
-      border-bottom: 1px solid $accent-color-light;
+      border-bottom: 1px solid variables.$accent-color-light;
     }
 
     &.icon {
@@ -47,10 +49,10 @@
     }
 
     &.chosen {
-      border-bottom: 1px solid $accent-color;
+      border-bottom: 1px solid variables.$accent-color;
 
       .select__title {
-        color: $dark;
+        color: variables.$dark;
       }
     }
   }
@@ -73,7 +75,7 @@
     svg {
       width: 100%;
       height: 100%;
-      fill: $accent-color;
+      fill: variables.$accent-color;
     }
   }
 
@@ -93,7 +95,7 @@
     svg {
       width: 100%;
       height: 100%;
-      fill: $accent-color;
+      fill: variables.$accent-color;
     }
   }
 
@@ -102,7 +104,7 @@
     cursor: pointer;
     padding: 1.5rem 2rem 1.5rem 0;
     line-height: 1;
-    color: $grey;
+    color: variables.$grey;
     font-weight: 400;
   }
 
@@ -116,9 +118,9 @@
     height: 0;
     opacity: 0;
     //transform: translateY(-2rem); // Начальное смещение вверх
-    transition: opacity $transition, transform $transition, height $transition; // Плавный переход
-    border: 1px solid $accent-color-light;
-    background-color: $white; // Добавляем фон, чтобы контент был виден
+    transition: opacity variables.$transition, transform variables.$transition, height variables.$transition; // Плавный переход
+    border: 1px solid variables.$accent-color-light;
+    background-color: variables.$white; // Добавляем фон, чтобы контент был виден
     z-index: 1;
 
   }
@@ -137,17 +139,17 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: $accent-color-light;
+      background-color: variables.$accent-color-light;
     }
 
     &-item {
       padding: 0.5rem 2rem 0.5rem 3rem;
       cursor: pointer;
-      transition: background-color $transition, color $transition;
+      transition: background-color variables.$transition, color variables.$transition;
 
       &:hover {
-        background-color: $accent-color-light;
-        color: $white;
+        background-color: variables.$accent-color-light;
+        color: variables.$white;
       }
     }
   }

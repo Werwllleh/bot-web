@@ -1,0 +1,49 @@
+@use "../variables";
+
+.page-attributes {
+
+  &__title {}
+
+  &__body {
+    height: 100%;
+    margin: 2rem 0 0 0;
+  }
+
+  &__products {}
+
+  &__section {
+    overflow: hidden;
+
+    &-title {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    &-products {
+      margin: 2rem 0 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+
+    }
+
+    &-product {
+      position: relative;
+      padding: 2rem;
+      border-radius: variables.$border-radius;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: variables.$semi-white;
+        filter: blur(5rem);
+        z-index: -1;
+      }
+    }
+  }
+}

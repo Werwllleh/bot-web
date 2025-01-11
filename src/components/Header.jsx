@@ -6,6 +6,7 @@ import {useUsersStore} from "../services/store";
 import {adminPages, menu, route, socialLinks} from "../utils/consts";
 import MainLogo from "./MainLogo";
 import {checkObject} from "../utils/checkObject";
+import {getScrollbarWidth, withoutTwitching} from "../utils/utils";
 
 const Header = ({color}) => {
 
@@ -17,6 +18,15 @@ const Header = ({color}) => {
   const showMenu = () => {
     setIsMenuActive(!isMenuActive);
   }
+
+  useEffect(() => {
+    withoutTwitching(isMenuActive);
+
+    // Чистка эффекта при размонтировании компонента
+    return () => {
+      withoutTwitching(isMenuActive);
+    };
+  }, [isMenuActive]);
 
   return (
     <>

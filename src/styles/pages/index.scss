@@ -1,18 +1,19 @@
 //pages
-@import './registration';
-@import './page-cars';
-@import './page-not-found';
-@import './page-profile';
-@import './page-partners';
+@use 'registration';
+@use 'page-cars';
+@use 'page-not-found';
+@use 'page-profile';
+@use 'page-partners';
 
-@import "./page-admin-panel";
-@import "./page-admin-partners";
-@import "./page-admin-users";
+@use "page-admin-panel";
+@use "page-admin-partners";
+@use "page-admin-users";
 
-@import './page-user-list';
-@import './page-feedback';
-@import './page-feedback-list';
-@import './page-location';
-@import './access-denied-block';
-@import './page-meet';
+@use 'page-user-list';
+@use 'page-feedback';
+@use 'page-feedback-list';
+@use 'page-location';
+@use 'access-denied-block';
+@use 'page-meet';
+@use 'page-attributes';
 

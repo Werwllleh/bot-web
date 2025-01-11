@@ -1,14 +1,16 @@
+@use "../variables";
+
 .main-logo{
 
   &__circle {
-    fill: $accent-color;
+    fill: variables.$accent-color;
   }
 
   &__digit {
-    fill: $white;
+    fill: variables.$white;
   }
 
   &__symbol {
-    fill: $black;
+    fill: variables.$black;
   }
 }

@@ -2,8 +2,11 @@ import React from "react";
 import TelegramIcon from "../components/icons/telegram-icon";
 import InstagramIcon from "../components/icons/instagram-icon";
 
+export const CMS = process.env.REACT_APP_CMS;
 const SITE = process.env.REACT_APP_SITE;
+
 export const API_BASE = `${SITE}/api`;
+export const API_CMS = `${CMS}/api`;
 
 export const places = [
   {
@@ -54,6 +57,11 @@ export const route = {
     url: '/meet',
     color: '#F4F7FB'
   },
+  ATTRIBUTES: {
+    title: 'Клубная атрибутика',
+    url: '/attributes',
+    color: '#F4F7FB'
+  },
   ADMIN: {
     title: 'Админ панель',
     url: '/admin',
@@ -101,6 +109,11 @@ export const menu = [
     url: route.MEET.url,
     color: '#F4F7FB'
   },
+  {
+    title: route.ATTRIBUTES.title,
+    url: route.ATTRIBUTES.url,
+    color: '#F4F7FB'
+  },
 ];
 
 export const adminPages = [
@@ -138,3 +151,9 @@ export const socialLinks = [
     icon: <InstagramIcon/>
   },
 ]
+
+export const attributeType = {
+  STICKER: 'наклейка',
+  FLAVORS: 'ароматизатор',
+  NUMBER_FRAMES: 'номерная рамка',
+}

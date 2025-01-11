@@ -23,6 +23,7 @@ import {checkObject} from "./utils/checkObject";
 import Meet from "./components/Pages/Meet";
 import {YMaps} from "@pbe/react-yandex-maps";
 import SnowMode from "./components/snow-mode";
+import Attributes from "./components/Pages/Attributes";
 
 
 
@@ -63,16 +64,18 @@ function App() {
     /*console.log(tg);
     console.log(tg?.initDataUnsafe?.user);*/
 
+
     updateUserTelegramData(tg?.initDataUnsafe?.user)
     /*updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      // id: process.env.REACT_APP_ADMIN_CHAT_ID,
-      id: 1, //test
+      id: process.env.REACT_APP_ADMIN_CHAT_ID,
+      // id: 1, //test
       language_code: "en",
       last_name: "",
       username: ""
     })*/
+
 
     setTimeout(() => {
       updateAuthChecked(true)
@@ -126,6 +129,7 @@ function App() {
             <Route path={route.PARTNERS.url} element={<OnlyAuth component={<Partners data={partnersSortedObject}/>}/>}/>
             <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile/>}/>}/>
             <Route path={route.MEET.url} element={<OnlyAuth component={<Meet/>}/>}/>
+            <Route path={route.ATTRIBUTES.url} element={<OnlyAuth component={<Attributes/>}/>}/>
             <Route path={route.REGISTER.url} element={<OnlyUnAuth component={<Registration/>}/>}/>
             <Route path={route.NF_404.url} element={<NotFound/>}/>
             <Route path={route.ADMIN.url} element={<OnlyAdminRoute component={<AdminPanel/>}/>}/>

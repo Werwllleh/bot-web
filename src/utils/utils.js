@@ -67,6 +67,24 @@ export const getScrollbarWidth = () => {
 
 }
 
+export const withoutTwitching = (active) => {
+  const header = document.querySelector("header");
+  const footer = document.querySelector("footer");
+
+  if (active) {
+    document.documentElement.classList.add("block");
+    // document.documentElement.style.paddingRight = `${getScrollbarWidth()}px`;
+    if (header) header.style.right = `${getScrollbarWidth()}px`;
+    if (footer) footer.style.right = `${getScrollbarWidth()}px`;
+
+  } else {
+    document.documentElement.classList.remove("block");
+    // document.documentElement.style.paddingRight = "";
+    if (header) header.style.right = "";
+    if (footer) footer.style.right = "";
+  }
+}
+
 export const offsetContent = (active) => {
 
   const htmlBody = document.querySelector('html');

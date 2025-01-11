@@ -1,3 +1,5 @@
+@use "../variables";
+
 .bg-wrap {
   background: rgb(62 62 62 / 64%);
   position: fixed;
@@ -10,7 +12,7 @@
   bottom: 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity $transition, visibility $transition;
+  transition: opacity variables.$transition, visibility variables.$transition;
 
   &.active {
     opacity: 1;
@@ -25,7 +27,7 @@
   inset-inline: 0;
   inset-block-start: 45%;
   transform: translateY(0);
-  border-radius: $border-radius;
+  border-radius: variables.$border-radius;
   min-width: 20rem;
   max-width: max-content;
   min-height: 5rem;
@@ -35,7 +37,7 @@
   padding: 1rem;
   visibility: hidden;
   pointer-events: none;
-  transition: transform $transition, opacity $transition, visibility $transition;
+  transition: transform variables.$transition, opacity variables.$transition, visibility variables.$transition;
 
   &.show {
     visibility: visible;
@@ -72,7 +74,7 @@
     border: none;
     cursor: pointer;
     background: none;
-    color: $accent-color-light;
+    color: variables.$accent-color-light;
 
     svg {
       width: 1.4rem;
@@ -81,7 +83,7 @@
 
 
     &:hover {
-      color: $accent-color;
+      color: variables.$accent-color;
     }
   }
 

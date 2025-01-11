@@ -1,27 +1,28 @@
-@import "variables";
-@import "breakpoints";
-@import "base";
+@use "variables";
+@use "breakpoints";
+@use "base";
 
 
 //components
 
-@import "./components/main-logo";
-@import "./components/header";
-@import "./components/footer";
-@import "./components/input";
-@import "./components/menu-burger-button";
-@import "./components/select";
-@import "./components/upload-button";
-@import "./components/modal";
-@import "./components/loader";
-@import "./components/user-about-info";
-@import "./components/snow-mode";
+@use "components/main-logo";
+@use "components/header";
+@use "components/footer";
+@use "components/input";
+@use "components/menu-burger-button";
+@use "components/select";
+@use "components/upload-button";
+@use "components/modal";
+@use "components/loader";
+@use "components/user-about-info";
+@use "components/snow-mode";
+@use "components/attribute-item";
 
 //icons
-@import "./components/icons/index";
+@use "components/icons/index";
 
 
-@import "./pages/index";
+@use "pages/index" as index2;
 
 
-@import "global";
+@use "global";

@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "../variables";
+
 .loader {
   position: fixed;
   margin-inline: auto;
@@ -61,7 +64,7 @@
 
     svg {
       animation: loader-resize .5s infinite alternate-reverse;
-      fill: $accent-color;
+      fill: variables.$accent-color;
       width: 11rem;
       height: 11rem;
     }
@@ -72,19 +75,19 @@
 
 @keyframes loader-resize {
   0% {
-    fill: $accent-color;
+    fill: variables.$accent-color;
   }
   25% {
-    fill: mix(#003fff, #7b00ff, 25%);
+    fill: color.mix(#003fff, #7b00ff, 25%);
   }
   50% {
-    fill: mix(#7b00ff, #ff0000, 50%);
+    fill: color.mix(#7b00ff, #ff0000, 50%);
   }
   75% {
-    fill: mix(#ff0000, $accent-color, 75%);
+    fill: color.mix(#ff0000, variables.$accent-color, 75%);
   }
   100% {
-    fill: $accent-color;
+    fill: variables.$accent-color;
   }
 }
 

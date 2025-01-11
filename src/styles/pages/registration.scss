@@ -1,3 +1,5 @@
+@use "../variables";
+
 .registration {
   padding: 0 0 10rem 0;
 
@@ -17,7 +19,7 @@
 
     &-footer {
       margin: 2rem 0 0 0;
-      transition: opacity $transition;
+      transition: opacity variables.$transition;
     }
 
     &-submit {
@@ -25,13 +27,13 @@
       align-items: center;
       justify-content: center;
       font-size: 1.8rem;
-      background-color: $accent-color-light;
+      background-color: variables.$accent-color-light;
       width: 100%;
       padding: 1rem;
-      color: $white;
+      color: variables.$white;
 
       &:hover {
-        background-color: $accent-color;
+        background-color: variables.$accent-color;
       }
     }
   }
@@ -40,7 +42,7 @@
     position: relative;
     display: flex;
     align-items: flex-end;
-    transition: opacity $transition, height $transition, visibility $transition;
+    transition: opacity variables.$transition, height variables.$transition, visibility variables.$transition;
     width: 100%;
 
 
@@ -110,7 +112,7 @@
       svg {
         width: 2rem;
         height: 2rem;
-        fill: $accent-color;
+        fill: variables.$accent-color;
       }
     }
   }
@@ -120,7 +122,7 @@
     & + & {
       padding: 1rem 0 0 0;
       margin: 1rem 0 0 0;
-      border-top: .3rem solid $accent-color;
+      border-top: .3rem solid variables.$accent-color;
     }
 
     //border-top: 1px solid $semi-dark;
@@ -137,19 +139,19 @@
       height: auto;
       padding: 1rem 2rem;
       margin: 0.5rem 0;
-      color: $green !important;
-      border-color: $green !important;
+      color: variables.$green !important;
+      border-color: variables.$green !important;
       box-shadow: none;
-      transition: all $transition !important;
+      transition: all variables.$transition !important;
       font-size: 1.5rem;
       font-weight: 600;
-      border-radius: $border-radius;
+      border-radius: variables.$border-radius;
       overflow: hidden;
 
       &:hover {
-        background-color: $green-light;
-        border-color: $green-light !important;
-        color: $semi-dark !important;
+        background-color: variables.$green-light;
+        border-color: variables.$green-light !important;
+        color: variables.$semi-dark !important;
       }
     }
 
@@ -160,22 +162,22 @@
       align-items: stretch;
 
       &-add {
-        color: $green;
+        color: variables.$green;
 
         &:hover {
-          border-color: $green-light;
-          background-color: $green-light;
-          color: $semi-dark;
+          border-color: variables.$green-light;
+          background-color: variables.$green-light;
+          color: variables.$semi-dark;
         }
       }
 
       &-delete {
-        color: $red;
+        color: variables.$red;
 
         &:hover {
-          border-color: $red-light;
-          background-color: $red-light;
-          color: $semi-dark;
+          border-color: variables.$red-light;
+          background-color: variables.$red-light;
+          color: variables.$semi-dark;
         }
       }
 
@@ -187,7 +189,7 @@
         padding: 1rem 2rem;
         font-size: 1.4rem;
         font-weight: 600;
-        border: 1px solid $grey-light;
+        border: 1px solid variables.$grey-light;
       }
     }
   }

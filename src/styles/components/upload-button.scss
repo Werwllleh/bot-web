@@ -1,3 +1,5 @@
+@use "../variables";
+
 .ant-upload-select {
   width: 100%;
   display: flex !important;
@@ -10,12 +12,12 @@
   .ant-btn {
     width: 100%;
     display: flex;
-    color: $grey;
+    color: variables.$grey;
     font-weight: 600;
 
     &:hover {
-      color: $accent-color-light !important;
-      border-color: $accent-color-light !important;
+      color: variables.$accent-color-light !important;
+      border-color: variables.$accent-color-light !important;
     }
   }
 
@@ -37,7 +39,7 @@
     width: 100%;
     font-size: 1.25rem;
     font-weight: 500;
-    color: $grey;
+    color: variables.$grey;
     user-select: none;
     margin: 0 0 .5rem 0;
   }

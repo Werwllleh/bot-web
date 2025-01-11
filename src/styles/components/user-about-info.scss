@@ -1,3 +1,5 @@
+@use "../variables";
+
 .user-about-info {
 
   &__body {
@@ -29,9 +31,9 @@
 
     &-submit {
       margin: 2rem 0 0 0;
-      background-color: $accent-color-light;
+      background-color: variables.$accent-color-light;
       padding: .8rem 1rem !important;
-      color: $white;
+      color: variables.$white;
     }
   }
 }

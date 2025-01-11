@@ -1,3 +1,5 @@
+@use "../variables";
+
 .page-admin-partners {
 
   &__title {}
@@ -22,7 +24,7 @@
     &__not-found {
       font-weight: 600;
       font-size: 1.6rem;
-      color: $red;
+      color: variables.$red;
       text-align: center;
     }
 
@@ -32,8 +34,8 @@
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      background-color: $semi-white;
-      border-radius: $border-radius;
+      background-color: variables.$semi-white;
+      border-radius: variables.$border-radius;
       padding: 1rem 2rem;
 
       &-label {
@@ -50,15 +52,15 @@
         svg {
           width: 1.6rem;
           height: 1.6rem;
-          fill: $accent-color;
+          fill: variables.$accent-color;
         }
       }
     }
 
     &__button {
       margin: 3rem auto 0;
-      background-color: $accent-color-light;
-      color: $white;
+      background-color: variables.$accent-color-light;
+      color: variables.$white;
     }
   }
 
@@ -88,7 +90,7 @@
       font-weight: 500;
       font-size: 1.1rem;
       text-align: justify;
-      color: $semi-dark;
+      color: variables.$semi-dark;
       max-width: 35rem;
     }
   }
@@ -109,7 +111,7 @@
         border-top: none !important;
         border-left: none !important;
         border-right: none !important;
-        border-bottom: 1px solid $accent-color-light !important;
+        border-bottom: 1px solid variables.$accent-color-light !important;
         border-radius: 0 !important;
         padding: 0.7rem 0.7rem 0.7rem 0 !important;
       }
@@ -133,7 +135,7 @@
       &.switch-not-recommended {
 
         .ant-switch.ant-switch-checked {
-          background: $error-color;
+          background: variables.$error-color;
         }
       }
     }
@@ -149,13 +151,13 @@
   }
 
   &-form-submit {
-    background-color: $accent-color-light;
-    color: $white;
+    background-color: variables.$accent-color-light;
+    color: variables.$white;
     padding: 1rem !important;
   }
 
   &-form-delete {
-    background-color: $error-color;
+    background-color: variables.$error-color;
     padding: 1rem !important;
   }
 }
@@ -172,7 +174,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $accent-color;
+    background-color: variables.$accent-color;
     border-radius: 100%;
 
     svg {
@@ -194,20 +196,20 @@
       flex-direction: column;
       gap: 1rem;
       padding: 1.5rem 1rem;
-      border-radius: $border-radius;
+      border-radius: variables.$border-radius;
       overflow: hidden;
-      background-color: $semi-white;
+      background-color: variables.$semi-white;
 
       &.active {
-        background-color: $green-light;
+        background-color: variables.$green-light;
       }
 
       &.rejected {
-        background-color: $error-color;
+        background-color: variables.$error-color;
       }
 
       &.not-rec {
-        background-color: $error-color;
+        background-color: variables.$error-color;
 
         .partner-card__title {
           text-decoration: line-through;
@@ -217,16 +219,16 @@
       &__about {
         margin: auto auto 0 auto;
         gap: .5rem;
-        background-color: $accent-color;
+        background-color: variables.$accent-color;
         padding: .7rem 1rem;
 
         &-text {
-          color: $white;
+          color: variables.$white;
         }
 
         &-not-rec {
           margin: auto 0 0 0;
-          color: $red;
+          color: variables.$red;
           text-align: center;
           font-size: 2rem;
           font-weight: 600;

@@ -1,3 +1,5 @@
+@use "../variables";
+
 .page-admin-panel {
 
   &__title {
@@ -19,16 +21,16 @@
     justify-content: center;
     text-align: center;
     padding: 2rem 1rem;
-    background-color: $accent-color-light;
-    border-radius: $border-radius;
+    background-color: variables.$accent-color-light;
+    border-radius: variables.$border-radius;
     font-size: 1.8rem;
     font-weight: 600;
-    color: $white;
-    transition: background-color $transition;
+    color: variables.$white;
+    transition: background-color variables.$transition;
     overflow: hidden;
 
     &:hover {
-      background-color: $accent-color;
+      background-color: variables.$accent-color;
     }
   }
 }

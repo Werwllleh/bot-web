@@ -1,3 +1,6 @@
+@use "breakpoints";
+@use "variables";
+
 .time-class {
   display: flex;
   align-items: center;
@@ -19,7 +22,7 @@
 }
 
 .ant-input {
-  border-bottom: 1px solid $accent-color-light;
+  border-bottom: 1px solid variables.$accent-color-light;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -27,20 +30,20 @@
   font-family: inherit;
   border-radius: 0;
   font-size: 1.6rem;
-  transition: border-bottom $transition;
+  transition: border-bottom variables.$transition;
   padding: 0;
 
   &:hover {
-    border-bottom: 1px solid $accent-color;
+    border-bottom: 1px solid variables.$accent-color;
   }
 
   &:focus {
     box-shadow: none;
-    border-bottom: 1px solid $accent-color;
+    border-bottom: 1px solid variables.$accent-color;
   }
 
   &.error {
-    border-bottom: 1px solid $error-color;
+    border-bottom: 1px solid variables.$error-color;
   }
 }
 
@@ -54,8 +57,8 @@
   position: relative;
 
   .ant-input {
-    border: 1px solid $accent-color !important;
-    border-radius: $border-radius !important;
+    border: 1px solid variables.$accent-color !important;
+    border-radius: variables.$border-radius !important;
     outline: none;
     font-family: inherit;
     font-size: 1.6rem;
@@ -65,7 +68,7 @@
     color: #4f4f4f !important;
 
     &.error {
-      border-color: $red !important;
+      border-color: variables.$red !important;
     }
   }
 
@@ -84,7 +87,7 @@
     svg {
       width: 1.4rem;
       height: 1.4rem;
-      fill: $accent-color;
+      fill: variables.$accent-color;
     }
   }
 }
@@ -104,8 +107,8 @@
 
   .ant-select {
     box-shadow: none !important;
-    border: 1px solid $accent-color !important;
-    border-radius: $border-radius !important;
+    border: 1px solid variables.$accent-color !important;
+    border-radius: variables.$border-radius !important;
     background-color: #ffffff;
     width: 100%;
     font-size: 1.6rem;
@@ -158,11 +161,11 @@
   }
 
   .ant-select-multiple .ant-select-selection-item {
-    background: $accent-color-light !important;
+    background: variables.$accent-color-light !important;
     padding: .2rem !important;
     margin: 0 !important;
     height: auto;
-    color: $white !important;
+    color: variables.$white !important;
     font-weight: 400 !important;
   }
 
@@ -176,7 +179,7 @@
 
   .anticon-close {
     svg {
-      fill: $white !important;
+      fill: variables.$white !important;
       width: 1.4rem;
       height: 1.4rem;
     }
@@ -191,11 +194,11 @@
   }
 
   .rc-virtual-list-scrollbar-thumb {
-    background: $accent-color !important;
+    background: variables.$accent-color !important;
   }
 
   .ant-select-item-option-content {
-    font-family: $ff-main !important;
+    font-family: variables.$ff-main !important;
     font-weight: 500 !important;
     font-size: 1.4rem;
   }
@@ -206,15 +209,15 @@
 }
 
 .ant-image-preview-progress {
-  font-family: $ff-main !important;
+  font-family: variables.$ff-main !important;
   margin-bottom: 16px;
-  color: $white;
+  color: variables.$white;
   font-size: 2rem;
 }
 
 .ant-image-preview-switch-left,
 .ant-image-preview-switch-right {
-  color: $white;
+  color: variables.$white;
   background: rgb(0 0 0 / 55%);
 
   &.ant-image-preview-switch-left-disabled,
@@ -229,17 +232,17 @@
 
 .ant-notification-notice-message,
 .ant-notification-notice-description {
-  font-family: $ff-main !important;
+  font-family: variables.$ff-main !important;
 }
 
 .h1t {
   font-size: 3.8rem;
   line-height: 1.4;
-  color: $black;
+  color: variables.$black;
   font-weight: 500;
   text-align: center;
 
-  @include mobile {
+  @include breakpoints.mobile {
     font-size: 2.4rem;
   }
 
@@ -249,7 +252,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: $border-radius;
+  border-radius: variables.$border-radius;
   padding: 1.2rem 1rem;
   font-size: 1.4rem;
   font-weight: 500;
@@ -273,4 +276,23 @@
 .ymaps-2-1-79-gototech,
 .ymaps-2-1-79-copyright__wrap {
   display: none !important;
+}
+
+.ant-image-preview-footer {
+  display: none;
+}
+
+.swiper-pagination {
+
+  .swiper-pagination-bullet {
+    width: 1.5rem;
+    height: 0.2rem;
+    border-radius: 0.3rem;
+    background-color: rgba(0, 112, 223, 0.7568627451);
+    margin: 0 0.2rem;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #004C9D;
+  }
 }
