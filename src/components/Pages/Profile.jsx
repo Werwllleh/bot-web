@@ -2,14 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {useUsersStore} from "../../services/store";
 import MainModal from "../MainModal/MainModal";
 import {getUserInfo} from "../../api/api-users";
-import {DeleteFilled, PlusOutlined, LoadingOutlined} from '@ant-design/icons';
+import {DeleteFilled, PlusOutlined} from '@ant-design/icons';
 import {checkObject} from "../../utils/checkObject";
 import CarAddForm from "../CarAddForm";
-import {addUserCar, changeCarData, deleteCarImage, deleteUserCar, getCarInfo} from "../../api/api-cars";
-import {notification, message, Upload, Input, Form} from "antd";
-import {API_BASE} from "../../utils/consts";
-import {validateCarNumber} from "../../utils/patterns";
-import dayjs from "dayjs";
+import {addUserCar, deleteUserCar, getCarInfo, getCars} from "../../api/api-cars";
+import {notification} from "antd";
+import ProfileEditForm from "../ProfileEditForm";
 
 const Profile = () => {
 
@@ -33,8 +31,6 @@ const Profile = () => {
 
   const [carForm, setCarForm] = useState({});
   const [selectedCar, setSelectedCar] = useState({});
-
-  const [loading, setLoading] = useState(false);
 
   const userTelegramData = useUsersStore((state) => state.userTelegramData);
 
@@ -110,98 +106,7 @@ const Profile = () => {
 
   }
 
-  const deleteProfileCarImage = async (image, data) => {
-    await deleteCarImage(image, data);
-    await getUserInfo(userTelegramData?.id).then(res => {
-      if (res.data !== '') {
-        updateUserData(res.data);
-        setSelectedCar(res.data?.cars.filter(car => car.car_id === data.car_id)[0]);
-        updateUsersCars();
-      }
-    })
 
-  }
-
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png";
-
-    if (!isJpgOrPng) {
-      message.error("Только изображения в формате JPG или PNG!");
-      return Upload.LIST_IGNORE;
-    }
-
-    message.success("Изображение добавлено.");
-    return true;
-  };
-
-  const handleChange = async (info, car_id) => {
-    if (info.file.status === 'uploading') {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      setLoading(false);
-      await getUserInfo(userTelegramData?.id).then(res => {
-        if (res.data !== '') {
-          updateUserData(res.data);
-          setSelectedCar(res.data.cars.filter(car => car.car_id === car_id)[0]);
-          updateUsersCars();
-        }
-      })
-    }
-  };
-
-  const [form] = Form.useForm();
-
-  useEffect(() => {
-    // console.log(selectedCar)
-  }, [selectedCar]);
-
-  const handleSubmit = async (values) => {
-    try {
-
-      if (!validateCarNumber.test(values.carNumber)) {
-        return showNotification('error', 'Номер введен не корректно')
-      }
-
-      if (Number(values.carYear) < 1800 || Number(values.carYear) > dayjs().year()) {
-        return showNotification('error', 'Год введен не корректно')
-      }
-
-      await changeCarData(userData.chat_id, selectedCar?.car_id, values)
-        .then(res => {
-          if (res.status === 200) {
-            getUserInfo(userTelegramData?.id).then(res => {
-              if (res.data !== '') {
-                updateUserData(res.data);
-                setSelectedCar(res.data.cars.filter(car => car.car_id === selectedCar?.car_id)[0]);
-                updateUsersCars();
-              }
-            })
-            return showNotification('success', res.data)
-          }
-          if (res.status === 203) {
-            return showNotification('error', res.data)
-          }
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    } catch (error) {
-      message.error(error.message || 'Ошибка отправки данных.');
-    }
-  };
-
-  const uploadButton = (
-    <button type="button" className="modal-info__upload-button">
-      <div className="modal-info__upload-button-icon">
-        {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      </div>
-      <div className="modal-info__upload-button-text">
-        Добавить фото
-      </div>
-    </button>
-  );
 
   return (
     <>
@@ -247,80 +152,7 @@ const Profile = () => {
                  onClose={handleModalClose}>
         {checkObject(selectedCar) ? (
           <div className="page-profile__modal">
-            <div className="page-profile__modal-info modal-info">
-              {selectedCar.car_images.length > 0 && (
-                <div className="modal-info__images">
-                  {selectedCar.car_images.map((image) => {
-                    return (
-                      <div key={image} className="modal-info__image">
-                        <div className="modal-info__image-img">
-                          <img src={`${API_BASE}/car/${image}`} alt=""/>
-                        </div>
-                        {selectedCar.car_images.length > 1 && (
-                          <div onClick={() => deleteProfileCarImage(image, {
-                            chat_id: userData?.chat_id,
-                            car_id: selectedCar?.car_id
-                          })} className="modal-info__image-action"><DeleteFilled/></div>
-                        )}
-                      </div>
-                    )
-                  })}
-                  {selectedCar.car_images.length >= 1 && selectedCar.car_images.length < 4 && (
-                    <div className="modal-info__upload">
-                      <Upload
-                        name="avatar"
-                        listType="picture-card"
-                        className="avatar-uploader"
-                        showUploadList={false}
-                        action={`${API_BASE}/upload`}
-                        data={
-                          {
-                            chat_id: userData?.chat_id,
-                            car_id: selectedCar?.car_id,
-                            downloadType: 'non-stop'
-                          }
-                        }
-                        // multiple
-                        maxCount={1}
-                        beforeUpload={beforeUpload}
-                        onChange={(info) => handleChange(info, selectedCar?.car_id)}
-                      >
-                        {uploadButton}
-                      </Upload>
-                    </div>
-                  )}
-                </div>
-              )}
-              <div className="modal-info__car">
-                <Form form={form} onFinish={handleSubmit} initialValues={{
-                  carNumber: selectedCar?.car_number,
-                  carYear: selectedCar?.car_year,
-                  carNote: selectedCar?.car_note,
-                }} variant="borderless" className="modal-info__car-form" layout="vertical">
-                  <div className="modal-info__car-model">{selectedCar?.car_brand} {selectedCar?.car_model}</div>
-                  <div className="modal-info__car-number input-antd">
-                    <Form.Item name="carNumber">
-                      <Input />
-                    </Form.Item>
-                  </div>
-                  <div className="modal-info__car-year input-antd">
-                    <Form.Item name="carYear">
-                      <Input type="tel" placeholder="Год выпуска авто" />
-                    </Form.Item>
-                  </div>
-                  <div className="modal-info__car-note input-antd">
-                    <Form.Item name="carNote">
-                      <Input placeholder="Примечание" />
-                    </Form.Item>
-                  </div>
-                  <div className="modal-info__car-submit">
-                    <button className="style-btn" type="submit">
-                      Обновить данные
-                    </button>
-                  </div>
-                </Form>
-              </div>
-            </div>
+            <ProfileEditForm selectedCar={selectedCar} updateSelectedCar={setSelectedCar}/>
           </div>
         ) : (
           <div className="page-profile__modal">

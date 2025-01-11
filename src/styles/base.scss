@@ -125,11 +125,13 @@ body {
   overflow-x: hidden;
   min-width: 35rem;
   line-height: 1.3;
+  background-color: variables.$white !important;
 }
 
 body #root {
   display: flex !important;
   flex-direction: column;
+
 }
 
 .main {

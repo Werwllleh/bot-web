@@ -113,7 +113,7 @@
     width: 100%;
     font-size: 1.6rem;
     font-family: inherit !important;
-    padding: .7rem;
+    padding: .9rem .5rem;
   }
 
   .ant-select-selector {
@@ -150,7 +150,7 @@
   }
 
   .ant-select-single {
-    height: auto !important;
+    //height: auto !important;
   }
 
   .ant-select-multiple .ant-select-selection-overflow {

@@ -71,6 +71,7 @@ function App() {
       first_name: "Lesha",
       id: process.env.REACT_APP_ADMIN_CHAT_ID,
       // id: 1, //test
+      // id: 345231955, //test
       language_code: "en",
       last_name: "",
       username: ""

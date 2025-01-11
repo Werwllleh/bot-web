@@ -1,12 +1,14 @@
 @use "../variables";
 
 .page-attributes {
+  padding: 0 0 5rem 0;
 
   &__title {}
 
   &__body {
     height: 100%;
     margin: 2rem 0 0 0;
+
   }
 
   &__products {}

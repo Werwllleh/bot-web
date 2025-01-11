@@ -8,8 +8,6 @@ const {TextArea} = Input;
 
 const UserAboutInfo = ({data}) => {
 
-  console.log(data)
-
   const [message, setMessage] = useState('');
 
   const initialFormValues = {
