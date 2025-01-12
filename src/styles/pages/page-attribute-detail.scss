@@ -1,0 +1,153 @@
+@use "../variables";
+
+.page-attribute-detail {
+  position: relative;
+  padding: 5rem 0 10rem 0;
+  height: 100%;
+
+  &__body {
+
+  }
+
+  &__about {}
+
+  &__images {
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      background-color: variables.$white;
+
+      .ant-image {
+
+        cursor: pointer !important;
+
+        img {
+          max-height: 30rem;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  &__info {
+
+    &-title {
+      margin: 3rem 0 0 0;
+      display: flex;
+      flex-direction: column;
+      border-radius: variables.$border-radius;
+      overflow: hidden;
+
+      &-type {
+        display: block;
+        background-color: variables.$accent-color;
+        font-size: 1.8rem;
+        white-space: nowrap;
+        text-align: center;
+        color: variables.$semi-white;
+        font-weight: 500;
+        padding: .5rem;
+      }
+
+      &-title {
+        display: block;
+        background-color: variables.$semi-white;
+        font-size: 1.6rem;
+        white-space: nowrap;
+        text-align: center;
+        color: variables.$black;
+        font-weight: 600;
+        padding: .5rem;
+      }
+    }
+
+    &-description {
+      border-radius: variables.$border-radius;
+      overflow: hidden;
+      padding: 1.5rem 1rem;
+      margin: 1rem 0 0 0;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: variables.$black;
+      background-color: variables.$semi-white;
+      line-height: 1.45;
+    }
+
+  }
+
+  &__specification {
+    margin: 1rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    &-row {
+      border-radius: variables.$border-radius;
+      overflow: hidden;
+      background-color: variables.$semi-white;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: .5rem 1rem;
+      color: variables.$black;
+    }
+
+    &-name {
+      flex: 0 1 max-content;
+      font-size: 1.4rem;
+    }
+
+    &-value {
+      flex: 1;
+      font-weight: 500;
+      font-size: 1.4rem;
+    }
+  }
+
+  &__note {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: variables.$grey;
+    margin: 2rem 0 0 0;
+
+    &-link {
+      color: variables.$accent-color;
+    }
+  }
+
+  &__backButton {
+    position: fixed;
+    bottom: 8rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 23rem;
+    width: 100%;
+    color: variables.$semi-white;
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: variables.$accent-color;
+      opacity: 0.9;
+      filter: blur(.15rem);
+      z-index: -1;
+      transition: opacity variables.$transition;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}

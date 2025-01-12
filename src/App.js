@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import useTelegram from "./hooks/useTelegram";
 import Cars from './components/Pages/Cars';
 import Partners from './components/Pages/Partners';
-import {Routes, Route, useNavigate, useLocation, Navigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, useLocation, Outlet} from 'react-router-dom';
 import {usePartnersStore, useUsersStore} from "./services/store";
 import {groupedPartnersFunc} from "./utils/partnersUtils";
 import {route} from "./utils/consts";
@@ -19,11 +19,11 @@ import AdminUsers from "./components/Pages/AdminPages/AdminUsers";
 import AdminMeet from "./components/Pages/AdminPages/AdminMeet";
 import AdminPartnersCategories from "./components/Pages/AdminPages/AdminPartnersCategories";
 import AdminPartnersAll from "./components/Pages/AdminPages/AdminPartnersAll";
-import {checkObject} from "./utils/checkObject";
 import Meet from "./components/Pages/Meet";
 import {YMaps} from "@pbe/react-yandex-maps";
 import SnowMode from "./components/snow-mode";
-import Attributes from "./components/Pages/Attributes";
+import AttributeDetail from "./components/Pages/Attributes/AttributeDetail";
+import Attributes from "./components/Pages/Attributes/Attributes";
 
 
 
@@ -65,8 +65,8 @@ function App() {
     console.log(tg?.initDataUnsafe?.user);*/
 
 
-    updateUserTelegramData(tg?.initDataUnsafe?.user)
-    /*updateUserTelegramData({
+    // updateUserTelegramData(tg?.initDataUnsafe?.user)
+    updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
       id: process.env.REACT_APP_ADMIN_CHAT_ID,
@@ -75,7 +75,7 @@ function App() {
       language_code: "en",
       last_name: "",
       username: ""
-    })*/
+    })
 
 
     setTimeout(() => {
@@ -130,7 +130,9 @@ function App() {
             <Route path={route.PARTNERS.url} element={<OnlyAuth component={<Partners data={partnersSortedObject}/>}/>}/>
             <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile/>}/>}/>
             <Route path={route.MEET.url} element={<OnlyAuth component={<Meet/>}/>}/>
-            <Route path={route.ATTRIBUTES.url} element={<OnlyAuth component={<Attributes/>}/>}/>
+            <Route path={route.ATTRIBUTES.url} element={<OnlyAuth component={<Attributes />}/>} >
+              <Route path=":slug" element={<AttributeDetail />} />
+            </Route>
             <Route path={route.REGISTER.url} element={<OnlyUnAuth component={<Registration/>}/>}/>
             <Route path={route.NF_404.url} element={<NotFound/>}/>
             <Route path={route.ADMIN.url} element={<OnlyAdminRoute component={<AdminPanel/>}/>}/>

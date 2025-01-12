@@ -20,6 +20,8 @@
       align-items: center;
       justify-content: center;
       width: 100% !important;
+      background-color: variables.$semi-white;
+
 
     }
 
@@ -36,8 +38,7 @@
     margin: 0 auto;
     pointer-events: none;
     user-select: none;
-    max-height: 20rem;
-    height: 100%;
+    height: 20rem !important;
   }
 
   &__title {

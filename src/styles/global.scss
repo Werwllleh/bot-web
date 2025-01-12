@@ -253,9 +253,12 @@
   align-items: center;
   justify-content: center;
   border-radius: variables.$border-radius;
+  transform: none;
   padding: 1.2rem 1rem;
   font-size: 1.4rem;
   font-weight: 500;
+  overflow: hidden;
+  transition: background-color variables.$transition, border-radius variables.$transition, color variables.$transition, opacity variables.$transition, transform variables.$transition;
 }
 
 .block-blur {
@@ -295,4 +298,12 @@
   .swiper-pagination-bullet-active {
     background-color: #004C9D;
   }
+}
+
+.ant-image-preview-mask {
+  background-color: rgb(81 81 81 / 66%) !important;
+}
+
+.ant-image-preview-img {
+  max-width: 90% !important;
 }

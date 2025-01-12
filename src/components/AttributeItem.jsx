@@ -30,7 +30,7 @@ const AttributeItem = ({data}) => {
   }, [data])
 
   useEffect(() => {
-    console.log(images)
+    // console.log(images)
   }, [images])
 
 
@@ -38,7 +38,7 @@ const AttributeItem = ({data}) => {
   return (
     <Link
       className="product"
-      // to={`/attributes/${data.slug}`}
+      to={`/attributes/${data.slug}`}
       key={data.documentId}
     >
       <div className="product__body">
@@ -47,7 +47,7 @@ const AttributeItem = ({data}) => {
             modules={[Pagination, Autoplay, EffectFade]}
             effect="fade"
             pagination={{clickable: true}}
-            autoHeight={true}
+            autoHeight={false}
             slidesPerView="auto"
             spaceBetween={0}
             loop={images.length > 1}
