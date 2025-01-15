@@ -9,6 +9,7 @@ import {checkObject} from "../../utils/checkObject";
 import SiteIcon from "../icons/site-icon";
 import PhoneIcon from "../icons/phone-icon";
 import {getScrollbarWidth, withoutTwitching} from "../../utils/utils";
+import {BrowserView, MobileView} from "react-device-detect";
 
 
 const Partners = () => {
@@ -103,7 +104,6 @@ const Partners = () => {
   }, []);
 
 
-
   useEffect(() => {
 
     let filteredData = partners;
@@ -134,7 +134,8 @@ const Partners = () => {
           <h1 className="page-partners__title h1t">Партнеры клуба</h1>
           <div className="page-partners__body">
             <div className="page-partners__filters">
-              <button onClick={showFilters} className={`page-partners__filters-button ${isFiltersActive ? 'active' : ''}`}>{isFiltersActive ? 'Скрыть фильтр' : 'Показать фильтр'}</button>
+              <button onClick={showFilters}
+                      className={`page-partners__filters-button ${isFiltersActive ? 'active' : ''}`}>{isFiltersActive ? 'Скрыть фильтр' : 'Показать фильтр'}</button>
               <div ref={filters} className={`page-partners__filters-params ${isFiltersActive ? 'show' : ''}`}>
                 <div className="page-partners__filter input-antd">
                   <Input placeholder="Поиск по названию" value={searchInput} onChange={handleChangeSearchInput}/>
@@ -166,7 +167,8 @@ const Partners = () => {
                 <div className="partners-block__list">
                   {partnersFiltered.map(partner => {
                     return (
-                      <div key={partner.id} className={`partners-block__partner partner-card ${!partner.rejected ? '' : 'not-rec'}`}>
+                      <div key={partner.id}
+                           className={`partners-block__partner partner-card ${!partner.rejected ? '' : 'not-rec'}`}>
                         <div className="partner-card__body">
                           <h5 className="partner-card__title">{partner.title}</h5>
                           {partner.description && <p className="partner-card__description">{partner.description}</p>}
@@ -198,11 +200,20 @@ const Partners = () => {
           <div className="page-users-partners-modal__body">
             {partnerAboutData.address_coordinates !== '-' ? (<div className="page-users-partners-modal__address">
               <div className="page-users-partners-modal__address-text">{partnerAboutData.address_text}</div>
-              <Link target="_blank"
-                    to={`yandexmaps://?whatshere[point]=${partnerAboutData.address_coordinates.reverse()}&whatshere[zoom]=17`}
-                    className="page-users-partners-modal__address-link style-btn">
-                Показать на карте
-              </Link>
+              <BrowserView>
+                <Link target="_blank"
+                      to={`https://yandex.ru/maps/?whatshere[point]=${partnerAboutData.address_coordinates.reverse()}&whatshere[zoom]=17`}
+                      className="page-users-partners-modal__address-link style-btn">
+                  Показать на карте
+                </Link>
+              </BrowserView>
+              <MobileView>
+                <Link target="_blank"
+                      to={`yandexmaps://?whatshere[point]=${partnerAboutData.address_coordinates.reverse()}&whatshere[zoom]=17`}
+                      className="page-users-partners-modal__address-link style-btn">
+                  Показать на карте
+                </Link>
+              </MobileView>
             </div>) : null}
             <div className="page-users-partners-modal__contacts">
               {/*<h5 className="page-users-partners-modal__contacts-title">Контакты:</h5>*/}
@@ -210,7 +221,7 @@ const Partners = () => {
                 return <Link className="page-users-partners-modal__contacts-link" key={phone}
                              to={`tel:${phone}`}><PhoneIcon/></Link>
               }) : null}
-              {partnerAboutData.links !== '-' && partnerAboutData.links.length  ? partnerAboutData.links.map(link => {
+              {partnerAboutData.links !== '-' && partnerAboutData.links.length ? partnerAboutData.links.map(link => {
                 return <Link className="page-users-partners-modal__contacts-link" target="_blank" key={link}
                              to={link}><SiteIcon/></Link>
               }) : null}
