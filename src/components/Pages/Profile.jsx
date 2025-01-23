@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useUsersStore} from "../../services/store";
 import MainModal from "../MainModal/MainModal";
-import {getUserInfo} from "../../api/api-users";
+import {getUserInfo, updateUser} from "../../api/api-users";
 import {DeleteFilled, PlusOutlined} from '@ant-design/icons';
 import {checkObject} from "../../utils/checkObject";
 import CarAddForm from "../CarAddForm";
 import {addUserCar, deleteUserCar, getCarInfo, getCars} from "../../api/api-cars";
-import {notification} from "antd";
+import {Form, Input, message, notification} from "antd";
 import ProfileEditForm from "../ProfileEditForm";
+import * as error from "antd";
 
 const Profile = () => {
 
@@ -26,6 +27,8 @@ const Profile = () => {
       });
     }
   };
+
+  const [userForm] = Form.useForm();
 
   const [isModalActive, setModalActive] = useState(false);
 
@@ -49,9 +52,9 @@ const Profile = () => {
     }
   }, [userTelegramData]);
 
-  /*useEffect(() => {
+  useEffect(() => {
     console.log(userData)
-  }, [userData])*/
+  }, [userData])
 
   /*useEffect(() => {
     console.log(selectedCar)
@@ -110,6 +113,31 @@ const Profile = () => {
 
   }
 
+  const handleSubmit = async (values) => {
+    console.log(values);
+
+    try {
+
+
+      await updateUser(userData.chat_id, values)
+        .then(res => {
+          if (res.status === 200) {
+            getUserInfo(userTelegramData?.id).then(res => {
+              if (res.data !== '') {
+                updateUserData(res.data);
+              }
+            })
+            return showNotification('success', res.data)
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    } catch (err) {
+      message.error(error.message || 'Ошибка обновления данных.');
+    }
+
+  }
 
 
   return (
@@ -120,14 +148,73 @@ const Profile = () => {
           <h1 className="page-profile__title h1t">Твой профиль</h1>
           <div className="page-profile__body">
             <div className="page-profile__info">
-              <div className="page-profile__row">
-                <div className="page-profile__row-title">Имя</div>
-                <div className="page-profile__row-value">
-                  <div className="page-profile__username">
-                    {userData?.user_name}
-                  </div>
+              <Form
+                form={userForm}
+                onFinish={handleSubmit}
+                variant="borderless"
+                className="page-profile__userform"
+                layout="vertical"
+                initialValues={{
+                  userName: userData?.user_name,
+                  userInstagram: userData?.user_instagram !== null ? `@${userData?.user_instagram}` : ''
+                }}
+              >
+                <div className="input-antd">
+                  <Form.Item
+                    label="Имя:"
+                    name="userName"
+                    rules={[
+                      {
+                        required: true,
+                        validator: (_, value) => {
+                          if (value.trim() !== '' && value.trim().length >= 2) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(new Error('Мало символов!'));
+                        },
+                      },
+                    ]}
+                  >
+                    <Input/>
+                  </Form.Item>
                 </div>
-              </div>
+                <div className="input-antd">
+                  <Form.Item
+                    label="Профиль в Instagram:"
+                    name="userInstagram"
+                    rules={[
+                      {
+                        validator: (_, value) => {
+                          if (value.trim() === '@') {
+                            return Promise.reject(new Error('Введи имя профиля!'));
+                          }
+                          if (value.trim() !== '' && value.startsWith('@')) {
+                            return Promise.resolve();
+                          }
+                          if (value.startsWith('@') && value.trim().length >= 2) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(new Error('Имя пользователя должно начинаться с @!'));
+                        },
+                      },
+                    ]}
+                  >
+                    <Input
+                      onChange={(e) => {
+                        const {value} = e.target;
+                        if (!value.startsWith('@')) {
+                          e.target.value = `@${value}`;
+                        }
+                      }}
+                    />
+                  </Form.Item>
+                </div>
+                <div className="page-profile__userform-submit">
+                  <button className="style-btn" type="submit">
+                    Обновить данные
+                  </button>
+                </div>
+              </Form>
               <div className="page-profile__row">
                 <div className="page-profile__row-title">Твои авто</div>
                 <div className="page-profile__row-value">
@@ -140,7 +227,8 @@ const Profile = () => {
                             {`${car.car_brand} ${car.car_model} - ${car.car_number}`}
                           </button>
                           {userData?.cars?.length > 1 &&
-                            <button onClick={() => deleteCar(car.car_id)} className="page-profile__car-delete"><DeleteFilled/></button>}
+                            <button onClick={() => deleteCar(car.car_id)} className="page-profile__car-delete">
+                              <DeleteFilled/></button>}
                         </div>
                       )
                     })}
@@ -150,7 +238,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <button onClick={addCarForm} className="page-profile__add-car style-btn">Добавить авто <PlusOutlined/></button>
+        <button onClick={addCarForm} className="page-profile__add-car style-btn">Добавить авто <PlusOutlined/>
+        </button>
       </div>
       <MainModal title={checkObject(selectedCar) ? 'Данные авто' : 'Добавить авто'} isOpen={isModalActive}
                  onClose={handleModalClose}>

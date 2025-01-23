@@ -37,9 +37,9 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
     })
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(selectedCar)
-  }, [selectedCar])
+  }, [selectedCar])*/
 
 
   const userTelegramData = useUsersStore((state) => state.userTelegramData);
@@ -115,7 +115,7 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
 
   const handleSubmit = async (values) => {
     try {
-      console.log(values)
+      // console.log(values)
 
       if (!validateCarNumber.test(values.carNumber)) {
         return showNotification('error', 'Номер введен не корректно')

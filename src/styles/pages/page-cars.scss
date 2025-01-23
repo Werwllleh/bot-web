@@ -352,6 +352,9 @@
     }
 
     &-value {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       max-width: 22rem;
       width: 100%;
       font-weight: 500;
@@ -366,9 +369,25 @@
 
   }
 
-  &__drive2 {
+  &__socials {
     margin: 1rem 0 0 0;
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    gap: 1rem;
+  }
+
+  &__drive2 {
+    display: inline-flex;
+  }
+
+  &__instagram {
+    display: inline-flex;
+
+    svg {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 }

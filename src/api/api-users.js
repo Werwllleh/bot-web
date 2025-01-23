@@ -14,6 +14,18 @@ export const createUser = async (chatId, data) => {
   }
 }
 
+export const updateUser = async (chatId, data) => {
+  try {
+    return await axios.post(`${API_BASE}/update-user`, {
+      chat_id: chatId,
+      data: data
+    })
+  } catch (err) {
+    console.error('Ошибка обновления данных: ', err);
+    throw err; // Пробрасываем ошибку, чтобы её можно было обработать в компоненте
+  }
+}
+
 export const getUserInfo = async (chatId) => {
   try {
     return await axios.post(`${API_BASE}/about-user`, {

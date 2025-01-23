@@ -18,14 +18,14 @@ const Meet = () => {
 
   useEffect(() => {
     setMeetData({
-      date: dayjs('2024-12-29 20:00'),
+      date: dayjs('2025-01-26 20:00'),
       description: <>
-        <p>❄️Новогодняя встреча клуба❄️</p>
-        <p>🎁Конкурсы, подарки🎁</p>
-        <p>🎉И конечно же салют🎉</p>
+        <p>❄️Первая встреча клуба в 2025!❄️</p>
+        {/*<p>🎁Конкурсы, подарки🎁</p>
+        <p>🎉И конечно же салют🎉</p>*/}
       </>,
     })
-    setDateExpired(dayjs().isBefore(dayjs('2024-12-29 20:00')))
+    setDateExpired(dayjs().isBefore(dayjs('2025-01-26 20:00')))
   }, []);
 
   const [dateExpired, setDateExpired] = useState(false);
@@ -44,7 +44,7 @@ const Meet = () => {
                 </div>
                 <div className="page-meet__about">
                   <h2 className="page-meet__about-date">
-                    {dayjs(meetData?.date).format('DD-MM-YYYY HH:mm')}
+                    {dayjs(meetData?.date).format('DD.MM.YYYY HH:mm')}
                   </h2>
                   <div className="page-meet__about-description">
                     {meetData?.description}

@@ -17,6 +17,9 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import Drive2Icon from "../icons/drive2-icon";
+import InstagramIcon from "../icons/instagram-icon";
+import {Link} from "react-router-dom";
+import InstagramIcon2 from "../icons/instagram-icon2";
 
 const Cars = () => {
 
@@ -215,7 +218,9 @@ const Cars = () => {
             <div className="car-info-modal__info">
               <div className="car-info-modal__info-row">
                 <span className="car-info-modal__info-title">Владелец:</span>
-                <p className="car-info-modal__info-value">{selectedCarInfo.user.user_name}</p>
+                <p className="car-info-modal__info-value">
+                  {selectedCarInfo.user.user_name}
+                </p>
               </div>
               <div className="car-info-modal__info-row">
                 <span className="car-info-modal__info-title">Авто:</span>
@@ -236,11 +241,18 @@ const Cars = () => {
 
               </div>}
             </div>
-            {selectedCarInfo.car_drive2 !== null && selectedCarInfo.car_drive2 !== '' && (
-              <div className="car-info-modal__drive2">
-                <Drive2Icon url={selectedCarInfo.car_drive2}/>
-              </div>
-            )}
+            <div className="car-info-modal__socials">
+              {selectedCarInfo.car_drive2 !== null && selectedCarInfo.car_drive2 !== '' && (
+                <div className="car-info-modal__drive2">
+                  <Drive2Icon url={selectedCarInfo.car_drive2}/>
+                </div>
+              )}
+              {selectedCarInfo.user.user_instagram !== null && selectedCarInfo.user.user_instagram !== '' && selectedCarInfo.user.user_instagram && (
+                <Link to={`https://www.instagram.com/${selectedCarInfo.user.user_instagram}`} target="_blank" className="car-info-modal__instagram">
+                  <InstagramIcon2 />
+                </Link>
+              )}
+            </div>
           </div>
         )}
       </MainModal>
