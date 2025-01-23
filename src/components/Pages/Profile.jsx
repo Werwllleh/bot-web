@@ -188,7 +188,7 @@ const Profile = () => {
                           if (value.trim() === '@') {
                             return Promise.reject(new Error('Введи имя профиля!'));
                           }
-                          if (value.trim() !== '' && value.startsWith('@')) {
+                          if (value.trim() === '') {
                             return Promise.resolve();
                           }
                           if (value.startsWith('@') && value.trim().length >= 2) {
