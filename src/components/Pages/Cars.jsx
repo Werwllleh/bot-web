@@ -16,6 +16,7 @@ import {EffectFade} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import Drive2Icon from "../icons/drive2-icon";
 
 const Cars = () => {
 
@@ -130,6 +131,10 @@ const Cars = () => {
     }
   }, [searchCarNumber]);
 
+  useEffect(() => {
+    console.log(selectedCarInfo)
+  }, [selectedCarInfo]);
+
   return (
     <>
       <div className="page-cars">
@@ -163,7 +168,12 @@ const Cars = () => {
           {isSearchActive ? <CloseOutlined/> : <SearchOutlined/>}
         </button>
       </div>
-      <MainModal className={"car-info-modal"} title={'Об авто'} isOpen={isModalActive} onClose={handleModalClose}>
+      <MainModal
+        className={"car-info-modal"}
+        title={'Об авто'}
+        isOpen={isModalActive}
+        onClose={handleModalClose}
+      >
         {checkObject(selectedCarInfo) && (
           <div className="car-info-modal__content">
             <div className="car-info-modal__images">
@@ -226,6 +236,11 @@ const Cars = () => {
 
               </div>}
             </div>
+            {selectedCarInfo.car_drive2 !== null && selectedCarInfo.car_drive2 !== '' && (
+              <div className="car-info-modal__drive2">
+                <Drive2Icon url={selectedCarInfo.car_drive2}/>
+              </div>
+            )}
           </div>
         )}
       </MainModal>

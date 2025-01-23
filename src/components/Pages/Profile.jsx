@@ -49,9 +49,13 @@ const Profile = () => {
     }
   }, [userTelegramData]);
 
-  useEffect(() => {
-    // console.log(userData)
-  }, [userData])
+  /*useEffect(() => {
+    console.log(userData)
+  }, [userData])*/
+
+  /*useEffect(() => {
+    console.log(selectedCar)
+  }, [selectedCar])*/
 
   const handleModalOpen = (carId) => {
     setModalActive(true);

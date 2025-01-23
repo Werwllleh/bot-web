@@ -1,0 +1,10 @@
+.drive2-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 7rem;
+
+  &__image {
+    object-fit: contain;
+  }
+}

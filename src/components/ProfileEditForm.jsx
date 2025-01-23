@@ -37,6 +37,10 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
     })
   }, []);
 
+  useEffect(() => {
+    console.log(selectedCar)
+  }, [selectedCar])
+
 
   const userTelegramData = useUsersStore((state) => state.userTelegramData);
 
@@ -119,6 +123,10 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
 
       if (Number(values.carYear) < 1800 || Number(values.carYear) > dayjs().year()) {
         return showNotification('error', 'Год введен не корректно')
+      }
+
+      if (values.carDrive2 !== '' && !values.carDrive2.includes('www.drive2.ru')) {
+        return showNotification('error', 'Ссылка должна быть с Drive2')
       }
 
       await changeCarData(userData.chat_id, selectedCar?.car_id, values)
@@ -210,6 +218,7 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
             carNumber: selectedCar?.car_number,
             carYear: selectedCar?.car_year,
             carNote: selectedCar?.car_note,
+            carDrive2: selectedCar?.car_drive2,
           }} variant="borderless" className="modal-info__car-form" layout="vertical">
             <div className="select-antd">
               <Form.Item
@@ -221,7 +230,7 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
                   },
                 ]}
               >
-                <Select options={cars.brands} />
+                <Select options={cars.brands}/>
               </Form.Item>
             </div>
             {selectedBrand !== undefined && cars.models && (
@@ -263,6 +272,11 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
                 ]}
               >
                 <Input type="tel" placeholder="Год выпуска авто"/>
+              </Form.Item>
+            </div>
+            <div className="input-antd">
+              <Form.Item name="carDrive2">
+                <Input placeholder="Ссылка на Drive2"/>
               </Form.Item>
             </div>
             <div className="input-antd">

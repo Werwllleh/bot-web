@@ -89,7 +89,7 @@
     position: fixed;
     left: 50%;
     bottom: 7rem;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) !important;
     gap: 1rem;
     font-size: 1.5rem !important;
     padding: 1rem !important;
