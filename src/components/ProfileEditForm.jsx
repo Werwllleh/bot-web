@@ -125,7 +125,7 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
         return showNotification('error', 'Год введен не корректно')
       }
 
-      if (values.carDrive2 !== '' && !values.carDrive2.includes('www.drive2.ru')) {
+      if (values.carDrive2 !== null && values.carDrive2 !== '' && !values.carDrive2.includes('www.drive2.ru')) {
         return showNotification('error', 'Ссылка должна быть с Drive2')
       }
 
