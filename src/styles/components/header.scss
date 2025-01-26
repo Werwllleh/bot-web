@@ -7,13 +7,50 @@
   right: 0;
   //width: 100%;
   z-index: 5;
-  padding: 15px 10px;
   transition: background variables.$transition, border-radius variables.$transition, right variables.$transition, padding-right variables.$transition;
 
   &__body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 1.5rem 1rem;
+  }
+
+  &__alert {
+    position: relative;
+    z-index: -1;
+    padding: .5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.5rem;
+    background-color: variables.$red;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-4rem);
+    transition: opacity variables.$transition, visibility variables.$transition, transform variables.$transition;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    span {
+
+      &:nth-child(1) {
+        color: variables.$white;
+      }
+
+      &:nth-child(2) {
+        color: variables.$semi-white;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
   }
 
   &__right {

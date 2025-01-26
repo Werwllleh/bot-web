@@ -1,17 +1,22 @@
 import React, {useEffect, useState} from "react";
 import MenuBurgerButton from "./MenuBurgerButton/MenuBurgerButton";
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useLocation} from "react-router-dom";
 import {CloseOutlined, FormOutlined, MessageOutlined} from "@ant-design/icons";
-import {useUsersStore} from "../services/store";
+import {useMeetStore, useUsersStore} from "../services/store";
 import {adminPages, menu, route, socialLinks} from "../utils/consts";
 import MainLogo from "./MainLogo";
 import {checkObject} from "../utils/checkObject";
 import {getScrollbarWidth, withoutTwitching} from "../utils/utils";
+import dayjs from "dayjs";
 
 const Header = ({color}) => {
 
   const userData = useUsersStore((state) => state.userData);
   const isAdmin = useUsersStore((state) => state.isAdmin);
+
+  const location = useLocation();
+
+  const meetDate = useMeetStore((state) => state.meetData);
 
   const [isMenuActive, setIsMenuActive] = useState(false);
 
@@ -30,8 +35,8 @@ const Header = ({color}) => {
 
   return (
     <>
-      <header className={`header`} style={{backgroundColor: color ? color : '#ffffff'}}>
-        <div className="header__body">
+      <header className={`header`} >
+        <div style={{backgroundColor: color ? color : '#ffffff'}} className="header__body">
           <div className="header__logo">
             <Link to={route.CARS.url}><MainLogo/></Link>
           </div>
@@ -50,6 +55,15 @@ const Header = ({color}) => {
             )}
           </div>
         </div>
+        <Link to={route.MEET.url} className={`header__alert ${checkObject(meetDate) 
+        && checkObject(userData) 
+        && dayjs().isBefore(dayjs(meetDate.date)) 
+        && location.pathname !== route.MEET.url 
+        && location.pathname !== route.PARTNERS.url 
+          ? 'show' : ''}`}>
+          <span>Встреча клуба!</span>
+          <span>Подробнее</span>
+        </Link>
       </header>
       <div className="menu">
         <div onClick={() => setIsMenuActive(false)} className={`bg-wrap ${isMenuActive ? 'active' : ''}`}></div>

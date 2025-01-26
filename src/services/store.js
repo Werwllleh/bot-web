@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import {getAllUsers} from "../api/api-users";
 import {getUsersCars} from "../api/api-cars";
 import {getPartnersAdmin, getPartnersCategories, getPartnersUsers} from "../api/api-partners";
+import {getMeetDate} from "../api/api-meet-date";
+import {checkObject} from "../utils/checkObject";
 
 export const useUsersStore = create((set) => ({
   userTelegramData: {},
@@ -45,10 +47,25 @@ export const usePartnersStore = create((set) => ({
   },
 }))
 
-
 export const useProductsCountStore = create((set) => ({
   productStore: [],
   productStoreLoading: true,
   updateProductStore: (data) => set(() => ({ productStore: data })),
   updateProductStoreLoading: (data) => set(() => ({ productStoreLoading: data })),
+}))
+
+export const useMeetStore = create((set) => ({
+  meetData: {},
+  loading: true,
+  updateMeetData: async () => {
+    const data = await getMeetDate();
+
+    if (checkObject(data)) {
+      set({
+        loading: false,
+        meetData: data
+      });
+    }
+
+  },
 }))

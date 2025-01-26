@@ -3,7 +3,7 @@ import useTelegram from "./hooks/useTelegram";
 import Cars from './components/Pages/Cars';
 import Partners from './components/Pages/Partners';
 import {Routes, Route, useNavigate, useLocation, Outlet} from 'react-router-dom';
-import {usePartnersStore, useUsersStore} from "./services/store";
+import {useMeetStore, usePartnersStore, useUsersStore} from "./services/store";
 import {groupedPartnersFunc} from "./utils/partnersUtils";
 import {API_BASE, route} from "./utils/consts";
 import Registration from "./components/Pages/Registration";
@@ -42,6 +42,8 @@ function App() {
   const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
   const updateAuthChecked = useUsersStore((state) => state.updateAuthChecked);
 
+  const updateMeetDate = useMeetStore((state) => state.updateMeetData);
+
   const updatePartnersUsers = usePartnersStore((state) => state.updatePartnersUsers);
   const updatePartnersAdmin = usePartnersStore((state) => state.updatePartnersAdmin);
   const updatePartnersCategories = usePartnersStore((state) => state.updatePartnersCategories);
@@ -52,23 +54,27 @@ function App() {
   const partners = usePartnersStore((state) => state.partnersListUsers);
 
   useEffect(() => {
+    updateMeetDate();
     updateUsers();
     updateUsersCars();
-    updatePartnersUsers()
+    updatePartnersUsers();
     updatePartnersCategories();
-  }, [updateUsers, updateUsersCars, updatePartnersUsers, updatePartnersCategories]);
+  }, [updateMeetDate, updateUsers, updateUsersCars, updatePartnersUsers, updatePartnersCategories]);
 
 
   useEffect(() => {
-    console.log(tg);
-    console.log(tg?.initDataUnsafe?.user)
+    /*console.log(tg);
+    console.log(tg?.initDataUnsafe?.user)*/
     tg.ready();
     tg.expand();
 
     /*console.log(tg);
     console.log(tg?.initDataUnsafe?.user);*/
 
-    /*updateUserTelegramData({
+    /*setTimeout(() => {
+      updateAuthChecked(true)
+    }, 1200)
+    updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
       id: process.env.REACT_APP_ADMIN_CHAT_ID,

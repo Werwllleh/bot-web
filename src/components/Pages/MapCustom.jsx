@@ -3,6 +3,8 @@ import {Map, Placemark, ZoomControl} from "@pbe/react-yandex-maps";
 
 const MapCustom = ({state}) => {
 
+  console.log(state)
+
   const map = useRef(null);
 
   const setMapRef = useCallback((instance) => {
