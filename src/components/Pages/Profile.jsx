@@ -117,14 +117,13 @@ const Profile = () => {
     console.log(values);
 
     try {
-
-
       await updateUser(userData.chat_id, values)
         .then(res => {
           if (res.status === 200) {
             getUserInfo(userTelegramData?.id).then(res => {
               if (res.data !== '') {
                 updateUserData(res.data);
+                updateUsersCars();
               }
             })
             return showNotification('success', res.data)

@@ -24,6 +24,7 @@
     "react-dom": "^18.3.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-input-mask": "^2.0.4",
+    "react-internet-meter": "^1.1.1",
     "react-router-dom": "^6.27.0",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.13",

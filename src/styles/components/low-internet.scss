@@ -1,0 +1,20 @@
+@use '../variables';
+
+.internet-alert {
+  background-color: rgb(208 26 26 / 98%) !important;
+  border: none !important;
+  font-family: variables.$ff-main !important;
+  padding: 1rem .5rem !important;
+
+  span {
+
+    &:nth-child(1) {
+      font-size: 1.8rem;
+    }
+
+    &:nth-child(2) {
+      font-size: 1.6rem;
+    }
+
+  }
+}

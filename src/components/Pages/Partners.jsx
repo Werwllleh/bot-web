@@ -105,8 +105,7 @@ const Partners = () => {
 
 
   useEffect(() => {
-
-    let filteredData = partners;
+    let filteredData = partners || []; // Убедитесь, что `partners` всегда имеет значение (например, пустой массив)
 
     // Фильтр по поисковому вводу (searchInput)
     if (searchInput) {
@@ -167,7 +166,7 @@ const Partners = () => {
                 <div className="partners-block__list">
                   {partnersFiltered.map(partner => {
                     return (
-                      <div key={partner.id}
+                      <div onClick={() => showModalAbout(partner.id)} key={partner.id}
                            className={`partners-block__partner partner-card ${!partner.rejected ? '' : 'not-rec'}`}>
                         <div className="partner-card__body">
                           <h5 className="partner-card__title">{partner.title}</h5>

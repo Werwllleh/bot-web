@@ -17,7 +17,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import Drive2Icon from "../icons/drive2-icon";
-import InstagramIcon from "../icons/instagram-icon";
 import {Link} from "react-router-dom";
 import InstagramIcon2 from "../icons/instagram-icon2";
 
@@ -102,9 +101,9 @@ const Cars = () => {
     };
   }, [selectedCarId]);
 
-  useEffect(() => {
-    // console.log(searchCarNumber)
-  }, [searchCarNumber]);
+  /*useEffect(() => {
+    console.log(searchCarNumber)
+  }, [searchCarNumber]);*/
 
   const searchFieldFunc = () => {
     if (isSearchActive) {
@@ -127,16 +126,16 @@ const Cars = () => {
 
   useEffect(() => {
     if (searchCarNumber !== '') {
-      const filteredData = carsList?.filter(car => car.car_number.includes(searchCarNumber));
+      const filteredData = usersCars.filter(car => car.car_number.includes(searchCarNumber));
       setCarsList(filteredData);
     } else {
       setCarsList(usersCars);
     }
-  }, [searchCarNumber]);
+  }, [searchCarNumber, usersCars]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(selectedCarInfo)
-  }, [selectedCarInfo]);
+  }, [selectedCarInfo]);*/
 
   return (
     <>
