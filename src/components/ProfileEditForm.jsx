@@ -141,15 +141,16 @@ const ProfileEditForm = ({selectedCar, updateSelectedCar}) => {
             })
             return showNotification('success', res.data)
           }
-          if (res.status === 203) {
+          if (res.status === 203 || res.status === 500) {
             return showNotification('error', res.data)
           }
         })
         .catch(err => {
           console.error(err)
+          return showNotification('error', 'Ошибка обновления данных')
         })
     } catch (error) {
-      message.error(error.message || 'Ошибка отправки данных.');
+      message.error(error.message || 'Ошибка отправки данных');
     }
   };
 

@@ -52,9 +52,9 @@ const Profile = () => {
     }
   }, [userTelegramData]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(userData)
-  }, [userData])
+  }, [userData])*/
 
   /*useEffect(() => {
     console.log(selectedCar)
