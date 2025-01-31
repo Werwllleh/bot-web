@@ -71,7 +71,7 @@ function App() {
     /*console.log(tg);
     console.log(tg?.initDataUnsafe?.user);*/
 
-    setTimeout(() => {
+    /*setTimeout(() => {
       updateAuthChecked(true)
     }, 1200)
     updateUserTelegramData({
@@ -83,14 +83,14 @@ function App() {
       language_code: "en",
       last_name: "",
       username: ""
-    })
+    })*/
 
-    /*if (tg?.initDataUnsafe?.user !== undefined) {
+    if (tg?.initDataUnsafe?.user !== undefined) {
       updateUserTelegramData(tg?.initDataUnsafe?.user)
       setTimeout(() => {
         updateAuthChecked(true)
       }, 1200)
-    }*/
+    }
 
 
   }, [tg])
