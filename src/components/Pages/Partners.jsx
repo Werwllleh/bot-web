@@ -201,14 +201,14 @@ const Partners = () => {
               <div className="page-users-partners-modal__address-text">{partnerAboutData.address_text}</div>
               <BrowserView>
                 <Link target="_blank"
-                      to={`https://yandex.ru/maps/?whatshere[point]=${partnerAboutData.address_coordinates.reverse()}&whatshere[zoom]=17`}
+                      to={`https://yandex.ru/maps/?whatshere[point]=${partnerAboutData.address_coordinates[1]},${partnerAboutData.address_coordinates[0]}&whatshere[zoom]=17`}
                       className="page-users-partners-modal__address-link style-btn">
                   Показать на карте
                 </Link>
               </BrowserView>
               <MobileView>
                 <Link target="_blank"
-                      to={`yandexmaps://?whatshere[point]=${partnerAboutData.address_coordinates.reverse()}&whatshere[zoom]=17`}
+                      to={`yandexmaps://?whatshere[point]=${partnerAboutData.address_coordinates[1]},${partnerAboutData.address_coordinates[0]}&whatshere[zoom]=17`}
                       className="page-users-partners-modal__address-link style-btn">
                   Показать на карте
                 </Link>
