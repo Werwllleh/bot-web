@@ -36,19 +36,19 @@ function App() {
 
   const {userTelegramData, updateUserTelegramData, userData, updateUserData, updateUsers, updateUsersCars, updateAuthChecked} = useUsersStore();
 
-  const {partners, updatePartnersUsers, updatePartnersAdmin, updatePartnersCategories} = usePartnersStore();
+  const {updatePartnersUsers, updatePartnersAdmin, updatePartnersCategories} = usePartnersStore();
 
-  const {updateMeetDate} = useMeetStore();
+  const {updateMeetData} = useMeetStore();
 
 
 
   useEffect(() => {
-    updateMeetDate();
+    updateMeetData();
     updateUsers();
     updateUsersCars();
     updatePartnersUsers();
     updatePartnersCategories();
-  }, [updateMeetDate, updateUsers, updateUsersCars, updatePartnersUsers, updatePartnersCategories]);
+  }, [updateMeetData, updateUsers, updateUsersCars, updatePartnersUsers, updatePartnersCategories]);
 
 
   useEffect(() => {
@@ -104,10 +104,6 @@ function App() {
 
   }, [userData]);
 
-  const navigate = useNavigate();
-
-  const partnersSortedObject = groupedPartnersFunc(partners);
-
   const {pathname} = useLocation();
 
   const headerColor = Object.values(route).filter(item => item?.url === pathname)[0]?.color;
@@ -147,7 +143,7 @@ function App() {
             <Routes>
               <Route index element={<OnlyAuth component={<Cars/>}/>}/>
               <Route path={route.PARTNERS.url}
-                     element={<OnlyAuth component={<Partners data={partnersSortedObject}/>}/>}/>
+                     element={<OnlyAuth component={<Partners />}/>}/>
               <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile/>}/>}/>
               <Route path={route.MEET.url} element={<OnlyAuth component={<Meet/>}/>}/>
               <Route path={route.ATTRIBUTES.url} element={<OnlyAuth component={<Attributes/>}/>}>

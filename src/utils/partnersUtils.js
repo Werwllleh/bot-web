@@ -11,6 +11,8 @@ export const getPartnersData = async () => {
 
 export const groupedPartnersFunc = (requiredArr) => {
 
+	console.log(requiredArr)
+
 	const groupedObject = {}
 
 	requiredArr.forEach(item => {
