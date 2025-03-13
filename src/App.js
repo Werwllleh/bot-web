@@ -34,24 +34,13 @@ function App() {
 
   const {tg, user} = useTelegram();
 
-  const userTelegramData = useUsersStore((state) => state.userTelegramData);
+  const {userTelegramData, updateUserTelegramData, userData, updateUserData, updateUsers, updateUsersCars, updateAuthChecked} = useUsersStore();
 
-  const updateUserTelegramData = useUsersStore((state) => state.updateUserTelegramData);
-  const updateUserData = useUsersStore((state) => state.updateUserData);
-  const updateUsers = useUsersStore((state) => state.updateUsers);
-  const updateUsersCars = useUsersStore((state) => state.updateUsersCars);
-  const updateAuthChecked = useUsersStore((state) => state.updateAuthChecked);
+  const {partners, updatePartnersUsers, updatePartnersAdmin, updatePartnersCategories} = usePartnersStore();
 
-  const updateMeetDate = useMeetStore((state) => state.updateMeetData);
-
-  const updatePartnersUsers = usePartnersStore((state) => state.updatePartnersUsers);
-  const updatePartnersAdmin = usePartnersStore((state) => state.updatePartnersAdmin);
-  const updatePartnersCategories = usePartnersStore((state) => state.updatePartnersCategories);
+  const {updateMeetDate} = useMeetStore();
 
 
-  const userData = useUsersStore((state) => state.userData);
-
-  const partners = usePartnersStore((state) => state.partnersListUsers);
 
   useEffect(() => {
     updateMeetDate();
@@ -113,7 +102,6 @@ function App() {
       updatePartnersAdmin()
     }
 
-    // console.log(userData)
   }, [userData]);
 
   const navigate = useNavigate();
@@ -152,7 +140,7 @@ function App() {
         ns: "use-load-option",
         load: "package.full"
       }}>
-        <SnowMode/>
+        {/*<SnowMode/>*/}
         <Header color={headerColor}/>
         <main className="main">
           <div className="content">
