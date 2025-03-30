@@ -33,7 +33,7 @@ const AttributeDetail = () => {
       const imagesLinks = [];
 
       imagesData.map(image => {
-        imagesLinks.push(CMS + image.formats.small.url)
+        imagesLinks.push(CMS + image.url)
       })
 
       setImages(imagesLinks);
@@ -116,11 +116,21 @@ const AttributeDetail = () => {
                 </h1>
                 <p className="page-attribute-detail__info-description">{attributeData.description}</p>
               </div>
-              <div className="page-attribute-detail__specification">
-                <div className="page-attribute-detail__specification-row">
-                  <p className="page-attribute-detail__specification-name">Стоимость</p>
-                  <span className="page-attribute-detail__specification-value">{attributeData.price} ₽</span>
+              {checkObject(attributeData?.specifications) && (
+                <div className="page-attribute-detail__specification">
+                  {Object.values(attributeData.specifications).map((param, index) => {
+                    return (
+                      <div key={index} className="page-attribute-detail__specification-row">
+                        <p className="page-attribute-detail__specification-name">{param.label}</p>
+                        <span className="page-attribute-detail__specification-value">{param.value}</span>
+                      </div>
+                    )
+                  })}
                 </div>
+              )}
+              <div className="page-attribute-detail__price">
+                <span className="page-attribute-detail__price_current">{attributeData.price} ₽</span>
+                <span className="page-attribute-detail__price_old">{attributeData.price_old} ₽</span>
               </div>
             </div>
           )}

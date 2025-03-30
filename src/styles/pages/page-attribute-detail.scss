@@ -105,6 +105,34 @@
     }
   }
 
+  &__price {
+    margin: 2rem 0 0 0;
+    padding: 0 .5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    span {
+      line-height: 1;
+    }
+
+    &_current {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: variables.$red;
+    }
+
+    &_old {
+      position: relative;
+      font-size: 1.4rem;
+      font-weight: 400;
+      text-decoration: line-through;
+      text-decoration-color: variables.$red;
+    }
+
+  }
+
   &__note {
     text-align: center;
     font-size: 1.2rem;

@@ -1,16 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Image} from "antd";
 import {CMS} from "../utils/consts";
 import {Link} from "react-router-dom";
-
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Pagination, Autoplay} from "swiper/modules";
-import {EffectFade} from 'swiper/modules';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
 
 const AttributeItem = ({data}) => {
 
@@ -22,56 +12,27 @@ const AttributeItem = ({data}) => {
     const imagesLinks = [];
 
     imagesData.map(image => {
-      imagesLinks.push(CMS + image.formats.small.url)
+      imagesLinks.push(CMS + image.url)
     })
 
     setImages(imagesLinks);
 
   }, [data])
 
-  useEffect(() => {
-    // console.log(images)
-  }, [images])
-
-
 
   return (
-    <Link
+    <div
       className="product"
-      to={`/attributes/${data.slug}`}
       key={data.documentId}
     >
       <div className="product__body">
-        <div className="product__images">
-          <Swiper
-            modules={[Pagination, Autoplay, EffectFade]}
-            effect="fade"
-            pagination={{clickable: true}}
-            autoHeight={false}
-            slidesPerView="auto"
-            spaceBetween={0}
-            loop={images.length > 1}
-            autoplay={{
-              delay: Math.floor(4000 + Math.random() * 4000), // Рандомное значение от 1500 до 3000
-              disableOnInteraction: true, // Автоплей будет отключаться при взаимодействии
-            }}
-          >
-            {images.map((image) => {
-              return (
-                <SwiperSlide key={image}>
-                  <Image
-                    className="product__image"
-                    src={image}
-                    preview={false}
-                  />
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
+        <div className="product__image">
+          <img src={CMS + data.preview_image.url} alt=""/>
         </div>
         <h4 className="product__title">{`${data.type} ${data.title}`}</h4>
       </div>
-    </Link>
+      <Link className="product__link" to={`/attributes/${data.slug}`} />
+    </div>
   );
 };
 

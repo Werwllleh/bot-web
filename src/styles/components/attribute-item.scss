@@ -1,44 +1,40 @@
 @use "../variables";
 
 .product {
+  position: relative;
   display: block;
-  pointer-events: none;
-  user-select: none;
+  padding: 1rem;
+  border-radius: variables.$border-radius;
   overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: variables.$semi-white;
+    filter: blur(5rem);
+    z-index: -1;
+  }
 
   &__body {
     display: flex;
     flex-direction: column;
   }
 
-  &__images {
-    position: relative;
-    overflow: hidden;
-
-    .swiper-slide {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100% !important;
-      background-color: variables.$semi-white;
-
-
-    }
-
-  }
-
   &__image {
     display: flex;
-    object-fit: contain;
-    position: relative;
-    align-items: center;
     justify-content: center;
-    cursor: pointer;
-    z-index: 1;
-    margin: 0 auto;
-    pointer-events: none;
-    user-select: none;
-    height: 20rem !important;
+
+    img {
+      pointer-events: none;
+      user-select: none;
+      object-fit: contain;
+      max-height: 20rem;
+      height: 100%;
+    }
   }
 
   &__title {
@@ -47,5 +43,13 @@
     color: variables.$accent-color;
     font-size: 1.4rem;
     font-weight: 500;
+  }
+
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }

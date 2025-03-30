@@ -30,18 +30,16 @@ const Attributes = () => {
   useEffect(() => {
     getAllAttributes().then((response) => {
       const status = response?.status;
-      // console.log(response)
-
       const {data} = response;
 
       if (status && status === 200) {
         setLoading(false); // Обновление состояния загрузки
 
-        if (data.length > 0) {
+        if (!!data.length) {
           // Обновляем данные для каждого типа атрибута
           const updatedAttributes = attributes.map((attribute) => {
             const filteredProducts = data.filter((product) =>
-              product.active === true && product.type.toLowerCase() === attribute.type.toLowerCase()
+              product.type.toLowerCase() === attribute.type.toLowerCase()
             );
 
             return {
@@ -58,10 +56,6 @@ const Attributes = () => {
     });
   }, []);
 
-  useEffect(() => {
-    // console.log(attributes)
-  }, [attributes]);
-
   const location = useLocation();
 
   // Показываем только на родительском маршруте
@@ -76,8 +70,8 @@ const Attributes = () => {
             <div className="page-attributes__body">
               <div className="page-attributes__products">
                 {loading && <Loader/>}
-                {!loading && attributes.length > 0 && attributes.map((attribute) => (
-                  attribute.data.length > 0 && (
+                {!loading && !!attributes.length && attributes.map((attribute) => (
+                  !!attribute.data.length && (
                     <section key={attribute.type} className="page-attributes__section">
                       <h3 className="page-attributes__section-title">{attribute.category}</h3>
                       <div className="page-attributes__section-products">
