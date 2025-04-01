@@ -37,6 +37,17 @@ export const getUserInfo = async (chatId) => {
   }
 }
 
+export const deleteUser = async (chatId) => {
+  try {
+    return await axios.post(`${API_BASE}/delete-user`, {
+      chatId: chatId
+    })
+  } catch (err) {
+    console.error('Ошибка удаления пользователя: ', err);
+    throw err; // Пробрасываем ошибку, чтобы её можно было обработать в компоненте
+  }
+}
+
 export const getAllUsers = async () => {
   try {
     return await axios.post(`${API_BASE}/all-users`)

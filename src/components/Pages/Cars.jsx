@@ -145,14 +145,15 @@ const Cars = () => {
         </div>
         <div className="page-cars__body">
           {loading && <div className="page-cars__loader"><Loader/></div>}
-          {!loading && carsList?.length ? (
+          {!loading && !!carsList.length && (
             <div className="page-cars__images">
               {carsList.map((car) => (
                 <CarImage openModal={handleModalOpen} car={car} key={car.id} isSelected={selectedCarId === car.id}
                           onSelect={handleCarSelect}/>
               ))}
             </div>
-          ) : (
+          )}
+          {searchCarNumber !== '' && !carsList.length && (
             <div className="page-cars__not-found">
               <img className="page-cars__not-found-image" src={`${API_BASE}/bot/not-found.png`} alt="not found"/>
               <p className="page-cars__not-found-text">Авто не найдено</p>
@@ -247,8 +248,9 @@ const Cars = () => {
                 </div>
               )}
               {selectedCarInfo.user.user_instagram !== null && selectedCarInfo.user.user_instagram !== '' && selectedCarInfo.user.user_instagram && (
-                <Link to={`https://www.instagram.com/${selectedCarInfo.user.user_instagram}`} target="_blank" className="car-info-modal__instagram">
-                  <InstagramIcon2 />
+                <Link to={`https://www.instagram.com/${selectedCarInfo.user.user_instagram}`} target="_blank"
+                      className="car-info-modal__instagram">
+                  <InstagramIcon2/>
                 </Link>
               )}
             </div>

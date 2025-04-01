@@ -2,11 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {checkObject} from "../utils/checkObject";
 import {Input, notification, Select, Switch} from "antd";
 import {useForm} from "../hooks/useForm";
-import {sendUserMessage} from "../api/api-users";
+import {deleteUser, sendUserMessage} from "../api/api-users";
+import {useUsersStore} from "../services/store";
 
 const {TextArea} = Input;
 
-const UserAboutInfo = ({data}) => {
+const UserAboutInfo = ({data, closeModal}) => {
+
+  const {updateUsers, updateUsersCars} = useUsersStore();
+
 
   const [message, setMessage] = useState('');
 
@@ -30,6 +34,15 @@ const UserAboutInfo = ({data}) => {
     setValues({
       message: "",
     })
+  }
+
+  const deleteUserFunc = async () => {
+    if (data?.chat_id) {
+      await deleteUser(data.chat_id);
+      closeModal();
+      await updateUsers();
+      await updateUsersCars();
+    }
   }
 
   return (
@@ -60,6 +73,9 @@ const UserAboutInfo = ({data}) => {
             />
             <button className="style-btn user-about-info__form-submit">Отправить</button>
           </form>
+        </div>
+        <div className="user-about-info__delete">
+          <button onClick={deleteUserFunc} className="style-btn user-about-info__delete_button">Удалить пользователя</button>
         </div>
       </div>
     </div>

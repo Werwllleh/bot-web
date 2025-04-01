@@ -94,7 +94,7 @@ const AdminUsers = () => {
         onClose={handleModalClose}
       >
         <div className="page-admin-users__modal-body">
-          <UserAboutInfo data={aboutDataModal} />
+          <UserAboutInfo closeModal={handleModalClose} data={aboutDataModal} />
         </div>
       </MainModal>
     </>

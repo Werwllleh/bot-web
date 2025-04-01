@@ -89,17 +89,21 @@ const Header = ({color}) => {
                 {menu.map(route => {
                   return (
                     <li key={route.url} className="menu__nav-item">
-                      <NavLink className={({ isActive }) => `menu__nav-link${isActive ? " active" : ""}`} onClick={() => setIsMenuActive(false)}
-                            to={route.url}>{route.title}</NavLink>
+                      <NavLink className={({isActive}) => `menu__nav-link${isActive ? " active" : ""}`}
+                               onClick={() => setIsMenuActive(false)}
+                               to={route.url}>{route.title}</NavLink>
                     </li>
                   )
                 })}
+                <li className="menu__nav-item">
+                  <Link className="menu__nav-link menu__nav-link-tp" target="_blank" to={'https://t.me/all_lllll'}>По всем вопросам</Link>
+                </li>
               </ul>
               {isAdmin && (
                 <div className="menu__admin">
                   {/*<h5 className="menu__admin-title">Админ панель</h5>*/}
                   <ul className="menu__nav-list menu__admin-list">
-                    {adminPages.map(route => {
+                  {adminPages.map(route => {
                       return (
                         <li key={route.url} className="menu__nav-item">
                           <NavLink

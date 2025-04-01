@@ -1,0 +1,36 @@
+@use "../variables";
+
+.no-login {
+  position: fixed;
+  margin-inline: auto;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 2rem;
+      text-align: center;
+      color: variables.$accent-color;
+      font-weight: 500;
+    }
+  }
+
+  &__loader {
+
+    .loader {
+      position: relative;
+      transform: none;
+    }
+  }
+
+}

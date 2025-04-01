@@ -243,7 +243,11 @@
       &.active {
         background-color: variables.$accent-color;
         color: variables.$white !important;
+      }
 
+      &-tp {
+        text-decoration: underline !important;
+        text-underline-offset: .5rem;
       }
     }
   }

@@ -36,4 +36,14 @@
       color: variables.$white;
     }
   }
+
+  &__delete {
+    margin: 2rem 0 0 0;
+
+    &_button {
+      width: 100%;
+      background-color: variables.$red;
+      color: variables.$white;
+    }
+  }
 }

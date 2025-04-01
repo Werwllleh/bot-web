@@ -28,18 +28,28 @@ import Attributes from "./components/Pages/Attributes/Attributes";
 import {ReactInternetSpeedMeter} from "react-internet-meter";
 import 'react-internet-meter/dist/index.css';
 import LowInternet from "./components/low-internet";
+import {checkObject} from "./utils/checkObject";
+import Loader from "./components/Loader/Loader";
+import NoLogin from "./components/no-login";
 
 function App() {
 
 
   const {tg, user} = useTelegram();
 
-  const {userTelegramData, updateUserTelegramData, userData, updateUserData, updateUsers, updateUsersCars, updateAuthChecked} = useUsersStore();
+  const {
+    userTelegramData,
+    updateUserTelegramData,
+    userData,
+    updateUserData,
+    updateUsers,
+    updateUsersCars,
+    updateAuthChecked
+  } = useUsersStore();
 
   const {updatePartnersUsers, updatePartnersAdmin, updatePartnersCategories} = usePartnersStore();
 
   const {updateMeetData} = useMeetStore();
-
 
 
   useEffect(() => {
@@ -48,7 +58,7 @@ function App() {
     updateUsersCars();
     updatePartnersUsers();
     updatePartnersCategories();
-  }, [updateMeetData, updateUsers, updateUsersCars, updatePartnersUsers, updatePartnersCategories]);
+  }, []);
 
 
   useEffect(() => {
@@ -60,15 +70,11 @@ function App() {
     /*console.log(tg);
     console.log(tg?.initDataUnsafe?.user);*/
 
-    /*setTimeout(() => {
-      updateAuthChecked(true)
-    }, 1200)
-    updateUserTelegramData({
+    /*updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
       id: process.env.REACT_APP_ADMIN_CHAT_ID,
-      // id: 1, //test
-      // id: 996146260, //test
+      // id: 000, //test
       language_code: "en",
       last_name: "",
       username: ""
@@ -76,25 +82,29 @@ function App() {
 
     if (tg?.initDataUnsafe?.user !== undefined) {
       updateUserTelegramData(tg?.initDataUnsafe?.user)
-      setTimeout(() => {
-        updateAuthChecked(true)
-      }, 1200)
     }
 
 
   }, [tg])
 
   useEffect(() => {
-    if (userTelegramData?.id) {
+    const fetchUser = async (telegramId) => {
+      try {
+        const {status, data} = await getUserInfo(telegramId);
 
-      getUserInfo(userTelegramData?.id).then(res => {
-        if (res.data !== '') {
-          updateUserData(res.data)
+        if (status === 200 && checkObject(data)) {
+          updateUserData(data);
+          updateAuthChecked(true);
         }
-      })
+      } catch (error) {
+        console.error('Ошибка при получении данных пользователя:', error);
+      }
+    };
+
+    if (userTelegramData?.id) {
+      fetchUser(userTelegramData.id);
     }
   }, [userTelegramData]);
-
 
   useEffect(() => {
 
@@ -138,30 +148,36 @@ function App() {
       }}>
         {/*<SnowMode/>*/}
         <Header color={headerColor}/>
-        <main className="main">
-          <div className="content">
-            <Routes>
-              <Route index element={<OnlyAuth component={<Cars/>}/>}/>
-              <Route path={route.PARTNERS.url}
-                     element={<OnlyAuth component={<Partners />}/>}/>
-              <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile/>}/>}/>
-              <Route path={route.MEET.url} element={<OnlyAuth component={<Meet/>}/>}/>
-              <Route path={route.ATTRIBUTES.url} element={<OnlyAuth component={<Attributes/>}/>}>
-                <Route path=":slug" element={<AttributeDetail/>}/>
-              </Route>
-              <Route path={route.REGISTER.url} element={<OnlyUnAuth component={<Registration/>}/>}/>
-              <Route path={route.NF_404.url} element={<NotFound/>}/>
-              <Route path={route.ADMIN.url} element={<OnlyAdminRoute component={<AdminPanel/>}/>}/>
-              <Route path={route.ADMIN_PARTNERS.url} element={<OnlyAdminRoute component={<AdminPartners/>}/>}/>
-              <Route path={`${route.ADMIN_PARTNERS.url}/all`}
-                     element={<OnlyAdminRoute component={<AdminPartnersAll/>}/>}/>
-              <Route path={`${route.ADMIN_PARTNERS.url}/categories`}
-                     element={<OnlyAdminRoute component={<AdminPartnersCategories/>}/>}/>
-              <Route path={route.ADMIN_USERS.url} element={<OnlyAdminRoute component={<AdminUsers/>}/>}/>
-              <Route path={route.ADMIN_MEET.url} element={<OnlyAdminRoute component={<AdminMeet/>}/>}/>
-            </Routes>
-          </div>
-        </main>
+        {!checkObject(userTelegramData) ? (
+          <main className="main">
+            <NoLogin />
+          </main>
+        ) : (
+          <main className="main">
+            <div className="content">
+              <Routes>
+                <Route index element={<OnlyAuth component={<Cars/>}/>}/>
+                <Route path={route.PARTNERS.url}
+                       element={<OnlyAuth component={<Partners/>}/>}/>
+                <Route path={route.PROFILE.url} element={<OnlyAuth component={<Profile/>}/>}/>
+                <Route path={route.MEET.url} element={<OnlyAuth component={<Meet/>}/>}/>
+                <Route path={route.ATTRIBUTES.url} element={<OnlyAuth component={<Attributes/>}/>}>
+                  <Route path=":slug" element={<AttributeDetail/>}/>
+                </Route>
+                <Route path={route.REGISTER.url} element={<OnlyUnAuth component={<Registration/>}/>}/>
+                <Route path={route.NF_404.url} element={<NotFound/>}/>
+                <Route path={route.ADMIN.url} element={<OnlyAdminRoute component={<AdminPanel/>}/>}/>
+                <Route path={route.ADMIN_PARTNERS.url} element={<OnlyAdminRoute component={<AdminPartners/>}/>}/>
+                <Route path={`${route.ADMIN_PARTNERS.url}/all`}
+                       element={<OnlyAdminRoute component={<AdminPartnersAll/>}/>}/>
+                <Route path={`${route.ADMIN_PARTNERS.url}/categories`}
+                       element={<OnlyAdminRoute component={<AdminPartnersCategories/>}/>}/>
+                <Route path={route.ADMIN_USERS.url} element={<OnlyAdminRoute component={<AdminUsers/>}/>}/>
+                <Route path={route.ADMIN_MEET.url} element={<OnlyAdminRoute component={<AdminMeet/>}/>}/>
+              </Routes>
+            </div>
+          </main>
+        )}
         <Footer/>
       </YMaps>
     </>
