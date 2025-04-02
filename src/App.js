@@ -73,8 +73,8 @@ function App() {
     /*updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      id: process.env.REACT_APP_ADMIN_CHAT_ID,
-      // id: 000, //test
+      // id: process.env.REACT_APP_ADMIN_CHAT_ID,
+      id: '000', //test
       language_code: "en",
       last_name: "",
       username: ""
@@ -82,6 +82,9 @@ function App() {
 
     if (tg?.initDataUnsafe?.user !== undefined) {
       updateUserTelegramData(tg?.initDataUnsafe?.user)
+      updateAuthChecked(true);
+    } else {
+      updateAuthChecked(true);
     }
 
 
@@ -94,7 +97,6 @@ function App() {
 
         if (status === 200 && checkObject(data)) {
           updateUserData(data);
-          updateAuthChecked(true);
         }
       } catch (error) {
         console.error('Ошибка при получении данных пользователя:', error);
