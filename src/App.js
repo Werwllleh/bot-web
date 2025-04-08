@@ -53,6 +53,17 @@ function App() {
 
 
   useEffect(() => {
+
+    /*updateUserTelegramData({
+      allows_write_to_pm: true,
+      first_name: "Lesha",
+      id: process.env.REACT_APP_ADMIN_CHAT_ID,
+      // id: '000', //test
+      language_code: "en",
+      last_name: "",
+      username: ""
+    })*/
+
     updateMeetData();
     updateUsers();
     updateUsersCars();
@@ -70,21 +81,13 @@ function App() {
     /*console.log(tg);
     console.log(tg?.initDataUnsafe?.user);*/
 
-    /*updateUserTelegramData({
-      allows_write_to_pm: true,
-      first_name: "Lesha",
-      // id: process.env.REACT_APP_ADMIN_CHAT_ID,
-      id: '000', //test
-      language_code: "en",
-      last_name: "",
-      username: ""
-    })*/
-
-    if (tg?.initDataUnsafe?.user !== undefined) {
-      updateUserTelegramData(tg?.initDataUnsafe?.user)
-      updateAuthChecked(true);
-    } else {
-      updateAuthChecked(true);
+    if (tg) {
+      if (tg?.initDataUnsafe?.user !== undefined) {
+        updateUserTelegramData(tg?.initDataUnsafe?.user)
+        updateAuthChecked(true);
+      } else {
+        updateAuthChecked(true);
+      }
     }
 
 
