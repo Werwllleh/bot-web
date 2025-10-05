@@ -80,5 +80,9 @@
   &__modal {
     max-width: 95%;
     width: 100%;
+
+    .modal__content {
+      min-height: 12rem;
+    }
   }
 }

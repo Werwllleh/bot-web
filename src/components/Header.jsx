@@ -24,14 +24,14 @@ const Header = ({color}) => {
     setIsMenuActive(!isMenuActive);
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     withoutTwitching(isMenuActive);
 
     // Чистка эффекта при размонтировании компонента
     return () => {
       withoutTwitching(isMenuActive);
     };
-  }, [isMenuActive]);
+  }, [isMenuActive]);*/
 
   return (
     <>

@@ -70,15 +70,15 @@ function App() {
     /*console.log(tg);
     console.log(tg?.initDataUnsafe?.user);*/
 
-    /*updateUserTelegramData({
+    updateUserTelegramData({
       allows_write_to_pm: true,
       first_name: "Lesha",
-      // id: process.env.REACT_APP_ADMIN_CHAT_ID,
-      id: '000', //test
+      id: process.env.REACT_APP_ADMIN_CHAT_ID,
+      // id: '000', //test
       language_code: "en",
       last_name: "",
       username: ""
-    })*/
+    })
 
     if (tg?.initDataUnsafe?.user !== undefined) {
       updateUserTelegramData(tg?.initDataUnsafe?.user)
@@ -86,7 +86,6 @@ function App() {
     } else {
       updateAuthChecked(true);
     }
-
 
 
   }, [tg])
