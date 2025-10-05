@@ -246,6 +246,7 @@
 }
 
 .car-info-modal {
+  max-width: 90%;
 
   .modal__title {
     font-size: 2rem;
@@ -259,7 +260,9 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    max-width: 32rem;
+    max-width: 80%;
+    max-height: 40rem;
+    min-width: 35rem;
     border-radius: variables.$border-radius;
     overflow: hidden;
 
@@ -287,8 +290,10 @@
 
         .page-cars__car-image {
           object-fit: contain;
-          max-height: 30rem;
+          object-position: center;
+          //max-height: 30rem;
           box-shadow: 0 0 .8rem .4rem variables.$white inset;
+          //min-width: 40rem;
         }
       }
 

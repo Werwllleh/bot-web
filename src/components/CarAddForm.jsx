@@ -20,22 +20,6 @@ const CarAddForm = ({data}) => {
   const [carNote, setCarNote] = useState('');
 
 
-
-  /*useEffect(() => {
-    if (carNumber.length >= 8 && carNumber.length <= 9 && validateCarNumber.test(carNumber.toUpperCase())) {
-      getCarInfo(carNumber).then((res) => {
-        if (res.data !== '') {
-          setCheckCarNumber(false)
-          openNotificationWithIcon('error', 'Авто с данным номером уже зарегистрирован!');
-        } else {
-          setCheckCarNumber(true)
-        }
-      })
-    } else {
-      setCheckCarNumber(false)
-    }
-  }, [carNumber]);*/
-
   useEffect(() => {
     getCars().then(res => {
       setCars(res.data)
@@ -71,7 +55,7 @@ const CarAddForm = ({data}) => {
           <div className="registration__field-select select-antd">
             <input name="brand" className="select-antd__value" type="text" defaultValue={brand} required/>
             <Select
-              showSearch
+              // showSearch
               optionFilterProp="label"
               placeholder="Марка авто"
               onChange={selectBrand}
@@ -86,7 +70,7 @@ const CarAddForm = ({data}) => {
             <div className="registration__field-select select-antd">
               <input name="model" className="select-antd__value" type="text" defaultValue={model} required/>
               <Select
-                showSearch
+                // showSearch
                 optionFilterProp="label"
                 placeholder="Модель авто"
                 value={model === '' ? null : model}

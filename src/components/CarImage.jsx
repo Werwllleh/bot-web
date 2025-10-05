@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
 import {EffectFade} from 'swiper/modules';
 import {Pagination, Autoplay} from "swiper/modules";
@@ -11,19 +11,14 @@ import 'swiper/css/effect-fade';
 
 
 
-const CarImage = ({ car, openModal, isSelected, onSelect }) => {
-
-  const carButtonAbout = useRef();
-
-  const selectCar = (e) => {
-    if (e.target !== carButtonAbout.current) {
-      onSelect(car.id);
-    }
-  };
+const CarImage = ({ car, isSelected, onClick }) => {
 
   return (
     <>
-      <div key={car.id} className={`page-cars__car ${isSelected ? 'selected' : ''}`} onClick={(e) => selectCar(e, car.id)}>
+      <div key={car.id}
+           className={`page-cars__car ${isSelected ? 'selected' : ''}`}
+           onClick={onClick}
+      >
         <div className="page-cars__car-body">
           <div className={`page-cars__car-images`}>
             <Swiper
@@ -54,11 +49,11 @@ const CarImage = ({ car, openModal, isSelected, onSelect }) => {
             </Swiper>
           </div>
         </div>
-        <div className={`page-cars__car-bg`}>
+        {/*<div className={`page-cars__car-bg`}>
           <button ref={carButtonAbout} onClick={openModal} className={`page-cars__car-about style-btn`}>
             Подробнее
           </button>
-        </div>
+        </div>*/}
       </div>
     </>
   );

@@ -44,6 +44,7 @@
     align-items: flex-end;
     transition: opacity variables.$transition, height variables.$transition, visibility variables.$transition;
     width: 100%;
+    min-height: 4.5rem;
 
 
     &-select {

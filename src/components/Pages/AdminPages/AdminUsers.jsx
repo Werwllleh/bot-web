@@ -25,19 +25,15 @@ const AdminUsers = () => {
 
   useEffect(() => {
     setUsersList(users.reverse())
-    // console.log(usersCars)
   }, [users])
 
-  useEffect(() => {
-    // console.log(usersList)
-  }, [usersList]);
-
   const getInfoAboutUser = async (chatId) => {
-    const userData = users.filter((user) => user.chat_id === chatId)[0];
+    const userData = await users.filter((user) => user.chat_id === chatId)[0];
+
+    if (!userData) return;
+
     setAboutDataModal(userData)
     setModalActive(true);
-
-    // console.log(userData)
   }
 
   const handleModalClose = () => {

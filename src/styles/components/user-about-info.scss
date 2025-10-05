@@ -15,16 +15,17 @@
   }
 
   &__message {
+    margin-block: 3rem 2rem;
   }
 
   &__cars {
-    margin: 0 0 1rem 0;
+    margin-block: 2rem 1rem;
     display: flex;
     align-items: stretch;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
-    max-height: 25rem;
+    max-height: 26rem;
     overflow-y: auto;
 
     &::-webkit-scrollbar {
@@ -41,13 +42,20 @@
   }
 
   &__swiper {
-    max-width: 30rem;
+    position: relative;
+    width: 100%;
 
     .swiper-wrapper {
       align-items: stretch;
 
       .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         //width: auto;
+        .ant-image {
+
+        }
       }
     }
 
@@ -59,11 +67,11 @@
   &__car {
     flex: 1 1 calc(50% - 1rem);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    flex-direction: column-reverse;
     gap: 1rem;
 
-    &--info {
+    &--info, &--number {
       font-size: 1.6rem;
       font-weight: 500;
     }
@@ -91,6 +99,35 @@
       width: 100%;
       background-color: variables.$red;
       color: variables.$white;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: stretch;
+    gap: 0 1rem;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    button {
+      font-size: 1.4rem;
+      padding: .5rem 1rem;
+      border-radius: variables.$border-radius;
+      border: 1px solid variables.$accent-color;
+
+      &.active {
+        color: variables.$white;
+        background-color: variables.$accent-color;
+      }
     }
   }
 }

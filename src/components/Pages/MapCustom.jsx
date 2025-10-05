@@ -1,9 +1,7 @@
 import React, {useCallback, useRef} from 'react';
-import {Map, Placemark, ZoomControl} from "@pbe/react-yandex-maps";
+import {Map, Placemark, ZoomControl} from "@iminside/react-yandex-maps";
 
 const MapCustom = ({state}) => {
-
-  console.log(state)
 
   const map = useRef(null);
 
@@ -23,7 +21,7 @@ const MapCustom = ({state}) => {
 
   return (
 
-      <Map defaultState={state} width={'100%'} instanceRef={setMapRef}>
+      <Map defaultState={state} width={'100%'} height={'20rem'} instanceRef={setMapRef}>
         <ZoomControl/>
         <Placemark
           geometry={state.center}

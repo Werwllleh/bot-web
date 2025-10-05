@@ -54,7 +54,9 @@ const Cars = () => {
     }
   }, [usersCars, updateUsers, updateUsersCars])
 
-  const handleModalOpen = () => {
+  const handleModalOpen = (carId) => {
+    setSelectedCarInfo({});
+    handleCarSelect(carId)
     setModalActive(true);
   };
 
@@ -64,27 +66,19 @@ const Cars = () => {
   };
 
   const handleCarSelect = (carId) => {
-    if (selectedCarId !== carId) {
-      setSelectedCarId(carId);
+    setSelectedCarId(carId);
 
-      // Находим данные о машине
+    let carData = usersCars.find(car => car.id === carId);
+    // Обновляем пути изображений, чтобы они содержали полный путь
+    const imageList = JSON.parse(carData.car_images).map(image => {
+      return `${API_BASE}/car/${image}`;
+    });
 
-      let carData = usersCars.find(car => car.id === carId);
-      // Обновляем пути изображений, чтобы они содержали полный путь
-      const imageList = JSON.parse(carData.car_images).map(image => {
-        return `${API_BASE}/car/${image}`;
-      });
+    // Обновляем состояние с новым списком изображений
+    setImageList(imageList);
 
-      // Обновляем состояние с новым списком изображений
-      setImageList(imageList);
-
-      // Устанавливаем данные выбранной машины
-      setSelectedCarInfo(carData);
-    } else {
-      // Сбрасываем выделение при повторном клике на ту же машину
-      setSelectedCarId(null);
-      setSelectedCarInfo({});
-    }
+    // Устанавливаем данные выбранной машины
+    setSelectedCarInfo(carData);
   };
 
   useEffect(() => {
@@ -121,7 +115,7 @@ const Cars = () => {
 
   const searchFieldClearFunc = () => {
     setSearchCarNumber('');
-    searchInput.current.focus();
+    // searchInput.current.focus();
   }
 
   useEffect(() => {
@@ -132,10 +126,6 @@ const Cars = () => {
       setCarsList(usersCars);
     }
   }, [searchCarNumber, usersCars]);
-
-  /*useEffect(() => {
-    console.log(selectedCarInfo)
-  }, [selectedCarInfo]);*/
 
   return (
     <>
@@ -148,8 +138,11 @@ const Cars = () => {
           {!loading && !!carsList.length && (
             <div className="page-cars__images">
               {carsList.map((car) => (
-                <CarImage openModal={handleModalOpen} car={car} key={car.id} isSelected={selectedCarId === car.id}
-                          onSelect={handleCarSelect}/>
+                <CarImage
+                  key={car.id}
+                  openModal={handleModalOpen}
+                  car={car}
+                  onClick={() => handleModalOpen(car.id)}/>
               ))}
             </div>
           )}
@@ -177,7 +170,7 @@ const Cars = () => {
         isOpen={isModalActive}
         onClose={handleModalClose}
       >
-        {checkObject(selectedCarInfo) && (
+        {checkObject(selectedCarInfo) ? (
           <div className="car-info-modal__content">
             <div className="car-info-modal__images">
               <Image.PreviewGroup
@@ -254,6 +247,10 @@ const Cars = () => {
                 </Link>
               )}
             </div>
+          </div>
+        ) : (
+          <div className="car-info-modal__laoder">
+            <Loader />
           </div>
         )}
       </MainModal>

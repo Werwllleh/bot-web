@@ -20,17 +20,17 @@ import AdminMeet from "./components/Pages/AdminPages/AdminMeet";
 import AdminPartnersCategories from "./components/Pages/AdminPages/AdminPartnersCategories";
 import AdminPartnersAll from "./components/Pages/AdminPages/AdminPartnersAll";
 import Meet from "./components/Pages/Meet";
-import {YMaps} from "@pbe/react-yandex-maps";
 import SnowMode from "./components/snow-mode";
 import AttributeDetail from "./components/Pages/Attributes/AttributeDetail";
 import Attributes from "./components/Pages/Attributes/Attributes";
-
 import {ReactInternetSpeedMeter} from "react-internet-meter";
 import 'react-internet-meter/dist/index.css';
 import LowInternet from "./components/low-internet";
 import {checkObject} from "./utils/checkObject";
 import Loader from "./components/Loader/Loader";
 import NoLogin from "./components/no-login";
+import {YMaps} from "@iminside/react-yandex-maps";
+import {Toaster} from "react-hot-toast";
 
 function App() {
 
@@ -182,6 +182,12 @@ function App() {
         )}
         <Footer/>
       </YMaps>
+      <Toaster toastOptions={{
+        style: {
+          fontSize: '1.6rem',
+          padding: '1.2rem',
+        },
+      }}/>
     </>
   );
 }
